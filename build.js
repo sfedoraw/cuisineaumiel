@@ -159,9 +159,8 @@ const picture = (id, alt, { sizes = '100vw', ratio = '4 / 3', eager = false, cls
 const HONEY = {
   clair: [
     ['1587049352851-8d4e89133924', 'Art Rachen', 'Un pot de miel clair'],
-    ['1613548058193-1cd24c1bebcf', 'Benyamin Bohlouli', 'Une cuillère en bois laisse couler le miel dans un pot'],
-    ['1515624424395-231050e373d2', 'Ale Vega', 'Un pot de miel'],
-    ['1555211652-5c6222f971bc', 'Heather Barnes', 'Du miel dans un verre'],
+    ['1555211652-5c6222f971bc', 'Heather Barnes', 'Un pot de miel clair et sa cuillère en bois'],
+    ['1622448559300-6df8495a1574', 'micheile henderson', 'Un pot de miel doré et sa cuillère'],
   ],
   ambre: [
     ['1771405317876-616a62efd97e', 'Madeline Liu', 'Le miel coule d’une cuillère en bois dans un bol'],

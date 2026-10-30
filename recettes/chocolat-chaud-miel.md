@@ -3,8 +3,8 @@ titre: Chocolat chaud épais au miel
 date: 2026-10-30
 categorie: boissons
 miel: Miel de châtaignier
-photo: 1762411245614-e0f145ba7183
-credit: Karthick Gislen
+photo: 1517578239113-b03992dcdd25
+credit: Giancarlo Duarte
 preparation: 5 min
 cuisson: 5 min
 portions: 2
