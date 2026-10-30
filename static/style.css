@@ -1,12 +1,12 @@
 :root {
-  --bg: #FBF6EE;
-  --paper: #FFFDF9;
-  --wax: #F3E6CF;
-  --honey: #E3A33C;
-  --honey-deep: #A85B1A;
-  --ink: #2A1C10;
-  --ink-soft: #6A5442;
-  --line: #E8DAC3;
+  --bg: #FFFFFF;
+  --paper: #FAF7F2;
+  --wax: #FDF1DC;
+  --honey: #F2A516;
+  --honey-deep: #A9550A;
+  --ink: #1F1A17;
+  --ink-soft: #5E5650;
+  --line: #ECE6DE;
   --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
   --sans: 'Karla', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
@@ -28,11 +28,11 @@ h3 { font-size: 1.1rem; }
 :focus-visible { outline: 3px solid var(--honey); outline-offset: 2px; border-radius: 4px; }
 .kicker { font: 700 .75rem/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--honey-deep); margin: 0 0 1em; }
 .lede { font-size: 1.15rem; color: var(--ink-soft); }
-.btn { display: inline-block; background: var(--ink); color: var(--bg); padding: .75em 1.4em; border-radius: 999px; font-weight: 700; text-decoration: none; }
-.btn:hover { background: var(--honey-deep); color: #fff; }
+.btn { display: inline-block; background: var(--honey); color: var(--ink); padding: .75em 1.4em; border-radius: 999px; font-weight: 700; text-decoration: none; }
+.btn:hover { background: #E09400; color: var(--ink); }
 
 /* En-tête façon blog */
-.masthead { text-align: center; padding: 36px 16px 0; border-bottom: 1px solid var(--line); background: var(--paper); }
+.masthead { text-align: center; padding: 36px 16px 0; border-bottom: 1px solid var(--line); background: var(--bg); border-top: 4px solid var(--honey); }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); font: 600 clamp(2rem, 5vw, 2.8rem)/1 var(--serif); letter-spacing: -.02em; }
 .brand em { color: var(--honey-deep); font-weight: 400; }
 .tagline { margin: 10px 0 20px; font: italic 400 1.05rem var(--serif); color: var(--ink-soft); }
@@ -166,7 +166,7 @@ h3 { font-size: 1.1rem; }
 .prose blockquote p { margin: 0; }
 
 /* Pied de page */
-.footer { background: var(--ink); color: #E5D5BE; padding: 52px 0 24px; }
+.footer { background: var(--ink); color: #E9E2D8; padding: 52px 0 24px; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1.5fr 1fr; gap: 32px; }
 .footer-grid a { display: block; color: #E5D5BE; text-decoration: none; padding: 3px 0; }
 .footer-grid a:hover { color: var(--honey); }

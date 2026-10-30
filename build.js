@@ -211,7 +211,7 @@ function layout({ title, description, body, canonical, extraHead = '', ogImage =
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="${SITE.url}${canonical}">
 ${ogImage ? `<meta property="og:image" content="${ogImage}">\n<meta name="twitter:card" content="summary_large_image">` : ''}
-<meta name="theme-color" content="#FBF6EE">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="${SITE.name}" href="/flux.xml">
 <link rel="preconnect" href="https://images.unsplash.com">
