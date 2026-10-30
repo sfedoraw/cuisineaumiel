@@ -3,8 +3,8 @@ titre: Poires pochées au miel et au vin épicé
 date: 2026-10-30
 categorie: desserts
 miel: Miel de châtaignier
-emoji: 🍐
-teinte: epice
+photo: 1572929773424-93549dced6d0
+credit: khloe arledge
 preparation: 15 min
 cuisson: 35 min
 portions: 4

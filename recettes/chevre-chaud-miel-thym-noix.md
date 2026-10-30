@@ -3,15 +3,14 @@ titre: Chèvre chaud rôti au miel de thym et aux noix
 date: 2026-10-30
 categorie: aperitifs-entrees
 miel: Miel de thym
-emoji: 🧀
-teinte: ambre
+photo: 1634234498278-b01fbf12bf4c
+credit: Rafael Maggion
 preparation: 10 min
 cuisson: 8 min
 portions: 4
 difficulte: Facile
 resume: Des crottins tièdes et fondants, nappés de miel de thym et parsemés de noix grillées, sur une salade croquante.
 tags: [chèvre, salade, noix, entrée rapide]
-vedette: oui
 ---
 Le grand classique des bistrots, remis à neuf. Le miel de thym, puissant et légèrement résineux, tient tête à l'acidité du chèvre et caramélise juste ce qu'il faut sous le gril.
 

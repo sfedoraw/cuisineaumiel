@@ -1,6 +1,7 @@
 ---
 titre: À propos
 resume: Un site entièrement consacré à la cuisine au miel, sucrée et salée.
+photo: 1613548058193-1cd24c1bebcf
 ---
 ## Pourquoi le miel ?
 

@@ -3,8 +3,8 @@ titre: Tartines ricotta, miel, figues et pistaches
 date: 2026-10-30
 categorie: petit-dejeuner
 miel: Miel de lavande
-emoji: 🍯
-teinte: lavande
+photo: 1747337403867-4140d119c168
+credit: Zahra Tavakoli fard
 preparation: 10 min
 cuisson: 3 min
 portions: 4

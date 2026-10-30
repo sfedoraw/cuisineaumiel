@@ -3,8 +3,8 @@ titre: Crème brûlée au miel de lavande
 date: 2026-10-30
 categorie: desserts
 miel: Miel de lavande
-emoji: 🍮
-teinte: lavande
+photo: 1615235739538-95040f341ba8
+credit: Max Griss
 preparation: 20 min
 cuisson: 1 h
 repos: 3 h

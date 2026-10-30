@@ -3,8 +3,8 @@ titre: Grog au miel, citron et cannelle
 date: 2026-10-30
 categorie: boissons
 miel: Miel de sapin
-emoji: 🍵
-teinte: epice
+photo: 1585777786852-51917fc4eba2
+credit: Anita Jankovic
 preparation: 5 min
 cuisson: 5 min
 portions: 2

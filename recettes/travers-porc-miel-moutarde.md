@@ -3,8 +3,8 @@ titre: Travers de porc caramélisés au miel et à la moutarde
 date: 2026-10-30
 categorie: plats
 miel: Miel de châtaignier
-emoji: 🍖
-teinte: foret
+photo: 1544025162-d76694265947
+credit: Alexandru-Bogdan Ghita
 preparation: 15 min
 cuisson: 2 h 15
 portions: 4

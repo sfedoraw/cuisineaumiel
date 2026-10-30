@@ -3,8 +3,8 @@ titre: Citronnade au miel et au romarin
 date: 2026-10-30
 categorie: boissons
 miel: Miel d'acacia
-emoji: 🍋
-teinte: vert
+photo: 1523677011781-c91d1bbe2f9e
+credit: Charity Beth Long
 preparation: 10 min
 repos: 1 h
 cuisson: 3 min

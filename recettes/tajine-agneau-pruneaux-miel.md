@@ -3,8 +3,8 @@ titre: Tajine d'agneau aux pruneaux, amandes et miel
 date: 2026-10-30
 categorie: plats
 miel: Miel d'oranger
-emoji: 🍲
-teinte: epice
+photo: 1643019237176-8ae0859f1123
+credit: HamZa NOUASRIA
 preparation: 25 min
 cuisson: 2 h
 portions: 6

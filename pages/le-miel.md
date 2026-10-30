@@ -1,6 +1,7 @@
 ---
 titre: Le guide des miels
 resume: Chaque miel a son caractère. Voici comment les reconnaître, les choisir et les utiliser en cuisine.
+photo: 1773957949216-8a65f0750fdf
 ---
 ## Les grandes familles de miels
 

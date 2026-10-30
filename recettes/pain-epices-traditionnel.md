@@ -3,8 +3,8 @@ titre: Pain d'épices traditionnel au miel
 date: 2026-10-30
 categorie: patisserie
 miel: Miel de sapin
-emoji: 🍞
-teinte: foret
+photo: 1768216604497-ecbf03ab5fa0
+credit: Ksenia Yakovleva
 preparation: 20 min
 cuisson: 1 h
 repos: 24 h

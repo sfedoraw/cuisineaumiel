@@ -3,8 +3,8 @@ titre: Panna cotta au miel et coulis de fruits rouges
 date: 2026-10-30
 categorie: desserts
 miel: Miel d'acacia
-emoji: 🍓
-teinte: rose
+photo: 1787550275377-9f54a07c68c8
+credit: Mustafa akın
 preparation: 15 min
 repos: 4 h
 cuisson: 5 min

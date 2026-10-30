@@ -3,8 +3,8 @@ titre: Brioche tressée au miel
 date: 2026-10-30
 categorie: patisserie
 miel: Miel toutes fleurs
-emoji: 🥖
-teinte: agrume
+photo: 1552056413-b8b5eed0170b
+credit: Youjeen Cho
 preparation: 30 min
 repos: 3 h
 cuisson: 30 min

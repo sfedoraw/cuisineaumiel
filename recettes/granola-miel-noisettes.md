@@ -3,8 +3,8 @@ titre: Granola croustillant au miel, noisettes et cannelle
 date: 2026-10-30
 categorie: petit-dejeuner
 miel: Miel de tilleul
-emoji: 🥣
-teinte: ambre
+photo: 1724441980123-aca7911329d0
+credit: Mayte Baque
 preparation: 10 min
 cuisson: 30 min
 portions: 10

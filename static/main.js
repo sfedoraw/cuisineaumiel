@@ -5,7 +5,7 @@
   const input = document.getElementById('filtre-q');
   const chips = document.querySelectorAll('.chip');
   const empty = document.querySelector('.empty');
-  const cards = [...grid.querySelectorAll('.card')];
+  const cards = [...grid.querySelectorAll('.tile')];
   const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   let cat = '';
   const params = new URLSearchParams(location.search);

@@ -3,8 +3,8 @@ titre: Nougat glacé au miel, pistaches et fruits confits
 date: 2026-10-30
 categorie: desserts
 miel: Miel de lavande
-emoji: 🍨
-teinte: clair
+photo: 1576681471886-734fad6d7f25
+credit: Christopher Farrugia
 preparation: 40 min
 repos: 6 h
 cuisson: 10 min

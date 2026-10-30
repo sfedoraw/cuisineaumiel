@@ -3,8 +3,8 @@ titre: Courge rôtie au miel, sauge et noisettes
 date: 2026-10-30
 categorie: plats
 miel: Miel de sarrasin
-emoji: 🎃
-teinte: agrume
+photo: 1536329711767-2ad681b7bf9b
+credit: Sara Dubler
 preparation: 15 min
 cuisson: 40 min
 portions: 4

@@ -3,8 +3,8 @@ titre: Noix caramélisées au miel, romarin et fleur de sel
 date: 2026-10-30
 categorie: aperitifs-entrees
 miel: Miel d'acacia
-emoji: 🌰
-teinte: clair
+photo: 1768237536983-36814908492f
+credit: Brett Jordan
 preparation: 5 min
 cuisson: 15 min
 portions: 6

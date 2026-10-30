@@ -3,8 +3,8 @@ titre: Saumon glacé miel, soja et gingembre
 date: 2026-10-30
 categorie: plats
 miel: Miel d'acacia
-emoji: 🐟
-teinte: rose
+photo: 1712334562767-5d366d0c40d9
+credit: Sara Nichols
 preparation: 10 min
 repos: 15 min
 cuisson: 12 min

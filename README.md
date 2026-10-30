@@ -19,7 +19,11 @@ Une recette dont la `date` est dans le futur n'est publiée qu'à partir de ce j
 - `pages/` : pages de contenu (guide des miels, à propos).
 - `static/` : CSS, JavaScript, favicon, CNAME, copiés tels quels.
 - `build.js` : générateur (pages recettes, catégories, recherche, flux RSS, sitemap, données structurées schema.org Recipe pour Google).
-- `automatisation/nouvelle-recette.md` : consigne suivie par la routine qui ajoute une recette tous les 2-3 jours.
+- `automatisation/nouvelle-recette.md` : consigne suivie par la routine qui ajoute une recette chaque jour.
+
+## Photos
+
+Chaque recette a une photo Unsplash (`photo:` = identifiant, `credit:` = photographe), affichée à gauche, et une photo de miel choisie selon la variété de miel, à droite. Les images sont servies par le CDN d'Unsplash, sous licence Unsplash (usage libre, commercial compris).
 
 ## Publication
 

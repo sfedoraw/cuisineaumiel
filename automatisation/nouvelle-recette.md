@@ -1,6 +1,6 @@
 # Consigne de la routine « nouvelle recette »
 
-Cette consigne est exécutée automatiquement tous les 2 à 3 jours (lundi, mercredi, vendredi) par une routine Claude branchée sur ce dépôt.
+Cette consigne est exécutée automatiquement chaque jour par une routine Claude branchée sur ce dépôt.
 
 ## Tâche
 
@@ -11,14 +11,15 @@ Cette consigne est exécutée automatiquement tous les 2 à 3 jours (lundi, merc
    - Tiens compte de la saison en France à la date du jour (fruits et légumes de saison, fêtes à venir).
    - Une recette réaliste, testable à la maison, avec des ingrédients faciles à trouver. Pas de copie d'une recette publiée ailleurs.
 3. Écris-la en français dans `recettes/<slug>.md`, en suivant exactement le format des recettes existantes :
-   - Front matter : `titre`, `date` (date du jour, AAAA-MM-JJ), `categorie` (un des slugs : aperitifs-entrees, plats, desserts, patisserie, petit-dejeuner, boissons, sauces-condiments), `miel`, `emoji`, `teinte` (ambre, clair, lavande, foret, agrume, rose, vert, epice), `preparation`, `cuisson`, `repos` si besoin, `portions`, `unite` si ce ne sont pas des personnes, `difficulte` (Très facile, Facile, Moyenne, Difficile), `resume` (une ou deux phrases), `tags`.
+   - Front matter : `titre`, `date` (date du jour, AAAA-MM-JJ), `categorie` (un des slugs : aperitifs-entrees, plats, desserts, patisserie, petit-dejeuner, boissons, sauces-condiments), `miel`, `photo` (identifiant Unsplash, voir ci-dessous), `credit` (nom du photographe), `preparation`, `cuisson`, `repos` si besoin, `portions`, `unite` si ce ne sont pas des personnes, `difficulte` (Très facile, Facile, Moyenne, Difficile), `resume` (une ou deux phrases), `tags`.
    - Un paragraphe d'introduction qui explique le rôle du miel dans la recette.
    - `## Ingrédients` (avec des sous-titres `###` si utile), chaque ligne commence par la quantité en chiffres pour que l'ajustement des portions fonctionne.
    - `## Préparation` en étapes numérotées.
    - `## Le conseil`, et éventuellement `## Variantes`.
    - Le slug : en minuscules, sans accents, mots séparés par des tirets.
-4. Lance `node build.js` et vérifie qu'il se termine sans erreur.
-5. Fais un commit `Nouvelle recette : <titre>` et pousse sur `main`. La publication est automatique.
+4. Photo : avec WebFetch, ouvre `https://unsplash.com/s/photos/<plat-en-anglais>` et choisis une photo **gratuite** (jamais `plus.unsplash.com` ni Unsplash+) dont la description correspond bien au plat. Mets dans `photo` la partie après `photo-` de l'URL `images.unsplash.com/photo-...` et le nom du photographe dans `credit`. N'utilise pas une photo déjà présente dans une autre recette. La photo du miel est choisie automatiquement selon le miel indiqué.
+5. Lance `node build.js` et vérifie qu'il se termine sans erreur.
+6. Fais un commit `Nouvelle recette : <titre>` et pousse sur `main`. La publication est automatique.
 
 ## Règles
 

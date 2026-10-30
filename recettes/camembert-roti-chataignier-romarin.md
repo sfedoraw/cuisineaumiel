@@ -3,8 +3,8 @@ titre: Camembert rôti au miel de châtaignier et romarin
 date: 2026-10-30
 categorie: aperitifs-entrees
 miel: Miel de châtaignier
-emoji: 🫕
-teinte: foret
+photo: 1743193144224-d2db90ea7784
+credit: Marco Palumbo
 preparation: 5 min
 cuisson: 20 min
 portions: 4

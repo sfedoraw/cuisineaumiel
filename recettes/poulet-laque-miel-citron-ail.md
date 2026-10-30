@@ -3,8 +3,8 @@ titre: Poulet laqué au miel, citron et ail
 date: 2026-10-30
 categorie: plats
 miel: Miel toutes fleurs
-emoji: 🍗
-teinte: ambre
+photo: 1630564510761-a560db92a09b
+credit: Amanda Lim
 preparation: 15 min
 cuisson: 45 min
 portions: 4

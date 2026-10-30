@@ -3,8 +3,8 @@ titre: Sauce barbecue maison au miel
 date: 2026-10-30
 categorie: sauces-condiments
 miel: Miel de sarrasin
-emoji: 🔥
-teinte: foret
+photo: 1472476443507-c7a5948772fc
+credit: Dennis Klein
 preparation: 10 min
 cuisson: 20 min
 portions: 1

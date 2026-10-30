@@ -3,8 +3,8 @@ titre: Figues rôties au miel, jambon cru et roquette
 date: 2026-10-30
 categorie: aperitifs-entrees
 miel: Miel de lavande
-emoji: 🍑
-teinte: rose
+photo: 1676486235818-05a1767491bf
+credit: phil cruz
 preparation: 15 min
 cuisson: 12 min
 portions: 4

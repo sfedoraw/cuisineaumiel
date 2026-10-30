@@ -3,8 +3,8 @@ titre: Pancakes à la ricotta, miel et citron
 date: 2026-10-30
 categorie: petit-dejeuner
 miel: Miel de romarin
-emoji: 🥞
-teinte: clair
+photo: 1669277038512-2dc8b3a2aac8
+credit: Dad hotel
 preparation: 15 min
 cuisson: 15 min
 portions: 4

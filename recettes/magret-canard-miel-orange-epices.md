@@ -3,8 +3,8 @@ titre: Magret de canard au miel, orange et quatre-épices
 date: 2026-10-30
 categorie: plats
 miel: Miel de sapin
-emoji: 🦆
-teinte: epice
+photo: 1580554530778-ca36943938b2
+credit: Sebastian Coman Photography
 preparation: 15 min
 cuisson: 20 min
 portions: 4

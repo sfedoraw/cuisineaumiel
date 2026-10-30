@@ -3,8 +3,8 @@ titre: Carottes rôties au miel et cumin, yaourt à la feta
 date: 2026-10-30
 categorie: aperitifs-entrees
 miel: Miel toutes fleurs
-emoji: 🥕
-teinte: agrume
+photo: 1636743716922-1884c23fb6f6
+credit: Anna Przepiorka
 preparation: 15 min
 cuisson: 30 min
 portions: 4

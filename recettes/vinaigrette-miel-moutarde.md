@@ -3,8 +3,8 @@ titre: Vinaigrette miel-moutarde
 date: 2026-10-30
 categorie: sauces-condiments
 miel: Miel toutes fleurs
-emoji: 🥗
-teinte: clair
+photo: 1631311309788-9a37722d05f6
+credit: Caroline Green
 preparation: 5 min
 cuisson: 0 min
 portions: 6

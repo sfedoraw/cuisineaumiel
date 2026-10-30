@@ -3,8 +3,8 @@ titre: Chutney de figues au miel et aux épices
 date: 2026-10-30
 categorie: sauces-condiments
 miel: Miel de châtaignier
-emoji: 🫙
-teinte: rose
+photo: 1633972767433-7e31be8575e7
+credit: Katya Azimova
 preparation: 15 min
 cuisson: 45 min
 portions: 3

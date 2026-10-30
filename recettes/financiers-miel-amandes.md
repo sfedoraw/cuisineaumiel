@@ -3,8 +3,8 @@ titre: Financiers au miel et beurre noisette
 date: 2026-10-30
 categorie: patisserie
 miel: Miel de bruyère
-emoji: 🧈
-teinte: ambre
+photo: 1638518909918-27910011e4d6
+credit: Luna Hu
 preparation: 15 min
 cuisson: 12 min
 portions: 16

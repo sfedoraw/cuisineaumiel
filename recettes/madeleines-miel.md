@@ -3,8 +3,8 @@ titre: Madeleines au miel et à la bosse parfaite
 date: 2026-10-30
 categorie: patisserie
 miel: Miel d'acacia
-emoji: 🐚
-teinte: clair
+photo: 1638518754956-b35c59b4f4cd
+credit: Luna Hu
 preparation: 15 min
 repos: 2 h
 cuisson: 10 min

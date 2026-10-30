@@ -3,8 +3,8 @@ titre: Lait d'or au curcuma, gingembre et miel
 date: 2026-10-30
 categorie: boissons
 miel: Miel de tilleul
-emoji: 🥛
-teinte: agrume
+photo: 1459933083533-46381576caa9
+credit: Osha Key
 preparation: 5 min
 cuisson: 5 min
 portions: 2

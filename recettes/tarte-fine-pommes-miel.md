@@ -3,8 +3,8 @@ titre: Tarte fine aux pommes, miel et beurre salé
 date: 2026-10-30
 categorie: desserts
 miel: Miel toutes fleurs
-emoji: 🍎
-teinte: ambre
+photo: 1562007908-17c67e878c88
+credit: Diliara Garifullina
 preparation: 20 min
 cuisson: 30 min
 portions: 6
