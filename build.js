@@ -191,8 +191,8 @@ for (const r of recipes) {
 }
 
 // ---------- gabarits ----------
-const PER_PAGE = 10;
-const logoSvg = `<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true"><path d="M20 2l15.6 9v18L20 38 4.4 29V11z" fill="#E3A33C"/><path d="M20 9l9.5 5.5v11L20 31l-9.5-5.5v-11z" fill="#FBE3A6"/><path d="M20 15.5c3 0 5 2.6 5 5.2 0 3.4-3 5.8-5 7.3-2-1.5-5-3.9-5-7.3 0-2.6 2-5.2 5-5.2z" fill="#A85B1A"/></svg>`;
+const logoSvg = `<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true"><path d="M20 2l15.6 9v18L20 38 4.4 29V11z" fill="#F2A516"/><path d="M20 9l9.5 5.5v11L20 31l-9.5-5.5v-11z" fill="#FFF4DE"/><path d="M20 15.5c3 0 5 2.6 5 5.2 0 3.4-3 5.8-5 7.3-2-1.5-5-3.9-5-7.3 0-2.6 2-5.2 5-5.2z" fill="#B45309"/></svg>`;
+const searchIcon = `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
 
 function layout({ title, description, body, canonical, extraHead = '', ogImage = '' }) {
   const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} · ${SITE.tagline}`;
@@ -217,21 +217,25 @@ ${ogImage ? `<meta property="og:image" content="${ogImage}">\n<meta name="twitte
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 ${extraHead}
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<header class="masthead">
-  <a class="brand" href="/">${logoSvg}<span>Cuisine <em>au</em> miel</span></a>
-  <p class="tagline">Le carnet de recettes sucrées et salées autour du miel</p>
-  <nav class="nav" aria-label="Navigation principale">
-    <a href="/">Accueil</a>
-    <a href="/recettes/">Toutes les recettes</a>
-    ${CATEGORIES.slice(0, 4).map((c) => `<a href="/categories/${c.slug}/">${c.name.split(' &')[0]}</a>`).join('\n    ')}
-    <a href="/le-miel/">Le miel</a>
-  </nav>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">${logoSvg}<span>Cuisine <b>au miel</b></span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="/recettes/">Recettes</a>
+      ${CATEGORIES.slice(0, 4).map((c) => `<a href="/categories/${c.slug}/">${c.name.split(' &')[0]}</a>`).join('\n      ')}
+      <a href="/le-miel/">Le miel</a>
+    </nav>
+    <form class="top-search" action="/recettes/" role="search">
+      <label class="sr" for="top-q">Rechercher une recette</label>
+      ${searchIcon}<input id="top-q" name="q" type="search" placeholder="Rechercher une recette…">
+    </form>
+  </div>
 </header>
 <main id="contenu">
 ${body}
@@ -239,7 +243,7 @@ ${body}
 <footer class="footer">
   <div class="wrap footer-grid">
     <div>
-      <p class="footer-brand">Cuisine <em>au</em> miel</p>
+      <a class="brand brand-light" href="/">${logoSvg}<span>Cuisine <b>au miel</b></span></a>
       <p>Une nouvelle recette chaque jour, sucrée ou salée, et toujours au miel.</p>
       <p><a href="/flux.xml">S'abonner au flux RSS</a></p>
     </div>
@@ -267,107 +271,126 @@ function totalTime(r) {
   const h = Math.floor(t / 60), m = t % 60;
   return m ? `${h} h ${String(m).padStart(2, '0')}` : `${h} h`;
 }
-const meta = (r) => `<p class="post-meta"><a href="/categories/${r.cat.slug}/">${esc(r.cat.name)}</a><span>·</span><time datetime="${r.date.toISOString().slice(0, 10)}">${dateFr(r.date)}</time></p>`;
-const facts = (r) => `<span>⏱ ${totalTime(r)}</span><span>${esc(r.difficulte)}</span><span>🍯 ${esc(r.miel)}</span>`;
+const shortHoney = (m) => (m || '').replace(/^Miel (de |d'|d’)?/i, '').replace(/^./, (c) => c.toUpperCase());
+const searchData = (r) => esc([r.titre, r.miel, r.resume, r.cat.name, ...r.tags].join(' ').toLowerCase());
 
-// Un billet dans le fil du blog : photo à gauche, texte à droite.
-function postRow(r) {
-  return `<article class="post-row">
-  <a class="post-photo" href="${r.url}" tabindex="-1" aria-hidden="true">${picture(r.photo, r.titre, { sizes: '(min-width: 760px) 340px, 100vw' })}</a>
-  <div class="post-text">
-    ${meta(r)}
-    <h2><a href="${r.url}">${esc(r.titre)}</a></h2>
-    <p>${esc(r.resume)}</p>
-    <p class="post-facts">${facts(r)}</p>
-    <a class="more" href="${r.url}">Lire la recette →</a>
-  </div>
-</article>`;
-}
-
-// Vignette compacte (archives, suggestions).
-function tile(r) {
-  return `<article class="tile" data-cat="${r.cat.slug}" data-search="${esc([r.titre, r.miel, r.resume, r.cat.name, ...r.tags].join(' ').toLowerCase())}">
+// Carte recette : photo arrondie avec badges, catégorie, titre, miel.
+function card(r, { big = false, eager = false } = {}) {
+  return `<article class="card${big ? ' card-big' : ''}" data-cat="${r.cat.slug}" data-search="${searchData(r)}">
   <a href="${r.url}">
-    ${picture(r.photo, r.titre, { sizes: '(min-width: 900px) 280px, 50vw', ratio: '1 / 1' })}
-    <span class="tile-cat">${esc(r.cat.name)}</span>
-    <h3>${esc(r.titre)}</h3>
+    <div class="card-media">
+      ${picture(r.photo, r.titre, { sizes: big ? '(min-width: 1000px) 640px, 100vw' : '(min-width: 1000px) 280px, 50vw', ratio: big ? '16 / 10' : '4 / 3', eager })}
+      <span class="badge badge-time">⏱ ${totalTime(r)}</span>
+      <span class="badge badge-level">${esc(r.difficulte)}</span>
+    </div>
+    <div class="card-body">
+      <span class="card-cat">${esc(r.cat.name)}</span>
+      <h3>${esc(r.titre)}</h3>
+      ${big ? `<p>${esc(r.resume)}</p>` : ''}
+      <span class="card-honey">🍯 ${esc(shortHoney(r.miel))}</span>
+    </div>
   </a>
 </article>`;
 }
+const grid = (list) => `<div class="cards">${list.map((r) => card(r)).join('\n')}</div>`;
+const sectionHead = (title, href, label = 'Voir tout') => `<div class="section-head"><h2>${title}</h2>${href ? `<a href="${href}">${label} ›</a>` : ''}</div>`;
 
-function sidebar() {
-  return `<aside class="sidebar">
-  <section class="side-box">
-    <h2>Bienvenue</h2>
-    <p>Ici, le miel ne se limite pas à la tartine : il laque les volailles, adoucit les sauces et parfume les desserts. Une nouvelle recette chaque jour.</p>
-    <a href="/a-propos/">En savoir plus →</a>
-  </section>
-  <section class="side-box">
-    <h2>Rechercher</h2>
-    <form action="/recettes/" role="search" class="side-search">
-      <label class="sr" for="side-q">Rechercher une recette</label>
-      <input id="side-q" name="q" type="search" placeholder="Poulet, lavande, madeleines…">
+const catPhoto = (c) => (recipes.find((r) => r.cat === c) || recipes[0]).photo;
+function catCircles() {
+  return `<div class="circles">${CATEGORIES.map((c) => `<a class="circle" href="/categories/${c.slug}/">${picture(catPhoto(c), '', { sizes: '96px', ratio: '1 / 1' })}<span>${c.name.split(' &')[0]}</span></a>`).join('')}</div>`;
+}
+
+function home() {
+  const [today0, ...rest] = recipes;
+  const latest = rest.slice(0, 8);
+  const collage = rest.slice(8, 11);
+  const body = `
+<section class="wrap hero">
+  <div class="hero-text">
+    <p class="eyebrow">Recettes sucrées & salées</p>
+    <h1>Le miel, de l'entrée <span>au dessert.</span></h1>
+    <p class="lede">${recipes.length} recettes originales pour cuisiner le miel au quotidien. Une nouvelle recette chaque jour.</p>
+    <form class="hero-search" action="/recettes/" role="search">
+      <label class="sr" for="hq">Rechercher une recette</label>
+      ${searchIcon}<input id="hq" name="q" type="search" placeholder="Poulet, lavande, madeleines…">
+      <button type="submit">Chercher</button>
     </form>
-  </section>
-  <section class="side-box">
-    <h2>Catégories</h2>
-    <ul class="side-cats">${CATEGORIES.map((c) => { const n = recipes.filter((r) => r.cat === c).length; return `<li><a href="/categories/${c.slug}/">${c.name}</a><span>${n}</span></li>`; }).join('')}</ul>
-  </section>
-  <section class="side-box side-guide">
-    ${picture(HONEY.ambre[0][0], 'Du miel qui coule d’une cuillère', { sizes: '300px', ratio: '3 / 2' })}
-    <h2>Quel miel choisir ?</h2>
-    <p>Acacia, lavande, châtaignier… Notre guide pour bien choisir et remplacer le sucre par du miel.</p>
-    <a href="/le-miel/">Lire le guide →</a>
-  </section>
-</aside>`;
+    <ul class="hero-stats"><li><b>${recipes.length}</b> recettes</li><li><b>${CATEGORIES.length}</b> catégories</li><li><b>1</b> nouvelle par jour</li></ul>
+  </div>
+  <div class="hero-collage" aria-hidden="true">
+    <div class="col">
+      ${picture(collage[0].photo, '', { sizes: '260px', ratio: '3 / 4', eager: true })}
+      <div class="pastel"><b>Apprendre.</b><br>Cuisiner.<br><b>Partager.</b></div>
+    </div>
+    <div class="col col-offset">
+      <div class="pastel"><b>${recipes.length}+</b><br>recettes<br><b>au miel</b></div>
+      ${picture(collage[1].photo, '', { sizes: '260px', ratio: '1 / 1', eager: true })}
+      ${picture(collage[2].photo, '', { sizes: '260px', ratio: '4 / 3', eager: true })}
+    </div>
+  </div>
+</section>
+
+<section class="wrap block">
+  ${sectionHead('Catégories', '/categories/aperitifs-entrees/', 'Tout explorer')}
+  ${catCircles()}
+</section>
+
+<section class="wrap block">
+  ${sectionHead('La recette du jour', today0.url, 'Voir la recette')}
+  <div class="today">
+    ${card(today0, { big: true, eager: true })}
+    <aside class="today-honey">
+      ${picture(today0.honey.id, today0.honey.alt, { sizes: '(min-width: 1000px) 360px, 100vw', ratio: '4 / 5' })}
+      <div class="today-honey-text">
+        <span class="card-cat">Le miel conseillé</span>
+        <p class="today-honey-name">${esc(today0.miel)}</p>
+        <a href="/le-miel/">Pourquoi ce miel ? ›</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="wrap block">
+  ${sectionHead('Nouveautés', '/recettes/')}
+  ${grid(latest)}
+</section>
+
+<section class="wrap block">
+  <div class="promo">
+    <div class="promo-icon">${picture(HONEY.ambre[0][0], '', { sizes: '120px', ratio: '1 / 1' })}</div>
+    <div>
+      <p class="promo-title">Acacia, lavande, châtaignier… quel miel choisir ?</p>
+      <p>Notre guide pour choisir la bonne variété et remplacer le sucre par du miel sans rater ses gâteaux.</p>
+      <a href="/le-miel/">Lire le guide des miels ›</a>
+    </div>
+  </div>
+</section>
+
+${CATEGORIES.map((c) => {
+    const list = recipes.filter((r) => r.cat === c && r !== today0 && !latest.includes(r)).slice(0, 4);
+    return list.length ? `<section class="wrap block">${sectionHead(c.name, `/categories/${c.slug}/`)}${grid(list)}</section>` : '';
+  }).join('\n')}`;
+  return layout({ title: '', canonical: '/', body });
 }
 
-function pager(page, pages, base) {
-  if (pages < 2) return '';
-  const href = (p) => (p === 1 ? base : `${base}page/${p}/`);
-  return `<nav class="pager" aria-label="Pages">
-  ${page > 1 ? `<a href="${href(page - 1)}">← Recettes plus récentes</a>` : '<span></span>'}
-  <span>Page ${page} sur ${pages}</span>
-  ${page < pages ? `<a href="${href(page + 1)}">Recettes précédentes →</a>` : '<span></span>'}
-</nav>`;
-}
-
-function feedPage(list, page, { base = '/', heading = '' } = {}) {
-  const pages = Math.max(1, Math.ceil(list.length / PER_PAGE));
-  let items = list.slice((page - 1) * PER_PAGE, page * PER_PAGE);
-  let lead = '';
-  if (page === 1 && base === '/') {
-    const r = items[0];
-    items = items.slice(1);
-    lead = `<article class="lead">
-  <a href="${r.url}" class="lead-photos">
-    ${picture(r.photo, r.titre, { sizes: '(min-width: 1000px) 520px, 60vw', eager: true, cls: 'lead-dish' })}
-    ${picture(r.honey.id, r.honey.alt, { sizes: '(min-width: 1000px) 260px, 40vw', ratio: '3 / 4', eager: true, cls: 'lead-honey' })}
-  </a>
-  <div class="lead-text">
-    <p class="kicker">La recette du jour</p>
-    <h1><a href="${r.url}">${esc(r.titre)}</a></h1>
-    <p>${esc(r.resume)}</p>
-    <p class="post-facts">${facts(r)}</p>
-    <a class="btn" href="${r.url}">Voir la recette</a>
-  </div>
-</article>`;
-  }
-  return `${lead}
-<div class="wrap columns">
-  <div class="feed">
-    ${heading}
-    ${items.map(postRow).join('\n')}
-    ${pager(page, pages, base)}
-  </div>
-  ${sidebar()}
-</div>`;
+function categoryPage(c) {
+  const list = recipes.filter((r) => r.cat === c);
+  const body = `
+<section class="wrap page-head">
+  <nav class="crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a> › <a href="/recettes/">Recettes</a></nav>
+  <h1>${c.name}</h1>
+  <p class="lede">${c.intro}</p>
+  ${catCircles()}
+</section>
+<section class="wrap block">${grid(list)}</section>`;
+  return layout({ title: c.name, description: `Recettes au miel : ${c.name.toLowerCase()}. ${c.intro}`, canonical: `/categories/${c.slug}/`, body });
 }
 
 function recipePage(r, i) {
   const same = recipes.filter((x) => x !== r && x.cat === r.cat);
   const others = recipes.filter((x) => x !== r && x.cat !== r.cat);
-  const related = [...same.slice(i % Math.max(1, same.length - 2), (i % Math.max(1, same.length - 2)) + 2), ...others.slice(i % (others.length - 2), (i % (others.length - 2)) + 2)].slice(0, 4);
+  const k = i % Math.max(1, same.length - 1), j = i % Math.max(1, others.length - 2);
+  const related = [...same.slice(k, k + 2), ...others.slice(j, j + 2)].slice(0, 4);
   const ld = {
     '@context': 'https://schema.org', '@type': 'Recipe', name: r.titre, description: r.resume,
     image: [img(r.photo, 1200)],
@@ -378,55 +401,57 @@ function recipePage(r, i) {
     recipeInstructions: r.steps.map((s) => ({ '@type': 'HowToStep', text: s.replace(/\*\*/g, '').replace(/\[(.+?)\]\(.+?\)/g, '$1') })),
   };
   const body = `
-<article class="article">
-  <header class="article-head wrap-narrow">
-    ${meta(r)}
+<article class="wrap recipe">
+  <nav class="crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a> › <a href="/categories/${r.cat.slug}/">${esc(r.cat.name)}</a></nav>
+  <header class="recipe-head">
     <h1>${esc(r.titre)}</h1>
     <p class="lede">${esc(r.resume)}</p>
+    <p class="recipe-date">Publiée le <time datetime="${r.date.toISOString().slice(0, 10)}">${dateFr(r.date)}</time></p>
   </header>
-  <div class="duo wrap">
+  <div class="duo">
     <figure class="duo-dish">
-      ${picture(r.photo, r.titre, { sizes: '(min-width: 1000px) 640px, 60vw', eager: true })}
-      <figcaption>Le plat</figcaption>
+      ${picture(r.photo, r.titre, { sizes: '(min-width: 1000px) 720px, 64vw', ratio: '4 / 3', eager: true })}
+      <span class="badge badge-time">⏱ ${totalTime(r)}</span>
     </figure>
     <figure class="duo-honey">
-      ${picture(r.honey.id, r.honey.alt, { sizes: '(min-width: 1000px) 320px, 40vw', ratio: '3 / 4', eager: true })}
-      <figcaption>Le miel conseillé : ${esc(r.miel.replace(/^Miel (de |d'|d’)?/i, ''))}</figcaption>
+      ${picture(r.honey.id, r.honey.alt, { sizes: '(min-width: 1000px) 360px, 36vw', ratio: '3 / 4', eager: true })}
+      <figcaption><span>Le miel conseillé</span>${esc(shortHoney(r.miel))}</figcaption>
     </figure>
   </div>
-  <div class="wrap-narrow">
-    <dl class="facts">
-      <div><dt>Préparation</dt><dd>${esc(r.preparation)}</dd></div>
-      ${r.cuisson && r.cuisson !== '0 min' ? `<div><dt>Cuisson</dt><dd>${esc(r.cuisson)}</dd></div>` : ''}
-      ${r.repos ? `<div><dt>Repos</dt><dd>${esc(r.repos)}</dd></div>` : ''}
-      <div><dt>Difficulté</dt><dd>${esc(r.difficulte)}</dd></div>
-      <div><dt>Miel</dt><dd>${esc(r.miel)}</dd></div>
-    </dl>
-    ${r.intro ? `<div class="intro">${r.intro}</div>` : ''}
-    <section class="ingredients-box" data-base="${r.portions}">
+  <ul class="pills">
+    <li><span>Préparation</span><b>${esc(r.preparation)}</b></li>
+    ${r.cuisson && r.cuisson !== '0 min' ? `<li><span>Cuisson</span><b>${esc(r.cuisson)}</b></li>` : ''}
+    ${r.repos ? `<li><span>Repos</span><b>${esc(r.repos)}</b></li>` : ''}
+    <li><span>Difficulté</span><b>${esc(r.difficulte)}</b></li>
+    <li><span>Pour</span><b>${r.portions} ${esc(r.unite || 'pers.')}</b></li>
+  </ul>
+  <div class="recipe-grid">
+    <aside class="ingredients-box" data-base="${r.portions}">
       <div class="box-head">
         <h2>Ingrédients</h2>
         <div class="servings" role="group" aria-label="Nombre de ${esc(r.unite || 'personnes')}">
           <button type="button" data-step="-1" aria-label="Moins">−</button>
           <output>${r.portions}</output>
           <button type="button" data-step="1" aria-label="Plus">+</button>
-          <span>${esc(r.unite || 'personnes')}</span>
         </div>
       </div>
       ${r.ingredientsHtml}
-    </section>
-    <h2>Préparation</h2>
-    <ol class="steps">${r.steps.map((s) => `<li>${inline(s)}</li>`).join('')}</ol>
-    ${r.conseil ? `<div class="tip"><h2>Le conseil</h2>${r.conseil}</div>` : ''}
-    ${r.variantes ? `<div class="variants"><h2>Variantes</h2>${r.variantes}</div>` : ''}
-    <p class="article-foot"><button type="button" class="print-btn" onclick="window.print()">Imprimer la recette</button>
-    <span class="credits">Photos : ${esc(r.credit)}${r.honey.credit ? ` et ${esc(r.honey.credit)}` : ''} sur <a href="https://unsplash.com/fr" rel="nofollow">Unsplash</a>.</span></p>
+      <button type="button" class="print-btn" onclick="window.print()">Imprimer la recette</button>
+    </aside>
+    <div class="recipe-main">
+      ${r.intro ? `<div class="intro">${r.intro}</div>` : ''}
+      <h2>Préparation</h2>
+      <ol class="steps">${r.steps.map((s) => `<li>${inline(s)}</li>`).join('')}</ol>
+      ${r.conseil ? `<div class="tip"><h2>🐝 Le conseil</h2>${r.conseil}</div>` : ''}
+      ${r.variantes ? `<div class="variants"><h2>Variantes</h2>${r.variantes}</div>` : ''}
+      <p class="credits">Photos : ${esc(r.credit)}${r.honey.credit ? ` et ${esc(r.honey.credit)}` : ''} sur <a href="https://unsplash.com/fr" rel="nofollow">Unsplash</a>.</p>
+    </div>
   </div>
-  <section class="wrap related">
-    <h2>À cuisiner aussi</h2>
-    <div class="tiles">${related.map(tile).join('\n')}</div>
-  </section>
-</article>`;
+</article>
+<section class="wrap block related">
+  ${sectionHead('À cuisiner aussi', `/categories/${r.cat.slug}/`, `Plus de ${r.cat.name.toLowerCase()}`)}
+  ${grid(related)}
+</section>`;
   return layout({
     title: r.titre, description: r.resume, canonical: r.url, body, ogImage: img(r.photo, 1200),
     extraHead: `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`,
@@ -439,27 +464,28 @@ function archive() {
   <h1>Toutes les recettes</h1>
   <p class="lede">${recipes.length} recettes au miel, de l'apéritif au goûter.</p>
   <div class="filters">
-    <label class="sr" for="filtre-q">Rechercher</label>
-    <input id="filtre-q" type="search" placeholder="Rechercher une recette, un miel, un ingrédient…" autocomplete="off">
+    <div class="filter-search">${searchIcon}<label class="sr" for="filtre-q">Rechercher</label><input id="filtre-q" type="search" placeholder="Rechercher une recette, un miel, un ingrédient…" autocomplete="off"></div>
     <div class="chips" role="group" aria-label="Filtrer par catégorie">
       <button type="button" class="chip is-on" data-filter="">Toutes</button>
       ${CATEGORIES.map((c) => `<button type="button" class="chip" data-filter="${c.slug}">${c.name}</button>`).join('\n      ')}
     </div>
   </div>
   <p class="empty" hidden>Aucune recette ne correspond. Essayez un autre mot.</p>
-  <div class="tiles" id="all">${recipes.map(tile).join('\n')}</div>
-</section>`;
+</section>
+<section class="wrap block"><div class="cards" id="all">${recipes.map((r) => card(r)).join('\n')}</div></section>`;
   return layout({ title: 'Toutes les recettes', description: `Les ${recipes.length} recettes au miel de cuisineaumiel.fr.`, canonical: '/recettes/', body });
 }
 
 function staticPage(file) {
   const { data, body } = parseFrontMatter(fs.readFileSync(path.join(ROOT, 'pages', file), 'utf8'));
   const slug = file.replace(/\.md$/, '');
-  const cover = data.photo ? `<figure class="wrap-narrow cover">${picture(data.photo, data.titre, { sizes: '(min-width: 800px) 760px, 100vw', ratio: '16 / 9', eager: true })}</figure>` : '';
+  const cover = data.photo ? `<figure class="cover">${picture(data.photo, data.titre, { sizes: '(min-width: 800px) 760px, 100vw', ratio: '16 / 9', eager: true })}</figure>` : '';
   const html = `
-<header class="article-head wrap-narrow"><h1>${esc(data.titre)}</h1>${data.resume ? `<p class="lede">${esc(data.resume)}</p>` : ''}</header>
-${cover}
-<section class="wrap-narrow prose">${markdown(body)}</section>`;
+<article class="wrap-narrow prose-page">
+  <header class="page-head"><h1>${esc(data.titre)}</h1>${data.resume ? `<p class="lede">${esc(data.resume)}</p>` : ''}</header>
+  ${cover}
+  <div class="prose">${markdown(body)}</div>
+</article>`;
   return { slug, html: layout({ title: data.titre, description: data.resume, canonical: `/${slug}/`, body: html }) };
 }
 
@@ -482,31 +508,16 @@ fs.mkdirSync(OUT, { recursive: true });
 fs.cpSync(path.join(ROOT, 'static'), OUT, { recursive: true });
 
 const urls = ['/', '/recettes/'];
-function writeFeed(list, base, opts) {
-  const pages = Math.max(1, Math.ceil(list.length / PER_PAGE));
-  for (let p = 1; p <= pages; p++) {
-    const rel = p === 1 ? base : `${base}page/${p}/`;
-    const title = opts.title ? (p > 1 ? `${opts.title}, page ${p}` : opts.title) : (p > 1 ? `Recettes, page ${p}` : '');
-    write(`${rel.slice(1)}index.html`, layout({ title, description: opts.description, canonical: rel, body: feedPage(list, p, { base, heading: opts.heading || '' }) }));
-    if (p > 1 || base !== '/') urls.push(rel);
-  }
-}
-writeFeed(recipes, '/', {});
+write('index.html', home());
 write('recettes/index.html', archive());
 recipes.forEach((r, i) => { write(`recettes/${r.slug}/index.html`, recipePage(r, i)); urls.push(r.url); });
-for (const c of CATEGORIES) {
-  const list = recipes.filter((r) => r.cat === c);
-  writeFeed(list, `/categories/${c.slug}/`, {
-    title: c.name, description: `Recettes au miel : ${c.name.toLowerCase()}. ${c.intro}`,
-    heading: `<header class="feed-head"><p class="kicker">Catégorie</p><h1>${c.name}</h1><p>${c.intro}</p></header>`,
-  });
-}
+for (const c of CATEGORIES) { write(`categories/${c.slug}/index.html`, categoryPage(c)); urls.push(`/categories/${c.slug}/`); }
 for (const f of fs.readdirSync(path.join(ROOT, 'pages')).filter((f) => f.endsWith('.md'))) {
   const p = staticPage(f);
   write(`${p.slug}/index.html`, p.html);
   urls.push(`/${p.slug}/`);
 }
-write('404.html', layout({ title: 'Page introuvable', canonical: '/404.html', body: `<header class="article-head wrap-narrow"><h1>Oups, cette page a fondu.</h1><p class="lede">Elle n'existe pas ou plus. <a href="/recettes/">Voir toutes les recettes</a>.</p></header>` }));
+write('404.html', layout({ title: 'Page introuvable', canonical: '/404.html', body: `<section class="wrap page-head"><h1>Oups, cette page a fondu.</h1><p class="lede">Elle n'existe pas ou plus. <a href="/recettes/">Voir toutes les recettes</a>.</p></section>` }));
 write('flux.xml', rss());
 write('sitemap.xml', sitemap(urls));
 write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE.url}/sitemap.xml\n`);
