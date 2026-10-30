@@ -1,0 +1,10 @@
+{
+  "name": "cuisineaumiel",
+  "private": true,
+  "description": "Site de recettes au miel cuisineaumiel.fr",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "node build.js && python3 -m http.server 8080 -d _site"
+  },
+  "engines": { "node": ">=18" }
+}
