@@ -191,7 +191,7 @@ for (const r of recipes) {
 }
 
 // ---------- gabarits ----------
-const logoSvg = `<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true"><path d="M20 2l15.6 9v18L20 38 4.4 29V11z" fill="#F2A516"/><path d="M20 9l9.5 5.5v11L20 31l-9.5-5.5v-11z" fill="#FFF4DE"/><path d="M20 15.5c3 0 5 2.6 5 5.2 0 3.4-3 5.8-5 7.3-2-1.5-5-3.9-5-7.3 0-2.6 2-5.2 5-5.2z" fill="#B45309"/></svg>`;
+const logoSvg = `<svg viewBox="7 1 26 36" width="26" height="36" aria-hidden="true"><defs><linearGradient id="goutte" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#FCC93A"/><stop offset=".55" stop-color="#F2A516"/><stop offset="1" stop-color="#C2650A"/></linearGradient></defs><path d="M20 2C17.6 6.8 8.5 15.6 8.5 25a11.5 11.5 0 0 0 23 0C31.5 15.6 22.4 6.8 20 2z" fill="url(#goutte)"/><path d="M14.2 27.5a6.4 6.4 0 0 1 .6-6.2" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="2.6" stroke-linecap="round"/></svg>`;
 const searchIcon = `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
 
 function layout({ title, description, body, canonical, extraHead = '', ogImage = '' }) {
