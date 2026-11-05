@@ -275,21 +275,20 @@ ${hero}
 ${body}
 </main>
 <footer class="footer">
-  <div class="footer-box">
-    <a class="logo logo-small" href="/">${logoSvg}<span class="logo-text"><span>Cuisine</span><b>au miel</b></span></a>
-    <nav class="footer-links" aria-label="Pied de page">
-      <a href="/recettes/">Recettes</a>
-      <a href="/categories/plats/">Catégories</a>
-      <a href="/miels/">Le guide des miels</a>
-      ${HAS_ATLAS ? `<a href="/miels/atlas/">L'atlas des miels</a>` : ''}
-      <a href="/outils/">Outils</a>
-      <a href="/magazine/">Magazine</a>
-      <a href="/guide/trouver-un-apiculteur/">Trouver un apiculteur</a>
-      <a href="/apiculteurs-partenaires/">Apiculteurs partenaires</a>
-      <a href="/a-propos/">À propos</a>
+  <div class="ft">
+    <div class="ft-brand">
+      <a class="ft-logo" href="/" aria-label="Cuisine au miel, accueil"><svg viewBox="0 0 26 36" width="30" height="42" aria-hidden="true"><path d="M13 1C10.6 5.8 1.5 14.6 1.5 24a11.5 11.5 0 0 0 23 0C24.5 14.6 15.4 5.8 13 1z" fill="#F2A516"/><path d="M7.2 26.5a6.4 6.4 0 0 1 .6-6.2" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg><span><small>Cuisine</small><b>au miel</b></span></a>
+      <p>Recettes, savoirs et carte des miels, avec des sources solides. Un site proposé par le <a href="/a-propos/">GAEC des Deux Vallées</a>, apiculteurs.</p>
+      <a class="ft-cta" href="/recettes/">Voir les ${recipes.length} recettes →</a>
+    </div>
+    <nav class="ft-cols" aria-label="Pied de page">
+      <div><h2>Recettes</h2><a href="/recettes/">Toutes les recettes</a><a href="/categories/desserts/">Desserts</a><a href="/categories/plats/">Plats</a><a href="/categories/aperitifs-entrees/">Apéritifs et entrées</a><a href="/recettes/saison/${saisonNow ? saisonNow.slug : 'automne'}/">Recettes de saison</a></div>
+      <div><h2>Le miel</h2><a href="/miels/">Le guide des miels</a>${HAS_ATLAS ? '<a href="/miels/atlas/">L\'atlas des miels</a>' : ''}<a href="/guide/glossaire-du-miel/">Le glossaire</a><a href="/guide/produits-de-la-ruche/">Les produits de la ruche</a><a href="/magazine/">Magazine</a></div>
+      <div><h2>Outils</h2><a href="/outils/sucre-miel/">Remplacer le sucre</a><a href="/outils/quel-miel/">Quel miel pour vous ?</a><a href="/outils/menu-de-la-semaine/">Menu de la semaine</a><a href="/outils/calendrier-des-miellees/">Calendrier des miellées</a><a href="/outils/">Tous les outils</a></div>
+      <div><h2>Apiculteurs</h2><a href="/apiculteurs-partenaires/">Nos apiculteurs partenaires</a><a href="/guide/trouver-un-apiculteur/">Bien acheter son miel</a><a href="/apiculteurs-partenaires/#liste-attente">Vous êtes apiculteur ?</a><a href="/a-propos/">À propos</a></div>
     </nav>
   </div>
-  <p class="fine">© ${today.getUTCFullYear()} cuisineaumiel.fr · Le miel ne convient pas aux enfants de moins d'un an.</p>
+  <div class="ft-bottom"><p>© ${today.getUTCFullYear()} cuisineaumiel.fr</p><p class="ft-anses">Le miel ne convient pas aux enfants de moins d'un an (Anses).</p></div>
 </footer>
 <script src="/main.js?v=${ASSET_V}" defer></script>
 </body>
@@ -481,7 +480,7 @@ ${printSheet(r)}
       <li>${RF.people}<span>Pour</span><b>${r.portions} ${esc(r.unite || 'pers.')}</b></li>
     </ul>
     <div class="rf-actions">
-      <button type="button" class="rf-btn rf-main" data-cook>${RF.chef}<span>Mode cuisine</span></button>
+      <button type="button" class="rf-btn rf-main" data-cook title="Plein écran, une étape à la fois, écran toujours allumé">${RF.chef}<span>Mode cuisine</span></button><span class="rf-hint">Plein écran, étape par étape, écran allumé</span>
       <button type="button" class="rf-btn" onclick="window.print()" aria-label="Imprimer la recette">${RF.print}<span>Imprimer</span></button>
       <button type="button" class="rf-btn" data-share aria-label="Partager la recette">${RF.share}<span>Partager</span></button>
     </div>
@@ -503,6 +502,7 @@ ${printSheet(r)}
     <div class="recipe-main">
       ${r.intro ? `<div class="intro">${r.intro}</div>` : ''}
       <div class="steps-head"><h2>Préparation</h2><button type="button" class="cook-btn" data-cook><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.9V20h12v-6.1"/><path d="M6 14a4 4 0 1 1 2.6-7A4.5 4.5 0 0 1 17 6.1 4 4 0 1 1 18 14z"/></svg>Mode cuisine</button></div>
+      <p class="cook-help"><b>Le mode cuisine ?</b> La recette passe en plein écran : les ingrédients à cocher, puis une étape à la fois en gros caractères, avec « Suivant » et « Précédent ». L'écran reste allumé pendant que vous cuisinez, même les mains occupées.</p>
       <ol class="steps">${r.steps.map((s) => `<li>${inline(s)}</li>`).join('')}</ol>
       ${r.conseil ? `<div class="tip"><h2>🐝 Le conseil</h2>${r.conseil}</div>` : ''}
       ${r.variantes ? `<div class="variants"><h2>Variantes</h2>${r.variantes}</div>` : ''}
