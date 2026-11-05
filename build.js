@@ -481,7 +481,7 @@ ${printSheet(r)}
     </ul>
     <div class="rf-actions">
       <button type="button" class="rf-btn rf-main" data-cook title="Plein écran, une étape à la fois, écran toujours allumé">${RF.chef}<span>Mode cuisine</span></button><span class="rf-hint">Plein écran, étape par étape, écran allumé</span>
-      <button type="button" class="rf-btn" onclick="window.print()" aria-label="Imprimer la recette">${RF.print}<span>Imprimer</span></button>
+      <button type="button" class="rf-btn" onclick="window.print()" aria-label="Imprimer la fiche recette au format A4" title="Une page A4 propre, sans publicité, à garder en cuisine">${RF.print}<span>Fiche A4</span></button>
       <button type="button" class="rf-btn" data-share aria-label="Partager la recette">${RF.share}<span>Partager</span></button>
     </div>
   </div>
@@ -542,8 +542,8 @@ function printSheet(r) {
     <div class="ps-steps"><h2>Préparation</h2><ol>${r.steps.map((x) => `<li>${inline(x)}</li>`).join('')}</ol></div>
   </div>
   <footer class="ps-foot">
-    <p class="ps-partner"><small>Fiche offerte par</small><b>MesAbeilles.fr</b></p>
-    <p>Retrouvez cette recette, ${recipes.length} autres et le guide des miels sur <b>cuisineaumiel.fr</b></p>
+    <a class="ps-partner" href="https://mesabeilles.fr"><small>Fiche offerte par</small><b>MesAbeilles.fr</b></a>
+    <p>Retrouvez cette recette, ${recipes.length} autres et le guide des miels sur <a href="${SITE.url}${r.url}"><b>cuisineaumiel.fr</b></a></p>
     <p class="ps-legal">Le miel ne doit pas être donné aux enfants de moins d'un an (recommandation de l'Anses).</p>
   </footer>
 </div>`;

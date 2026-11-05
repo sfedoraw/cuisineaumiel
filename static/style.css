@@ -806,7 +806,8 @@ h3 { font-size: .98rem; font-weight: 600; }
   .ps-tip p { margin: 0; }
   .ps-foot { margin-top: 5mm; padding-top: 3mm; border-top: .6pt solid #D6CFC4; display: grid; grid-template-columns: auto 1fr; gap: 1mm 6mm; align-items: center; font-size: 8pt; color: #57534E; break-inside: avoid; }
   .ps-foot p { margin: 0; }
-  .ps-partner { grid-row: span 2; display: grid; text-align: center; padding: 2.5mm 6mm; background: #FFF4DE; border: .8pt solid #F2A516; border-radius: 3mm; }
+  .ps-foot a { color: inherit; text-decoration: none; }
+  .ps-partner { grid-row: span 2; display: grid; text-decoration: none; text-align: center; padding: 2.5mm 6mm; background: #FFF4DE; border: .8pt solid #F2A516; border-radius: 3mm; }
   .ps-partner small { font-size: 7pt; letter-spacing: .12em; text-transform: uppercase; color: #8A6A3A; }
   .ps-partner b { font-size: 12pt; color: #B45309; }
   .ps-legal { font-size: 7pt; color: #8A8178; }
