@@ -642,3 +642,14 @@ h3 { font-size: .98rem; font-weight: 600; }
 .explore .chips li.on { background: var(--honey); }
 .accord-more { margin-top: 48px; }
 .accord-more h2 { font-size: 1.2rem; margin: 0 0 14px; }
+.tool-link { display: block; margin-top: 14px; text-align: center; font-size: .88rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+.tool-link:hover { text-decoration: underline; }
+@media print { .tool-link { display: none; } }
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.tool-tile { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 26px; border-radius: 22px; background: #fff; border: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: transform .25s, box-shadow .25s, border-color .25s; }
+.tool-tile:hover { transform: translateY(-4px); border-color: #EBD8B4; box-shadow: 0 24px 46px -30px rgba(60,40,10,.55); }
+.tool-tile b { font-size: 1.15rem; line-height: 1.25; }
+.tool-tile > span:not(.tt-ico):not(.tt-tag):not(.tt-go) { color: var(--ink-soft); font-size: .95rem; line-height: 1.55; }
+.tt-ico { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; background: #FFF4DE; color: var(--accent); }
+.tt-tag { position: absolute; top: 22px; right: 22px; background: var(--honey); color: var(--ink); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: 5px 10px; border-radius: 999px; }
+.tt-go { margin-top: auto; padding-top: 6px; color: var(--accent); font-weight: 600; font-size: .92rem; }

@@ -252,7 +252,7 @@ ${extraHead}
 <header class="masthead">
   <nav class="nav nav-left" aria-label="Navigation principale">
     <a href="/recettes/">Recettes</a>
-    <a href="/categories/plats/">Catégories</a>
+    <a href="/outils/">Outils</a>
   </nav>
   <a class="logo" href="/" aria-label="Cuisine au miel, accueil">${logoMedal('lg-drop')}</a>
   <nav class="nav nav-right" aria-label="Navigation secondaire">
@@ -272,6 +272,7 @@ ${body}
       <a href="/categories/plats/">Catégories</a>
       <a href="/miels/">Le guide des miels</a>
       ${HAS_ATLAS ? `<a href="/miels/atlas/">L'atlas des miels</a>` : ''}
+      <a href="/outils/">Outils</a>
       <a href="/magazine/">Magazine</a>
       <a href="/guide/trouver-un-apiculteur/">Trouver un apiculteur</a>
       <a href="/a-propos/">À propos</a>
@@ -477,6 +478,7 @@ function recipePage(r, i) {
       </div>
       ${r.ingredientsHtml}
       <button type="button" class="print-btn" onclick="window.print()">Imprimer la recette</button>
+      <a class="tool-link" href="/outils/sucre-miel/">Adapter vos recettes : remplacez le sucre par du miel →</a>
     </aside>
     <div class="recipe-main">
       ${r.intro ? `<div class="intro">${r.intro}</div>` : ''}
@@ -1114,8 +1116,29 @@ function aboutPage() {
   return layout({ title: 'À propos', description: "Cuisine au miel, proposé par le GAEC des Deux Vallées : mieux comprendre le miel pour mieux l'utiliser. Recettes, guide des miels, atlas et magazine, avec des sources solides et sans promesse santé.", canonical: '/a-propos/', body, extraHead: ldScript(crumbsLd(trail)) + ldScript({ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'À propos de Cuisine au miel', url: SITE.url + '/a-propos/', about: { '@id': SITE.url + '/#org' } }) });
 }
 
+function toolsHub() {
+  const trail = [['Accueil', '/'], ['Outils']];
+  const ico = (d) => `<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const tools = [
+    ['/outils/sucre-miel/', ico('<path d="M4 7h16M4 12h10M4 17h7"/><path d="M17 14l3 3-3 3"/>'), 'Remplacer le sucre par du miel', 'Le calculateur qui adapte n\'importe quelle recette : quantité de miel, liquide, bicarbonate et four.', 'Nouveau'],
+    ['/recettes/', ico('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'), 'Trouver une recette', `Cherchez parmi nos ${recipes.length} recettes par miel, ingrédient ou envie.`, ''],
+    [`/recettes/saison/${saisonNow ? saisonNow.slug : 'automne'}/`, ico('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'), 'Cuisiner de saison', 'Les recettes au miel du printemps, de l\'été, de l\'automne et de l\'hiver.', ''],
+    [ACCORD_PAGES.length ? `/recettes/${ACCORD_PAGES[0].slug}/` : '/recettes/', ico('<path d="M8 3v7a4 4 0 0 0 8 0V3"/><path d="M12 14v7M9 21h6"/>'), 'Les accords au miel', 'Miel et citron, miel et fromage, miel et romarin… toutes les associations qui marchent.', ''],
+    ...(HAS_ATLAS ? [['/miels/atlas/', ico('<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/>'), "L'atlas des miels", 'Tous les miels AOP et IGP d\'Europe et les grands miels du monde, sur la carte.', '']] : []),
+    ['/recettes/' + (recipes[0] ? recipes[0].slug + '/' : ''), ico('<path d="M6 13.9V20h12v-6.1"/><path d="M6 14a4 4 0 1 1 2.6-7A4.5 4.5 0 0 1 17 6.1 4 4 0 1 1 18 14z"/>'), 'Le mode cuisine', 'Sur chaque recette : une étape à la fois, en grand, et l\'écran reste allumé.', ''],
+    ['/guide/glossaire-du-miel/', ico('<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M8 7h8M8 11h6"/>'), 'Le glossaire du miel', 'Miellat, opercule, monofloral… tous les mots du miel expliqués simplement.', ''],
+    ['/guide/trouver-un-apiculteur/', ico('<path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>'), 'Trouver un apiculteur', 'Où et comment acheter un vrai miel, près de chez vous.', ''],
+  ];
+  const body = `
+${pageHead('Nos outils', 'Calculateur, recherche, saisons, accords, atlas : tout pour choisir et cuisiner le miel facilement.', 'decoupe-cuisine', crumbsHtml(trail))}
+<section class="wrap block">
+  <div class="tools-grid">${tools.map(([u, i, t, d, tag]) => `<a class="tool-tile" href="${u}"><span class="tt-ico">${i}</span>${tag ? `<span class="tt-tag">${tag}</span>` : ''}<b>${t}</b><span>${d}</span><span class="tt-go">Ouvrir →</span></a>`).join('')}</div>
+</section>`;
+  return layout({ title: 'Nos outils pour cuisiner le miel', description: 'Calculateur sucre vers miel, recherche de recettes, recettes de saison, accords, atlas des miels et mode cuisine : les outils gratuits de Cuisine au miel.', canonical: '/outils/', body, extraHead: ldScript(crumbsLd(trail)) });
+}
+
 function sugarTool() {
-  const trail = [['Accueil', '/'], ['Outils', '/outils/sucre-miel/'], ['Remplacer le sucre par du miel']];
+  const trail = [['Accueil', '/'], ['Outils', '/outils/'], ['Remplacer le sucre par du miel']];
   const faq = [
     { q: 'Combien de miel pour remplacer 100 g de sucre ?', a: 'Comptez environ 85 g de miel pour 100 g de sucre remplacés. Le miel a un pouvoir sucrant un peu plus élevé et il apporte de l\'eau.' },
     { q: 'Peut-on remplacer tout le sucre par du miel ?', a: 'Pour la pâtisserie, on conseille de commencer par la moitié du sucre. Au-delà, la texture change : gâteau plus dense, plus humide et qui colore plus vite.' },
@@ -1245,6 +1268,7 @@ write('recettes/index.html', archive());
 recipes.forEach((r, i) => { write(`recettes/${r.slug}/index.html`, recipePage(r, i)); urls.push(r.url); });
 for (const c of CATEGORIES) { write(`categories/${c.slug}/index.html`, categoryPage(c)); urls.push(`/categories/${c.slug}/`); }
 write('a-propos/index.html', aboutPage()); urls.push('/a-propos/');
+write('outils/index.html', toolsHub()); urls.push('/outils/');
 write('outils/sucre-miel/index.html', sugarTool()); urls.push('/outils/sucre-miel/');
 for (const sa of SAISONS) { write(`recettes/saison/${sa.slug}/index.html`, saisonPage(sa)); urls.push(`/recettes/saison/${sa.slug}/`); }
 for (const a of ACCORD_PAGES) { write(`recettes/${a.slug}/index.html`, accordPage(a)); urls.push(`/recettes/${a.slug}/`); }
