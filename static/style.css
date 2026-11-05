@@ -43,15 +43,25 @@ h3 { font-size: .98rem; font-weight: 600; }
 .nav-right { justify-content: flex-start; padding-left: clamp(24px, 5vw, 72px); }
 .nav a { color: var(--ink); text-decoration: none; text-transform: uppercase; font-size: .9rem; font-weight: 500; letter-spacing: .04em; }
 .nav a:hover { color: var(--accent); }
-.logo { position: relative; display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; background: #fff; padding: 22px 34px 26px; margin-bottom: -46px; border-radius: 0 0 999px 999px; }
-.logo svg { width: 30px; height: 42px; }
+/* Logo : médaillon blanc, tout en noir */
+.logo { position: relative; align-self: start; margin-top: 8px; display: grid; place-items: center; width: 148px; aspect-ratio: 1; border-radius: 50%; background: #fff; color: var(--ink); text-decoration: none; box-shadow: 0 10px 30px rgba(28, 25, 23, .18); }
+.logo-ring { display: flex; flex-direction: column; align-items: center; justify-content: center; width: calc(100% - 14px); aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--ink); outline: 1px solid var(--ink); outline-offset: -5px; }
+.logo svg { width: 18px; height: 25px; color: var(--ink); }
+.logo-ring .logo-text { align-items: center; margin-top: 6px; }
 .logo-text { display: flex; flex-direction: column; line-height: 1; }
-.logo-text span { font-size: .78rem; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: var(--ink-soft); }
-.logo-text b { font-size: 1.55rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
-.logo-small { background: none; padding: 0; margin: 0; }
+.logo-text span { font-size: .62rem; font-weight: 600; letter-spacing: .42em; margin-right: -.42em; text-transform: uppercase; color: var(--ink); }
+.logo-text b { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 600; font-size: 1.7rem; letter-spacing: 0; color: var(--ink); margin-top: 3px; }
+.logo:hover .logo-ring { border-color: var(--accent); outline-color: var(--accent); }
+.logo-small { display: flex; align-items: center; gap: 10px; width: auto; aspect-ratio: auto; background: none; box-shadow: none; margin: 0; border-radius: 0; }
+.logo-small svg { width: 22px; height: 30px; }
+.logo-small .logo-text b { font-size: 1.4rem; }
 @media (max-width: 760px) {
   .masthead { grid-template-columns: 1fr 1fr; height: auto; padding: 8px 0 14px; row-gap: 6px; }
-  .logo { grid-column: 1 / -1; order: -1; justify-self: center; margin: 0; padding: 6px 16px; }
+  .logo { grid-column: 1 / -1; order: -1; justify-self: center; margin: 0; width: 112px; }
+  .logo svg { width: 14px; height: 20px; }
+  .logo-text span { font-size: .5rem; }
+  .logo-text b { font-size: 1.3rem; }
+  .logo-ring { outline-offset: -4px; width: calc(100% - 10px); }
   .nav { gap: 18px; }
   .nav-left { padding-right: 9px; }
   .nav-right { padding-left: 9px; }

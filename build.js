@@ -191,7 +191,7 @@ for (const r of recipes) {
 }
 
 // ---------- gabarits ----------
-const logoSvg = `<svg viewBox="7 1 26 36" width="26" height="36" aria-hidden="true"><defs><linearGradient id="goutte" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#FCC93A"/><stop offset=".55" stop-color="#F2A516"/><stop offset="1" stop-color="#C2650A"/></linearGradient></defs><path d="M20 2C17.6 6.8 8.5 15.6 8.5 25a11.5 11.5 0 0 0 23 0C31.5 15.6 22.4 6.8 20 2z" fill="url(#goutte)"/><path d="M14.2 27.5a6.4 6.4 0 0 1 .6-6.2" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="2.6" stroke-linecap="round"/></svg>`;
+const logoSvg = `<svg viewBox="7 1 26 36" width="26" height="36" aria-hidden="true"><path d="M20 2C17.6 6.8 8.5 15.6 8.5 25a11.5 11.5 0 0 0 23 0C31.5 15.6 22.4 6.8 20 2z" fill="currentColor"/><path d="M14.2 27.5a6.4 6.4 0 0 1 .6-6.2" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>`;
 const searchIcon = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
 const clockIcon = `<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
 const arrow = (d) => `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${d === 'prev' ? 'M19 12H5m6-6-6 6 6 6' : 'M5 12h14m-6-6 6 6-6 6'}"/></svg>`;
@@ -224,7 +224,7 @@ ${ogImage ? `<meta property="og:image" content="${ogImage}">\n<meta name="twitte
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 ${extraHead}
 </head>
@@ -235,7 +235,7 @@ ${extraHead}
     <a href="/recettes/">Recettes</a>
     <a href="/categories/plats/">Catégories</a>
   </nav>
-  <a class="logo" href="/" aria-label="Cuisine au miel, accueil">${logoSvg}<span class="logo-text"><span>Cuisine</span><b>au miel</b></span></a>
+  <a class="logo" href="/" aria-label="Cuisine au miel, accueil"><span class="logo-ring">${logoSvg}<span class="logo-text"><span>Cuisine</span><b>au miel</b></span></span></a>
   <nav class="nav nav-right" aria-label="Navigation secondaire">
     <a href="/recettes/#nouveautes">Nouveautés</a>
     <a href="/le-miel/">Le miel</a>
