@@ -14,9 +14,9 @@ Pourtant, on le cantonne souvent à la tartine du matin. **Cuisine au miel** est
 - Des recettes originales, testables à la maison avec des ingrédients faciles à trouver.
 - Pour chaque recette, le miel conseillé, et pourquoi.
 - Des quantités ajustables selon le nombre de convives, et une version imprimable.
-- Un [guide des miels](/le-miel/) pour choisir la bonne variété et savoir remplacer le sucre.
+- Un [guide des miels](/miels/) pour choisir la bonne variété et savoir remplacer le sucre.
 
-## Une nouvelle recette tous les deux ou trois jours
+## Une nouvelle recette chaque jour
 
 Le carnet s'enrichit régulièrement. Pour ne rien manquer, abonnez-vous au [flux RSS](/flux.xml) ou repassez nous voir de temps en temps.
 

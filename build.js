@@ -81,6 +81,15 @@ function markdown(src) {
       list.items.push(m[1]);
       continue;
     }
+    if (/^\|.*\|$/.test(line)) {
+      flushPara(); flushList();
+      const cells = line.slice(1, -1).split('|').map((c) => c.trim());
+      if (cells.every((c) => /^:?-{3,}:?$/.test(c))) continue;
+      const prev = out[out.length - 1];
+      if (prev && prev.startsWith('<table>')) out[out.length - 1] = prev.replace('</tbody></table>', `<tr>${cells.map((c) => `<td>${inline(c)}</td>`).join('')}</tr></tbody></table>`);
+      else out.push(`<table><thead><tr>${cells.map((c) => `<th>${inline(c)}</th>`).join('')}</tr></thead><tbody></tbody></table>`);
+      continue;
+    }
     if ((m = line.match(/^>\s?(.*)$/))) { flushPara(); flushList(); out.push(`<blockquote><p>${inline(m[1])}</p></blockquote>`); continue; }
     flushList();
     para.push(line);
@@ -239,8 +248,8 @@ ${extraHead}
   </nav>
   <a class="logo" href="/" aria-label="Cuisine au miel, accueil"><span class="logo-ring">${logoSvg}<span class="logo-text"><span>Cuisine</span><b>au miel</b></span></span></a>
   <nav class="nav nav-right" aria-label="Navigation secondaire">
-    <a href="/recettes/#nouveautes">Nouveautés</a>
-    <a href="/le-miel/">Le miel</a>
+    <a href="/miels/">Les miels</a>
+    <a href="/magazine/">Magazine</a>
   </nav>
 </header>
 ${hero}
@@ -253,7 +262,10 @@ ${body}
     <nav class="footer-links" aria-label="Pied de page">
       <a href="/recettes/">Recettes</a>
       <a href="/categories/plats/">Catégories</a>
-      <a href="/le-miel/">Le miel</a>
+      <a href="/miels/">Le guide des miels</a>
+      ${HAS_ATLAS ? `<a href="/miels/atlas/">L'atlas des miels</a>` : ''}
+      <a href="/magazine/">Magazine</a>
+      <a href="/guide/trouver-un-apiculteur/">Trouver un apiculteur</a>
       <a href="/a-propos/">À propos</a>
       <a href="/flux.xml">Flux RSS</a>
     </nav>
@@ -331,7 +343,8 @@ function honeyCards() {
     const all = [...fam, ...HONEY.ambre, ...HONEY.clair, ...HONEY.fonce];
     const [id, , alt] = all.find((h) => !used.has(h[0])) || fam[0];
     used.add(id);
-    return `<article class="honey-card"><a href="/recettes/?q=${encodeURIComponent(name.toLowerCase())}">
+    const fiche = honeyOf(list[0]);
+    return `<article class="honey-card"><a href="${fiche ? fiche.url : `/recettes/?q=${encodeURIComponent(name.toLowerCase())}`}">
     <div class="card-media">${picture(id, alt, { sizes: '(min-width: 1200px) 280px, 60vw', ratio: '4 / 3' })}</div>
     <span class="card-cat">Miel</span><h3>${esc(name)}</h3>
     <div class="card-meta"><span>${list.length} recette${list.length > 1 ? 's' : ''}</span></div></a></article>`;
@@ -368,8 +381,10 @@ function home() {
 <section class="block">
   <div class="wrap">${sectionTitle('Les miels', 'Un miel pour chaque recette')}</div>
   ${carousel(honeyCards(), 'Les miels')}
-  <div class="wrap more"><a class="btn-outline" href="/le-miel/">Lire le guide des miels</a></div>
+  <div class="wrap more"><a class="btn-outline" href="/miels/">Lire le guide des miels</a></div>
 </section>
+
+${posts.length ? `<section class="wrap block">${sectionTitle('Le magazine du miel', 'Actualités et dossiers, toujours sourcés')}<div class="posts">${posts.slice(0, 3).map(postCard).join('')}</div><div class="more"><a class="btn-outline" href="/magazine/">Tous les articles</a></div></section>` : ''}
 
 <section class="wrap block">
   <div class="story">
@@ -377,7 +392,7 @@ function home() {
     <div class="story-text">
       <p class="kicker">Une recette chaque jour</p>
       <h2>Le miel, de l'entrée au dessert</h2>
-      <p>${recipes.length} recettes originales et testées à la maison pour remplacer le sucre, laquer une viande ou parfumer une pâtisserie. Chaque fiche vous indique le miel le plus adapté et pourquoi.</p>
+      <p>${recipes.length} recettes originales pour remplacer le sucre, laquer une viande ou parfumer une pâtisserie. Chaque fiche vous indique le miel le plus adapté et pourquoi.</p>
       <a class="btn" href="/a-propos/">Découvrir le site</a>
     </div>
   </div>
@@ -430,7 +445,7 @@ function recipePage(r, i) {
     </figure>
     <figure class="duo-honey">
       ${picture(r.honey.id, r.honey.alt, { sizes: '(min-width: 1000px) 360px, 36vw', ratio: '3 / 4', eager: true })}
-      <figcaption><span>Le miel conseillé</span>${esc(shortHoney(r.miel))}</figcaption>
+      <figcaption><span>Le miel conseillé</span>${honeyOf(r) ? `<a href="${honeyOf(r).url}">${esc(shortHoney(r.miel))}</a>` : esc(shortHoney(r.miel))}</figcaption>
     </figure>
   </div>
   <ul class="pills">
@@ -516,12 +531,171 @@ const sitemap = (urls) => `<?xml version="1.0" encoding="UTF-8"?>
 ${urls.map((u) => `<url><loc>${SITE.url}${u}</loc></url>`).join('\n')}
 </urlset>`;
 
+
+// ---------- guide des miels, pages piliers et magazine ----------
+// miels/*.md : une fiche par miel. guide/*.md : pages de fond. magazine/*.md : articles datés.
+const HAS_ATLAS = fs.existsSync(path.join(ROOT, 'atlas'));
+const readCollection = (dir) => {
+  const d = path.join(ROOT, dir);
+  if (!fs.existsSync(d)) return [];
+  return fs.readdirSync(d).filter((f) => f.endsWith('.md')).map((f) => {
+    const { data, body } = parseFrontMatter(fs.readFileSync(path.join(d, f), 'utf8'));
+    return { ...data, slug: f.replace(/\.md$/, ''), body };
+  });
+};
+// Sépare le corps en : texte principal, FAQ (### question + réponse) et sources.
+function splitLong(body) {
+  const parts = { main: [], faq: [], sources: [] };
+  let cur = 'main';
+  for (const line of body.split('\n')) {
+    const h = line.match(/^##\s+(.*)$/);
+    if (h) {
+      const k = slugify(h[1]);
+      if (k === 'questions-frequentes') { cur = 'faq'; continue; }
+      if (k === 'sources') { cur = 'sources'; continue; }
+      cur = 'main';
+    }
+    parts[cur].push(line);
+  }
+  const faq = [];
+  for (const line of parts.faq) {
+    const q = line.match(/^###\s+(.*)$/);
+    if (q) faq.push({ q: q[1], a: [] });
+    else if (faq.length) faq[faq.length - 1].a.push(line);
+  }
+  return { main: parts.main.join('\n'), faq: faq.map((x) => ({ q: x.q, a: x.a.join('\n').trim() })), sources: listItems(parts.sources) };
+}
+const plain = (s) => String(s).replace(/\*\*?|__/g, '').replace(/\[(.+?)\]\((.+?)\)/g, '$1');
+const wordCount = (s) => plain(s).split(/\s+/).filter((w) => /[a-zà-ÿ0-9]/i.test(w)).length;
+const readTime = (n) => Math.max(1, Math.round(n / 220));
+
+const honeys = readCollection('miels').map((h) => ({ ...h, url: `/miels/${h.slug}/`, kind: 'miel' }))
+  .sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
+const pillars = readCollection('guide').map((g) => ({ ...g, url: `/guide/${g.slug}/`, kind: 'guide' }))
+  .sort((a, b) => (+a.ordre || 99) - (+b.ordre || 99));
+const posts = readCollection('magazine').map((a) => ({ ...a, url: `/magazine/${a.slug}/`, kind: 'magazine', date: new Date(a.date) }))
+  .filter((a) => a.date <= today).sort((a, b) => b.date - a.date);
+const honeyByName = Object.fromEntries(honeys.map((h) => [slugify(h.nom), h]));
+const honeyOf = (r) => honeyByName[slugify(r.miel || '')];
+for (const x of [...honeys, ...pillars, ...posts]) {
+  Object.assign(x, splitLong(x.body));
+  x.words = wordCount(x.body);
+  if (x.kind === 'miel' && x.words < 1000) console.warn(`⚠ ${x.slug} : ${x.words} mots (moins de 1 000)`);
+  if (!x.sources.length) console.warn(`⚠ ${x.kind}/${x.slug} : aucune source citée`);
+}
+
+// Bandeau photo : image du site (/img) ou photo Unsplash (identifiant numérique).
+const bannerImg = (photo) => /^\d/.test(photo || '') ? picture(photo, '', { cls: 'banner-bg', ratio: 'auto', eager: true, sizes: '100vw' }) : own(photo || 'chef-sel', '', { cls: 'banner-bg', ratio: 'auto', eager: true });
+function longBanner(title, lede, photo, crumbs) {
+  return `<section class="page-banner">${bannerImg(photo)}<div class="banner-inner">${crumbs}<h1>${title}</h1>${lede ? `<p>${lede}</p>` : ''}</div></section>`;
+}
+const crumbsHtml = (items) => `<nav class="crumbs" aria-label="Fil d'Ariane">${items.map(([n, u]) => u ? `<a href="${u}">${esc(n)}</a>` : `<span>${esc(n)}</span>`).join(' › ')}</nav>`;
+const crumbsLd = (items) => ({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, ...(u ? { item: SITE.url + u } : {}) })) });
+const ldScript = (o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`;
+const isoDate = (d) => (d instanceof Date ? d : new Date(d || today)).toISOString().slice(0, 10);
+
+function toc(md) {
+  const hs = [...md.matchAll(/^##\s+(.*)$/gm)].map((m) => m[1]);
+  if (hs.length < 3) return '';
+  return `<nav class="toc" aria-label="Sommaire"><p>Au sommaire</p><ol>${hs.map((h) => `<li><a href="#${slugify(h)}">${inline(h)}</a></li>`).join('')}</ol></nav>`;
+}
+const faqHtml = (faq) => faq.length ? `<section class="faq" id="questions-frequentes"><h2>Questions fréquentes</h2>${faq.map((f) => `<details><summary>${inline(f.q)}</summary>${markdown(f.a)}</details>`).join('')}</section>` : '';
+const sourcesHtml = (src) => src.length ? `<section class="sources" id="sources"><h2>Sources</h2><ol>${src.map((s) => `<li>${inline(s)}</li>`).join('')}</ol></section>` : '';
+const faqLd = (faq) => faq.length ? { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: plain(f.q), acceptedAnswer: { '@type': 'Answer', text: plain(f.a) } })) } : null;
+
+function honeyTile(h) {
+  const n = recipes.filter((r) => honeyOf(r) === h).length;
+  return `<article class="honey-card"><a href="${h.url}">
+    <div class="card-media">${picture(h.photo, h.nom, { sizes: '(min-width: 1200px) 280px, 60vw', ratio: '4 / 3' })}</div>
+    <span class="card-cat">${esc(h.famille === 'fonce' ? 'Miel foncé' : h.famille === 'clair' ? 'Miel clair' : 'Miel ambré')}</span><h3>${esc(h.nom)}</h3>
+    <div class="card-meta"><span>${n ? `${n} recette${n > 1 ? 's' : ''}` : 'Fiche complète'}</span></div></a></article>`;
+}
+function postCard(a) {
+  return `<article class="post-card"><a href="${a.url}">
+    <div class="card-media">${bannerImgCard(a)}</div>
+    <span class="card-cat">${esc(a.rubrique || 'Guide')}${a.date ? ` · <time datetime="${isoDate(a.date)}">${dateFr(a.date)}</time>` : ''}</span>
+    <h3>${esc(a.titre)}</h3><p>${esc(a.resume)}</p></a></article>`;
+}
+const bannerImgCard = (a) => /^\d/.test(a.photo || '') ? picture(a.photo, a.titre, { sizes: '(min-width: 1000px) 380px, 90vw', ratio: '16 / 10' }) : own(a.photo || 'chef-sel', a.titre, { ratio: '16 / 10', sizes: '(min-width: 1000px) 380px, 90vw' });
+
+function longPage(x) {
+  const isHoney = x.kind === 'miel', isPost = x.kind === 'magazine';
+  const trail = isPost ? [['Accueil', '/'], ['Magazine', '/magazine/'], [x.titre]] : [['Accueil', '/'], ['Le guide des miels', '/miels/'], [isHoney ? x.nom : x.titre]];
+  const linked = isHoney ? recipes.filter((r) => honeyOf(r) === x) : [];
+  const facts = isHoney ? [['Plante', x.plante], ['Couleur', x.couleur], ['Goût', x.gout], ['Texture', x.texture], ['Cristallisation', x.cristallisation], ['Récolte', x.recolte], ['Où', x.regions], ['Labels', x.labels]].filter(([, v]) => v) : [];
+  const published = isoDate(x.date || x.publie || '2026-11-05'), modified = isoDate(x.maj || x.date || '2026-11-05');
+  const article = {
+    '@context': 'https://schema.org', '@type': isPost && /actu/i.test(x.rubrique || '') ? 'NewsArticle' : 'Article',
+    headline: plain(x.titre).slice(0, 110), description: x.resume, inLanguage: 'fr-FR', wordCount: x.words,
+    datePublished: published, dateModified: modified, mainEntityOfPage: SITE.url + x.url,
+    ...(/^\d/.test(x.photo || '') ? { image: [img(x.photo, 1200)] } : x.photo ? { image: [`${SITE.url}/img/${x.photo}-2000.jpg`] } : {}),
+    author: { '@type': 'Organization', name: SITE.name, url: SITE.url }, publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url, logo: { '@type': 'ImageObject', url: `${SITE.url}/favicon.svg` } },
+    ...(x.sources.length ? { citation: x.sources.map((s) => { const m = s.match(/\]\((https?:[^)]+)\)/); return m ? m[1] : plain(s); }) } : {}),
+    ...(isHoney ? { about: { '@type': 'Thing', name: x.nom } } : {}),
+  };
+  const others = isHoney ? honeys.filter((h) => h !== x) : isPost ? posts.filter((a) => a !== x).slice(0, 3) : pillars.filter((g) => g !== x);
+  const body = `
+${longBanner(esc(isHoney ? x.nom : x.titre), esc(x.resume), x.photo, crumbsHtml(trail))}
+<div class="wrap long">
+  <article class="long-main">
+    <p class="long-meta">${isPost ? `${esc(x.rubrique || 'Magazine')} · Publié le <time datetime="${published}">${dateFr(new Date(published))}</time> · ` : `Mis à jour le <time datetime="${modified}">${dateFr(new Date(modified))}</time> · `}${readTime(x.words)} min de lecture</p>
+    ${toc(x.main)}
+    <div class="prose">${markdown(x.main)}</div>
+    ${faqHtml(x.faq)}
+    ${sourcesHtml(x.sources)}
+    <p class="disclaimer">Le miel est un aliment plaisir, à consommer dans le cadre d'une alimentation variée. Il ne doit pas être donné aux enfants de moins d'un an (<a href="https://www.anses.fr/fr/content/pas-de-miel-les-enfants-de-moins-dun-an" rel="nofollow">recommandation de l'Anses</a>).</p>
+  </article>
+  <aside class="long-side">
+    ${facts.length ? `<div class="facts"><h2>Fiche d'identité</h2><dl>${facts.map(([k, v]) => `<dt>${k}</dt><dd>${inline(v)}</dd>`).join('')}</dl></div>` : ''}
+    ${isHoney ? `<div class="side-box"><h2>Où l'acheter</h2><p>Chez un apiculteur, sur un marché ou à la ferme : notre guide pour <a href="/guide/trouver-un-apiculteur/">trouver un apiculteur près de chez vous</a>.</p></div>` : ''}
+    <div class="side-box"><h2>Le guide des miels</h2><ul>${pillars.map((g) => `<li><a href="${g.url}">${esc(g.titre_court || g.titre)}</a></li>`).join('')}${HAS_ATLAS ? `<li><a href="/miels/atlas/">L'atlas des miels du monde</a></li>` : ''}</ul></div>
+  </aside>
+</div>
+${isHoney ? `<section class="wrap block related">${sectionTitle(`Recettes au ${esc(x.nom.replace(/^Miel /, 'miel '))}`, linked.length ? 'Avec ce miel' : 'Bientôt sur le site : en attendant, toutes nos recettes')}${grid(linked.length ? linked : recipes.slice(0, 6))}</section>` : ''}
+${isHoney ? `<section class="block"><div class="wrap">${sectionTitle('Les autres miels', 'Continuez la dégustation')}</div>${carousel(others.map(honeyTile).join('\n'), 'Les autres miels')}</section>`
+  : others.length ? `<section class="wrap block">${sectionTitle(isPost ? 'À lire aussi' : 'Continuer la lecture', '')}<div class="posts">${others.slice(0, 3).map(postCard).join('')}</div></section>` : ''}`;
+  return layout({
+    title: plain(x.titre), description: x.resume, canonical: x.url, body, ogImage: /^\d/.test(x.photo || '') ? img(x.photo, 1200) : '',
+    extraHead: [article, crumbsLd(trail), faqLd(x.faq)].filter(Boolean).map(ldScript).join('\n'),
+  });
+}
+
+function guideHub() {
+  const fam = [['clair', 'Les miels clairs', 'Doux et délicats, ils accompagnent sans dominer.'], ['ambre', 'Les miels ambrés', 'Floraux ou aromatiques, le cœur de la gamme.'], ['fonce', 'Les miels foncés', 'Puissants, maltés ou boisés, ils s\'affirment.']];
+  const trail = [['Accueil', '/'], ['Le guide des miels']];
+  const body = `
+${longBanner('Le guide des miels', `${honeys.length} miels décryptés, leur goût, leur origine et la meilleure façon de les cuisiner.`, '1600759487717-62bbb608106e', crumbsHtml(trail))}
+<section class="wrap block-tight">
+  <div class="hub-intro prose"><p>Un miel prend le goût des fleurs, des arbres ou du miellat que les abeilles ont récoltés. Chaque fiche de ce guide décrit un miel en détail : la plante d'origine, la couleur, le goût, la texture, la saison de récolte, les régions de production, les labels, et surtout la façon de l'utiliser en cuisine, avec nos recettes. Les informations s'appuient sur des sources reconnues, citées en bas de chaque fiche.</p></div>
+  ${fam.map(([k, t, sub]) => { const l = honeys.filter((h) => h.famille === k); return l.length ? `${sectionTitle(t, sub)}<div class="honey-grid">${l.map(honeyTile).join('')}</div>` : ''; }).join('\n')}
+</section>
+<section class="wrap block">
+  ${sectionTitle('Comprendre le miel', 'Histoire, ruche, fraude, achat')}
+  <div class="posts">${pillars.map(postCard).join('')}${!HAS_ATLAS ? '' : postCard({ url: '/miels/atlas/', titre: "L'atlas des miels du monde", resume: 'Tous les miels de France et du monde sur une carte.', rubrique: 'Carte', photo: '1774284266228-27698569b2fd' })}</div>
+</section>
+${posts.length ? `<section class="wrap block">${sectionTitle('Le magazine du miel', 'Actualités et dossiers')}<div class="posts">${posts.slice(0, 3).map(postCard).join('')}</div><div class="more"><a class="btn-outline" href="/magazine/">Tous les articles</a></div></section>` : ''}`;
+  return layout({ title: 'Le guide des miels : variétés, goûts et usages en cuisine', description: `Le guide complet des miels : ${honeys.map((h) => h.nom.replace(/^Miel /, '')).join(', ')}. Goût, origine, récolte, labels et recettes.`, canonical: '/miels/', body, extraHead: ldScript(crumbsLd(trail)) + ldScript({ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: honeys.map((h, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE.url + h.url, name: h.nom })) }) });
+}
+
+function magazineHub() {
+  const trail = [['Accueil', '/'], ['Magazine']];
+  const body = `
+${longBanner('Le magazine du miel', "L'actualité du miel et de l'apiculture, des dossiers de saison, toujours sourcés.", '1774284266228-27698569b2fd', crumbsHtml(trail))}
+<section class="wrap block-tight"><div class="posts">${posts.map(postCard).join('')}</div></section>`;
+  return layout({ title: 'Le magazine du miel : actualités et dossiers', description: "Actualités du miel et de l'apiculture, récoltes, réglementation, dossiers de saison : le magazine de Cuisine au miel.", canonical: '/magazine/', body, extraHead: ldScript(crumbsLd(trail)) });
+}
+
 // ---------- construction ----------
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
 fs.cpSync(path.join(ROOT, 'static'), OUT, { recursive: true });
 
-const urls = ['/', '/recettes/'];
+const urls = ['/', '/recettes/', '/miels/', '/magazine/'];
+write('miels/index.html', guideHub());
+write('magazine/index.html', magazineHub());
+for (const x of [...honeys, ...pillars, ...posts]) { write(`${x.url.slice(1)}index.html`, longPage(x)); urls.push(x.url); }
+// Ancienne adresse du guide : redirection vers /miels/.
+write('le-miel/index.html', `<!doctype html><meta charset="utf-8"><title>Le guide des miels</title><link rel="canonical" href="${SITE.url}/miels/"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/miels/"><a href="/miels/">Le guide des miels</a>`);
 write('index.html', home());
 write('recettes/index.html', archive());
 recipes.forEach((r, i) => { write(`recettes/${r.slug}/index.html`, recipePage(r, i)); urls.push(r.url); });
