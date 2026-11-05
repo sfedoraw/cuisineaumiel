@@ -363,6 +363,7 @@ function home() {
   const first = byCat.find((x) => x.c.slug === 'plats') || byCat[0];
   const FILTERS = [
     ['nouveautes', 'Nouveautés', recipes],
+    ...(saisonNow && saisonList(saisonNow).length ? [['saison', `De saison`, saisonList(saisonNow)]] : []),
     ['rapide', 'Rapide', recipes.filter((r) => totalMin(r) <= 30)],
     ['vegetarien', 'Végétarien', recipes.filter(isVeggie)],
     ['facile', 'Facile', recipes.filter((r) => /facile/i.test(r.difficulte))],
@@ -488,6 +489,7 @@ function recipePage(r, i) {
     </div>
   </div>
 </article>
+<section class="wrap">${exploreHtml(r)}</section>
 <section class="wrap block related">
   ${sectionTitle('À cuisiner aussi', `D'autres idées de ${r.cat.name.toLowerCase()}`)}
   ${grid(related)}
@@ -511,6 +513,7 @@ ${pageHead('Toutes les recettes', `${recipes.length} recettes au miel, de l'apé
   </div>
   <p class="empty" hidden>Aucune recette ne correspond. Essayez un autre mot.</p>
   ${grid(recipes, 'all')}
+  ${exploreHtml()}
 </section>`;
   return layout({ title: 'Toutes les recettes', description: `Les ${recipes.length} recettes au miel de cuisineaumiel.fr.`, canonical: '/recettes/', body });
 }
@@ -1164,6 +1167,67 @@ ${pageHead('Remplacer le sucre par du miel', 'Le calculateur pour adapter n\'imp
   return layout({ title: 'Remplacer le sucre par du miel : le calculateur', description: 'Combien de miel pour remplacer le sucre ? Notre calculateur gratuit adapte vos recettes : quantité de miel, liquide à retirer, bicarbonate et température du four.', canonical: '/outils/sucre-miel/', body, extraHead: [crumbsLd(trail), faqLd(faq), { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Calculateur sucre vers miel', applicationCategory: 'LifestyleApplication', operatingSystem: 'Tous', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }, url: SITE.url + '/outils/sucre-miel/', inLanguage: 'fr-FR' }].map(ldScript).join('\n') });
 }
 
+// ---------- saisons et accords miel + ingrédient ----------
+const SAISON_DATA = fs.existsSync(path.join(ROOT, 'data', 'saisons.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'saisons.json'), 'utf8')) : {};
+const SAISONS = [
+  { slug: 'printemps', nom: 'Printemps', de: 'de printemps', photo: 'salade-printemps', mois: [2, 3, 4], lede: 'Herbes fraîches, premiers légumes, fruits rouges : des recettes légères et lumineuses, adoucies au miel.' },
+  { slug: 'ete', nom: 'Été', de: "d'été", photo: 'chef-sel', mois: [5, 6, 7], lede: 'Grillades, desserts glacés, fruits rôtis et boissons fraîches : le miel se met à l\'heure de l\'été.' },
+  { slug: 'automne', nom: 'Automne', de: "d'automne", photo: 'decoupe-legumes', mois: [8, 9, 10], lede: 'Figues, pommes, courges, coings et noix : la saison la plus gourmande pour cuisiner le miel.' },
+  { slug: 'hiver', nom: 'Hiver', de: "d'hiver", photo: 'vieux-livre', mois: [11, 0, 1], lede: 'Plats mijotés, épices, boissons chaudes et pain d\'épices : des recettes réconfortantes au miel.' },
+];
+const saisonNow = SAISONS.find((x) => x.mois.includes(today.getMonth()));
+const inSaison = (r, sa) => (SAISON_DATA[r.slug] || []).includes(sa.slug);
+const saisonList = (sa) => recipes.filter((r) => inSaison(r, sa));
+function saisonPage(sa) {
+  const list = saisonList(sa);
+  const trail = [['Accueil', '/'], ['Recettes', '/recettes/'], [`Recettes ${sa.de}`]];
+  const body = `
+${pageHead(`Recettes au miel ${sa.de}`, sa.lede, sa.photo, crumbsHtml(trail))}
+<section class="wrap block">
+  <nav class="season-nav" aria-label="Saisons">${SAISONS.map((x) => `<a href="/recettes/saison/${x.slug}/"${x === sa ? ' aria-current="page"' : ''}>${x.nom}${x === saisonNow ? ' <small>maintenant</small>' : ''}</a>`).join('')}</nav>
+  ${sectionTitle(`${list.length} recettes ${sa.de}`, 'Choisies selon la saison de leurs ingrédients principaux')}
+  ${grid(list)}
+  <h2 class="season-more">Et toute l'année</h2>
+  ${grid(recipes.filter((r) => !SAISON_DATA[r.slug]).slice(0, 8))}
+</section>`;
+  return layout({ title: `Recettes au miel ${sa.de}`, description: `${list.length} recettes au miel ${sa.de}. ${sa.lede}`, canonical: `/recettes/saison/${sa.slug}/`, body, extraHead: [crumbsLd(trail), { '@context': 'https://schema.org', '@type': 'ItemList', name: `Recettes au miel ${sa.de}`, itemListElement: list.map((r, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE.url + r.url })) }].map(ldScript).join('\n') });
+}
+const ACCORDS = [
+  ['citron', 'citron', /citron/, "Le miel et le citron forment un duo classique : l'acidité vive du citron équilibre la rondeur sucrée du miel. On les retrouve dans les vinaigrettes, les laques, les boissons chaudes ou glacées et les pâtisseries."],
+  ['romarin', 'romarin', /romarin/, "Le romarin apporte une note résineuse et méditerranéenne qui s'accorde naturellement avec les miels de garrigue. Il parfume les viandes rôties, les fruits au four et même les citronnades."],
+  ['thym', 'thym', /\bthym\b/, "Le thym et le miel partagent les mêmes paysages : ceux des collines du Sud. Ensemble, ils subliment les fromages chauds, les légumes rôtis et les viandes."],
+  ['gingembre', 'gingembre', /gingembre/, "Le gingembre apporte du piquant et de la fraîcheur, que le miel vient arrondir. Un accord idéal pour les plats d'inspiration asiatique, les veloutés et les boissons."],
+  ['moutarde', 'moutarde', /moutarde/, "Le mariage du miel et de la moutarde est un grand classique des sauces : doux et piquant à la fois, il nappe les viandes, les salades et les légumes."],
+  ['noix', 'noix', /\bnoix\b/, "Les noix et le miel, c'est l'automne dans l'assiette : un contraste de croquant et de fondant, parfait avec les fromages, les salades et les desserts."],
+  ['fromage', 'fromage', /feta|chevre|camembert|halloumi|ricotta|fromage|parmesan|mascarpone|burrata/, "Fromage et miel : l'un des accords les plus spectaculaires. Le sel et le gras du fromage rencontrent la douceur du miel, chaud ou froid."],
+  ['figue', 'figues', /figue/, "Figue et miel partagent une douceur profonde et un parfum de fin d'été. Rôties, en chutney ou sur une tartine, elles s'accordent aussi très bien avec le salé."],
+  ['pomme', 'pommes', /\bpommes?\b(?! de terre)/, "La pomme et le miel sont les piliers des desserts d'automne : tartes, porridges et compotes gagnent en caractère avec un miel bien choisi."],
+  ['soja', 'sauce soja', /soja/, "Le salé de la sauce soja et la douceur du miel créent des laques brillantes et caramélisées, pour le poulet, le saumon, le tofu ou les légumes."],
+  ['cannelle', 'cannelle', /cannelle/, "La cannelle et le miel réchauffent tout ce qu'ils touchent : boissons d'hiver, porridges, pains d'épices et fruits pochés."],
+  ['orange', 'orange', /orange/, "L'orange apporte une acidité douce et un parfum qui se marient au miel dans les plats de fête, les sauces et les desserts."],
+  ['amande', 'amandes', /amande/, "L'amande et le miel sont unis depuis l'Antiquité, du nougat aux financiers. Un accord de douceur et de croquant."],
+  ['yaourt', 'yaourt', /yaourt|yogourt/, "Un filet de miel sur un yaourt, c'est le plus simple des desserts. Mais le duo s'invite aussi dans les gâteaux, les sauces et les petits-déjeuners."],
+];
+const exploreHtml = (r) => {
+  const ss = r ? SAISONS.filter((sa) => inSaison(r, sa)) : SAISONS;
+  const aa = r ? ACCORD_PAGES.filter((a) => a.list.includes(r)) : ACCORD_PAGES;
+  if (!ss.length && !aa.length) return '';
+  return `<div class="explore">${ss.length ? `<div><h2>${r ? 'De saison' : 'Recettes de saison'}</h2><ul class="chips">${ss.map((sa) => `<li${sa === saisonNow ? ' class="on"' : ''}><a href="/recettes/saison/${sa.slug}/">${sa.nom} <small>${saisonList(sa).length}</small></a></li>`).join('')}</ul></div>` : ''}${aa.length ? `<div><h2>${r ? 'Dans les mêmes accords' : 'Les accords au miel'}</h2><ul class="chips">${aa.map((a) => `<li><a href="/recettes/${a.slug}/">Miel et ${a.nom} <small>${a.list.length}</small></a></li>`).join('')}</ul></div>` : ''}</div>`;
+};
+const accordList = (re) => recipes.filter((r) => re.test(normTxt([r.titre, ...(r.ingredientsList || [])].join(' '))));
+const ACCORD_PAGES = ACCORDS.map(([slug, nom, re, intro]) => ({ slug: `miel-et-${slug}`, nom, intro, list: accordList(re) })).filter((a) => a.list.length >= 3);
+function accordPage(a) {
+  const trail = [['Accueil', '/'], ['Recettes', '/recettes/'], [`Miel et ${a.nom}`]];
+  const others = ACCORD_PAGES.filter((x) => x !== a);
+  const body = `
+${pageHead(`Miel et ${a.nom} : ${a.list.length} recettes`, a.intro, 'decoupe-cuisine', crumbsHtml(trail))}
+<section class="wrap block">
+  ${grid(a.list)}
+  <div class="accord-more"><h2>Autres accords au miel</h2><ul class="chips">${others.map((x) => `<li><a href="/recettes/${x.slug}/">Miel et ${x.nom} <small>${x.list.length}</small></a></li>`).join('')}</ul></div>
+</section>`;
+  return layout({ title: `Miel et ${a.nom} : ${a.list.length} recettes`, description: `${a.list.length} recettes qui associent le miel et ${a.nom === 'fromage' ? 'le fromage' : a.nom}. ${a.intro}`.slice(0, 300), canonical: `/recettes/${a.slug}/`, body, extraHead: [crumbsLd(trail), { '@context': 'https://schema.org', '@type': 'ItemList', name: `Recettes miel et ${a.nom}`, itemListElement: a.list.map((r, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE.url + r.url })) }].map(ldScript).join('\n') });
+}
+
 // ---------- construction ----------
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
@@ -1182,6 +1246,8 @@ recipes.forEach((r, i) => { write(`recettes/${r.slug}/index.html`, recipePage(r,
 for (const c of CATEGORIES) { write(`categories/${c.slug}/index.html`, categoryPage(c)); urls.push(`/categories/${c.slug}/`); }
 write('a-propos/index.html', aboutPage()); urls.push('/a-propos/');
 write('outils/sucre-miel/index.html', sugarTool()); urls.push('/outils/sucre-miel/');
+for (const sa of SAISONS) { write(`recettes/saison/${sa.slug}/index.html`, saisonPage(sa)); urls.push(`/recettes/saison/${sa.slug}/`); }
+for (const a of ACCORD_PAGES) { write(`recettes/${a.slug}/index.html`, accordPage(a)); urls.push(`/recettes/${a.slug}/`); }
 for (const f of (fs.existsSync(path.join(ROOT, 'pages')) ? fs.readdirSync(path.join(ROOT, 'pages')) : []).filter((f) => f.endsWith('.md') && f !== 'a-propos.md')) {
   const p = staticPage(f);
   write(`${p.slug}/index.html`, p.html);

@@ -602,9 +602,9 @@ h3 { font-size: .98rem; font-weight: 600; }
 @keyframes cam-fill { from { transform: translateY(20px); } to { transform: translateY(0); } }
 @keyframes cam-wave { from { transform: translateX(0); } to { transform: translateX(-10px); } }
 @keyframes cam-wave2 { from { transform: translateX(-10px); } to { transform: translateX(0); } }
-@keyframes cam-tide { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(1.6px); } }
-.medal .lv { animation: cam-tide 6s ease-in-out infinite; }
-.first-visit .logo .lv { animation: cam-fill 2.2s cubic-bezier(.4, 0, .2, 1) both, cam-tide 6s ease-in-out 2.2s infinite; }
+@keyframes cam-tide { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(9px); } }
+.medal .lv { animation: cam-tide 9s ease-in-out infinite; }
+.first-visit .logo .lv { animation: cam-fill 2.2s cubic-bezier(.4, 0, .2, 1) both, cam-tide 9s ease-in-out 2.2s infinite; }
 .medal .wv { animation: cam-wave 5s linear infinite; }
 .medal .wv2 { animation: cam-wave2 7.5s linear infinite; }
 @media (prefers-reduced-motion: reduce) { .lv, .wv, .wv2 { animation: none !important; } }
@@ -630,3 +630,15 @@ h3 { font-size: .98rem; font-weight: 600; }
 .tool-txt { max-width: 760px; margin: 0 auto 32px; }
 .tool .faq, .tool .sources { max-width: 760px; margin-inline: auto; }
 @media (max-width: 800px) { .tool-card { grid-template-columns: 1fr; } }
+/* Saisons et accords */
+.season-nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; }
+.season-nav a { padding: 10px 20px; min-height: 44px; display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; }
+.season-nav a[aria-current] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.season-nav small { font-size: .7rem; background: var(--honey); color: var(--ink); border-radius: 999px; padding: 2px 8px; }
+.season-more { margin: 48px 0 20px; font-size: 1.3rem; }
+.explore { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; margin-top: 40px; padding: 28px; border-radius: 20px; background: var(--surface); }
+.explore h2 { font-size: 1rem; margin: 0 0 12px; }
+.explore .chips li { background: #fff; }
+.explore .chips li.on { background: var(--honey); }
+.accord-more { margin-top: 48px; }
+.accord-more h2 { font-size: 1.2rem; margin: 0 0 14px; }
