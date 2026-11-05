@@ -1142,12 +1142,62 @@ ${pageHead('Le calendrier des miellées', 'Quand récolte-t-on le miel de lavand
   return layout({ title: 'Calendrier des miellées : quand récolte-t-on chaque miel ?', description: 'Le calendrier des récoltes des grands miels de France, mois par mois : romarin, acacia, châtaignier, tilleul, lavande, sapin, sarrasin, bruyère…', canonical: '/outils/calendrier-des-miellees/', body, extraHead: ldScript(crumbsLd(trail)) });
 }
 
+const QUIZ = [
+  { q: 'Au petit-déjeuner, vous êtes plutôt…', a: [
+    ['Tartine douce, sans surprise', { 'miel-d-acacia': 2, 'miel-de-romarin': 2, 'miel-toutes-fleurs': 1 }],
+    ['Yaourt, fruits et parfums fleuris', { 'miel-d-oranger': 2, 'miel-de-lavande': 2 }],
+    ['Pain complet et saveurs franches', { 'miel-de-chataignier': 2, 'miel-de-sarrasin': 2 }],
+    ['Une infusion bien chaude', { 'miel-de-tilleul': 2, 'miel-de-thym': 1, 'miel-de-sapin': 1 }],
+  ] },
+  { q: 'Le paysage qui vous fait rêver…', a: [
+    ['Les champs de lavande de Provence', { 'miel-de-lavande': 3, 'miel-de-romarin': 1 }],
+    ['Une forêt de montagne', { 'miel-de-sapin': 3, 'miel-de-chataignier': 1 }],
+    ['Une lande sauvage', { 'miel-de-bruyere': 3, 'miel-de-sarrasin': 1 }],
+    ['Un verger en fleurs', { 'miel-d-oranger': 2, 'miel-d-acacia': 1, 'miel-toutes-fleurs': 1 }],
+  ] },
+  { q: 'En cuisine, vous aimez…', a: [
+    ['Sucrer sans changer le goût', { 'miel-d-acacia': 3 }],
+    ['Le sucré-salé et les fromages', { 'miel-de-chataignier': 2, 'miel-de-thym': 2 }],
+    ['Les pâtisseries parfumées', { 'miel-d-oranger': 2, 'miel-de-lavande': 1, 'miel-de-sarrasin': 1 }],
+    ['Un peu de tout, selon l\'humeur', { 'miel-toutes-fleurs': 3 }],
+  ] },
+  { q: 'Votre texture idéale ?', a: [
+    ['Bien liquide, qui coule', { 'miel-d-acacia': 2, 'miel-de-chataignier': 1, 'miel-de-sapin': 1 }],
+    ['Crémeuse, qui se tartine', { 'miel-de-romarin': 2, 'miel-de-lavande': 1, 'miel-de-tilleul': 1 }],
+    ['Épaisse et dense', { 'miel-de-sapin': 1, 'miel-de-sarrasin': 1, 'miel-de-bruyere': 2 }],
+    ['Peu importe, c\'est le goût qui compte', { 'miel-de-thym': 2, 'miel-toutes-fleurs': 1 }],
+  ] },
+  { q: 'Et côté intensité ?', a: [
+    ['Tout en douceur', { 'miel-d-acacia': 2, 'miel-de-romarin': 1, 'miel-d-oranger': 1 }],
+    ['Fleuri et parfumé', { 'miel-de-lavande': 2, 'miel-d-oranger': 1, 'miel-de-tilleul': 1 }],
+    ['Aromatique et chaleureux', { 'miel-de-thym': 2, 'miel-de-sapin': 2 }],
+    ['Puissant, avec du caractère', { 'miel-de-chataignier': 2, 'miel-de-sarrasin': 2, 'miel-de-bruyere': 1 }],
+  ] },
+];
+function quizPage() {
+  const trail = [['Accueil', '/'], ['Outils', '/outils/'], ['Quel miel est fait pour vous ?']];
+  const hdata = Object.fromEntries(honeys.map((h) => { const slug = h.url.split('/').filter(Boolean).pop(); return [slug, { nom: h.nom, url: h.url, gout: h.gout || '', resume: h.resume || '', photo: h.photo && /^\d/.test(h.photo) ? img(h.photo, 800) : '' }]; }));
+  const body = `
+${pageHead('Quel miel est fait pour vous ?', 'Cinq questions pour trouver le miel qui vous ressemble, et les recettes qui vont avec.', 'chef-dressage', crumbsHtml(trail))}
+<section class="wrap block quiz" data-quiz>
+  <div class="quiz-card">
+    <div class="quiz-progress"><span></span></div>
+    ${QUIZ.map((x, i) => `<fieldset class="quiz-q"${i ? ' hidden' : ''}><legend><small>Question ${i + 1} sur ${QUIZ.length}</small>${esc(x.q)}</legend><div class="quiz-a">${x.a.map(([t, sc]) => `<button type="button" data-score='${JSON.stringify(sc)}'>${esc(t)}</button>`).join('')}</div></fieldset>`).join('')}
+    <div class="quiz-res" hidden aria-live="polite"></div>
+  </div>
+  <script type="application/json" id="quiz-honeys">${JSON.stringify(hdata).replace(/</g, '\\u003c')}</script>
+  <p class="quiz-note">Un jeu pour découvrir les miels : il n'y a pas de bonne ou de mauvaise réponse. Les profils de goût viennent de nos <a href="/miels/">fiches miels</a>.</p>
+</section>`;
+  return layout({ title: 'Quiz : quel miel est fait pour vous ?', description: 'Acacia, lavande, châtaignier, sapin ? Répondez à 5 questions et découvrez le miel qui vous ressemble, avec ses recettes.', canonical: '/outils/quel-miel/', body, extraHead: ldScript(crumbsLd(trail)) });
+}
+
 function toolsHub() {
   const trail = [['Accueil', '/'], ['Outils']];
   const ico = (d) => `<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
   const tools = [
     ['/outils/sucre-miel/', ico('<path d="M4 7h16M4 12h10M4 17h7"/><path d="M17 14l3 3-3 3"/>'), 'Remplacer le sucre par du miel', 'Le calculateur qui adapte n\'importe quelle recette : quantité de miel, liquide, bicarbonate et four.', 'Nouveau'],
     ['/outils/calendrier-des-miellees/', ico('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'), 'Le calendrier des miellées', 'Quand récolte-t-on chaque miel ? Les grands miels de France, mois par mois.', 'Nouveau'],
+    ['/outils/quel-miel/', ico('<path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/>'), 'Quel miel est fait pour vous ?', 'Le quiz en 5 questions pour trouver le miel qui vous ressemble.', 'Quiz'],
     ['/recettes/', ico('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'), 'Trouver une recette', `Cherchez parmi nos ${recipes.length} recettes par miel, ingrédient ou envie.`, ''],
     [`/recettes/saison/${saisonNow ? saisonNow.slug : 'automne'}/`, ico('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'), 'Cuisiner de saison', 'Les recettes au miel du printemps, de l\'été, de l\'automne et de l\'hiver.', ''],
     [ACCORD_PAGES.length ? `/recettes/${ACCORD_PAGES[0].slug}/` : '/recettes/', ico('<path d="M8 3v7a4 4 0 0 0 8 0V3"/><path d="M12 14v7M9 21h6"/>'), 'Les accords au miel', 'Miel et citron, miel et fromage, miel et romarin… toutes les associations qui marchent.', ''],
@@ -1302,6 +1352,7 @@ recipes.forEach((r, i) => { write(`recettes/${r.slug}/index.html`, recipePage(r,
 for (const c of CATEGORIES) { write(`categories/${c.slug}/index.html`, categoryPage(c)); urls.push(`/categories/${c.slug}/`); }
 write('a-propos/index.html', aboutPage()); urls.push('/a-propos/');
 write('outils/index.html', toolsHub()); urls.push('/outils/');
+write('outils/quel-miel/index.html', quizPage()); urls.push('/outils/quel-miel/');
 write('outils/calendrier-des-miellees/index.html', calendarPage()); urls.push('/outils/calendrier-des-miellees/');
 write('outils/sucre-miel/index.html', sugarTool()); urls.push('/outils/sucre-miel/');
 for (const sa of SAISONS) { write(`recettes/saison/${sa.slug}/index.html`, saisonPage(sa)); urls.push(`/recettes/saison/${sa.slug}/`); }

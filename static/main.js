@@ -228,3 +228,29 @@ document.querySelectorAll('.carousel').forEach((c) => {
   [s, bake, ...parts].forEach((el) => el.addEventListener('input', calc));
   calc();
 })();
+
+// Quiz : quel miel est fait pour vous ?
+(() => {
+  const root = document.querySelector('[data-quiz]');
+  if (!root) return;
+  const H = JSON.parse(document.getElementById('quiz-honeys').textContent);
+  const qs = [...root.querySelectorAll('.quiz-q')], res = root.querySelector('.quiz-res'), bar = root.querySelector('.quiz-progress span');
+  let score = {}, i = 0;
+  const show = () => { qs.forEach((q, k) => { q.hidden = k !== i; }); bar.style.width = (i / qs.length * 100) + '%'; };
+  const finish = () => {
+    qs.forEach((q) => { q.hidden = true; }); bar.style.width = '100%';
+    const best = Object.entries(score).filter(([k]) => H[k]).sort((a, b) => b[1] - a[1]);
+    const [k1] = best[0] || ['miel-toutes-fleurs'], h = H[k1], alt = best.slice(1, 3).map(([k]) => H[k]);
+    const link = (u) => { const a = document.querySelector('a.logo'); const pre = a ? a.getAttribute('href').replace(/\/$/, '') : ''; return pre + u; };
+    res.innerHTML = `<p class="kicker">Votre miel</p><h2>${h.nom}</h2>${h.photo ? `<img src="${h.photo}" alt="" loading="lazy">` : ''}<p class="quiz-gout">${h.gout}</p><p>${h.resume}</p><p class="quiz-btns"><a class="btn" href="${link(h.url)}">Découvrir ce miel</a> <button type="button" class="btn-outline" data-again>Recommencer</button></p>${alt.length ? `<p class="quiz-alt">Vous aimerez aussi : ${alt.map((x) => `<a href="${link(x.url)}">${x.nom}</a>`).join(' et ')}.</p>` : ''}`;
+    res.hidden = false; res.querySelector('h2').setAttribute('tabindex', '-1'); res.querySelector('h2').focus();
+    res.querySelector('[data-again]').addEventListener('click', () => { score = {}; i = 0; res.hidden = true; show(); });
+  };
+  root.addEventListener('click', (e) => {
+    const b = e.target.closest('.quiz-a button');
+    if (!b) return;
+    Object.entries(JSON.parse(b.dataset.score)).forEach(([k, v]) => { score[k] = (score[k] || 0) + v; });
+    i++; if (i < qs.length) { show(); qs[i].querySelector('button').focus(); } else finish();
+  });
+  show();
+})();
