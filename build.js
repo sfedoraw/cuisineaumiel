@@ -1116,11 +1116,38 @@ function aboutPage() {
   return layout({ title: 'À propos', description: "Cuisine au miel, proposé par le GAEC des Deux Vallées : mieux comprendre le miel pour mieux l'utiliser. Recettes, guide des miels, atlas et magazine, avec des sources solides et sans promesse santé.", canonical: '/a-propos/', body, extraHead: ldScript(crumbsLd(trail)) + ldScript({ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'À propos de Cuisine au miel', url: SITE.url + '/a-propos/', about: { '@id': SITE.url + '/#org' } }) });
 }
 
+const MIELLEES = { 'miel-de-romarin': [[3, 5]], 'miel-d-oranger': [[3, 5]], 'miel-de-bruyere': [[4, 5], [8, 9]], 'miel-de-thym': [[4, 6]], 'miel-d-acacia': [[5, 5]], 'miel-de-chataignier': [[6, 7]], 'miel-de-tilleul': [[6, 7]], 'miel-de-lavande': [[7, 8]], 'miel-de-sapin': [[7, 8]], 'miel-de-sarrasin': [[7, 9]], 'miel-toutes-fleurs': [[4, 8]] };
+function calendarPage() {
+  const MOIS = ['Janv.', 'Févr.', 'Mars', 'Avr.', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'];
+  const MOISL = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+  const cur = today.getMonth() + 1;
+  const rows = honeys.map((h) => ({ h, r: MIELLEES[h.url.split('/').filter(Boolean).pop()] || [] })).filter((x) => x.r.length).sort((a, b) => a.r[0][0] - b.r[0][0] || a.r[0][1] - b.r[0][1]);
+  const now = rows.filter((x) => x.r.some(([a, b]) => cur >= a && cur <= b));
+  const trail = [['Accueil', '/'], ['Outils', '/outils/'], ['Calendrier des miellées']];
+  const body = `
+${pageHead('Le calendrier des miellées', 'Quand récolte-t-on le miel de lavande, de châtaignier ou d\'acacia ? Le calendrier des grands miels de France, mois par mois.', 'salade-printemps', crumbsHtml(trail))}
+<section class="wrap block">
+  <div class="cal-now"><p class="kicker">En ${MOISL[cur - 1]}</p><p>${now.length ? `Saison de récolte : ${now.map((x) => `<a href="${x.h.url}">${esc(x.h.nom)}</a>`).join(', ')}.` : 'Les ruches se reposent : c\'est l\'hivernage. Les abeilles vivent sur leurs réserves, et c\'est le moment de déguster les miels de l\'année.'}</p></div>
+  <div class="cal-wrap"><table class="cal">
+    <thead><tr><th scope="col">Miel</th>${MOIS.map((m, i) => `<th scope="col"${i + 1 === cur ? ' class="cur"' : ''}>${m}</th>`).join('')}</tr></thead>
+    <tbody>${rows.map(({ h, r }) => `<tr><th scope="row"><a href="${h.url}">${esc(h.nom.replace(/^Miel /, ''))}</a></th>${MOIS.map((_, i) => { const m = i + 1; const on = r.some(([a, b]) => m >= a && m <= b); return `<td class="${on ? 'on' : ''}${m === cur ? ' cur' : ''}">${on ? '<span></span>' : ''}</td>`; }).join('')}</tr>`).join('')}</tbody>
+  </table></div>
+  <div class="prose tool-txt">
+    <h2>Qu'est-ce qu'une miellée ?</h2>
+    <p>La <b>miellée</b> est la période pendant laquelle une plante produit beaucoup de nectar, ou un arbre beaucoup de miellat, et où les abeilles récoltent en abondance. Elle dépend de la floraison, de la météo et de la région : une même plante fleurit plus tôt dans le Sud que dans le Nord, ou en plaine qu'en montagne.</p>
+    <p>Pour produire des miels monofloraux, les apiculteurs placent leurs ruches au plus près des floraisons, et pratiquent parfois la <b>transhumance</b> : ils déplacent leurs ruches d'une miellée à l'autre, des romarins du printemps aux lavandes de l'été.</p>
+    <p>Les périodes de ce calendrier sont indicatives et valent pour la France. Elles varient d'une année à l'autre : en 2026, les canicules ont par exemple fortement réduit la récolte. Chaque <a href="/miels/">fiche miel</a> détaille ses régions et ses sources.</p>
+  </div>
+</section>`;
+  return layout({ title: 'Calendrier des miellées : quand récolte-t-on chaque miel ?', description: 'Le calendrier des récoltes des grands miels de France, mois par mois : romarin, acacia, châtaignier, tilleul, lavande, sapin, sarrasin, bruyère…', canonical: '/outils/calendrier-des-miellees/', body, extraHead: ldScript(crumbsLd(trail)) });
+}
+
 function toolsHub() {
   const trail = [['Accueil', '/'], ['Outils']];
   const ico = (d) => `<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
   const tools = [
     ['/outils/sucre-miel/', ico('<path d="M4 7h16M4 12h10M4 17h7"/><path d="M17 14l3 3-3 3"/>'), 'Remplacer le sucre par du miel', 'Le calculateur qui adapte n\'importe quelle recette : quantité de miel, liquide, bicarbonate et four.', 'Nouveau'],
+    ['/outils/calendrier-des-miellees/', ico('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'), 'Le calendrier des miellées', 'Quand récolte-t-on chaque miel ? Les grands miels de France, mois par mois.', 'Nouveau'],
     ['/recettes/', ico('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'), 'Trouver une recette', `Cherchez parmi nos ${recipes.length} recettes par miel, ingrédient ou envie.`, ''],
     [`/recettes/saison/${saisonNow ? saisonNow.slug : 'automne'}/`, ico('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'), 'Cuisiner de saison', 'Les recettes au miel du printemps, de l\'été, de l\'automne et de l\'hiver.', ''],
     [ACCORD_PAGES.length ? `/recettes/${ACCORD_PAGES[0].slug}/` : '/recettes/', ico('<path d="M8 3v7a4 4 0 0 0 8 0V3"/><path d="M12 14v7M9 21h6"/>'), 'Les accords au miel', 'Miel et citron, miel et fromage, miel et romarin… toutes les associations qui marchent.', ''],
@@ -1269,6 +1296,7 @@ recipes.forEach((r, i) => { write(`recettes/${r.slug}/index.html`, recipePage(r,
 for (const c of CATEGORIES) { write(`categories/${c.slug}/index.html`, categoryPage(c)); urls.push(`/categories/${c.slug}/`); }
 write('a-propos/index.html', aboutPage()); urls.push('/a-propos/');
 write('outils/index.html', toolsHub()); urls.push('/outils/');
+write('outils/calendrier-des-miellees/index.html', calendarPage()); urls.push('/outils/calendrier-des-miellees/');
 write('outils/sucre-miel/index.html', sugarTool()); urls.push('/outils/sucre-miel/');
 for (const sa of SAISONS) { write(`recettes/saison/${sa.slug}/index.html`, saisonPage(sa)); urls.push(`/recettes/saison/${sa.slug}/`); }
 for (const a of ACCORD_PAGES) { write(`recettes/${a.slug}/index.html`, accordPage(a)); urls.push(`/recettes/${a.slug}/`); }
