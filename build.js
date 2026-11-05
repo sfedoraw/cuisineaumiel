@@ -267,7 +267,6 @@ ${body}
       <a href="/magazine/">Magazine</a>
       <a href="/guide/trouver-un-apiculteur/">Trouver un apiculteur</a>
       <a href="/a-propos/">À propos</a>
-      <a href="/flux.xml">Flux RSS</a>
     </nav>
   </div>
   <p class="fine">© ${today.getUTCFullYear()} cuisineaumiel.fr · Le miel ne convient pas aux enfants de moins d'un an.</p>
