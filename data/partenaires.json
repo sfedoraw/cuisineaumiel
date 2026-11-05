@@ -30,5 +30,78 @@
   "miels": "Miels récoltés autour de la baie du Mont-Saint-Michel : acacia, tilleul, tournesol et bien d'autres.",
   "vente": "En vente dans des magasins et épiceries fines de la région.",
   "site": "https://www.facebook.com/wiartnicolas/"
+ },
+ {
+  "nom": "MesAbeilles.fr",
+  "departement": "27",
+  "commune": "Saint-Aubin-sur-Gaillon (Eure)",
+  "miels": "L'exploitation de Samuel Fedorawiez, apiculteur et vice-président de l'ANERCEA.",
+  "vente": "Vente en ligne.",
+  "site": "https://mesabeilles.fr"
+ },
+ {
+  "nom": "Miellerie du Revest",
+  "departement": "83",
+  "commune": "Le Revest-les-Eaux (Var)",
+  "miels": "L'exploitation d'Ivan Broncard, apiculteur dans le Var.",
+  "vente": "Contact direct à la miellerie."
+ },
+ {
+  "nom": "L'Abeille de la Roche",
+  "departement": "87",
+  "commune": "La Roche-l'Abeille (Haute-Vienne)",
+  "miels": "L'exploitation de Guillaume Antenor, apiculteur en Nouvelle-Aquitaine.",
+  "vente": "Contact direct à l'exploitation."
+ },
+ {
+  "nom": "Miellerie de la Divette",
+  "departement": "60",
+  "commune": "Thiescourt (Oise)",
+  "miels": "Exploitation apicole en bio de Sylvaine Charpentier et Célestin Morel, engagée pour l'IGP miel de tilleul de Picardie.",
+  "vente": "Vente directe à la miellerie."
+ },
+ {
+  "nom": "GAEC L'Arc en Miel",
+  "departement": "12",
+  "commune": "Saint-Affrique (Aveyron)",
+  "miels": "Ferme d'abeilles en bio et pédagogique, où exerce Bruno Bondia.",
+  "vente": "Vente à la ferme et visites."
+ },
+ {
+  "nom": "GAEC du Val d'Or",
+  "departement": "45",
+  "commune": "Saint-Benoît-sur-Loire (Loiret)",
+  "miels": "L'exploitation de Raffaël Quinet, apiculteur dans le Val de Loire.",
+  "vente": "Contact direct à l'exploitation."
+ },
+ {
+  "nom": "L'Abeille de la Mer d'Iroise",
+  "departement": "29",
+  "commune": "Landunvez (Finistère)",
+  "miels": "La miellerie de Charlotte Lossec, inaugurée en septembre 2026, face à la mer d'Iroise.",
+  "vente": "Vente directe à la miellerie."
+ },
+ {
+  "nom": "Miels du Pays de Châteaubriant",
+  "departement": "44",
+  "commune": "Villepot (Loire-Atlantique)",
+  "miels": "Apiculture paysanne depuis 1984, aujourd'hui en GAEC avec Jean-François Chauvel et Alexandre Constant.",
+  "vente": "Vente directe et sur leur site.",
+  "site": "https://miel-chateaubriant.fr"
+ },
+ {
+  "nom": "L'Oru di Fiori",
+  "departement": "2A",
+  "commune": "Péri, vallée de la Gravona (Corse-du-Sud)",
+  "miels": "L'exploitation de Serge Frigara, apiculteur en Corse : miels et gourmandises au miel.",
+  "vente": "Boutique en ligne.",
+  "site": "https://lorudifiori.com"
+ },
+ {
+  "nom": "L'Abeille autonome",
+  "departement": "91",
+  "commune": "Essonne",
+  "miels": "L'exploitation de Maya Joubin : miels et gelée royale d'Île-de-France.",
+  "vente": "Contact direct à l'exploitation."
  }
 ]
