@@ -1178,9 +1178,15 @@ ${pageHead('Remplacer le sucre par du miel', 'Le calculateur pour adapter n\'imp
     <div class="tool-in">
       <label for="t-sugar">Sucre dans la recette</label>
       <div class="tool-num"><input id="t-sugar" type="number" inputmode="decimal" min="0" max="2000" step="5" value="200"><span>g</span></div>
-      <label for="t-part">Part du sucre à remplacer : <output id="t-part-o">50 %</output></label>
-      <input id="t-part" type="range" min="10" max="100" step="5" value="50">
-      <p class="tool-warn" id="t-warn" hidden>Au-delà de 50 %, la texture change nettement : faites un essai.</p>
+      <fieldset class="tool-part">
+        <legend>Quelle quantité de sucre voulez-vous remplacer par du miel ?</legend>
+        <label><input type="radio" name="t-part" value="25"><span><b>Un quart</b><small>Goût de miel léger</small></span></label>
+        <label><input type="radio" name="t-part" value="50" checked><span><b>La moitié</b><small>Conseillé</small></span></label>
+        <label><input type="radio" name="t-part" value="75"><span><b>Les trois quarts</b><small>Goût de miel marqué</small></span></label>
+        <label><input type="radio" name="t-part" value="100"><span><b>Tout</b><small>Plus de sucre du tout</small></span></label>
+      </fieldset>
+      <p class="tool-explain" id="t-explain"></p>
+      <p class="tool-warn" id="t-warn" hidden>Au-delà de la moitié, le gâteau sera plus dense, plus moelleux et dorera plus vite : faites un premier essai.</p>
       <label class="tool-check"><input id="t-bake" type="checkbox" checked> C'est une recette cuite au four</label>
     </div>
     <div class="tool-out" aria-live="polite">

@@ -208,13 +208,13 @@ document.querySelectorAll('.carousel').forEach((c) => {
 (() => {
   const s = document.getElementById('t-sugar');
   if (!s) return;
-  const part = document.getElementById('t-part'), bake = document.getElementById('t-bake');
+  const parts = [...document.querySelectorAll('input[name="t-part"]')], bake = document.getElementById('t-bake');
   const $ = (id) => document.getElementById(id);
   const r5 = (x) => Math.round(x / 5) * 5;
   const calc = () => {
-    const sugar = Math.max(0, parseFloat(s.value) || 0), p = parseInt(part.value, 10) / 100;
+    const sugar = Math.max(0, parseFloat(s.value) || 0), p = parseInt((parts.find((x) => x.checked) || { value: 50 }).value, 10) / 100;
     const replaced = sugar * p, honey = replaced * 0.85;
-    $('t-part-o').textContent = Math.round(p * 100) + ' %';
+    $('t-explain').innerHTML = p >= 1 ? `Vous remplacez les <b>${r5(sugar)} g</b> de sucre par <b>${r5(honey)} g</b> de miel.` : `Sur ${r5(sugar)} g de sucre, vous gardez <b>${r5(sugar - replaced)} g de sucre</b> et vous remplacez les ${r5(replaced)} g restants par <b>${r5(honey)} g de miel</b>.`;
     $('t-warn').hidden = p <= 0.5;
     $('o-honey').textContent = r5(honey) + ' g';
     const cs = honey / 21;
@@ -225,6 +225,6 @@ document.querySelectorAll('.carousel').forEach((c) => {
     $('o-soda').textContent = soda < 0.6 ? '1 petite pincée' : soda < 1.5 ? '1 pincée (environ 1 g)' : `environ ${soda.toFixed(1).replace('.', ',')} g`;
     document.querySelectorAll('.o-bake').forEach((li) => { li.hidden = !bake.checked; });
   };
-  [s, part, bake].forEach((el) => el.addEventListener('input', calc));
+  [s, bake, ...parts].forEach((el) => el.addEventListener('input', calc));
   calc();
 })();
