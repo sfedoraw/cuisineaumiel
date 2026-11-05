@@ -203,6 +203,9 @@ for (const r of recipes) {
 // ---------- gabarits ----------
 // Version des fichiers CSS/JS : change à chaque modification, pour que les navigateurs ne gardent pas l'ancienne.
 const ASSET_V = require('crypto').createHash('md5').update(['style.css', 'main.js'].map((f) => fs.readFileSync(path.join(__dirname, 'static', f))).join('')).digest('hex').slice(0, 8);
+// Logo médaillon (piste A) : la goutte se remplit de miel.
+const DROP = 'M13 1C10.6 5.8 1.5 14.6 1.5 24a11.5 11.5 0 0 0 23 0C24.5 14.6 15.4 5.8 13 1z';
+const logoMedal = (id) => `<svg class="medal" viewBox="0 0 280 280" role="img" aria-label="Cuisine au miel"><circle cx="140" cy="140" r="130" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="140" cy="140" r="119" fill="none" stroke="currentColor" stroke-width="1"/><g transform="translate(118 44) scale(1.7)"><clipPath id="${id}"><path d="${DROP}"/></clipPath><g clip-path="url(#${id})"><g class="lv"><path class="wv" d="M-10 0q2.5-1.6 5 0t5 0 5 0 5 0 5 0 5 0 5 0 5 0 5 0 5 0V40H-10z" fill="#F2A516"/></g></g><path d="${DROP}" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.2 26.5a6.4 6.4 0 0 1 .6-6.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g><text x="140" y="150" text-anchor="middle" class="m-k">CUISINE</text><text x="140" y="197" text-anchor="middle" class="m-n">au miel</text><path d="M104 216h72" stroke="currentColor" stroke-width="1"/><circle cx="140" cy="216" r="2.5" fill="currentColor"/></svg>`;
 const logoSvg = `<svg viewBox="7 1 26 36" width="26" height="36" aria-hidden="true"><path d="M20 2C17.6 6.8 8.5 15.6 8.5 25a11.5 11.5 0 0 0 23 0C31.5 15.6 22.4 6.8 20 2z" fill="currentColor"/><path d="M14.2 27.5a6.4 6.4 0 0 1 .6-6.2" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>`;
 const searchIcon = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
 const clockIcon = `<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
@@ -220,6 +223,7 @@ function layout({ title, description, body, canonical, extraHead = '', ogImage =
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<script>try{if(!sessionStorage.getItem('cam')){sessionStorage.setItem('cam','1');document.documentElement.classList.add('first-visit')}}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(fullTitle)}</title>
 <meta name="description" content="${esc(description || SITE.description)}">
@@ -250,7 +254,7 @@ ${extraHead}
     <a href="/recettes/">Recettes</a>
     <a href="/categories/plats/">Catégories</a>
   </nav>
-  <a class="logo" href="/" aria-label="Cuisine au miel, accueil"><span class="logo-ring">${logoSvg}<span class="logo-text"><span>Cuisine</span><b>au miel</b></span></span></a>
+  <a class="logo" href="/" aria-label="Cuisine au miel, accueil">${logoMedal('lg-drop')}</a>
   <nav class="nav nav-right" aria-label="Navigation secondaire">
     <a href="/miels/">Les miels</a>
     <a href="/magazine/">Magazine</a>
@@ -1088,7 +1092,7 @@ function aboutPage() {
 
 <section class="wrap block">
   <div class="about-who">
-    <span class="logo-ring about-logo">${logoSvg}<span class="logo-text"><span>Cuisine</span><b>au miel</b></span></span>
+    <span class="about-logo">${logoMedal('lg-drop-2')}</span>
     <div>
       <p class="kicker">Qui sommes-nous ?</p>
       <h2>Proposé par le GAEC des Deux Vallées</h2>

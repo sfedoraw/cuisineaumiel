@@ -594,3 +594,13 @@ h3 { font-size: .98rem; font-weight: 600; }
   .print-partner p { margin: 0; }
   .print-partner b { color: #B45309; }
 }
+/* Logo médaillon animé */
+.logo .medal, .about-logo .medal { display: block; width: calc(100% - 6px); height: auto; color: var(--ink); overflow: visible; }
+.medal .m-k { font: 700 15px var(--font); letter-spacing: .42em; fill: currentColor; }
+.medal .m-n { font: italic 600 42px 'Playfair Display', Georgia, serif; fill: currentColor; }
+.logo:hover .medal { color: var(--accent); }
+@keyframes cam-fill { from { transform: translateY(36px); } to { transform: translateY(0); } }
+@keyframes cam-wave { from { transform: translateX(0); } to { transform: translateX(-10px); } }
+.first-visit .logo .lv, .logo:hover .lv, .about-logo:hover .lv { animation: cam-fill 2.4s cubic-bezier(.4, 0, .2, 1) both; }
+.first-visit .logo .wv, .logo:hover .wv, .about-logo:hover .wv { animation: cam-wave 1s linear 3; }
+@media (prefers-reduced-motion: reduce) { .lv, .wv { animation: none !important; } }
