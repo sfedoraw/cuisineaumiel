@@ -210,6 +210,16 @@ const logoSvg = `<svg viewBox="7 1 26 36" width="26" height="36" aria-hidden="tr
 const searchIcon = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
 const clockIcon = `<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
 const arrow = (d) => `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${d === 'prev' ? 'M19 12H5m6-6-6 6 6 6' : 'M5 12h14m-6-6 6 6-6 6'}"/></svg>`;
+const RF = {
+  clock: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>`,
+  knife: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18c0 5-4 9-9 9s-9-4-9-9z"/><path d="M14 11l5-8"/></svg>`,
+  flame: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 7-2.7 7-6.5 0-4-3-6-4-9.5-1 2-2 3-3 3 0-2-1-4.5-3-6 0 3-4 6-4 12.5C5 19.3 8 22 12 22z"/></svg>`,
+  pause: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9"/></svg>`,
+  people: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.7 3 2.4 3.5 5.2"/></svg>`,
+  chef: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.9V20h12v-6.1"/><path d="M6 14a4 4 0 1 1 2.6-7A4.5 4.5 0 0 1 17 6.1 4 4 0 1 1 18 14z"/></svg>`,
+  print: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></svg>`,
+  share: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>`,
+};
 const dropIcon = (on) => `<svg viewBox="0 0 12 16" width="11" height="14" aria-hidden="true"><path d="M6 1C5 3 1 7 1 10.4a5 5 0 0 0 10 0C11 7 7 3 6 1z" fill="${on ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.4"/></svg>`;
 // Photos fournies par le propriétaire du site, servies depuis /img/.
 const own = (name, alt, { ratio = '16 / 9', eager = false, cls = '', sizes = '100vw' } = {}) =>
@@ -459,13 +469,21 @@ function recipePage(r, i) {
       <figcaption><span>Le miel conseillé</span>${honeyOf(r) ? `<a href="${honeyOf(r).url}">${esc(shortHoney(r.miel))}</a>` : esc(shortHoney(r.miel))}</figcaption>
     </figure>
   </div>
-  <ul class="pills">
-    <li><span>Préparation</span><b>${esc(r.preparation)}</b></li>
-    ${r.cuisson && r.cuisson !== '0 min' ? `<li><span>Cuisson</span><b>${esc(r.cuisson)}</b></li>` : ''}
-    ${r.repos ? `<li><span>Repos</span><b>${esc(r.repos)}</b></li>` : ''}
-    <li><span>Difficulté</span><b>${esc(r.difficulte)}</b></li>
-    <li><span>Pour</span><b>${r.portions} ${esc(r.unite || 'pers.')}</b></li>
-  </ul>
+  <div class="rfacts">
+    <div class="rf-total">${RF.clock}<span>Temps total</span><b>${totalTime(r)}</b></div>
+    <ul class="rf-list">
+      <li>${RF.knife}<span>Préparation</span><b>${esc(r.preparation)}</b></li>
+      ${r.cuisson && r.cuisson !== '0 min' ? `<li>${RF.flame}<span>Cuisson</span><b>${esc(r.cuisson)}</b></li>` : ''}
+      ${r.repos ? `<li>${RF.pause}<span>Repos</span><b>${esc(r.repos)}</b></li>` : ''}
+      <li>${level(r)}<span>Difficulté</span><b>${esc(r.difficulte)}</b></li>
+      <li>${RF.people}<span>Pour</span><b>${r.portions} ${esc(r.unite || 'pers.')}</b></li>
+    </ul>
+    <div class="rf-actions">
+      <button type="button" class="rf-btn rf-main" data-cook>${RF.chef}<span>Mode cuisine</span></button>
+      <button type="button" class="rf-btn" onclick="window.print()" aria-label="Imprimer la recette">${RF.print}<span>Imprimer</span></button>
+      <button type="button" class="rf-btn" data-share aria-label="Partager la recette">${RF.share}<span>Partager</span></button>
+    </div>
+  </div>
   <div class="recipe-grid">
     <aside class="ingredients-box" data-base="${r.portions}">
       <div class="box-head">

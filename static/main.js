@@ -161,8 +161,8 @@ document.querySelectorAll('.carousel').forEach((c) => {
 
 // Mode cuisine : une étape à la fois, en grand, écran maintenu allumé.
 (() => {
-  const btn = document.querySelector('[data-cook]');
-  if (!btn) return;
+  const btns = document.querySelectorAll('[data-cook]');
+  if (!btns.length) return;
   const steps = [...document.querySelectorAll('.steps li')].map((li) => li.innerHTML);
   const title = document.querySelector('.recipe-head h1')?.textContent || '';
   const el = document.createElement('div');
@@ -190,7 +190,7 @@ document.querySelectorAll('.carousel').forEach((c) => {
   };
   const open = () => { last = document.activeElement; i = -1; render(); el.hidden = false; document.body.style.overflow = 'hidden'; next.focus(); wake(); };
   const close = () => { el.hidden = true; document.body.style.overflow = ''; try { lock && lock.release(); } catch (e) {} lock = null; last && last.focus(); };
-  btn.addEventListener('click', open);
+  btns.forEach((b) => b.addEventListener('click', open));
   el.querySelector('.cook-x').addEventListener('click', close);
   el.querySelector('.cook-tab').addEventListener('click', () => { i = -1; render(); });
   prev.addEventListener('click', () => { if (i > -1) { i--; render(); } });
@@ -297,3 +297,13 @@ document.querySelectorAll('.carousel').forEach((c) => {
   dessertBox.addEventListener('change', render);
   build(); render();
 })();
+
+// Partager une recette.
+document.querySelectorAll('[data-share]').forEach((b) => b.addEventListener('click', async () => {
+  const data = { title: document.title, url: location.href };
+  try {
+    if (navigator.share) { await navigator.share(data); return; }
+    await navigator.clipboard.writeText(location.href);
+    const t = b.querySelector('span'); const old = t.textContent; t.textContent = 'Lien copié !'; setTimeout(() => { t.textContent = old; }, 2000);
+  } catch (e) {}
+}));

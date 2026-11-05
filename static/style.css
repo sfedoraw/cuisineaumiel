@@ -725,3 +725,37 @@ h3 { font-size: .98rem; font-weight: 600; }
   .menu-days li { break-inside: avoid; }
   .menu-r img { display: none; }
 }
+/* Bandeau d'infos recette */
+.rfacts { display: grid; grid-template-columns: auto 1fr auto; align-items: stretch; gap: 0; margin: 0 0 36px; background: #fff; border: 1px solid #F1E2C4; border-radius: 26px; box-shadow: 0 22px 48px -34px rgba(60,40,10,.5); overflow: hidden; }
+.rf-total { display: grid; justify-items: center; align-content: center; gap: 2px; padding: 20px 30px; background: linear-gradient(160deg, #F7B733, #E8920F); color: #2A1F14; text-align: center; }
+.rf-total svg { width: 26px; height: 26px; margin-bottom: 4px; }
+.rf-total span { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; }
+.rf-total b { font-size: 1.7rem; line-height: 1.1; letter-spacing: -.01em; white-space: nowrap; }
+.rf-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; }
+.rf-list li { flex: 1 1 120px; display: grid; justify-items: center; gap: 3px; padding: 16px 12px; text-align: center; position: relative; }
+.rf-list li + li::before { content: ''; position: absolute; left: 0; top: 22%; bottom: 22%; border-left: 1px solid var(--line); }
+.rf-list li > svg { color: var(--accent); margin-bottom: 4px; }
+.rf-list .level { color: var(--honey); display: flex; gap: 3px; height: 22px; align-items: center; margin-bottom: 4px; }
+.rf-list .level svg { width: 13px; height: 17px; }
+.rf-list span:not(.level):not(.sr) { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.rf-list b { font-size: 1.08rem; white-space: nowrap; }
+.rf-actions { display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 16px 18px; background: #FFFBF3; border-left: 1px solid #F1E2C4; }
+.rf-btn { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font: 600 .9rem var(--font); color: var(--ink); cursor: pointer; transition: background .2s, color .2s, border-color .2s; white-space: nowrap; }
+.rf-btn svg { width: 18px; height: 18px; flex: none; }
+.rf-btn:hover { border-color: var(--accent); color: var(--accent); }
+.rf-btn.rf-main { background: var(--ink); color: #fff; border-color: var(--ink); }
+.rf-btn.rf-main:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+@media (max-width: 980px) {
+  .rfacts { grid-template-columns: auto 1fr; }
+  .rf-actions { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; border-left: 0; border-top: 1px solid #F1E2C4; }
+  .rf-btn { flex: 1 1 140px; justify-content: center; }
+}
+@media (max-width: 620px) {
+  .rfacts { grid-template-columns: 1fr; }
+  .rf-total { grid-template-columns: auto auto 1fr; justify-items: start; align-items: center; gap: 10px; padding: 14px 20px; }
+  .rf-total svg { margin: 0; }
+  .rf-total b { justify-self: end; font-size: 1.4rem; }
+  .rf-list li { flex: 1 1 45%; }
+  .rf-list li:nth-child(odd)::before { display: none; }
+}
+@media print { .rf-actions { display: none !important; } .rfacts { box-shadow: none; } }
