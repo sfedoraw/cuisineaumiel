@@ -65,3 +65,33 @@
     render();
   }));
 })();
+
+// Onglets et pastilles : chaque bouton affiche le panneau dont l'id est dans data-panel.
+document.querySelectorAll('[role="tablist"]').forEach((list) => {
+  const btns = [...list.querySelectorAll('[data-panel]')];
+  btns.forEach((b) => b.addEventListener('click', () => {
+    for (const x of btns) {
+      const on = x === b;
+      x.classList.toggle('is-on', on);
+      x.setAttribute('aria-selected', on);
+      document.getElementById(x.dataset.panel).hidden = !on;
+    }
+    const track = document.getElementById(b.dataset.panel).querySelector('.car-track');
+    if (track) track.dispatchEvent(new Event('scroll'));
+  }));
+});
+
+// Carrousels : flèches qui font défiler d'un écran.
+document.querySelectorAll('.carousel').forEach((c) => {
+  const track = c.querySelector('.car-track');
+  const prev = c.querySelector('.car-prev'), next = c.querySelector('.car-next');
+  const update = () => {
+    prev.disabled = track.scrollLeft < 8;
+    next.disabled = track.scrollLeft + track.clientWidth > track.scrollWidth - 8;
+  };
+  prev.addEventListener('click', () => track.scrollBy({ left: -track.clientWidth * 0.8, behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left: track.clientWidth * 0.8, behavior: 'smooth' }));
+  track.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+});

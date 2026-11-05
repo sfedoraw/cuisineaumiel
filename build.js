@@ -192,9 +192,16 @@ for (const r of recipes) {
 
 // ---------- gabarits ----------
 const logoSvg = `<svg viewBox="7 1 26 36" width="26" height="36" aria-hidden="true"><defs><linearGradient id="goutte" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#FCC93A"/><stop offset=".55" stop-color="#F2A516"/><stop offset="1" stop-color="#C2650A"/></linearGradient></defs><path d="M20 2C17.6 6.8 8.5 15.6 8.5 25a11.5 11.5 0 0 0 23 0C31.5 15.6 22.4 6.8 20 2z" fill="url(#goutte)"/><path d="M14.2 27.5a6.4 6.4 0 0 1 .6-6.2" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="2.6" stroke-linecap="round"/></svg>`;
-const searchIcon = `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
+const searchIcon = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
+const clockIcon = `<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
+const arrow = (d) => `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${d === 'prev' ? 'M19 12H5m6-6-6 6 6 6' : 'M5 12h14m-6-6 6 6-6 6'}"/></svg>`;
+const dropIcon = (on) => `<svg viewBox="0 0 12 16" width="11" height="14" aria-hidden="true"><path d="M6 1C5 3 1 7 1 10.4a5 5 0 0 0 10 0C11 7 7 3 6 1z" fill="${on ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.4"/></svg>`;
+// Photos fournies par le propriétaire du site, servies depuis /img/.
+const own = (name, alt, { ratio = '16 / 9', eager = false, cls = '', sizes = '100vw' } = {}) =>
+  `<img class="${cls}" src="/img/${name}-1000.jpg" srcset="/img/${name}-1000.jpg 1000w, /img/${name}-2000.jpg 2000w" sizes="${sizes}" alt="${esc(alt)}" style="aspect-ratio:${ratio}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+const shortCat = (c) => c.name.split(' &')[0];
 
-function layout({ title, description, body, canonical, extraHead = '', ogImage = '' }) {
+function layout({ title, description, body, canonical, extraHead = '', ogImage = '', hero = '' }) {
   const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} · ${SITE.tagline}`;
   return `<!doctype html>
 <html lang="fr">
@@ -217,48 +224,39 @@ ${ogImage ? `<meta property="og:image" content="${ogImage}">\n<meta name="twitte
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 ${extraHead}
 </head>
-<body>
+<body${hero ? ' class="has-hero"' : ''}>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<header class="topbar">
-  <div class="wrap topbar-inner">
-    <a class="brand" href="/">${logoSvg}<span>Cuisine <b>au miel</b></span></a>
-    <nav class="nav" aria-label="Navigation principale">
-      <a href="/recettes/">Recettes</a>
-      ${CATEGORIES.slice(0, 4).map((c) => `<a href="/categories/${c.slug}/">${c.name.split(' &')[0]}</a>`).join('\n      ')}
-      <a href="/le-miel/">Le miel</a>
-    </nav>
-    <form class="top-search" action="/recettes/" role="search">
-      <label class="sr" for="top-q">Rechercher une recette</label>
-      ${searchIcon}<input id="top-q" name="q" type="search" placeholder="Rechercher une recette…">
-    </form>
-  </div>
+<header class="masthead">
+  <nav class="nav nav-left" aria-label="Navigation principale">
+    <a href="/recettes/">Recettes</a>
+    <a href="/categories/plats/">Catégories</a>
+  </nav>
+  <a class="logo" href="/" aria-label="Cuisine au miel, accueil">${logoSvg}<span class="logo-text"><span>Cuisine</span><b>au miel</b></span></a>
+  <nav class="nav nav-right" aria-label="Navigation secondaire">
+    <a href="/recettes/#nouveautes">Nouveautés</a>
+    <a href="/le-miel/">Le miel</a>
+  </nav>
 </header>
+${hero}
 <main id="contenu">
 ${body}
 </main>
 <footer class="footer">
-  <div class="wrap footer-grid">
-    <div>
-      <a class="brand brand-light" href="/">${logoSvg}<span>Cuisine <b>au miel</b></span></a>
-      <p>Une nouvelle recette chaque jour, sucrée ou salée, et toujours au miel.</p>
-      <p><a href="/flux.xml">S'abonner au flux RSS</a></p>
-    </div>
-    <nav aria-label="Catégories">
-      <p class="footer-title">Catégories</p>
-      ${CATEGORIES.map((c) => `<a href="/categories/${c.slug}/">${c.name}</a>`).join('\n      ')}
-    </nav>
-    <nav aria-label="Le site">
-      <p class="footer-title">Le site</p>
-      <a href="/recettes/">Toutes les recettes</a>
-      <a href="/le-miel/">Guide des miels</a>
+  <div class="footer-box">
+    <a class="logo logo-small" href="/">${logoSvg}<span class="logo-text"><span>Cuisine</span><b>au miel</b></span></a>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a href="/recettes/">Recettes</a>
+      <a href="/categories/plats/">Catégories</a>
+      <a href="/le-miel/">Le miel</a>
       <a href="/a-propos/">À propos</a>
+      <a href="/flux.xml">Flux RSS</a>
     </nav>
   </div>
-  <p class="wrap fine">© ${today.getUTCFullYear()} cuisineaumiel.fr · Photos : Unsplash · Le miel ne convient pas aux enfants de moins d'un an.</p>
+  <p class="fine">© ${today.getUTCFullYear()} cuisineaumiel.fr · Photos : Unsplash et Depositphotos · Le miel ne convient pas aux enfants de moins d'un an.</p>
 </footer>
 <script src="/main.js" defer></script>
 </body>
@@ -271,118 +269,133 @@ function totalTime(r) {
   const h = Math.floor(t / 60), m = t % 60;
   return m ? `${h} h ${String(m).padStart(2, '0')}` : `${h} h`;
 }
+const totalMin = (r) => minutes(r.preparation) + minutes(r.cuisson) + minutes(r.repos);
 const shortHoney = (m) => (m || '').replace(/^Miel (de |d'|d’)?/i, '').replace(/^./, (c) => c.toUpperCase());
 const searchData = (r) => esc([r.titre, r.miel, r.resume, r.cat.name, ...r.tags].join(' ').toLowerCase());
+const LEVEL = { 'très facile': 1, facile: 1, moyenne: 2, difficile: 3 };
+const level = (r) => {
+  const n = LEVEL[(r.difficulte || '').toLowerCase()] || 2;
+  return `<span class="level" title="Difficulté : ${esc(r.difficulte)}"><span class="sr">Difficulté : ${esc(r.difficulte)}</span>${[1, 2, 3].map((i) => dropIcon(i <= n)).join('')}</span>`;
+};
+const MEAT = /poulet|porc|boeuf|bœuf|veau|agneau|canard|jambon|lard|bacon|magret|saumon|thon|crevette|poisson|cabillaud|dorade|chorizo|saucisse|dinde|caille|lapin|anchois|gélatine|gelatine/i;
+const isVeggie = (r) => !MEAT.test(r.ingredientsList.join(' ') + ' ' + r.titre);
 
-// Carte recette : photo arrondie avec badges, catégorie, titre, miel.
-function card(r, { big = false, eager = false } = {}) {
-  return `<article class="card${big ? ' card-big' : ''}" data-cat="${r.cat.slug}" data-search="${searchData(r)}">
+// Carte recette en portrait : photo, catégorie, titre, difficulté et temps.
+function card(r, { eager = false } = {}) {
+  return `<article class="card" data-cat="${r.cat.slug}" data-search="${searchData(r)}">
   <a href="${r.url}">
     <div class="card-media">
-      ${picture(r.photo, r.titre, { sizes: big ? '(min-width: 1000px) 640px, 100vw' : '(min-width: 1000px) 280px, 50vw', ratio: big ? '16 / 10' : '4 / 3', eager })}
-      <span class="badge badge-time">⏱ ${totalTime(r)}</span>
-      <span class="badge badge-level">${esc(r.difficulte)}</span>
-    </div>
-    <div class="card-body">
-      <span class="card-cat">${esc(r.cat.name)}</span>
-      <h3>${esc(r.titre)}</h3>
-      ${big ? `<p>${esc(r.resume)}</p>` : ''}
+      ${picture(r.photo, r.titre, { sizes: '(min-width: 1200px) 220px, (min-width: 700px) 30vw, 46vw', ratio: '3 / 4', eager })}
       <span class="card-honey">🍯 ${esc(shortHoney(r.miel))}</span>
     </div>
+    <span class="card-cat">${esc(shortCat(r.cat))}</span>
+    <h3>${esc(r.titre)}</h3>
+    <div class="card-meta">${level(r)}<span class="time">${clockIcon} ${totalTime(r)}</span></div>
   </a>
 </article>`;
 }
-const grid = (list) => `<div class="cards">${list.map((r) => card(r)).join('\n')}</div>`;
-const sectionHead = (title, href, label = 'Voir tout') => `<div class="section-head"><h2>${title}</h2>${href ? `<a href="${href}">${label} ›</a>` : ''}</div>`;
+const grid = (list, id = '') => `<div class="cards"${id ? ` id="${id}"` : ''}>${list.map((r) => card(r)).join('\n')}</div>`;
+const sectionTitle = (title, sub) => `<header class="section-title"><h2>${title}</h2>${sub ? `<p>${sub}</p>` : ''}</header>`;
+const carousel = (inner, label) => `<div class="carousel" aria-label="${esc(label)}">
+  <button type="button" class="car-btn car-prev" aria-label="Précédent">${arrow('prev')}</button>
+  <div class="car-track">${inner}</div>
+  <button type="button" class="car-btn car-next" aria-label="Suivant">${arrow('next')}</button>
+</div>`;
+function catTabs(active = '') {
+  return `<nav class="cat-tabs" aria-label="Catégories">${CATEGORIES.map((c) => `<a href="/categories/${c.slug}/"${c.slug === active ? ' class="is-on" aria-current="page"' : ''}>${shortCat(c)}</a>`).join('')}</nav>`;
+}
 
-const catPhoto = (c) => (recipes.find((r) => r.cat === c) || recipes[0]).photo;
-function catCircles() {
-  return `<div class="circles">${CATEGORIES.map((c) => `<a class="circle" href="/categories/${c.slug}/">${picture(catPhoto(c), '', { sizes: '96px', ratio: '1 / 1' })}<span>${c.name.split(' &')[0]}</span></a>`).join('')}</div>`;
+function heroBanner() {
+  return `<section class="hero">
+  ${own('chef-dressage', '', { eager: true, cls: 'hero-bg', ratio: 'auto' })}
+  <div class="hero-inner">
+    <h1>Trouvez la recette au miel qui va régaler vos papilles !</h1>
+    <form class="hero-search" action="/recettes/" role="search">
+      <label class="sr" for="hq">Rechercher une recette</label>
+      <input id="hq" name="q" type="search" placeholder="Poulet, lavande, madeleines…">
+      <button type="submit" aria-label="Rechercher">${searchIcon}</button>
+    </form>
+  </div>
+</section>`;
+}
+
+// Miels les plus utilisés, pour le carrousel « Les miels ».
+function honeyCards() {
+  const count = {};
+  for (const r of recipes) { const k = shortHoney(r.miel); (count[k] ||= []).push(r); }
+  const used = new Set();
+  return Object.entries(count).sort((a, b) => b[1].length - a[1].length).slice(0, 8).map(([name, list]) => {
+    const fam = HONEY[honeyFamily(list[0].miel)];
+    const all = [...fam, ...HONEY.ambre, ...HONEY.clair, ...HONEY.fonce];
+    const [id, , alt] = all.find((h) => !used.has(h[0])) || fam[0];
+    used.add(id);
+    return `<article class="honey-card"><a href="/recettes/?q=${encodeURIComponent(name.toLowerCase())}">
+    <div class="card-media">${picture(id, alt, { sizes: '(min-width: 1200px) 280px, 60vw', ratio: '4 / 3' })}</div>
+    <span class="card-cat">Miel</span><h3>${esc(name)}</h3>
+    <div class="card-meta"><span>${list.length} recette${list.length > 1 ? 's' : ''}</span></div></a></article>`;
+  }).join('\n');
 }
 
 function home() {
-  const [today0, ...rest] = recipes;
-  const latest = rest.slice(0, 8);
-  const collage = rest.slice(8, 11);
+  const byCat = CATEGORIES.map((c) => ({ c, list: recipes.filter((r) => r.cat === c).slice(0, 10) })).filter((x) => x.list.length);
+  const first = byCat.find((x) => x.c.slug === 'plats') || byCat[0];
+  const FILTERS = [
+    ['nouveautes', 'Nouveautés', recipes],
+    ['rapide', 'Rapide', recipes.filter((r) => totalMin(r) <= 30)],
+    ['vegetarien', 'Végétarien', recipes.filter(isVeggie)],
+    ['facile', 'Facile', recipes.filter((r) => /facile/i.test(r.difficulte))],
+    ['sucre', 'Sucré', recipes.filter((r) => ['desserts', 'patisserie', 'petit-dejeuner', 'boissons'].includes(r.cat.slug))],
+  ];
   const body = `
-<section class="wrap hero">
-  <div class="hero-text">
-    <p class="eyebrow">Recettes sucrées & salées</p>
-    <h1>Le miel, de l'entrée <span>au dessert.</span></h1>
-    <p class="lede">${recipes.length} recettes originales pour cuisiner le miel au quotidien. Une nouvelle recette chaque jour.</p>
-    <form class="hero-search" action="/recettes/" role="search">
-      <label class="sr" for="hq">Rechercher une recette</label>
-      ${searchIcon}<input id="hq" name="q" type="search" placeholder="Poulet, lavande, madeleines…">
-      <button type="submit">Chercher</button>
-    </form>
-    <ul class="hero-stats"><li><b>${recipes.length}</b> recettes</li><li><b>${CATEGORIES.length}</b> catégories</li><li><b>1</b> nouvelle par jour</li></ul>
+<section class="block">
+  <div class="tabs" role="tablist" aria-label="Recettes par catégorie">
+    ${byCat.map(({ c }) => `<button type="button" role="tab" class="tab${c === first.c ? ' is-on' : ''}" aria-selected="${c === first.c}" data-panel="cat-${c.slug}">${shortCat(c)}</button>`).join('')}
   </div>
-  <div class="hero-collage" aria-hidden="true">
-    <div class="col">
-      ${picture(collage[0].photo, '', { sizes: '260px', ratio: '3 / 4', eager: true })}
-      <div class="pastel"><b>Apprendre.</b><br>Cuisiner.<br><b>Partager.</b></div>
-    </div>
-    <div class="col col-offset">
-      <div class="pastel"><b>${recipes.length}+</b><br>recettes<br><b>au miel</b></div>
-      ${picture(collage[1].photo, '', { sizes: '260px', ratio: '1 / 1', eager: true })}
-      ${picture(collage[2].photo, '', { sizes: '260px', ratio: '4 / 3', eager: true })}
-    </div>
+  ${byCat.map(({ c, list }) => `<div class="panel" id="cat-${c.slug}"${c === first.c ? '' : ' hidden'}>${carousel(list.map((r) => card(r)).join('\n'), c.name)}</div>`).join('\n')}
+</section>
+
+<section class="wrap block">
+  ${sectionTitle('Recettes', 'Sucré, salé, et toujours au miel')}
+  <div class="pills" role="tablist" aria-label="Filtrer les recettes">
+    ${FILTERS.map(([id, label], i) => `<button type="button" role="tab" class="pill${i ? '' : ' is-on'}" aria-selected="${!i}" data-panel="f-${id}">${label}</button>`).join('')}
   </div>
+  ${FILTERS.map(([id, , list], i) => `<div class="panel" id="f-${id}"${i ? ' hidden' : ''}>${grid(list.slice(0, 12))}</div>`).join('\n')}
+  <div class="more"><a class="btn-outline" href="/recettes/">Voir plus de recettes</a></div>
+</section>
+
+<section class="block">
+  <div class="wrap">${sectionTitle('Les miels', 'Un miel pour chaque recette')}</div>
+  ${carousel(honeyCards(), 'Les miels')}
+  <div class="wrap more"><a class="btn-outline" href="/le-miel/">Lire le guide des miels</a></div>
 </section>
 
 <section class="wrap block">
-  ${sectionHead('Catégories', '/categories/aperitifs-entrees/', 'Tout explorer')}
-  ${catCircles()}
-</section>
-
-<section class="wrap block">
-  ${sectionHead('La recette du jour', today0.url, 'Voir la recette')}
-  <div class="today">
-    ${card(today0, { big: true, eager: true })}
-    <aside class="today-honey">
-      ${picture(today0.honey.id, today0.honey.alt, { sizes: '(min-width: 1000px) 360px, 100vw', ratio: '4 / 5' })}
-      <div class="today-honey-text">
-        <span class="card-cat">Le miel conseillé</span>
-        <p class="today-honey-name">${esc(today0.miel)}</p>
-        <a href="/le-miel/">Pourquoi ce miel ? ›</a>
-      </div>
-    </aside>
-  </div>
-</section>
-
-<section class="wrap block">
-  ${sectionHead('Nouveautés', '/recettes/')}
-  ${grid(latest)}
-</section>
-
-<section class="wrap block">
-  <div class="promo">
-    <div class="promo-icon">${picture(HONEY.ambre[0][0], '', { sizes: '120px', ratio: '1 / 1' })}</div>
-    <div>
-      <p class="promo-title">Acacia, lavande, châtaignier… quel miel choisir ?</p>
-      <p>Notre guide pour choisir la bonne variété et remplacer le sucre par du miel sans rater ses gâteaux.</p>
-      <a href="/le-miel/">Lire le guide des miels ›</a>
+  <div class="story">
+    ${own('vieux-livre', 'Un vieux livre de recettes ouvert, une cuillère en bois et de la farine', { ratio: '4 / 3', sizes: '(min-width: 900px) 560px, 100vw' })}
+    <div class="story-text">
+      <p class="kicker">Une recette chaque jour</p>
+      <h2>Le miel, de l'entrée au dessert</h2>
+      <p>${recipes.length} recettes originales et testées à la maison pour remplacer le sucre, laquer une viande ou parfumer une pâtisserie. Chaque fiche vous indique le miel le plus adapté et pourquoi.</p>
+      <a class="btn" href="/a-propos/">Découvrir le site</a>
     </div>
   </div>
-</section>
-
-${CATEGORIES.map((c) => {
-    const list = recipes.filter((r) => r.cat === c && r !== today0 && !latest.includes(r)).slice(0, 4);
-    return list.length ? `<section class="wrap block">${sectionHead(c.name, `/categories/${c.slug}/`)}${grid(list)}</section>` : '';
-  }).join('\n')}`;
-  return layout({ title: '', canonical: '/', body });
+</section>`;
+  return layout({ title: '', canonical: '/', body, hero: heroBanner() });
 }
+
+function pageHead(title, lede, photo, crumbs = '') {
+  return `<section class="page-banner">
+  ${own(photo, '', { cls: 'banner-bg', ratio: 'auto', eager: true })}
+  <div class="banner-inner">${crumbs}<h1>${title}</h1>${lede ? `<p>${lede}</p>` : ''}</div>
+</section>`;
+}
+const BANNER = { 'aperitifs-entrees': 'salade-maison', plats: 'chef-sel', desserts: 'pappardelle-bandeau', patisserie: 'vieux-livre', 'petit-dejeuner': 'salade-printemps', boissons: 'decoupe-cuisine', 'sauces-condiments': 'decoupe-legumes' };
 
 function categoryPage(c) {
   const list = recipes.filter((r) => r.cat === c);
   const body = `
-<section class="wrap page-head">
-  <nav class="crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a> › <a href="/recettes/">Recettes</a></nav>
-  <h1>${c.name}</h1>
-  <p class="lede">${c.intro}</p>
-  ${catCircles()}
-</section>
-<section class="wrap block">${grid(list)}</section>`;
+${pageHead(c.name, c.intro, BANNER[c.slug] || 'chef-sel', `<nav class="crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a> › <a href="/recettes/">Recettes</a></nav>`)}
+<section class="wrap block-tight">${catTabs(c.slug)}${grid(list)}</section>`;
   return layout({ title: c.name, description: `Recettes au miel : ${c.name.toLowerCase()}. ${c.intro}`, canonical: `/categories/${c.slug}/`, body });
 }
 
@@ -390,7 +403,7 @@ function recipePage(r, i) {
   const same = recipes.filter((x) => x !== r && x.cat === r.cat);
   const others = recipes.filter((x) => x !== r && x.cat !== r.cat);
   const k = i % Math.max(1, same.length - 1), j = i % Math.max(1, others.length - 2);
-  const related = [...same.slice(k, k + 2), ...others.slice(j, j + 2)].slice(0, 4);
+  const related = [...same.slice(k, k + 3), ...others.slice(j, j + 3)].slice(0, 6);
   const ld = {
     '@context': 'https://schema.org', '@type': 'Recipe', name: r.titre, description: r.resume,
     image: [img(r.photo, 1200)],
@@ -449,7 +462,7 @@ function recipePage(r, i) {
   </div>
 </article>
 <section class="wrap block related">
-  ${sectionHead('À cuisiner aussi', `/categories/${r.cat.slug}/`, `Plus de ${r.cat.name.toLowerCase()}`)}
+  ${sectionTitle('À cuisiner aussi', `D'autres idées de ${r.cat.name.toLowerCase()}`)}
   ${grid(related)}
 </section>`;
   return layout({
@@ -460,19 +473,18 @@ function recipePage(r, i) {
 
 function archive() {
   const body = `
-<section class="wrap page-head">
-  <h1>Toutes les recettes</h1>
-  <p class="lede">${recipes.length} recettes au miel, de l'apéritif au goûter.</p>
+${pageHead('Toutes les recettes', `${recipes.length} recettes au miel, de l'apéritif au goûter.`, 'salade-maison')}
+<section class="wrap block-tight" id="nouveautes">
   <div class="filters">
     <div class="filter-search">${searchIcon}<label class="sr" for="filtre-q">Rechercher</label><input id="filtre-q" type="search" placeholder="Rechercher une recette, un miel, un ingrédient…" autocomplete="off"></div>
-    <div class="chips" role="group" aria-label="Filtrer par catégorie">
-      <button type="button" class="chip is-on" data-filter="">Toutes</button>
-      ${CATEGORIES.map((c) => `<button type="button" class="chip" data-filter="${c.slug}">${c.name}</button>`).join('\n      ')}
+    <div class="pills" role="group" aria-label="Filtrer par catégorie">
+      <button type="button" class="pill chip is-on" data-filter="">Toutes</button>
+      ${CATEGORIES.map((c) => `<button type="button" class="pill chip" data-filter="${c.slug}">${shortCat(c)}</button>`).join('\n      ')}
     </div>
   </div>
   <p class="empty" hidden>Aucune recette ne correspond. Essayez un autre mot.</p>
-</section>
-<section class="wrap block"><div class="cards" id="all">${recipes.map((r) => card(r)).join('\n')}</div></section>`;
+  ${grid(recipes, 'all')}
+</section>`;
   return layout({ title: 'Toutes les recettes', description: `Les ${recipes.length} recettes au miel de cuisineaumiel.fr.`, canonical: '/recettes/', body });
 }
 
