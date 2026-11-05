@@ -1,6 +1,6 @@
 # Consigne de la routine « nouvelle recette »
 
-Cette consigne est exécutée automatiquement chaque jour par une routine Claude branchée sur ce dépôt.
+Cette consigne est exécutée automatiquement deux fois par semaine (lundi et jeudi) par une routine Claude branchée sur ce dépôt. Une seule recette par exécution.
 
 ## Tâche
 

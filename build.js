@@ -410,7 +410,7 @@ ${posts.length ? `<section class="wrap block">${sectionTitle('Le magazine du mie
   <div class="story">
     ${own('vieux-livre', 'Un vieux livre de recettes ouvert, une cuillère en bois et de la farine', { ratio: '4 / 3', sizes: '(min-width: 900px) 560px, 100vw' })}
     <div class="story-text">
-      <p class="kicker">Une recette chaque jour</p>
+      <p class="kicker">De nouvelles recettes chaque semaine</p>
       <h2>Le miel, de l'entrée au dessert</h2>
       <p>${recipes.length} recettes originales pour remplacer le sucre, laquer une viande ou parfumer une pâtisserie. Chaque fiche vous indique le miel le plus adapté et pourquoi.</p>
       <a class="btn" href="/a-propos/">Découvrir le site</a>
@@ -679,7 +679,7 @@ function sideMarket(x, linked) {
   ];
   return `<div class="sm-day">
       <a href="${day.url}">
-        <span class="sm-media">${picture(day.photo, day.titre, { ratio: '4 / 3', sizes: '320px' })}<span class="sm-badge">Recette du jour</span></span>
+        <span class="sm-media">${picture(day.photo, day.titre, { ratio: '4 / 3', sizes: '320px' })}<span class="sm-badge">Nouvelle recette</span></span>
         <span class="sm-body"><b>${esc(day.titre)}</b><small>${clockIcon} ${totalTime(day)} · 🍯 ${esc(shortHoney(day.miel))}</small><span class="sm-cta">Voir la recette →</span></span>
       </a>
     </div>
@@ -937,7 +937,7 @@ function atlasPage() {
 
   const protRows = prot.map((x) => `<tr id="${x.id}" data-pays="${x.pays.join(' ')}" data-statut="${x.cls}"><td><b>${x.fiche ? ficheLink(x.fiche, x.nom) : esc(x.nom)}</b>${x.plante ? `<small>${esc(x.plante)}</small>` : ''}</td><td>${esc(paysTxt(x.pays))}</td><td><span class="tag ${x.cls}">${STATUT[x.statut]}</span></td><td>${x.annee || '—'}</td></tr>`).join('');
   const plantRows = A.europe.map((x) => `<tr data-pays="${x.pays.join(' ')}" data-type="${x.type}"><td><b>${x.fiche ? ficheLink(x.fiche, x.nom) : esc(x.nom)}</b><small><i>${esc(x.latin)}</i></small></td><td>${x.type === 'miellat' ? 'Miellat' : 'Fleurs'}</td><td>${esc(x.pays.map((c) => ZONES_EU[c] || c).join(', '))}</td></tr>`).join('');
-  const mondeCards = monde.map((x) => `<article class="world-card" id="${x.id}"><span class="card-cat">${esc(paysTxt(x.pays))}</span><h3>${esc(x.nom)}</h3>${x.region !== paysTxt(x.pays) ? `<p class="wc-region">${esc(x.region)}</p>` : ''}<p><b>Plante :</b> ${esc(x.plante)}</p><p>${esc(x.note)}</p><p class="wc-src">Source : <a href="${x.src[1]}" rel="noopener">${esc(x.src[0])}</a></p></article>`).join('');
+  const mondeCards = monde.map((x) => `<article class="world-card" id="${x.id}"><span class="card-cat">${esc(paysTxt(x.pays))}</span><h3>${x.fiche ? ficheLink(x.fiche, x.nom) : esc(x.nom)}</h3>${x.region !== paysTxt(x.pays) ? `<p class="wc-region">${esc(x.region)}</p>` : ''}<p><b>Plante :</b> ${esc(x.plante)}</p><p>${esc(x.note)}</p><p class="wc-src">Source : <a href="${x.src[1]}" rel="noopener">${esc(x.src[0])}</a></p></article>`).join('');
   const zoneOpts = Object.entries(ZONES_EU).filter(([k]) => A.europe.some((x) => x.pays.includes(k)));
 
   const faq = [
@@ -1048,7 +1048,7 @@ function aboutPage() {
   const nbSources = new Set([...honeys, ...pillars, ...posts].flatMap((x) => x.sources.map((s) => (s.match(/\]\((https?:[^)]+)\)/) || [])[1]).filter(Boolean))).size;
   const nbAppellations = ATLAS ? ATLAS.protege.filter((x) => x.statut === 'AOP' || x.statut === 'IGP').length : 0;
   const tiles = [
-    ['/recettes/', 'Les recettes', `${recipes.length} recettes sucrées et salées, une nouvelle chaque jour.`, own('chef-dressage', '', { ratio: '4 / 5', sizes: '(min-width: 900px) 300px, 50vw' })],
+    ['/recettes/', 'Les recettes', `${recipes.length} recettes sucrées et salées, et de nouvelles chaque semaine.`, own('chef-dressage', '', { ratio: '4 / 5', sizes: '(min-width: 900px) 300px, 50vw' })],
     ['/miels/', 'Le guide des miels', 'Une fiche complète et sourcée pour chaque miel.', picture('1752776132399-59fb3579e854', '', { ratio: '4 / 5', sizes: '(min-width: 900px) 300px, 50vw' })],
     ['/miels/atlas/', "L'atlas des miels", 'Tous les miels protégés d\'Europe et du monde, sur la carte.', picture('1774284266228-27698569b2fd', '', { ratio: '4 / 5', sizes: '(min-width: 900px) 300px, 50vw' })],
     ['/magazine/', 'Le magazine', "L'actualité du miel et de l'apiculture, décryptée.", picture('1784873230783-967a9263d4c4', '', { ratio: '4 / 5', sizes: '(min-width: 900px) 300px, 50vw' })],
@@ -1150,7 +1150,7 @@ function aboutPage() {
       <p class="kicker">Qui sommes-nous ?</p>
       <h2>Proposé par le GAEC des Deux Vallées</h2>
       <p>Derrière Cuisine au miel, il y a une exploitation agricole attachée à son territoire, au rythme des saisons et au respect du vivant. Une famille de passionnés qui a appris, au fil des années, à regarder les abeilles avec admiration.</p>
-      <p>Nous avons créé ce site pour partager cette passion et donner à chacun les clés pour comprendre, choisir et cuisiner le miel. Un projet sincère, que nous faisons grandir chaque jour, avec une nouvelle recette et de nouvelles fiches.</p>
+      <p>Nous avons créé ce site pour partager cette passion et donner à chacun les clés pour comprendre, choisir et cuisiner le miel. Un projet sincère, que nous faisons grandir chaque semaine, avec de nouvelles recettes, de nouvelles fiches et de nouveaux articles.</p>
     </div>
   </div>
   <div class="about-cta">
