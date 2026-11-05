@@ -943,6 +943,15 @@ ${CATEGORIES.map((c) => line(`/categories/${c.slug}/`, c.name, '')).join('\n')}
 ${recipes.slice(0, 30).map((r) => line(r.url, r.titre, r.resume)).join('\n')}
 `;
 }
+
+// Flux Pinterest : un flux par tableau, image verticale 2:3 pour chaque page.
+const pinImg = (photo) => /^\d/.test(photo || '') ? `https://images.unsplash.com/photo-${photo}?auto=format&fit=crop&w=1000&h=1500&q=75` : `${SITE.url}/img/${photo || 'chef-sel'}-2000.jpg`;
+function pinFeed(title, desc, items) {
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>${esc(title)}</title><link>${SITE.url}/</link><description>${esc(desc)}</description><language>fr-FR</language>
+${items.map((x) => `<item><title>${esc(plain(x.titre))}</title><link>${SITE.url}${x.url}</link><guid>${SITE.url}${x.url}</guid>${x.date ? `<pubDate>${new Date(x.date).toUTCString()}</pubDate>` : ''}<description>${esc(plain(x.resume || ''))}</description><media:content url="${esc(pinImg(x.photo))}" medium="image"/><enclosure url="${esc(pinImg(x.photo))}" type="image/jpeg" length="0"/></item>`).join('\n')}
+</channel></rss>`;
+}
 // ---------- construction ----------
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
@@ -966,6 +975,9 @@ for (const f of fs.readdirSync(path.join(ROOT, 'pages')).filter((f) => f.endsWit
 }
 write('404.html', layout({ title: 'Page introuvable', canonical: '/404.html', body: `<section class="wrap page-head"><h1>Oups, cette page a fondu.</h1><p class="lede">Elle n'existe pas ou plus. <a href="/recettes/">Voir toutes les recettes</a>.</p></section>` }));
 write('flux.xml', rss());
+write('pinterest/recettes.xml', pinFeed('Recettes au miel', 'Les recettes de Cuisine au miel.', recipes.slice(0, 200)));
+write('pinterest/miels.xml', pinFeed('Le guide des miels', 'Les fiches du guide des miels et l\'atlas.', [...honeys.map((h) => ({ ...h, date: h.maj })), ...pillars, ...(HAS_ATLAS ? [{ titre: "L'atlas des miels", resume: "Tous les miels AOP et IGP d'Europe, les plantes à miel et les grands miels du monde, sur la carte.", url: '/miels/atlas/', photo: '1774284266228-27698569b2fd' }] : [])]));
+write('pinterest/magazine.xml', pinFeed('Le magazine du miel', 'Actualités et dossiers sur le miel.', posts));
 write('sitemap.xml', sitemap(urls));
 const AI_BOTS = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot', 'CCBot', 'Meta-ExternalAgent', 'MistralAI-User', 'DuckAssistBot'];
 write('robots.txt', `# Cuisine au miel : moteurs de recherche et assistants IA bienvenus.\nUser-agent: *\nAllow: /\n\n${AI_BOTS.map((b) => `User-agent: ${b}\nAllow: /`).join('\n\n')}\n\nSitemap: ${SITE.url}/sitemap.xml\n`);
