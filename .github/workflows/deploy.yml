@@ -26,6 +26,9 @@ jobs:
         with:
           node-version: 22
       - run: node build.js
+      # Adresse provisoire sfedoraw.github.io/cuisineaumiel/ tant que cuisineaumiel.fr n'est pas branché.
+      # Le jour où le domaine fonctionne : supprimer cette ligne.
+      - run: node base-path.js /cuisineaumiel
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
