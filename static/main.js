@@ -307,3 +307,9 @@ document.querySelectorAll('[data-share]').forEach((b) => b.addEventListener('cli
     const t = b.querySelector('span'); const old = t.textContent; t.textContent = 'Lien copié !'; setTimeout(() => { t.textContent = old; }, 2000);
   } catch (e) {}
 }));
+
+// Liens e-mail assemblés au clic (limite le spam).
+document.querySelectorAll('[data-mail]').forEach((a) => a.addEventListener('click', (e) => {
+  e.preventDefault();
+  location.href = `mailto:${a.dataset.mail}@${a.dataset.domain}?subject=${a.dataset.subject || ''}&body=${a.dataset.body || ''}`;
+}));

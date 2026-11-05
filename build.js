@@ -285,6 +285,7 @@ ${body}
       <a href="/outils/">Outils</a>
       <a href="/magazine/">Magazine</a>
       <a href="/guide/trouver-un-apiculteur/">Trouver un apiculteur</a>
+      <a href="/apiculteurs-partenaires/">Apiculteurs partenaires</a>
       <a href="/a-propos/">À propos</a>
     </nav>
   </div>
@@ -1232,6 +1233,40 @@ ${pageHead('Le menu de la semaine', 'Sept idées de repas au miel, de saison, et
   return layout({ title: 'Menu de la semaine au miel et liste de courses', description: 'Un menu de la semaine au miel, de saison, généré en un clic, avec la liste de courses à imprimer.', canonical: '/outils/menu-de-la-semaine/', body, extraHead: ldScript(crumbsLd(trail)) });
 }
 
+const PARTNER_MAIL = ['samuel', 'fedorawiez.com'];
+const PARTENAIRES = fs.existsSync(path.join(ROOT, 'data', 'partenaires.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'partenaires.json'), 'utf8')) : [];
+function partnersPage() {
+  const trail = [['Accueil', '/'], ['Apiculteurs partenaires']];
+  const ico = (d) => `<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const charte = [
+    [ico('<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/>'), 'Leur propre miel', 'Ils vendent le miel de leurs ruches, récolté par eux-mêmes.'],
+    [ico('<path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>'), 'Une origine claire', 'Le lieu des ruchers et le pays de récolte sont indiqués sans ambiguïté.'],
+    [ico('<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M8 7h8M8 11h6"/>'), 'Une étiquette conforme', 'Dénomination, origine et mentions obligatoires respectent la réglementation.'],
+    [ico('<path d="M3 11h18c0 5-4 9-9 9s-9-4-9-9z"/><path d="M12 11V4"/>'), 'Un miel pur', 'Rien n\'est ajouté au miel : ni sucre, ni sirop, ni arôme.'],
+  ];
+  const mailBody = encodeURIComponent("Bonjour,\n\nJe souhaite rejoindre l'annuaire des apiculteurs partenaires de Cuisine au miel.\n\nNom et prénom :\nNom de l'exploitation :\nDépartement et commune :\nMiels produits :\nOù vendez-vous (marché, ferme, boutique en ligne) :\nSite web ou réseaux sociaux :\nNuméro SIRET :\n\nMerci !");
+  const list = PARTENAIRES.length ? `<div class="pt-grid">${PARTENAIRES.map((x) => `<article class="pt-card"><p class="kicker">${esc(x.departement || '')}</p><h3>${esc(x.nom)}</h3><p>${esc(x.miels || '')}</p>${x.site ? `<a href="${esc(x.site)}" rel="nofollow noopener">Voir le site</a>` : ''}</article>`).join('')}</div>`
+    : `<div class="pt-empty"><span class="pt-empty-ico">${ico('<path d="M12 2l8.7 5v10L12 22l-8.7-5V7z"/>')}</span><h2>L'annuaire ouvre ses portes</h2><p>Nous sélectionnons nos premiers apiculteurs partenaires, un par un. Revenez bientôt pour trouver un producteur près de chez vous. En attendant, notre guide vous explique <a href="/guide/trouver-un-apiculteur/">comment trouver un bon apiculteur</a>.</p></div>`;
+  const body = `
+${pageHead('Les apiculteurs partenaires', 'Des femmes et des hommes passionnés, qui récoltent leur propre miel et le vendent en direct. Trouvez le vôtre, près de chez vous.', 'salade-printemps', crumbsHtml(trail))}
+<section class="wrap block">
+  ${list}
+</section>
+<section class="wrap block">
+  ${sectionTitle('Notre charte', 'Ce que nous demandons à chaque partenaire')}
+  <div class="about-pillars pt-charte">${charte.map(([i, t, d]) => `<div class="ap-card"><span class="ap-ico">${i}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>
+</section>
+<section class="wrap block">
+  <div class="about-cta pt-cta">
+    <h2>Vous êtes apiculteur ? <em>Rejoignez-nous.</em></h2>
+    <p>L'inscription est gratuite. Présentez-nous votre exploitation et vos miels : nous vous répondons personnellement.</p>
+    <p class="about-cta-btns"><a class="btn" href="#" data-mail="${PARTNER_MAIL[0]}" data-domain="${PARTNER_MAIL[1]}" data-subject="${encodeURIComponent('Candidature apiculteur partenaire')}" data-body="${mailBody}">Proposer ma candidature</a></p>
+    <p class="pt-small">Votre candidature s'ouvre dans votre messagerie, avec un modèle à compléter.</p>
+  </div>
+</section>`;
+  return layout({ title: 'Apiculteurs partenaires : trouver un producteur de miel', description: 'L\'annuaire des apiculteurs partenaires de Cuisine au miel : des producteurs qui récoltent et vendent leur propre miel en direct. Apiculteur ? Rejoignez-nous gratuitement.', canonical: '/apiculteurs-partenaires/', body, extraHead: ldScript(crumbsLd(trail)) });
+}
+
 function toolsHub() {
   const trail = [['Accueil', '/'], ['Outils']];
   const ico = (d) => `<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
@@ -1247,6 +1282,7 @@ function toolsHub() {
     ['/recettes/' + (recipes[0] ? recipes[0].slug + '/' : ''), ico('<path d="M6 13.9V20h12v-6.1"/><path d="M6 14a4 4 0 1 1 2.6-7A4.5 4.5 0 0 1 17 6.1 4 4 0 1 1 18 14z"/>'), 'Le mode cuisine', 'Sur chaque recette : une étape à la fois, en grand, et l\'écran reste allumé.', ''],
     ['/guide/glossaire-du-miel/', ico('<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M8 7h8M8 11h6"/>'), 'Le glossaire du miel', 'Miellat, opercule, monofloral… tous les mots du miel expliqués simplement.', ''],
     ['/guide/trouver-un-apiculteur/', ico('<path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>'), 'Trouver un apiculteur', 'Où et comment acheter un vrai miel, près de chez vous.', ''],
+    ['/apiculteurs-partenaires/', ico('<path d="M12 2l8.7 5v10L12 22l-8.7-5V7z"/><path d="M9 12l2 2 4-4"/>'), 'Les apiculteurs partenaires', 'L\'annuaire des producteurs qui vendent leur propre miel. Apiculteur ? Rejoignez-nous.', ''],
   ];
   const body = `
 ${pageHead('Nos outils', 'Calculateur, recherche, saisons, accords, atlas : tout pour choisir et cuisiner le miel facilement.', 'decoupe-cuisine', crumbsHtml(trail))}
@@ -1394,6 +1430,7 @@ recipes.forEach((r, i) => { write(`recettes/${r.slug}/index.html`, recipePage(r,
 for (const c of CATEGORIES) { write(`categories/${c.slug}/index.html`, categoryPage(c)); urls.push(`/categories/${c.slug}/`); }
 write('a-propos/index.html', aboutPage()); urls.push('/a-propos/');
 write('outils/index.html', toolsHub()); urls.push('/outils/');
+write('apiculteurs-partenaires/index.html', partnersPage()); urls.push('/apiculteurs-partenaires/');
 write('outils/menu-de-la-semaine/index.html', menuPage()); urls.push('/outils/menu-de-la-semaine/');
 write('outils/quel-miel/index.html', quizPage()); urls.push('/outils/quel-miel/');
 write('outils/calendrier-des-miellees/index.html', calendarPage()); urls.push('/outils/calendrier-des-miellees/');

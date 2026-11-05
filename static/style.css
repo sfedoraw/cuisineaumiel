@@ -759,3 +759,16 @@ h3 { font-size: .98rem; font-weight: 600; }
   .rf-list li:nth-child(odd)::before { display: none; }
 }
 @media print { .rf-actions { display: none !important; } .rfacts { box-shadow: none; } }
+/* Apiculteurs partenaires */
+.pt-empty { max-width: 720px; margin: 0 auto; text-align: center; padding: clamp(28px, 5vw, 56px); border: 2px dashed #EBD8B4; border-radius: 28px; background: #FFFBF3; }
+.pt-empty-ico { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: #FFF0D2; color: var(--accent); margin-bottom: 12px; }
+.pt-empty h2 { margin: 0 0 10px; }
+.pt-empty p { color: var(--ink-soft); line-height: 1.7; margin: 0; }
+.pt-empty a { color: var(--accent); }
+.pt-charte { grid-template-columns: repeat(4, 1fr); }
+.pt-small { font-size: .85rem; margin-top: 14px !important; }
+.pt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.pt-card { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 22px; }
+.pt-card h3 { margin: 0 0 6px; }
+@media (max-width: 900px) { .pt-charte { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .pt-charte { grid-template-columns: 1fr; } }
