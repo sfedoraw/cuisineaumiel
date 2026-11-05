@@ -952,6 +952,94 @@ function pinFeed(title, desc, items) {
 ${items.map((x) => `<item><title>${esc(plain(x.titre))}</title><link>${SITE.url}${x.url}</link><guid>${SITE.url}${x.url}</guid>${x.date ? `<pubDate>${new Date(x.date).toUTCString()}</pubDate>` : ''}<description>${esc(plain(x.resume || ''))}</description><media:content url="${esc(pinImg(x.photo))}" medium="image"/><enclosure url="${esc(pinImg(x.photo))}" type="image/jpeg" length="0"/></item>`).join('\n')}
 </channel></rss>`;
 }
+// ---------- page À propos ----------
+function aboutPage() {
+  const nbSources = new Set([...honeys, ...pillars, ...posts].flatMap((x) => x.sources.map((s) => (s.match(/\]\((https?:[^)]+)\)/) || [])[1]).filter(Boolean))).size;
+  const nbAppellations = ATLAS ? ATLAS.protege.filter((x) => x.statut === 'AOP' || x.statut === 'IGP').length : 0;
+  const tiles = [
+    ['/recettes/', 'Les recettes', `${recipes.length} recettes sucrées et salées, une nouvelle chaque jour.`, own('chef-dressage', '', { ratio: '4 / 5', sizes: '(min-width: 900px) 300px, 50vw' })],
+    ['/miels/', 'Le guide des miels', 'Une fiche complète et sourcée pour chaque miel.', picture('1752776132399-59fb3579e854', '', { ratio: '4 / 5', sizes: '(min-width: 900px) 300px, 50vw' })],
+    ['/miels/atlas/', "L'atlas des miels", 'Tous les miels protégés d\'Europe et du monde, sur la carte.', picture('1774284266228-27698569b2fd', '', { ratio: '4 / 5', sizes: '(min-width: 900px) 300px, 50vw' })],
+    ['/magazine/', 'Le magazine', "L'actualité du miel et de l'apiculture, décryptée.", picture('1784873230783-967a9263d4c4', '', { ratio: '4 / 5', sizes: '(min-width: 900px) 300px, 50vw' })],
+  ];
+  const timeline = [
+    ['il y a 9 000 ans', 'Les premiers agriculteurs utilisent déjà la cire d\'abeille.'],
+    ['vers 2450 av. J.-C.', 'Les Égyptiens représentent les premiers ruchers organisés.'],
+    ['il y a 3 000 ans', 'Le rucher de Tel Rehov compte des dizaines de ruches en argile.'],
+    ['1852', 'Langstroth invente la ruche à cadres mobiles.'],
+    ['aujourd\'hui', 'Le miel est l\'un des aliments les plus fraudés au monde.'],
+  ];
+  const svg = (d) => `<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const pillarsAbout = [
+    [svg('<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M8 7h8M8 11h6"/>'), 'Des sources solides', 'Textes officiels, organismes publics, revues scientifiques : chaque fiche cite ses sources, en bas de page.'],
+    [svg('<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/>'), 'Aucune promesse santé', "Le miel est un aliment de plaisir et de bien-être. Nous respectons la loi : pas d'allégation de santé."],
+    [svg('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'), 'Toute la transparence', 'Origine, étiquette, appellations, fraude : les clés pour choisir un vrai miel.'],
+  ];
+  const trail = [['Accueil', '/'], ['À propos']];
+  const body = `
+<section class="about-hero">
+  ${picture('1587049352851-8d4e89133924', '', { cls: 'banner-bg', ratio: 'auto', eager: true, sizes: '100vw' })}
+  <div class="about-hero-inner">
+    ${crumbsHtml(trail)}
+    <p class="kicker">À propos</p>
+    <h1>Mieux comprendre le miel,<br><em>pour mieux l'utiliser.</em></h1>
+    <p>Connu depuis la nuit des temps, et pourtant si mal connu aujourd'hui.</p>
+  </div>
+</section>
+
+<section class="wrap about-manifesto">
+  <div class="am-text">
+    <p class="kicker">Notre conviction</p>
+    <h2>Le miel mérite mieux qu'une place de second rôle.</h2>
+    <p>On le range parmi les sucres, on le réduit à la tartine du matin, on le soupçonne parfois de tous les défauts. Pendant ce temps, il est devenu l'un des aliments les plus fraudés au monde, coupé au sirop et vendu sous de fausses origines.</p>
+    <p>Étrange destin pour l'un des produits les plus extraordinaires que la nature nous offre. Nous avons créé ce site pour <b>rétablir la vérité</b>, avec nos armes : des faits, des sources et de bonnes recettes.</p>
+  </div>
+  <blockquote class="am-quote"><p>« C'est de l'or à l'état pur, et les abeilles en sont les reines. »</p></blockquote>
+</section>
+
+<section class="about-band">
+  <div class="wrap about-stats">
+    <div><b>${recipes.length}</b><span>recettes au miel</span></div>
+    <div><b>${honeys.length}</b><span>fiches miels détaillées</span></div>
+    <div><b>${nbAppellations}</b><span>appellations recensées dans l'atlas</span></div>
+    <div><b>${nbSources}</b><span>sources citées</span></div>
+  </div>
+</section>
+
+<section class="wrap block">
+  ${sectionTitle('Un produit vivant', 'Façonné par les abeilles, depuis toujours')}
+  <div class="about-living">
+    <p>Le miel n'est pas un produit figé. Il évolue dans le pot : il cristallise, change de texture et de couleur avec le temps. Chaque miel raconte une fleur, un paysage, une saison et le travail patient d'une colonie entière. Pour un seul pot, des milliers d'abeilles ont butiné, transformé, ventilé et operculé.</p>
+    <ol class="timeline">${timeline.map(([d, t]) => `<li><b>${d}</b><span>${t}</span></li>`).join('')}</ol>
+    <p class="more"><a class="btn-outline" href="/guide/histoire-du-miel/">Lire l'histoire du miel</a></p>
+  </div>
+</section>
+
+<section class="wrap block">
+  ${sectionTitle('Nos engagements', 'Ce qui nous guide, page après page')}
+  <div class="about-pillars">${pillarsAbout.map(([i, t, d]) => `<div class="ap-card"><span class="ap-ico">${i}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>
+</section>
+
+<section class="wrap block">
+  ${sectionTitle('Ce que vous trouverez ici', 'Cuisiner, comprendre, choisir')}
+  <div class="about-tiles">${tiles.map(([u, t, d, im]) => `<a class="about-tile" href="${u}">${im}<span class="at-txt"><b>${t}</b><small>${d}</small></span></a>`).join('')}</div>
+  <p class="about-sport">Et aussi des idées pour le sport et le quotidien : recettes pour avant et après l'effort, petits-déjeuners et encas maison.</p>
+</section>
+
+<section class="wrap block">
+  <div class="about-who">
+    <span class="logo-ring about-logo">${logoSvg}<span class="logo-text"><span>Cuisine</span><b>au miel</b></span></span>
+    <div>
+      <p class="kicker">Qui sommes-nous ?</p>
+      <h2>Proposé par le GAEC des Deux Vallées</h2>
+      <p>Une exploitation agricole attachée à son territoire et passionnée par le monde des abeilles. Nous avons créé Cuisine au miel pour partager cette passion et donner à chacun les clés pour comprendre, choisir et cuisiner le miel.</p>
+    </div>
+  </div>
+  <p class="disclaimer">Le miel ne doit pas être donné aux enfants de moins d'un an, même cuit, en raison du risque de botulisme infantile (<a href="https://www.anses.fr/fr/content/pas-de-miel-les-enfants-de-moins-dun-an">recommandation de l'Anses</a>).</p>
+</section>`;
+  return layout({ title: 'À propos', description: "Cuisine au miel, proposé par le GAEC des Deux Vallées : mieux comprendre le miel pour mieux l'utiliser. Recettes, guide des miels, atlas et magazine, avec des sources solides et sans promesse santé.", canonical: '/a-propos/', body, extraHead: ldScript(crumbsLd(trail)) + ldScript({ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'À propos de Cuisine au miel', url: SITE.url + '/a-propos/', about: { '@id': SITE.url + '/#org' } }) });
+}
+
 // ---------- construction ----------
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
@@ -968,7 +1056,8 @@ write('index.html', home());
 write('recettes/index.html', archive());
 recipes.forEach((r, i) => { write(`recettes/${r.slug}/index.html`, recipePage(r, i)); urls.push(r.url); });
 for (const c of CATEGORIES) { write(`categories/${c.slug}/index.html`, categoryPage(c)); urls.push(`/categories/${c.slug}/`); }
-for (const f of fs.readdirSync(path.join(ROOT, 'pages')).filter((f) => f.endsWith('.md'))) {
+write('a-propos/index.html', aboutPage()); urls.push('/a-propos/');
+for (const f of (fs.existsSync(path.join(ROOT, 'pages')) ? fs.readdirSync(path.join(ROOT, 'pages')) : []).filter((f) => f.endsWith('.md') && f !== 'a-propos.md')) {
   const p = staticPage(f);
   write(`${p.slug}/index.html`, p.html);
   urls.push(`/${p.slug}/`);
