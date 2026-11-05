@@ -418,7 +418,7 @@ ${posts.length ? `<section class="wrap block">${sectionTitle('Le magazine du mie
   </div>
 </section>`;
   const ld = [{ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url + '/', inLanguage: 'fr-FR', description: SITE.description, publisher: { '@id': SITE.url + '/#org' }, potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: SITE.url + '/recettes/?q={search_term_string}' }, 'query-input': 'required name=search_term_string' } },
-    { '@context': 'https://schema.org', '@type': 'Organization', '@id': SITE.url + '/#org', name: SITE.name, url: SITE.url + '/', logo: SITE.url + '/favicon.svg', description: "Site de référence sur le miel en cuisine : recettes, guide des miels, atlas et magazine. Proposé par le GAEC des Deux Vallées.", parentOrganization: { '@type': 'Organization', name: 'GAEC des Deux Vallées' } }];
+    { '@context': 'https://schema.org', '@type': 'Organization', '@id': SITE.url + '/#org', name: SITE.name, url: SITE.url + '/', logo: SITE.url + '/favicon.svg', description: "Site de référence sur le miel en cuisine : recettes, guide des miels, atlas et magazine. Proposé par le GAEC des Deux Vallées, exploitation apicole.", parentOrganization: { '@type': 'Organization', name: 'GAEC des Deux Vallées' } }];
   return layout({ title: '', canonical: '/', body, hero: heroBanner(), extraHead: ld.map(ldScript).join('') });
 }
 
@@ -935,7 +935,7 @@ function atlasPage() {
   const legend = `<ul class="legend"><li><i class="aop"></i>AOP enregistrée</li><li><i class="igp"></i>IGP enregistrée</li><li><i class="dem"></i>Demande en cours</li><li><i class="monde"></i>Miel emblématique hors UE</li></ul>`;
   const filters = (id, opts) => `<div class="filters" data-target="${id}"><label class="f-search"><span class="sr">Rechercher</span><input type="search" placeholder="Rechercher un miel, une plante, un pays…" data-f="q"></label>${opts.map(([key, label, values]) => `<label><span class="sr">${label}</span><select data-f="${key}"><option value="">${label}</option>${values.map(([v, t]) => `<option value="${esc(v)}">${esc(t)}</option>`).join('')}</select></label>`).join('')}<output class="f-count" aria-live="polite"></output></div>`;
 
-  const protRows = prot.map((x) => `<tr id="${x.id}" data-pays="${x.pays.join(' ')}" data-statut="${x.cls}"><td><b>${x.fiche ? ficheLink(x.fiche, x.nom) : esc(x.nom)}</b>${x.plante ? `<small>${esc(x.plante)}</small>` : ''}</td><td>${esc(paysTxt(x.pays))}</td><td><span class="tag ${x.cls}">${STATUT[x.statut]}</span></td><td>${x.annee || '—'}</td></tr>`).join('');
+  const protRows = prot.map((x) => `<tr id="${x.id}" data-pays="${x.pays.join(' ')}" data-statut="${x.cls}"><td><b>${x.fiche ? ficheLink(x.fiche, x.nom) : esc(x.nom)}</b>${x.plante ? `<small>${esc(x.plante)}</small>` : ''}${x.site ? `<small><a href="${x.site}" rel="noopener" target="_blank">Site officiel (INAO) ↗</a></small>` : ''}</td><td>${esc(paysTxt(x.pays))}</td><td><span class="tag ${x.cls}">${STATUT[x.statut]}</span></td><td>${x.annee || '—'}</td></tr>`).join('');
   const plantRows = A.europe.map((x) => `<tr data-pays="${x.pays.join(' ')}" data-type="${x.type}"><td><b>${x.fiche ? ficheLink(x.fiche, x.nom) : esc(x.nom)}</b><small><i>${esc(x.latin)}</i></small></td><td>${x.type === 'miellat' ? 'Miellat' : 'Fleurs'}</td><td>${esc(x.pays.map((c) => ZONES_EU[c] || c).join(', '))}</td></tr>`).join('');
   const mondeCards = monde.map((x) => `<article class="world-card" id="${x.id}"><span class="card-cat">${esc(paysTxt(x.pays))}</span><h3>${x.fiche ? ficheLink(x.fiche, x.nom) : esc(x.nom)}</h3>${x.region !== paysTxt(x.pays) ? `<p class="wc-region">${esc(x.region)}</p>` : ''}<p><b>Plante :</b> ${esc(x.plante)}</p><p>${esc(x.note)}</p><p class="wc-src">Source : <a href="${x.src[1]}" rel="noopener">${esc(x.src[0])}</a></p></article>`).join('');
   const zoneOpts = Object.entries(ZONES_EU).filter(([k]) => A.europe.some((x) => x.pays.includes(k)));
@@ -972,7 +972,8 @@ ${longBanner("L'atlas des miels", 'Tous les miels protégés d\'Europe, les plan
       <figure class="viz">${dotsSvg({ d: F.d, w: F.w, h: F.h, pt: fpt, items: frItems, cls: 'map-fr', label: 'Carte des appellations de miel en France', pad: 20, r: 13, labels: true })}<figcaption>${legend}</figcaption></figure>
       <div class="fr-list">
         <h3>Les appellations</h3>
-        <ul class="ap-list">${prot.filter((x) => x.pays.includes('fr')).map((x) => `<li data-id="${x.id}"><span class="tag ${x.cls}">${x.statut}</span><span>${x.fiche ? ficheLink(x.fiche, x.nom) : esc(x.nom)}</span><small>depuis ${x.annee}</small></li>`).join('')}</ul>
+        <ul class="ap-list">${prot.filter((x) => x.pays.includes('fr')).map((x) => `<li data-id="${x.id}"><span class="tag ${x.cls}">${x.statut}</span><span>${x.fiche ? ficheLink(x.fiche, x.nom) : esc(x.nom)}</span><small>depuis ${x.annee}</small>${x.site ? `<a class="ap-off" href="${x.site}" rel="noopener" target="_blank">Site officiel</a>` : ''}</li>`).join('')}</ul>
+        <p class="hid-note">« Site officiel » : la fiche de l'appellation à l'INAO, avec son cahier des charges.</p>
         <h3>Les miels monofloraux de France</h3>
         <ul class="chips chips-fr">${frPlants.map((x) => x.fiche ? `<li class="on"><a href="${honeys.find((h) => h.slug === x.fiche)?.url || '#'}">${esc(x.nom)}</a></li>` : `<li>${esc(x.nom)}</li>`).join('')}</ul>
         <p class="hid-note">En couleur : les miels qui ont déjà leur fiche complète dans notre guide.</p>
@@ -1011,7 +1012,7 @@ function llmsTxt() {
   const line = (u, t, d) => `- [${plain(t)}](${SITE.url}${u})${d ? `: ${plain(d)}` : ''}`;
   return `# ${SITE.name}
 
-> Site français consacré au miel en cuisine : ${recipes.length} recettes au miel sucrées et salées, un guide complet des variétés de miel avec une fiche sourcée par miel, un atlas de tous les miels protégés d'Europe et du monde, et un magazine d'actualité sur le miel et l'apiculture. Proposé par le GAEC des Deux Vallées.
+> Site français consacré au miel en cuisine : ${recipes.length} recettes au miel sucrées et salées, un guide complet des variétés de miel avec une fiche sourcée par miel, un atlas de tous les miels protégés d'Europe et du monde, et un magazine d'actualité sur le miel et l'apiculture. Proposé par le GAEC des Deux Vallées, exploitation apicole.
 
 Règles éditoriales : chaque fiche et chaque article cite ses sources (textes officiels européens, INAO, revues scientifiques comme Apidologie, organismes publics). Aucune allégation de santé : le miel est présenté comme un aliment de plaisir et de bien-être, conformément au règlement (CE) n° 1924/2006. Le miel ne convient pas aux enfants de moins d'un an (recommandation de l'Anses).
 
@@ -1149,7 +1150,7 @@ function aboutPage() {
     <div>
       <p class="kicker">Qui sommes-nous ?</p>
       <h2>Proposé par le GAEC des Deux Vallées</h2>
-      <p>Derrière Cuisine au miel, il y a une exploitation agricole attachée à son territoire, au rythme des saisons et au respect du vivant. Une famille de passionnés qui a appris, au fil des années, à regarder les abeilles avec admiration.</p>
+      <p><b>Nous sommes apiculteurs.</b> Derrière Cuisine au miel, il y a une exploitation agricole attachée à son territoire, au rythme des saisons et au respect du vivant. Nos ruches, nos récoltes et nos saisons passées au rucher nous ont appris à regarder les abeilles avec admiration, et à connaître le miel de l'intérieur.</p>
       <p>Nous avons créé ce site pour partager cette passion et donner à chacun les clés pour comprendre, choisir et cuisiner le miel. Un projet sincère, que nous faisons grandir chaque semaine, avec de nouvelles recettes, de nouvelles fiches et de nouveaux articles.</p>
     </div>
   </div>
@@ -1263,36 +1264,76 @@ ${pageHead('Le menu de la semaine', 'Sept idées de repas au miel, de saison, et
 
 const PARTNER_MAIL = ['samuel', 'fedorawiez.com'];
 const PARTENAIRES = fs.existsSync(path.join(ROOT, 'data', 'partenaires.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'partenaires.json'), 'utf8')) : [];
+const DEPTS = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'departements.json'), 'utf8'));
 function partnersPage() {
   const trail = [['Accueil', '/'], ['Apiculteurs partenaires']];
   const ico = (d) => `<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const D = DEPTS;
+  const byDep = {};
+  PARTENAIRES.forEach((x) => { (byDep[x.departement] = byDep[x.departement] || []).push(x); });
+  const card = (x) => `<article class="pt-card"><p class="kicker">${esc(x.commune || '')}</p><h3>${esc(x.nom)}</h3>${x.exploitation ? `<p class="pt-exp">${esc(x.exploitation)}</p>` : ''}${x.miels ? `<p>${esc(x.miels)}</p>` : ''}${x.vente ? `<p class="pt-vente">${esc(x.vente)}</p>` : ''}${x.site ? `<a href="${esc(x.site)}" rel="nofollow noopener" target="_blank">Voir le site</a>` : ''}</article>`;
+  const depData = Object.fromEntries(D.deps.map((d) => [d.code, { nom: d.nom, html: (byDep[d.code] || []).map(card).join('') }]));
+  const map = `<svg class="dep-map" viewBox="-10 -10 ${D.w + 20} ${D.h + 20}" role="group" aria-label="Carte des départements de France">${D.deps.map((d) => `<path d="${d.d}" class="dep${byDep[d.code] ? ' has' : ''}" data-dep="${d.code}" tabindex="0" role="button" aria-label="${esc(d.nom)} (${d.code})${byDep[d.code] ? `, ${byDep[d.code].length} apiculteur(s)` : ''}"><title>${esc(d.nom)} (${d.code})</title></path>`).join('')}</svg>`;
+  const opts = D.deps.map((d) => `<option value="${d.code}">${d.code} · ${esc(d.nom)}</option>`).join('');
   const charte = [
     [ico('<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/>'), 'Leur propre miel', 'Ils vendent le miel de leurs ruches, récolté par eux-mêmes.'],
     [ico('<path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>'), 'Une origine claire', 'Le lieu des ruchers et le pays de récolte sont indiqués sans ambiguïté.'],
     [ico('<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M8 7h8M8 11h6"/>'), 'Une étiquette conforme', 'Dénomination, origine et mentions obligatoires respectent la réglementation.'],
     [ico('<path d="M3 11h18c0 5-4 9-9 9s-9-4-9-9z"/><path d="M12 11V4"/>'), 'Un miel pur', 'Rien n\'est ajouté au miel : ni sucre, ni sirop, ni arôme.'],
   ];
-  const mailBody = encodeURIComponent("Bonjour,\n\nJe souhaite rejoindre l'annuaire des apiculteurs partenaires de Cuisine au miel.\n\nNom et prénom :\nNom de l'exploitation :\nDépartement et commune :\nMiels produits :\nOù vendez-vous (marché, ferme, boutique en ligne) :\nSite web ou réseaux sociaux :\nNuméro SIRET :\n\nMerci !");
-  const list = PARTENAIRES.length ? `<div class="pt-grid">${PARTENAIRES.map((x) => `<article class="pt-card"><p class="kicker">${esc(x.departement || '')}</p><h3>${esc(x.nom)}</h3><p>${esc(x.miels || '')}</p>${x.site ? `<a href="${esc(x.site)}" rel="nofollow noopener">Voir le site</a>` : ''}</article>`).join('')}</div>`
-    : `<div class="pt-empty"><span class="pt-empty-ico">${ico('<path d="M12 2l8.7 5v10L12 22l-8.7-5V7z"/>')}</span><h2>L'annuaire ouvre ses portes</h2><p>Nous sélectionnons nos premiers apiculteurs partenaires, un par un. Revenez bientôt pour trouver un producteur près de chez vous. En attendant, notre guide vous explique <a href="/guide/trouver-un-apiculteur/">comment trouver un bon apiculteur</a>.</p></div>`;
+  const gains = [
+    [ico('<path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/>'), 'Votre exploitation présentée', 'Une fiche complète : votre histoire, vos ruchers, vos miels, vos points de vente, vos horaires, votre site et vos réseaux.'],
+    [ico('<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>'), 'Vos miels dans nos recettes', 'Un lien vers votre miel depuis plusieurs recettes du site qui l\'utilisent, là où nos lecteurs cherchent quoi acheter.'],
+    [ico('<path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>'), 'Sur la carte de votre département', 'Les amateurs de miel de votre région vous trouvent en un clic, au plus près de chez eux.'],
+    [ico('<path d="M4 4h16v16H4z"/><path d="M4 8l8 5 8-5"/>'), 'Un contact personnel', 'Dès l\'ouverture, nous vous écrivons pour vous présenter les modalités d\'entrée dans l\'annuaire.'],
+  ];
   const body = `
-${pageHead('Les apiculteurs partenaires', 'Des femmes et des hommes passionnés, qui récoltent leur propre miel et le vendent en direct. Trouvez le vôtre, près de chez vous.', 'salade-printemps', crumbsHtml(trail))}
+${pageHead('Les apiculteurs partenaires', 'Des femmes et des hommes passionnés, qui récoltent leur propre miel et le vendent en direct. Bientôt, trouvez le vôtre près de chez vous.', 'salade-printemps', crumbsHtml(trail))}
 <section class="wrap block">
-  ${list}
-</section>
-<section class="wrap block">
-  ${sectionTitle('Notre charte', 'Ce que nous demandons à chaque partenaire')}
-  <div class="about-pillars pt-charte">${charte.map(([i, t, d]) => `<div class="ap-card"><span class="ap-ico">${i}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>
-</section>
-<section class="wrap block">
-  <div class="about-cta pt-cta">
-    <h2>Vous êtes apiculteur ? <em>Rejoignez-nous.</em></h2>
-    <p>L'inscription est gratuite. Présentez-nous votre exploitation et vos miels : nous vous répondons personnellement.</p>
-    <p class="about-cta-btns"><a class="btn" href="#" data-mail="${PARTNER_MAIL[0]}" data-domain="${PARTNER_MAIL[1]}" data-subject="${encodeURIComponent('Candidature apiculteur partenaire')}" data-body="${mailBody}">Proposer ma candidature</a></p>
-    <p class="pt-small">Votre candidature s'ouvre dans votre messagerie, avec un modèle à compléter.</p>
+  ${sectionTitle('Trouver un apiculteur près de chez vous', PARTENAIRES.length ? `${PARTENAIRES.length} apiculteurs partenaires` : 'L\'annuaire ouvre bientôt : cliquez sur votre département')}
+  <div class="dep-wrap">
+    <figure class="dep-fig">${map}</figure>
+    <div class="dep-panel" aria-live="polite">
+      <label class="dep-pick"><span>Choisir un département</span><select id="dep-select"><option value="">Votre département…</option>${opts}</select></label>
+      <div id="dep-out">
+        <p class="kicker">Mode d'emploi</p>
+        <h3>Cliquez sur votre département</h3>
+        <p>Vous verrez les apiculteurs partenaires installés près de chez vous, leurs miels et où les acheter.</p>
+        <p class="dep-note">Nous sélectionnons nos premiers partenaires un par un. En attendant, notre guide vous explique <a href="/guide/trouver-un-apiculteur/">comment trouver un bon apiculteur</a>.</p>
+      </div>
+    </div>
   </div>
+  <script type="application/json" id="dep-data">${JSON.stringify(depData).replace(/</g, '\\u003c')}</script>
+</section>
+<section class="wrap block" id="liste-attente">
+  <div class="wl">
+    <div class="wl-intro">
+      <p class="kicker">Vous êtes apiculteur ?</p>
+      <h2>Inscrivez-vous sur la <em>liste d'attente</em></h2>
+      <p>Nous sommes nous-mêmes apiculteurs, au sein du <a href="/a-propos/">GAEC des Deux Vallées</a> : nous savons ce que représente une récolte. Laissez-nous vos coordonnées : dès que l'annuaire ouvrira, nous vous recontacterons avec les modalités d'entrée.</p>
+      <ul class="wl-gains">${gains.map(([i, t, d]) => `<li><span class="ap-ico">${i}</span><div><h3>${t}</h3><p>${d}</p></div></li>`).join('')}</ul>
+    </div>
+    <form class="wl-form" id="wl-form" data-mail="${PARTNER_MAIL[0]}" data-domain="${PARTNER_MAIL[1]}" novalidate>
+      <h3>Rejoindre la liste d'attente</h3>
+      <label>Nom et prénom<input name="nom" required autocomplete="name"></label>
+      <label>Nom de l'exploitation<input name="exploitation" required autocomplete="organization"></label>
+      <div class="wl-row"><label>Département<select name="departement" required><option value="">Choisir…</option>${opts}</select></label><label>Commune<input name="commune" autocomplete="address-level2"></label></div>
+      <label>E-mail<input name="email" type="email" required autocomplete="email"></label>
+      <label><span>Téléphone <small>(facultatif)</small></span><input name="tel" type="tel" autocomplete="tel"></label>
+      <label>Vos miels<textarea name="miels" rows="2" placeholder="Acacia, châtaignier, toutes fleurs…"></textarea></label>
+      <label><span>Site web ou réseaux <small>(facultatif)</small></span><input name="site" type="url" placeholder="https://"></label>
+      <p class="wl-err" hidden>Merci de remplir les champs : nom, exploitation, département et e-mail.</p>
+      <button class="btn" type="submit">M'inscrire sur la liste d'attente</button>
+      <p class="pt-small">Votre messagerie s'ouvre avec votre inscription déjà rédigée : il ne reste qu'à l'envoyer. Vos coordonnées servent uniquement à vous recontacter au sujet de l'annuaire.</p>
+    </form>
+  </div>
+</section>
+<section class="wrap block">
+  ${sectionTitle('Notre charte', 'Ce que nous demanderons à chaque partenaire')}
+  <div class="about-pillars pt-charte">${charte.map(([i, t, d]) => `<div class="ap-card"><span class="ap-ico">${i}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>
+  <p class="hid-note">Carte des départements : IGN Admin Express, Licence Ouverte Etalab.</p>
 </section>`;
-  return layout({ title: 'Apiculteurs partenaires : trouver un producteur de miel', description: 'L\'annuaire des apiculteurs partenaires de Cuisine au miel : des producteurs qui récoltent et vendent leur propre miel en direct. Apiculteur ? Rejoignez-nous gratuitement.', canonical: '/apiculteurs-partenaires/', body, extraHead: ldScript(crumbsLd(trail)) });
+  return layout({ title: 'Apiculteurs partenaires : trouver un producteur de miel près de chez vous', description: 'La carte des apiculteurs partenaires de Cuisine au miel, département par département : des producteurs qui récoltent et vendent leur propre miel. Apiculteur ? Inscrivez-vous sur la liste d\'attente.', canonical: '/apiculteurs-partenaires/', body, extraHead: ldScript(crumbsLd(trail)) });
 }
 
 function toolsHub() {

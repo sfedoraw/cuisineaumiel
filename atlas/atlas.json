@@ -3,6 +3,7 @@
 "protege": [
 {
 "nom": "Miel de sapin des Vosges",
+"site": "https://www.inao.gouv.fr/produit/miel-de-sapin-des-vosges-16076",
 "pays": [
 "fr"
 ],
@@ -15,6 +16,7 @@
 },
 {
 "nom": "Miel de Corse – Mele di Corsica",
+"site": "https://www.inao.gouv.fr/produit/miel-de-corse-mele-di-corsica-4668",
 "pays": [
 "fr"
 ],
@@ -25,6 +27,7 @@
 },
 {
 "nom": "Miel de Provence",
+"site": "https://www.inao.gouv.fr/produit/miel-de-provence-3512",
 "pays": [
 "fr"
 ],
@@ -35,6 +38,7 @@
 },
 {
 "nom": "Miel d'Alsace",
+"site": "https://www.inao.gouv.fr/produit/miel-dalsace-17665",
 "pays": [
 "fr"
 ],
@@ -45,6 +49,7 @@
 },
 {
 "nom": "Miel des Cévennes",
+"site": "https://www.inao.gouv.fr/produit/miel-des-cevennes-4530",
 "pays": [
 "fr"
 ],
@@ -55,6 +60,7 @@
 },
 {
 "nom": "Miel de tilleul de Picardie",
+"site": "https://www.inao.gouv.fr/produit/miel-de-tilleul-de-picardie-17965",
 "pays": [
 "fr"
 ],
@@ -67,6 +73,7 @@
 },
 {
 "nom": "Miel des Landes",
+"site": "https://extranet.inao.gouv.fr/fichier/CDC-IGP-Miel-des-Landes-260126.pdf",
 "pays": [
 "fr"
 ],

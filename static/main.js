@@ -326,3 +326,46 @@ document.querySelectorAll('[data-mail]').forEach((a) => a.addEventListener('clic
     if (o && pp) pp.textContent = o.textContent;
   });
 })();
+
+// Annuaire : carte des départements.
+(() => {
+  const dataEl = document.getElementById('dep-data');
+  if (!dataEl) return;
+  const data = JSON.parse(dataEl.textContent);
+  const out = document.getElementById('dep-out');
+  const sel = document.getElementById('dep-select');
+  const paths = document.querySelectorAll('.dep-map .dep');
+  const show = (code) => {
+    const d = data[code];
+    if (!d) return;
+    paths.forEach((p) => p.classList.toggle('on', p.dataset.dep === code));
+    sel.value = code;
+    out.innerHTML = d.html
+      ? `<p class="kicker">${code}</p><h3>${d.nom}</h3><div class="pt-grid">${d.html}</div>`
+      : `<p class="kicker">${code}</p><h3>${d.nom}</h3><p>Pas encore d'apiculteur partenaire dans ce département. Nous sélectionnons nos premiers partenaires un par un : revenez bientôt.</p><p class="dep-note">Vous êtes apiculteur dans ce département ? <a href="#liste-attente" data-wl="${code}">Inscrivez-vous sur la liste d'attente</a>.</p>`;
+    const wl = out.querySelector('[data-wl]');
+    if (wl) wl.addEventListener('click', () => { const s = document.querySelector('#wl-form select[name=departement]'); if (s) s.value = code; });
+  };
+  paths.forEach((p) => {
+    p.addEventListener('click', () => show(p.dataset.dep));
+    p.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(p.dataset.dep); } });
+  });
+  sel.addEventListener('change', () => show(sel.value));
+})();
+
+// Annuaire : liste d'attente (ouvre la messagerie avec l'inscription rédigée).
+(() => {
+  const f = document.getElementById('wl-form');
+  if (!f) return;
+  f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const v = (n) => (f.elements[n].value || '').trim();
+    const err = f.querySelector('.wl-err');
+    const ok = v('nom') && v('exploitation') && v('departement') && /.+@.+\..+/.test(v('email'));
+    err.hidden = ok;
+    if (!ok) return;
+    const dep = f.elements.departement.selectedOptions[0].textContent;
+    const body = `Bonjour,\n\nJe souhaite être inscrit(e) sur la liste d'attente de l'annuaire des apiculteurs partenaires de Cuisine au miel.\n\nNom et prénom : ${v('nom')}\nExploitation : ${v('exploitation')}\nDépartement : ${dep}\nCommune : ${v('commune')}\nE-mail : ${v('email')}\nTéléphone : ${v('tel')}\nMiels : ${v('miels')}\nSite ou réseaux : ${v('site')}\n\nMerci !`;
+    location.href = `mailto:${f.dataset.mail}@${f.dataset.domain}?subject=${encodeURIComponent("Liste d'attente annuaire : " + v('exploitation'))}&body=${encodeURIComponent(body)}`;
+  });
+})();
