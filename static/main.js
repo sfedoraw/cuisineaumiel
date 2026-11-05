@@ -313,3 +313,16 @@ document.querySelectorAll('[data-mail]').forEach((a) => a.addEventListener('clic
   e.preventDefault();
   location.href = `mailto:${a.dataset.mail}@${a.dataset.domain}?subject=${a.dataset.subject || ''}&body=${a.dataset.body || ''}`;
 }));
+
+// Fiche imprimée : reprend les quantités ajustées.
+(() => {
+  const ps = document.querySelector('.ps');
+  if (!ps) return;
+  document.body.classList.add('has-ps');
+  addEventListener('beforeprint', () => {
+    const src = [...document.querySelectorAll('.ingredients-box [data-qty]')], dst = [...ps.querySelectorAll('[data-qty]')];
+    dst.forEach((d, i) => { if (src[i]) d.innerHTML = src[i].innerHTML; });
+    const o = document.querySelector('.ingredients-box output'), pp = ps.querySelector('[data-ps-portions]');
+    if (o && pp) pp.textContent = o.textContent;
+  });
+})();

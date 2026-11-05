@@ -453,6 +453,7 @@ function recipePage(r, i) {
     recipeInstructions: r.steps.map((s) => ({ '@type': 'HowToStep', text: s.replace(/\*\*/g, '').replace(/\[(.+?)\]\(.+?\)/g, '$1') })),
   };
   const body = `
+${printSheet(r)}
 <article class="wrap recipe">
   <nav class="crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a> › <a href="/categories/${r.cat.slug}/">${esc(r.cat.name)}</a></nav>
   <header class="recipe-head">
@@ -519,6 +520,33 @@ function recipePage(r, i) {
     title: r.titre, description: r.resume, canonical: r.url, body, ogImage: img(r.photo, 1200),
     extraHead: `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`,
   });
+}
+
+function printSheet(r) {
+  const h = honeyOf(r);
+  const facts = [['Préparation', r.preparation], ...(r.cuisson && r.cuisson !== '0 min' ? [['Cuisson', r.cuisson]] : []), ...(r.repos ? [['Repos', r.repos]] : []), ['Total', totalTime(r)], ['Difficulté', r.difficulte], ['Pour', `<span data-ps-portions>${r.portions}</span> ${esc(r.unite || 'pers.')}`]];
+  return `<div class="ps" aria-hidden="true">
+  <header class="ps-head">
+    <div class="ps-brand">${logoMedal('ps-drop')}</div>
+    <div class="ps-title">
+      <p class="ps-cat">${esc(r.cat.name)} · Miel conseillé : ${esc(shortHoney(r.miel))}</p>
+      <h1>${esc(r.titre)}</h1>
+      <p class="ps-lede">${esc(r.resume)}</p>
+    </div>
+    <img class="ps-photo" src="${img(r.photo, 700)}" alt="">
+  </header>
+  <ul class="ps-facts">${facts.map(([k, v]) => `<li><span>${k}</span><b>${v}</b></li>`).join('')}</ul>
+  <div class="ps-body">
+    <aside class="ps-ing"><h2>Ingrédients</h2>${r.ingredientsHtml.replace(/<input type="checkbox">/g, '<i></i>')}
+    ${r.conseil ? `<div class="ps-tip"><h3>Le conseil</h3>${r.conseil}</div>` : ''}</aside>
+    <div class="ps-steps"><h2>Préparation</h2><ol>${r.steps.map((x) => `<li>${inline(x)}</li>`).join('')}</ol></div>
+  </div>
+  <footer class="ps-foot">
+    <p class="ps-partner"><small>Fiche offerte par</small><b>MesAbeilles.fr</b></p>
+    <p>Retrouvez cette recette, ${recipes.length} autres et le guide des miels sur <b>cuisineaumiel.fr</b></p>
+    <p class="ps-legal">Le miel ne doit pas être donné aux enfants de moins d'un an (recommandation de l'Anses).</p>
+  </footer>
+</div>`;
 }
 
 function archive() {
