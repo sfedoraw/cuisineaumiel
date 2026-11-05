@@ -254,3 +254,46 @@ document.querySelectorAll('.carousel').forEach((c) => {
   });
   show();
 })();
+
+// Menu de la semaine et liste de courses.
+(() => {
+  const root = document.querySelector('[data-menu]');
+  if (!root) return;
+  const D = JSON.parse(document.getElementById('menu-data').textContent);
+  const JOURS = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+  const pre = (() => { const a = document.querySelector('a.logo'); return a ? a.getAttribute('href').replace(/\/$/, '') : ''; })();
+  const weight = (r) => (!r.s.length || r.s.includes(D.saison) ? 1 : 0.15);
+  const draw = (pool, avoid) => {
+    const c = pool.filter((r) => !avoid.includes(r));
+    const tot = c.reduce((a, r) => a + weight(r), 0);
+    let x = Math.random() * tot;
+    for (const r of c) { x -= weight(r); if (x <= 0) return r; }
+    return c[0];
+  };
+  const dessertBox = document.getElementById('m-dessert');
+  let menu = [];
+  const build = () => {
+    const used = [], usedD = [];
+    menu = JOURS.map(() => { const p = draw(D.plats, used); used.push(p); const d = draw(D.desserts, usedD); usedD.push(d); return { p, d }; });
+  };
+  const card = (r, k, kind) => `<a class="menu-r" href="${pre}${r.u}"><img src="${r.img}" alt="" loading="lazy"><span><b>${r.t}</b><small>${r.d}</small></span></a><button type="button" class="menu-swap" data-swap="${k}" data-kind="${kind}" aria-label="Changer ${kind === 'p' ? 'le plat' : 'le dessert'} du ${JOURS[k].toLowerCase()}">↻</button>`;
+  const render = () => {
+    const withD = dessertBox.checked;
+    root.querySelector('.menu-days').innerHTML = menu.map((m, k) => `<li><p class="menu-day">${JOURS[k]}</p><div class="menu-slot">${card(m.p, k, 'p')}</div>${withD ? `<div class="menu-slot menu-d">${card(m.d, k, 'd')}</div>` : ''}</li>`).join('');
+    const rs = menu.flatMap((m) => (withD ? [m.p, m.d] : [m.p]));
+    root.querySelector('.menu-groups').innerHTML = rs.map((r) => `<div class="menu-g"><h3>${r.t} <small>(${r.p})</small></h3><ul>${r.i.map((x) => `<li><label><input type="checkbox"><span>${x}</span></label></li>`).join('')}</ul></div>`).join('');
+  };
+  root.addEventListener('click', (e) => {
+    const sw = e.target.closest('[data-swap]');
+    if (sw) {
+      const k = +sw.dataset.swap, kind = sw.dataset.kind;
+      const pool = kind === 'p' ? D.plats : D.desserts;
+      menu[k][kind] = draw(pool, menu.map((m) => m[kind]));
+      render();
+      root.querySelector(`[data-swap="${k}"][data-kind="${kind}"]`).focus();
+    } else if (e.target.closest('[data-new]')) { build(); render(); }
+    else if (e.target.closest('[data-print]')) window.print();
+  });
+  dessertBox.addEventListener('change', render);
+  build(); render();
+})();

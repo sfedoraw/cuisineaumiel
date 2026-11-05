@@ -1191,6 +1191,29 @@ ${pageHead('Quel miel est fait pour vous ?', 'Cinq questions pour trouver le mie
   return layout({ title: 'Quiz : quel miel est fait pour vous ?', description: 'Acacia, lavande, châtaignier, sapin ? Répondez à 5 questions et découvrez le miel qui vous ressemble, avec ses recettes.', canonical: '/outils/quel-miel/', body, extraHead: ldScript(crumbsLd(trail)) });
 }
 
+function menuPage() {
+  const trail = [['Accueil', '/'], ['Outils', '/outils/'], ['Menu de la semaine']];
+  const pick = (cats) => recipes.filter((r) => cats.includes(r.cat.slug)).map((r) => ({ t: r.titre, u: r.url, d: totalTime(r), i: r.ingredientsList || [], s: SAISON_DATA[r.slug] || [], img: img(r.photo, 400), p: `${r.portions} ${r.unite || 'pers.'}` }));
+  const data = { plats: pick(['plats', 'aperitifs-entrees']), desserts: pick(['desserts', 'patisserie']), saison: saisonNow ? saisonNow.slug : '' };
+  const body = `
+${pageHead('Le menu de la semaine', 'Sept idées de repas au miel, de saison, et la liste de courses qui va avec. Changez un plat d\'un clic.', 'pappardelle-bandeau', crumbsHtml(trail))}
+<section class="wrap block menu" data-menu>
+  <div class="menu-bar">
+    <label class="tool-check"><input type="checkbox" id="m-dessert"> Ajouter un dessert</label>
+    <button type="button" class="btn-outline" data-new>Un autre menu</button>
+    <button type="button" class="btn" data-print>Imprimer le menu et la liste</button>
+  </div>
+  <ol class="menu-days"></ol>
+  <div class="menu-list">
+    <h2>La liste de courses</h2>
+    <p class="menu-hint">Les quantités sont celles des recettes. Pensez à vérifier vos placards : sel, poivre, huile et miel sont souvent déjà là.</p>
+    <div class="menu-groups"></div>
+  </div>
+  <script type="application/json" id="menu-data">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>
+</section>`;
+  return layout({ title: 'Menu de la semaine au miel et liste de courses', description: 'Un menu de la semaine au miel, de saison, généré en un clic, avec la liste de courses à imprimer.', canonical: '/outils/menu-de-la-semaine/', body, extraHead: ldScript(crumbsLd(trail)) });
+}
+
 function toolsHub() {
   const trail = [['Accueil', '/'], ['Outils']];
   const ico = (d) => `<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
@@ -1198,6 +1221,7 @@ function toolsHub() {
     ['/outils/sucre-miel/', ico('<path d="M4 7h16M4 12h10M4 17h7"/><path d="M17 14l3 3-3 3"/>'), 'Remplacer le sucre par du miel', 'Le calculateur qui adapte n\'importe quelle recette : quantité de miel, liquide, bicarbonate et four.', 'Nouveau'],
     ['/outils/calendrier-des-miellees/', ico('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'), 'Le calendrier des miellées', 'Quand récolte-t-on chaque miel ? Les grands miels de France, mois par mois.', 'Nouveau'],
     ['/outils/quel-miel/', ico('<path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/>'), 'Quel miel est fait pour vous ?', 'Le quiz en 5 questions pour trouver le miel qui vous ressemble.', 'Quiz'],
+    ['/outils/menu-de-la-semaine/', ico('<path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/>'), 'Menu de la semaine', 'Sept repas au miel de saison et la liste de courses, en un clic.', 'Nouveau'],
     ['/recettes/', ico('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'), 'Trouver une recette', `Cherchez parmi nos ${recipes.length} recettes par miel, ingrédient ou envie.`, ''],
     [`/recettes/saison/${saisonNow ? saisonNow.slug : 'automne'}/`, ico('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'), 'Cuisiner de saison', 'Les recettes au miel du printemps, de l\'été, de l\'automne et de l\'hiver.', ''],
     [ACCORD_PAGES.length ? `/recettes/${ACCORD_PAGES[0].slug}/` : '/recettes/', ico('<path d="M8 3v7a4 4 0 0 0 8 0V3"/><path d="M12 14v7M9 21h6"/>'), 'Les accords au miel', 'Miel et citron, miel et fromage, miel et romarin… toutes les associations qui marchent.', ''],
@@ -1352,6 +1376,7 @@ recipes.forEach((r, i) => { write(`recettes/${r.slug}/index.html`, recipePage(r,
 for (const c of CATEGORIES) { write(`categories/${c.slug}/index.html`, categoryPage(c)); urls.push(`/categories/${c.slug}/`); }
 write('a-propos/index.html', aboutPage()); urls.push('/a-propos/');
 write('outils/index.html', toolsHub()); urls.push('/outils/');
+write('outils/menu-de-la-semaine/index.html', menuPage()); urls.push('/outils/menu-de-la-semaine/');
 write('outils/quel-miel/index.html', quizPage()); urls.push('/outils/quel-miel/');
 write('outils/calendrier-des-miellees/index.html', calendarPage()); urls.push('/outils/calendrier-des-miellees/');
 write('outils/sucre-miel/index.html', sugarTool()); urls.push('/outils/sucre-miel/');
