@@ -960,9 +960,9 @@ ${longBanner("L'atlas des miels", 'Tous les miels protégés d\'Europe, les plan
     <div><b>${reg.length}</b><span>miels AOP et IGP enregistrés dans l'Union européenne</span></div>
     <div><b>${A.europe.length}</b><span>plantes et miellats donnant un miel monofloral en Europe</span></div>
     <div><b>${frPlants.length}</b><span>miels monofloraux recensés en France</span></div>
-    <div><b>46 %</b><span>des miels importés contrôlés par l'UE étaient suspects de fraude</span></div>
+    <div class="st-alert"><b>46 %</b><span>des miels importés contrôlés par l'UE étaient suspects de fraude</span></div>
   </div>
-  <aside class="fraud"><h2>Le miel, l'un des aliments les plus fraudés au monde</h2><p>Lors de l'enquête « From the Hives » coordonnée par la Commission européenne en 2021-2022, <b>46 % des 320 échantillons</b> de miels importés analysés étaient suspects d'être frelatés, le plus souvent avec des sirops de sucre. Les appellations de cet atlas, l'étiquette et la vente directe sont vos meilleurs repères. <a href="/guide/trouver-un-apiculteur/">Comment bien acheter son miel</a></p></aside>
+  <aside class="fraud"><div class="fraud-big" aria-hidden="true"><b>46&nbsp;%</b><span>des miels importés contrôlés</span></div><div><p class="kicker">Alerte fraude</p><h2>Le miel, l'un des aliments les plus fraudés au monde</h2><p>Lors de l'enquête « From the Hives » coordonnée par la Commission européenne en 2021-2022, <b>46 % des 320 échantillons</b> de miels importés analysés étaient suspects d'être frelatés, le plus souvent avec des sirops de sucre. Les appellations de cet atlas, l'étiquette et la vente directe sont vos meilleurs repères. <a href="/guide/trouver-un-apiculteur/">Comment bien acheter son miel →</a></p></div></aside>
 
   <nav class="atlas-nav" aria-label="Dans l'atlas"><a href="#france">France</a><a href="#europe">Europe</a><a href="#monde">Monde</a><a href="#plantes">Toutes les plantes à miel</a></nav>
 

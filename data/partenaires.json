@@ -1,1 +1,4 @@
-[]
+[
+ {"nom": "Maison Fedon", "departement": "87", "commune": "Razès (Haute-Vienne)", "miels": "Miels primés à plusieurs reprises.", "vente": "Boutique sur place, boutique en ligne, visites et dégustations l'été.", "site": "https://www.maison-fedon.fr/"},
+ {"nom": "Les Ruchers d'Alexandre", "departement": "78", "commune": "Brueil-en-Vexin (Yvelines)", "miels": "Apiculture française aux portes de Paris.", "vente": "Vente à la miellerie le samedi de 15 h à 18 h, toute l'année.", "site": "http://www.lesruchersdalexandre.fr"}
+]
