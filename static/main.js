@@ -52,16 +52,26 @@
     const half = Math.max(.5, Math.round(n * 2) / 2);
     return half === Math.floor(half) ? String(half) : (Math.floor(half) ? `${Math.floor(half)} ½` : '½');
   };
+  // Unités métriques : nombres entiers arrondis, jamais de fractions.
+  const metric = (v, unit) => {
+    const dec = (x) => String(x).replace('.', ',');
+    if (/^(kg|l)$/.test(unit)) return dec(Math.max(.1, Math.round(v * 10) / 10));
+    if (/^(cl|dl)$/.test(unit)) return dec(v < 10 ? Math.max(.5, Math.round(v * 2) / 2) : Math.round(v));
+    if (v < 10) return String(Math.max(1, Math.round(v)));
+    if (v < 100) return String(Math.round(v));
+    return String(Math.round(v / 5) * 5);
+  };
+  const step = base >= 12 ? Math.max(1, Math.round(base / 6)) : 1;
   let n = base;
   function render() {
     out.textContent = n;
     const k = n / base;
     for (const s of spans) {
-      s.innerHTML = k === 1 ? s.dataset.orig : s.dataset.orig.replace(/^(\d+(?:[.,]\d+)?|\d+\/\d+|[½¼¾⅓⅔])(?=[\s a-zA-Zéèà]|$)/, (m) => fmt(parse(m) * k));
+      s.innerHTML = k === 1 ? s.dataset.orig : s.dataset.orig.replace(/^(\d+(?:[.,]\d+)?|\d+\/\d+|[½¼¾⅓⅔])(\s*)(kg|g|mg|cl|ml|dl|l)?(?=[\s a-zA-Zéèà']|$)/, (m, q, sp, unit) => (unit ? metric(parse(q) * k, unit) : fmt(parse(q) * k)) + sp + (unit || ''));
     }
   }
   box.querySelectorAll('[data-step]').forEach((b) => b.addEventListener('click', () => {
-    n = Math.max(1, Math.min(48, n + +b.dataset.step));
+    n = Math.max(step, Math.min(Math.max(48, base * 3), n + Math.sign(+b.dataset.step) * step));
     render();
   }));
 })();
