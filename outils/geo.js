@@ -55,8 +55,23 @@ for (const f of features(tl, tl.objects.land)) {
     dW += pathOf(part, 1.4);
   }
 }
+// Europe : pays (frontières) entre 12° O et 45° E, 34° N et 61° N.
+const EU = { lon0: -12, lat1: 61, k: 15, c: Math.cos(48 * Math.PI / 180), lon1: 45, lat0: 34 };
+const projEu = ([lon, lat]) => [r((lon - EU.lon0) * EU.k * EU.c), r((EU.lat1 - lat) * EU.k)];
+const t50 = JSON.parse(fs.readFileSync(path.join(atlasDir, 'countries-50m.json')));
+let dEu = '';
+for (const f of features(t50, t50.objects.countries)) {
+  for (const poly of f.polys) {
+    const ring = poly[0];
+    if (!ring.some(([lon, lat]) => lon > EU.lon0 - 2 && lon < EU.lon1 + 2 && lat > EU.lat0 - 2 && lat < EU.lat1 + 2)) continue;
+    // Les points lointains sont ramenés juste hors du cadre (la Russie traverse l'antiméridien).
+    const cl = ring.filter(([lon]) => lon > -60).map(([lon, lat]) => [Math.min(Math.max(lon, -20), 55), Math.min(Math.max(lat, 28), 68)]);
+    dEu += pathOf(cl.map(projEu), 1.8);
+  }
+}
 fs.writeFileSync(path.join(__dirname, '..', 'data', 'geo.json'), JSON.stringify({
+  europe: { d: dEu, w: r((EU.lon1 - EU.lon0) * EU.k * EU.c), h: r((EU.lat1 - EU.lat0) * EU.k), proj: EU },
   france: { d: dFr, w: frW, h: frH, proj: FR },
   monde: { d: dW, w: r(360 * W.k), h: r((84 + 58) * W.k), proj: W },
 }));
-console.log('✓ data/geo.json', (dFr.length / 1024).toFixed(0), 'Ko France,', (dW.length / 1024).toFixed(0), 'Ko monde');
+console.log('✓ data/geo.json', (dEu.length / 1024).toFixed(0), 'Ko Europe,', (dFr.length / 1024).toFixed(0), 'Ko France,', (dW.length / 1024).toFixed(0), 'Ko monde');

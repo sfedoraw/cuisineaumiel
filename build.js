@@ -285,7 +285,7 @@ function totalTime(r) {
 }
 const totalMin = (r) => minutes(r.preparation) + minutes(r.cuisson) + minutes(r.repos);
 const shortHoney = (m) => (m || '').replace(/^Miel (de |d'|d’)?/i, '').replace(/^./, (c) => c.toUpperCase());
-const searchData = (r) => esc([r.titre, r.miel, r.resume, r.cat.name, ...r.tags].join(' ').toLowerCase());
+const searchData = (r) => esc([r.titre, r.miel, r.resume, r.cat.name, ...r.tags, ...r.ingredientsList].join(' ').toLowerCase());
 const LEVEL = { 'très facile': 1, facile: 1, moyenne: 2, difficile: 3 };
 const level = (r) => {
   const n = LEVEL[(r.difficulte || '').toLowerCase()] || 2;
@@ -632,6 +632,14 @@ function franceMap(zones, color) {
   const dots = zones.map(([name, lon, lat]) => { const [x, y] = pt(+lon, +lat); const right = x < w * 0.62; return `<g><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="15" fill="${color}" stroke="#1C1917" stroke-width="3"/><text x="${(x + (right ? 22 : -22)).toFixed(1)}" y="${(y + 11).toFixed(1)}" text-anchor="${right ? 'start' : 'end'}">${esc(name)}</text></g>`; }).join('');
   return `<svg class="fr-map" viewBox="-40 -10 ${w + 80} ${h + 20}" role="img" aria-label="Carte des zones de production en France : ${esc(zones.map((z) => z[0]).join(', '))}"><path d="${GEO.france.d}" fill="#F4F2EF" stroke="#A8A29E" stroke-width="1.2"/>${dots}</svg>`;
 }
+// Un accord mène aux recettes qui contiennent cet ingrédient (sinon aux recettes de ce miel).
+const normTxt = (t) => String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+function pairChip(a, x) {
+  const w = normTxt(a).replace(/s$/, '').split(/\s+/).filter((m) => m.length > 2).pop() || normTxt(a);
+  const n = recipes.filter((r) => normTxt([r.titre, ...r.ingredientsList].join(' ')).includes(w)).length;
+  const q = n ? w : normTxt(shortHoney(x.nom));
+  return `<li><a href="/recettes/?q=${encodeURIComponent(q)}" title="${n ? `${n} recette${n > 1 ? 's' : ''} avec ${esc(a.toLowerCase())}` : `Nos recettes au ${esc(x.nom.toLowerCase())}`}">${esc(a)}${n ? ` <small>${n}</small>` : ''}</a></li>`;
+}
 function honeyId(x) {
   if (!x.profil) return '';
   const prof = nums(x.profil), months = nums(x.mois), crist = +x.crist || 3;
@@ -662,8 +670,8 @@ function honeyId(x) {
   </div>
   ${x.accords || x.boissons ? `<div class="hid-card hid-pairs">
     <h2>Les accords</h2>
-    <ul class="chips">${listOf(x.accords).map((a) => `<li>${esc(a)}</li>`).join('')}</ul>
-    ${x.boissons ? `<h3>Avec quoi le boire</h3><ul class="chips chips-drink">${listOf(x.boissons).map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
+    <ul class="chips">${listOf(x.accords).map((a) => pairChip(a, x)).join('')}</ul>
+    ${x.boissons ? `<h3>Avec quoi le boire</h3><ul class="chips chips-drink">${listOf(x.boissons).map((a) => `<li><a href="/recettes/?q=${encodeURIComponent(shortHoney(x.nom).toLowerCase())}" title="Nos recettes au ${esc(x.nom.toLowerCase())}">${esc(a)}</a></li>`).join('')}</ul>` : ''}
   </div>` : ''}
 </section>`;
 }
@@ -786,6 +794,106 @@ ${longBanner('Le magazine du miel', "L'actualité du miel et de l'apiculture, de
   return layout({ title: 'Le magazine du miel : actualités et dossiers', description: "Actualités du miel et de l'apiculture, récoltes, réglementation, dossiers de saison : le magazine de Cuisine au miel.", canonical: '/magazine/', body, extraHead: ldScript(crumbsLd(trail)) });
 }
 
+// ---------- atlas des miels ----------
+const ATLAS = HAS_ATLAS ? JSON.parse(fs.readFileSync(path.join(ROOT, 'atlas', 'atlas.json'), 'utf8')) : null;
+const PAYS = { fr: 'France', es: 'Espagne', pt: 'Portugal', it: 'Italie', gr: 'Grèce', pl: 'Pologne', lt: 'Lituanie', si: 'Slovénie', hr: 'Croatie', bg: 'Bulgarie', sk: 'Slovaquie', lu: 'Luxembourg', be: 'Belgique', tr: 'Turquie', nz: 'Nouvelle-Zélande', et: 'Éthiopie', br: 'Brésil', mx: 'Mexique', au: 'Australie', us: 'États-Unis', ca: 'Canada' };
+const ZONES_EU = { A: 'Autriche', AL: 'Albanie', B: 'Belgique', BG: 'Bulgarie', BI: 'Îles britanniques', CH: 'Suisse', D: 'Allemagne', DK: 'Danemark', E: 'Espagne', F: 'France', GR: 'Grèce', HR: 'Croatie', I: 'Italie', L: 'Luxembourg', NL: 'Pays-Bas', P: 'Portugal', PL: 'Pologne', SLO: 'Slovénie', EE: "Europe de l'Est", SEE: 'Europe du Sud-Est', FS: 'Scandinavie et Finlande', EU: 'Toute l\'Europe', CAN: 'Canaries' };
+const STATUT = { AOP: 'AOP', IGP: 'IGP', publiée: 'Demande publiée', demande: 'Demande déposée' };
+const ficheLink = (slug, label) => { const h = honeys.find((x) => x.slug === slug); return h ? `<a href="${h.url}">${esc(label)}</a>` : esc(label); };
+const paysTxt = (l) => l.map((c) => PAYS[c] || c).join(', ');
+
+function dotsSvg({ d, w, h, pt, items, cls, label, pad = 0, r = 7, labels = false }) {
+  const dots = items.filter((x) => x.lon != null).map((x) => { const [cx, cy] = pt(x.lon, x.lat); const lab = labels && x.court ? (() => { if (x.lab === 't') return `<text x="${cx.toFixed(1)}" y="${(cy - r - 10).toFixed(1)}" text-anchor="middle">${esc(x.court)}</text>`; const right = x.lab !== 'l'; return `<text x="${(cx + (right ? r + 6 : -r - 6)).toFixed(1)}" y="${(cy + 5).toFixed(1)}" text-anchor="${right ? 'start' : 'end'}">${esc(x.court)}</text>`; })() : ''; return `<a href="#${x.id}" class="dot ${x.cls}" data-id="${x.id}"><circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r}"/>${lab}<title>${esc(x.nom)}${x.sub ? ` · ${esc(x.sub)}` : ''}</title></a>`; }).join('');
+  return `<svg class="atlas-map ${cls}" viewBox="${-pad} ${-pad} ${w + 2 * pad} ${h + 2 * pad}" role="img" aria-label="${esc(label)}"><rect x="${-pad}" y="${-pad}" width="${w + 2 * pad}" height="${h + 2 * pad}" class="sea"/><path d="${d}" class="land"/>${dots}</svg>`;
+}
+
+function atlasPage() {
+  const A = ATLAS;
+  const prot = A.protege.map((x, i) => ({ ...x, id: `aop-${i + 1}`, cls: x.statut === 'AOP' ? 'aop' : x.statut === 'IGP' ? 'igp' : 'dem', sub: `${STATUT[x.statut]}${x.annee ? ` ${x.annee}` : ''}, ${paysTxt(x.pays)}` }));
+  const monde = A.monde.map((x, i) => ({ ...x, id: `monde-${i + 1}`, cls: 'monde', sub: x.region }));
+  const frPlants = A.europe.filter((x) => x.pays.includes('F'));
+  const reg = prot.filter((x) => x.statut === 'AOP' || x.statut === 'IGP');
+  const paysProt = [...new Set(prot.flatMap((x) => x.pays))];
+
+  const E = GEO.europe, ep = E.proj, ept = (lon, lat) => [(lon - ep.lon0) * ep.k * ep.c, (ep.lat1 - lat) * ep.k];
+  const F = GEO.france, fp = F.proj, fpt = (lon, lat) => [(lon - fp.lon0) * fp.k * fp.c, (fp.lat1 - lat) * fp.k];
+  const M = GEO.monde, mpt = (lon, lat) => [(lon + 180) * M.proj.k, (84 - lat) * M.proj.k];
+  const COURT = { 'Miel de sapin des Vosges': ['Sapin des Vosges', 'l'], 'Miel d\'Alsace': ['Alsace', 'r'], 'Miel de Corse – Mele di Corsica': ['Corse', 'l'], 'Miel de Provence': ['Provence', 'r'], 'Miel des Cévennes': ['Cévennes', 't'], 'Miel de tilleul de Picardie': ['Tilleul de Picardie', 'r'], 'Miel des Landes': ['Landes', 'r'] };
+  const frItems = prot.filter((x) => x.pays.includes('fr')).map((x) => ({ ...x, court: (COURT[x.nom] || [])[0], lab: (COURT[x.nom] || [])[1] }));
+
+  const legend = `<ul class="legend"><li><i class="aop"></i>AOP enregistrée</li><li><i class="igp"></i>IGP enregistrée</li><li><i class="dem"></i>Demande en cours</li><li><i class="monde"></i>Miel emblématique hors UE</li></ul>`;
+  const filters = (id, opts) => `<div class="filters" data-target="${id}"><label class="f-search"><span class="sr">Rechercher</span><input type="search" placeholder="Rechercher un miel, une plante, un pays…" data-f="q"></label>${opts.map(([key, label, values]) => `<label><span class="sr">${label}</span><select data-f="${key}"><option value="">${label}</option>${values.map(([v, t]) => `<option value="${esc(v)}">${esc(t)}</option>`).join('')}</select></label>`).join('')}<output class="f-count" aria-live="polite"></output></div>`;
+
+  const protRows = prot.map((x) => `<tr id="${x.id}" data-pays="${x.pays.join(' ')}" data-statut="${x.cls}"><td><b>${x.fiche ? ficheLink(x.fiche, x.nom) : esc(x.nom)}</b>${x.plante ? `<small>${esc(x.plante)}</small>` : ''}</td><td>${esc(paysTxt(x.pays))}</td><td><span class="tag ${x.cls}">${STATUT[x.statut]}</span></td><td>${x.annee || '—'}</td></tr>`).join('');
+  const plantRows = A.europe.map((x) => `<tr data-pays="${x.pays.join(' ')}" data-type="${x.type}"><td><b>${x.fiche ? ficheLink(x.fiche, x.nom) : esc(x.nom)}</b><small><i>${esc(x.latin)}</i></small></td><td>${x.type === 'miellat' ? 'Miellat' : 'Fleurs'}</td><td>${esc(x.pays.map((c) => ZONES_EU[c] || c).join(', '))}</td></tr>`).join('');
+  const mondeCards = monde.map((x) => `<article class="world-card" id="${x.id}"><span class="card-cat">${esc(paysTxt(x.pays))}</span><h3>${esc(x.nom)}</h3>${x.region !== paysTxt(x.pays) ? `<p class="wc-region">${esc(x.region)}</p>` : ''}<p><b>Plante :</b> ${esc(x.plante)}</p><p>${esc(x.note)}</p><p class="wc-src">Source : <a href="${x.src[1]}" rel="noopener">${esc(x.src[0])}</a></p></article>`).join('');
+  const zoneOpts = Object.entries(ZONES_EU).filter(([k]) => A.europe.some((x) => x.pays.includes(k)));
+
+  const faq = [
+    { q: 'Combien de miels sont protégés par une appellation en Europe ?', a: `Le registre officiel de l'Union européenne compte ${reg.length} miels enregistrés en AOP ou en IGP, dont ${reg.filter((x) => x.pays.includes('fr')).length} en France. ${prot.length - reg.length} autres demandes sont en cours, surtout en Turquie.` },
+    { q: 'Quelle différence entre AOP et IGP pour un miel ?', a: "Pour une AOP, toutes les étapes de production ont lieu dans l'aire délimitée et le lien avec le terroir est le plus fort. Pour une IGP, au moins une étape a lieu dans l'aire et le miel doit sa réputation ou une qualité à son origine." },
+    { q: 'Combien de miels monofloraux existe-t-il en Europe ?', a: `Une étude de référence publiée dans la revue *Apidologie* recense ${A.europe.length} plantes et miellats capables de donner un miel monofloral en Europe, dont ${frPlants.length} en France.` },
+    { q: 'Le miel est-il vraiment souvent fraudé ?', a: "Oui. Le miel est l'un des aliments les plus fraudés au monde. Lors d'une enquête coordonnée par la Commission européenne en 2021-2022, 46 % des 320 échantillons de miels importés analysés étaient suspects d'être frelatés, le plus souvent avec des sirops de sucre." },
+  ];
+  const sources = [
+    "Commission européenne, [registre des indications géographiques eAmbrosia](https://ec.europa.eu/agriculture/eambrosia/geographical-indications-register/), consulté le 5 novembre 2026.",
+    "Persano Oddo L. et al., « [Botanical species giving unifloral honey in Europe](https://doi.org/10.1051/apido:2004045) », *Apidologie*, 35 (Suppl. 1), S82-S93, 2004.",
+    "Commission européenne, « [From the Hives](https://food.ec.europa.eu/food-safety/eu-agri-food-fraud-network/eu-coordinated-actions/honey-2021-2022_en) », action coordonnée contre la fraude au miel, 2021-2022.",
+    ...[...new Map(monde.map((x) => [x.src[1], `${x.src[0]}, [${x.src[1].replace(/^https?:\/\/(www\.)?/, '').split('/')[0]}](${x.src[1]})`])).values()],
+  ];
+  const trail = [['Accueil', '/'], ['Le guide des miels', '/miels/'], ["L'atlas des miels"]];
+  const body = `
+${longBanner("L'atlas des miels", 'Tous les miels protégés d\'Europe, les plantes à miel et les grands miels du monde, sur la carte.', '1774284266228-27698569b2fd', crumbsHtml(trail))}
+<section class="wrap block-tight atlas">
+  <div class="stats">
+    <div><b>${reg.length}</b><span>miels AOP et IGP enregistrés dans l'Union européenne</span></div>
+    <div><b>${A.europe.length}</b><span>plantes et miellats donnant un miel monofloral en Europe</span></div>
+    <div><b>${frPlants.length}</b><span>miels monofloraux recensés en France</span></div>
+    <div><b>46 %</b><span>des miels importés contrôlés par l'UE étaient suspects de fraude</span></div>
+  </div>
+  <aside class="fraud"><h2>Le miel, l'un des aliments les plus fraudés au monde</h2><p>Lors de l'enquête « From the Hives » coordonnée par la Commission européenne en 2021-2022, <b>46 % des 320 échantillons</b> de miels importés analysés étaient suspects d'être frelatés, le plus souvent avec des sirops de sucre. Les appellations de cet atlas, l'étiquette et la vente directe sont vos meilleurs repères. <a href="/guide/trouver-un-apiculteur/">Comment bien acheter son miel</a></p></aside>
+
+  <nav class="atlas-nav" aria-label="Dans l'atlas"><a href="#france">France</a><a href="#europe">Europe</a><a href="#monde">Monde</a><a href="#plantes">Toutes les plantes à miel</a></nav>
+
+  <section id="france" class="atlas-sec">
+    ${sectionTitle('Les miels de France', `${reg.filter((x) => x.pays.includes('fr')).length} appellations et ${frPlants.length} miels monofloraux`)}
+    <div class="atlas-duo">
+      <figure class="viz">${dotsSvg({ d: F.d, w: F.w, h: F.h, pt: fpt, items: frItems, cls: 'map-fr', label: 'Carte des appellations de miel en France', pad: 20, r: 13, labels: true })}<figcaption>${legend}</figcaption></figure>
+      <div class="fr-list">
+        <h3>Les appellations</h3>
+        <ul class="ap-list">${prot.filter((x) => x.pays.includes('fr')).map((x) => `<li data-id="${x.id}"><span class="tag ${x.cls}">${x.statut}</span><span>${x.fiche ? ficheLink(x.fiche, x.nom) : esc(x.nom)}</span><small>depuis ${x.annee}</small></li>`).join('')}</ul>
+        <h3>Les miels monofloraux de France</h3>
+        <ul class="chips chips-fr">${frPlants.map((x) => x.fiche ? `<li class="on"><a href="${honeys.find((h) => h.slug === x.fiche)?.url || '#'}">${esc(x.nom)}</a></li>` : `<li>${esc(x.nom)}</li>`).join('')}</ul>
+        <p class="hid-note">En couleur : les miels qui ont déjà leur fiche complète dans notre guide.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="europe" class="atlas-sec">
+    ${sectionTitle('Les miels protégés d\'Europe', `${prot.length} appellations et demandes dans ${paysProt.length} pays`)}
+    <figure class="viz">${dotsSvg({ d: E.d, w: E.w, h: E.h, pt: ept, items: prot, cls: 'map-eu', label: 'Carte des miels AOP et IGP en Europe', r: 7 })}<figcaption>${legend}<p class="hid-note">Les Açores et les Canaries apparaissent sur la carte du monde.</p></figcaption></figure>
+    ${filters('t-prot', [['pays', 'Tous les pays', paysProt.map((c) => [c, PAYS[c]]).sort((a, b) => a[1].localeCompare(b[1], 'fr'))], ['statut', 'Tous les statuts', [['aop', 'AOP'], ['igp', 'IGP'], ['dem', 'Demande en cours']]]])}
+    <div class="table-wrap"><table class="atlas-table" id="t-prot"><thead><tr><th>Miel</th><th>Pays</th><th>Statut</th><th>Année</th></tr></thead><tbody>${protRows}</tbody></table></div>
+  </section>
+
+  <section id="monde" class="atlas-sec">
+    ${sectionTitle('Les grands miels du monde', 'Des forêts de Tasmanie aux hauts plateaux éthiopiens')}
+    <figure class="viz">${dotsSvg({ d: M.d, w: M.w, h: M.h, pt: mpt, items: [...prot, ...monde], cls: 'map-world', label: 'Carte des miels du monde', r: 5 })}<figcaption>${legend}</figcaption></figure>
+    <div class="world-grid">${mondeCards}</div>
+    <p class="hid-note">L'atlas s'enrichit régulièrement. Chaque miel ajouté est appuyé par une source officielle ou reconnue.</p>
+  </section>
+
+  <section id="plantes" class="atlas-sec">
+    ${sectionTitle('Toutes les plantes à miel d\'Europe', `${A.europe.length} plantes et miellats qui donnent un miel monofloral`)}
+    ${filters('t-plantes', [['pays', 'Tous les pays', zoneOpts.sort((a, b) => a[1].localeCompare(b[1], 'fr'))], ['type', 'Fleurs et miellats', [['fleurs', 'Miels de fleurs'], ['miellat', 'Miels de miellat']]]])}
+    <div class="table-wrap"><table class="atlas-table" id="t-plantes"><thead><tr><th>Plante</th><th>Type</th><th>Où on le récolte</th></tr></thead><tbody>${plantRows}</tbody></table></div>
+  </section>
+
+  <div class="long-foot">${faqHtml(faq)}${sourcesHtml(sources)}<p class="disclaimer">Le miel ne convient pas aux enfants de moins d'un an (recommandation de l'Anses).</p></div>
+</section>`;
+  return layout({ title: "L'atlas des miels : tous les miels AOP, IGP et monofloraux d'Europe et du monde", description: `Carte interactive et liste complète des miels : ${reg.length} miels AOP et IGP en Europe, ${A.europe.length} plantes à miel, et les grands miels du monde. Sources officielles.`, canonical: '/miels/atlas/', body, extraHead: ldScript(crumbsLd(trail)) + ldScript(faqLd(faq)) + ldScript({ '@context': 'https://schema.org', '@type': 'Dataset', name: "L'atlas des miels", description: 'Liste des miels protégés par une appellation en Europe, des plantes à miel européennes et de miels emblématiques du monde.', url: SITE.url + '/miels/atlas/', dateModified: A.maj, creator: { '@type': 'Organization', name: 'Cuisine au miel' }, isBasedOn: ['https://ec.europa.eu/agriculture/eambrosia/geographical-indications-register/', 'https://doi.org/10.1051/apido:2004045'] }) });
+}
+
 // ---------- construction ----------
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
@@ -794,6 +902,7 @@ fs.cpSync(path.join(ROOT, 'static'), OUT, { recursive: true });
 const urls = ['/', '/recettes/', '/miels/', '/magazine/'];
 write('miels/index.html', guideHub());
 write('magazine/index.html', magazineHub());
+if (HAS_ATLAS) { write('miels/atlas/index.html', atlasPage()); urls.push('/miels/atlas/'); }
 for (const x of [...honeys, ...pillars, ...posts]) { write(`${x.url.slice(1)}index.html`, longPage(x)); urls.push(x.url); }
 // Ancienne adresse du guide : redirection vers /miels/.
 write('le-miel/index.html', `<!doctype html><meta charset="utf-8"><title>Le guide des miels</title><link rel="canonical" href="${SITE.url}/miels/"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/miels/"><a href="/miels/">Le guide des miels</a>`);

@@ -39,7 +39,7 @@ Les fiches descriptives des miels monofloraux européens publiées dans la revue
 - **Odeur** : forte, boisée, chaude, avec des notes que les dégustateurs qualifient parfois de « chimiques » ou de tanniques.
 - **Goût** : peu sucré, peu acide, mais avec une **amertume forte** et une persistance en bouche longue, parfois une sensation légèrement astringente.
 
-Le cahier des charges de l'IGP Miel d'Alsace parle d'un goût « boisé et grillé, avec une amertume marquée en fin de bouche ». Celui de l'IGP Miel des Landes, en cours de reconnaissance, évoque le caramel et le cuir. Selon le terroir et la part de miellat, il peut être plus ou moins amer, plus ou moins fruité.
+Le cahier des charges de l'IGP Miel d'Alsace parle d'un goût « boisé et grillé, avec une amertume marquée en fin de bouche ». Celui de l'IGP Miel des Landes, enregistrée en octobre 2026, évoque le caramel et le cuir. Selon le terroir et la part de miellat, il peut être plus ou moins amer, plus ou moins fruité.
 
 ## Un miel qui reste souvent liquide
 
@@ -109,6 +109,6 @@ Pas avant un an, comme tous les miels, à cause du risque de botulisme infantile
 - INAO, [cahier des charges de l'IGP Miel d'Alsace](https://extranet.inao.gouv.fr/fichier/PNOCDC-MielAlsace-CN230201.pdf), 2023.
 - INAO, [cahier des charges de l'IGP Miel des Cévennes](https://extranet.inao.gouv.fr/fichier/CNIGPLRSTG-2010-212-IGP-MielDesCevennes-CDC.pdf).
 - INAO, [fiche de l'AOP Miel de Corse – Mele di Corsica](https://www.inao.gouv.fr/node/1722/printable/pdf).
-- INAO, [cahier des charges de l'IGP Miel des Landes](https://extranet.inao.gouv.fr/fichier/CDC-IGP-Miel-des-Landes-260126.pdf), demande de reconnaissance approuvée le 26 janvier 2026.
+- INAO, [cahier des charges de l'IGP Miel des Landes](https://extranet.inao.gouv.fr/fichier/CDC-IGP-Miel-des-Landes-260126.pdf), version approuvée par l'INAO le 26 janvier 2026 ; IGP enregistrée par l'Union européenne le 15 octobre 2026.
 - Union européenne, [directive 2001/110/CE relative au miel](https://eur-lex.europa.eu/eli/dir/2001/110/oj).
 - Anses, « [Pas de miel pour les enfants de moins d'un an](https://www.anses.fr/fr/content/pas-de-miel-les-enfants-de-moins-dun-an) », 2023.

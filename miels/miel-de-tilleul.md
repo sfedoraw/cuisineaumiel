@@ -11,13 +11,13 @@ gout: Frais, mentholé, boisé, avec une finale parfois légèrement amère
 texture: Liquide puis crémeuse
 cristallisation: Moyenne, en cristaux plutôt fins
 recolte: Fin juin à juillet
-regions: Alsace (forêt de la Hardt), Bourgogne, Franche-Comté, Drôme ; en Europe surtout Europe centrale et orientale
-labels: "Variété reconnue par l'IGP Miel d'Alsace"
+regions: Alsace (forêt de la Hardt), Picardie, Bourgogne, Franche-Comté, Drôme ; en Europe surtout Europe centrale et orientale
+labels: "IGP Miel de tilleul de Picardie (2025) ; variété de l'IGP Miel d'Alsace"
 profil: 3,1,2,4,4
 teinte: #E6C341
 mois: 6,7
 crist: 3
-zones: Hardt (Alsace)|7.5|47.8;Franche-Comté|6.0|47.3;Bourgogne|4.8|47.3;Drôme|5.3|44.3
+zones: Picardie|2.6|49.75;Hardt (Alsace)|7.5|47.8;Franche-Comté|6.0|47.3;Bourgogne|4.8|47.3;Drôme|5.3|44.3
 accords: Citron, menthe, verveine, poire, abricot, chèvre frais, lait
 boissons: Thé vert, infusion de verveine, cidre doux, vin blanc sec
 profil_source: apidologie
@@ -54,6 +54,8 @@ Sa cristallisation est moyenne : il reste liquide quelques semaines à quelques 
 En France, le miel de tilleul est produit surtout dans l'Est et le Centre-Est : Alsace, Franche-Comté, Bourgogne, ainsi que dans la Drôme, connue pour ses tilleuls cultivés pour l'herboristerie. La récolte a lieu en juillet, juste après la floraison.
 
 Le cahier des charges de l'**IGP Miel d'Alsace** compte le tilleul parmi ses six variétés et précise qu'il est récolté dans la **forêt de la Hardt**, un grand massif de plaine au sud de l'Alsace.
+
+Depuis le 11 novembre 2025, le **Miel de tilleul de Picardie** est aussi protégé par une IGP enregistrée par l'Union européenne. C'est l'une des appellations de miel les plus récentes de France. Retrouvez-les toutes sur [notre atlas des miels](/miels/atlas/).
 
 En Europe, les grands producteurs sont les pays d'Europe centrale et orientale : Pologne, Hongrie, Roumanie, Ukraine, Russie. Le miel de tilleul de Bachkirie, au pied de l'Oural, y est particulièrement réputé.
 
@@ -103,5 +105,6 @@ Pas avant un an. Aucun miel ne doit être donné aux enfants de moins d'un an, �
 - Persano Oddo L., Piro R. et al., « [Main European unifloral honeys: descriptive sheets](https://doi.org/10.1051/apido:2004049) », *Apidologie*, 35 (Suppl. 1), S38-S81, 2004.
 - Persano Oddo L. et al., « [Botanical species giving unifloral honey in Europe](https://doi.org/10.1051/apido:2004045) », *Apidologie*, 35 (Suppl. 1), S82-S93, 2004.
 - INAO, [cahier des charges de l'IGP Miel d'Alsace](https://extranet.inao.gouv.fr/fichier/PNOCDC-MielAlsace-CN230201.pdf), 2023.
+- Commission européenne, [registre européen eAmbrosia](https://ec.europa.eu/agriculture/eambrosia/geographical-indications-register/), IGP Miel de tilleul de Picardie (PGI-FR-03290), enregistrée le 11 novembre 2025.
 - Union européenne, [directive 2001/110/CE relative au miel](https://eur-lex.europa.eu/eli/dir/2001/110/oj).
 - Anses, « [Pas de miel pour les enfants de moins d'un an](https://www.anses.fr/fr/content/pas-de-miel-les-enfants-de-moins-dun-an) », 2023.

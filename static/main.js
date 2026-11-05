@@ -101,3 +101,36 @@ document.querySelectorAll('.carousel').forEach((c) => {
   const m = new Date().getMonth() + 1;
   document.querySelectorAll(`.gantt [data-m="${m}"]`).forEach((el) => el.classList.add('now'));
 })();
+
+// Atlas : filtres des tableaux et liens entre carte et liste.
+(function () {
+  const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  document.querySelectorAll('.filters').forEach((box) => {
+    const table = document.getElementById(box.dataset.target);
+    if (!table) return;
+    const rows = [...table.tBodies[0].rows];
+    const out = box.querySelector('.f-count');
+    const ctl = [...box.querySelectorAll('[data-f]')];
+    function apply() {
+      const v = Object.fromEntries(ctl.map((c) => [c.dataset.f, c.value]));
+      const words = norm(v.q || '').split(/\s+/).filter(Boolean);
+      let n = 0;
+      for (const r of rows) {
+        const ok = words.every((w) => norm(r.textContent).includes(w))
+          && (!v.pays || r.dataset.pays.split(' ').includes(v.pays))
+          && (!v.statut || r.dataset.statut === v.statut)
+          && (!v.type || r.dataset.type === v.type);
+        r.hidden = !ok; if (ok) n++;
+      }
+      out.textContent = `${n} miel${n > 1 ? 's' : ''}`;
+    }
+    ctl.forEach((c) => c.addEventListener('input', apply));
+    apply();
+  });
+  // Survol d'un point : met en avant la ligne ou la carte correspondante, et inversement.
+  const hl = (id, on) => document.querySelectorAll(`[data-id="${id}"], #${id}`).forEach((e) => e.classList.toggle('is-hl', on));
+  document.querySelectorAll('.atlas-map .dot, .ap-list li[data-id]').forEach((d) => {
+    d.addEventListener('mouseenter', () => hl(d.dataset.id, true));
+    d.addEventListener('mouseleave', () => hl(d.dataset.id, false));
+  });
+})();

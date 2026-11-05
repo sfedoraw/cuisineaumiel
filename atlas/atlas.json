@@ -1,0 +1,2071 @@
+{
+"maj": "2026-11-05",
+"protege": [
+{
+"nom": "Miel de sapin des Vosges",
+"pays": [
+"fr"
+],
+"statut": "AOP",
+"lon": 6.8,
+"lat": 48.1,
+"annee": 1997,
+"plante": "Sapin (miellat)",
+"fiche": "miel-de-sapin"
+},
+{
+"nom": "Miel de Corse – Mele di Corsica",
+"pays": [
+"fr"
+],
+"statut": "AOP",
+"lon": 9.1,
+"lat": 42.2,
+"annee": 2000
+},
+{
+"nom": "Miel de Provence",
+"pays": [
+"fr"
+],
+"statut": "IGP",
+"lon": 5.9,
+"lat": 43.8,
+"annee": 2005
+},
+{
+"nom": "Miel d'Alsace",
+"pays": [
+"fr"
+],
+"statut": "IGP",
+"lon": 7.35,
+"lat": 48.3,
+"annee": 2005
+},
+{
+"nom": "Miel des Cévennes",
+"pays": [
+"fr"
+],
+"statut": "IGP",
+"lon": 3.8,
+"lat": 44.15,
+"annee": 2015
+},
+{
+"nom": "Miel de tilleul de Picardie",
+"pays": [
+"fr"
+],
+"statut": "IGP",
+"lon": 2.6,
+"lat": 49.75,
+"annee": 2025,
+"plante": "Tilleul",
+"fiche": "miel-de-tilleul"
+},
+{
+"nom": "Miel des Landes",
+"pays": [
+"fr"
+],
+"statut": "IGP",
+"lon": -0.8,
+"lat": 44.1,
+"annee": 2026
+},
+{
+"nom": "Miel de La Alcarria",
+"pays": [
+"es"
+],
+"statut": "AOP",
+"lon": -2.6,
+"lat": 40.7,
+"annee": 1996
+},
+{
+"nom": "Miel de Granada",
+"pays": [
+"es"
+],
+"statut": "AOP",
+"lon": -3.6,
+"lat": 37.2,
+"annee": 2005
+},
+{
+"nom": "Mel de Galicia",
+"pays": [
+"es"
+],
+"statut": "IGP",
+"lon": -8.0,
+"lat": 42.8,
+"annee": 2007
+},
+{
+"nom": "Miel de Tenerife",
+"pays": [
+"es"
+],
+"statut": "AOP",
+"lon": -16.6,
+"lat": 28.3,
+"annee": 2014
+},
+{
+"nom": "Miel de Liébana",
+"pays": [
+"es"
+],
+"statut": "AOP",
+"lon": -4.65,
+"lat": 43.1,
+"annee": 2016
+},
+{
+"nom": "Miel Villuercas-Ibores",
+"pays": [
+"es"
+],
+"statut": "AOP",
+"lon": -5.4,
+"lat": 39.5,
+"annee": 2017
+},
+{
+"nom": "Miel de Ibiza – Mel d'Eivissa",
+"pays": [
+"es"
+],
+"statut": "AOP",
+"lon": 1.4,
+"lat": 38.98,
+"annee": 2024
+},
+{
+"nom": "Miel de Asturias",
+"pays": [
+"es"
+],
+"statut": "IGP",
+"lon": -6.0,
+"lat": 43.3,
+"annee": 2025
+},
+{
+"nom": "Miel de Málaga",
+"pays": [
+"es"
+],
+"statut": "AOP",
+"lon": -4.4,
+"lat": 36.8,
+"annee": 2026
+},
+{
+"nom": "Mel do Ribatejo Norte",
+"pays": [
+"pt"
+],
+"statut": "AOP",
+"lon": -8.3,
+"lat": 39.6,
+"annee": 1996
+},
+{
+"nom": "Mel das Terras Altas do Minho",
+"pays": [
+"pt"
+],
+"statut": "AOP",
+"lon": -8.3,
+"lat": 41.9,
+"annee": 1996
+},
+{
+"nom": "Mel da Terra Quente",
+"pays": [
+"pt"
+],
+"statut": "AOP",
+"lon": -7.0,
+"lat": 41.4,
+"annee": 1996
+},
+{
+"nom": "Mel da Serra de Monchique",
+"pays": [
+"pt"
+],
+"statut": "AOP",
+"lon": -8.55,
+"lat": 37.3,
+"annee": 1996
+},
+{
+"nom": "Mel do Alentejo",
+"pays": [
+"pt"
+],
+"statut": "AOP",
+"lon": -7.9,
+"lat": 38.3,
+"annee": 1996
+},
+{
+"nom": "Mel dos Açores",
+"pays": [
+"pt"
+],
+"statut": "AOP",
+"lon": -27.2,
+"lat": 38.6,
+"annee": 1996
+},
+{
+"nom": "Mel da Serra da Lousã",
+"pays": [
+"pt"
+],
+"statut": "AOP",
+"lon": -8.2,
+"lat": 40.1,
+"annee": 1996
+},
+{
+"nom": "Mel de Barroso",
+"pays": [
+"pt"
+],
+"statut": "AOP",
+"lon": -7.8,
+"lat": 41.7,
+"annee": 1996
+},
+{
+"nom": "Mel do Parque de Montezinho",
+"pays": [
+"pt"
+],
+"statut": "AOP",
+"lon": -6.8,
+"lat": 41.9,
+"annee": 1996
+},
+{
+"nom": "Miel – Marque nationale du Grand-Duché de Luxembourg",
+"pays": [
+"lu"
+],
+"statut": "AOP",
+"lon": 6.1,
+"lat": 49.75,
+"annee": 1996
+},
+{
+"nom": "Miel wallon",
+"pays": [
+"be"
+],
+"statut": "IGP",
+"lon": 5.0,
+"lat": 50.4,
+"annee": 2025
+},
+{
+"nom": "Miele della Lunigiana",
+"pays": [
+"it"
+],
+"statut": "AOP",
+"lon": 9.95,
+"lat": 44.25,
+"annee": 2004
+},
+{
+"nom": "Miele delle Dolomiti Bellunesi",
+"pays": [
+"it"
+],
+"statut": "AOP",
+"lon": 12.2,
+"lat": 46.2,
+"annee": 2011
+},
+{
+"nom": "Miele Varesino",
+"pays": [
+"it"
+],
+"statut": "AOP",
+"lon": 8.8,
+"lat": 45.8,
+"annee": 2014
+},
+{
+"nom": "Meli Elatis Menalou Vanilia",
+"pays": [
+"gr"
+],
+"statut": "AOP",
+"lon": 22.2,
+"lat": 37.6,
+"annee": 1996,
+"plante": "Sapin (miellat)"
+},
+{
+"nom": "Meli Kissouri",
+"pays": [
+"gr"
+],
+"statut": "AOP",
+"lon": 24.42,
+"lat": 38.02,
+"annee": 2024
+},
+{
+"nom": "Miód wrzosowy z Borów Dolnośląskich",
+"pays": [
+"pl"
+],
+"statut": "IGP",
+"lon": 15.3,
+"lat": 51.4,
+"annee": 2008,
+"plante": "Bruyère"
+},
+{
+"nom": "Miód kurpiowski",
+"pays": [
+"pl"
+],
+"statut": "IGP",
+"lon": 21.6,
+"lat": 53.2,
+"annee": 2010
+},
+{
+"nom": "Podkarpacki miód spadziowy",
+"pays": [
+"pl"
+],
+"statut": "AOP",
+"lon": 22.0,
+"lat": 49.7,
+"annee": 2010,
+"plante": "Miellat"
+},
+{
+"nom": "Miód drahimski",
+"pays": [
+"pl"
+],
+"statut": "IGP",
+"lon": 16.3,
+"lat": 53.6,
+"annee": 2011
+},
+{
+"nom": "Miód spadziowy z Beskidu Wyspowego",
+"pays": [
+"pl"
+],
+"statut": "AOP",
+"lon": 20.3,
+"lat": 49.7,
+"annee": 2020,
+"plante": "Miellat"
+},
+{
+"nom": "Lazdijų krašto medus",
+"pays": [
+"lt",
+"pl"
+],
+"statut": "AOP",
+"lon": 23.5,
+"lat": 54.2,
+"annee": 2012
+},
+{
+"nom": "Kočevski gozdni med",
+"pays": [
+"si"
+],
+"statut": "AOP",
+"lon": 14.85,
+"lat": 45.6,
+"annee": 2011,
+"plante": "Miel de forêt"
+},
+{
+"nom": "Slovenski med",
+"pays": [
+"si"
+],
+"statut": "IGP",
+"lon": 14.8,
+"lat": 46.1,
+"annee": 2013
+},
+{
+"nom": "Kraški med",
+"pays": [
+"si"
+],
+"statut": "AOP",
+"lon": 13.85,
+"lat": 45.75,
+"annee": 2013
+},
+{
+"nom": "Istarski med – Istrski med",
+"pays": [
+"hr",
+"si"
+],
+"statut": "AOP",
+"lon": 13.85,
+"lat": 45.2,
+"annee": 2024
+},
+{
+"nom": "Slavonski med",
+"pays": [
+"hr"
+],
+"statut": "AOP",
+"lon": 18.0,
+"lat": 45.4,
+"annee": 2018
+},
+{
+"nom": "Zagorski bagremov med",
+"pays": [
+"hr"
+],
+"statut": "AOP",
+"lon": 15.9,
+"lat": 46.1,
+"annee": 2022,
+"plante": "Robinier (acacia)"
+},
+{
+"nom": "Dalmatinski med",
+"pays": [
+"hr"
+],
+"statut": "AOP",
+"lon": 16.4,
+"lat": 43.5,
+"annee": 2024
+},
+{
+"nom": "Banski kestenov med",
+"pays": [
+"hr"
+],
+"statut": "AOP",
+"lon": 16.1,
+"lat": 45.3,
+"annee": 2026,
+"plante": "Châtaignier"
+},
+{
+"nom": "Med Hrvatskog primorja",
+"pays": [
+"hr"
+],
+"statut": "demande",
+"lon": 14.8,
+"lat": 45.0
+},
+{
+"nom": "Strandzhanski manov med",
+"pays": [
+"bg"
+],
+"statut": "AOP",
+"lon": 27.6,
+"lat": 42.05,
+"annee": 2019,
+"plante": "Miellat"
+},
+{
+"nom": "Med z Bardejova",
+"pays": [
+"sk"
+],
+"statut": "AOP",
+"lon": 21.3,
+"lat": 49.3,
+"annee": 2022
+},
+{
+"nom": "Bingöl Balı",
+"pays": [
+"tr"
+],
+"statut": "AOP",
+"lon": 40.5,
+"lat": 38.9,
+"annee": 2024
+},
+{
+"nom": "Yenice Ihlamur Balı",
+"pays": [
+"tr"
+],
+"statut": "AOP",
+"lon": 32.3,
+"lat": 41.2,
+"annee": 2025,
+"plante": "Tilleul"
+},
+{
+"nom": "Muğla Çam Balı",
+"pays": [
+"tr"
+],
+"statut": "publiée",
+"lon": 28.4,
+"lat": 37.2,
+"plante": "Pin (miellat)"
+},
+{
+"nom": "Marmaris Çam Balı",
+"pays": [
+"tr"
+],
+"statut": "demande",
+"lon": 28.27,
+"lat": 36.85,
+"plante": "Pin (miellat)"
+},
+{
+"nom": "Ardahan Çiçek Balı",
+"pays": [
+"tr"
+],
+"statut": "demande",
+"lon": 42.7,
+"lat": 41.1,
+"plante": "Fleurs"
+},
+{
+"nom": "Ağrı Geven Balı",
+"pays": [
+"tr"
+],
+"statut": "demande",
+"lon": 43.05,
+"lat": 39.7,
+"plante": "Astragale"
+},
+{
+"nom": "Elazığ Geven Balı",
+"pays": [
+"tr"
+],
+"statut": "demande",
+"lon": 39.2,
+"lat": 38.7,
+"plante": "Astragale"
+},
+{
+"nom": "Pervari Balı",
+"pays": [
+"tr"
+],
+"statut": "demande",
+"lon": 42.55,
+"lat": 37.9
+},
+{
+"nom": "Sason Balı",
+"pays": [
+"tr"
+],
+"statut": "demande",
+"lon": 41.4,
+"lat": 38.33
+},
+{
+"nom": "Sinop Kestane Balı",
+"pays": [
+"tr"
+],
+"statut": "demande",
+"lon": 35.15,
+"lat": 42.0,
+"plante": "Châtaignier"
+},
+{
+"nom": "Düzce Kestane Balı",
+"pays": [
+"tr"
+],
+"statut": "demande",
+"lon": 31.15,
+"lat": 40.85,
+"plante": "Châtaignier"
+},
+{
+"nom": "Salıpazarı Kestane Balı",
+"pays": [
+"tr"
+],
+"statut": "demande",
+"lon": 36.83,
+"lat": 41.08,
+"plante": "Châtaignier"
+},
+{
+"nom": "Yalova Kestane Balı",
+"pays": [
+"tr"
+],
+"statut": "demande",
+"lon": 29.27,
+"lat": 40.65,
+"plante": "Châtaignier"
+}
+],
+"europe": [
+{
+"nom": "Ailante",
+"latin": "Ailanthus altissima",
+"pays": [
+"I",
+"E",
+"D",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Oignon",
+"latin": "Allium cepa",
+"pays": [
+"E",
+"D",
+"NL",
+"CH",
+"I",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Faux indigo",
+"latin": "Amorpha fruticosa",
+"pays": [
+"I",
+"SEE"
+],
+"type": "fleurs"
+},
+{
+"nom": "Anthyllide faux cytise",
+"latin": "Anthyllis cytisoides",
+"pays": [
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Arbousier",
+"latin": "Arbutus unedo",
+"pays": [
+"I",
+"F",
+"AL",
+"HR",
+"E",
+"GR"
+],
+"type": "fleurs"
+},
+{
+"nom": "Asperge",
+"latin": "Asparagus spp.",
+"pays": [
+"I",
+"DK",
+"NL",
+"D",
+"F",
+"CH",
+"HR"
+],
+"type": "fleurs"
+},
+{
+"nom": "Asphodèle",
+"latin": "Asphodelus microcarpus",
+"pays": [
+"I"
+],
+"type": "fleurs"
+},
+{
+"nom": "Bourrache",
+"latin": "Borago officinalis",
+"pays": [
+"I",
+"E",
+"NL",
+"F",
+"FS",
+"BI"
+],
+"type": "fleurs"
+},
+{
+"nom": "Colza",
+"latin": "Brassica napus",
+"pays": [
+"CH",
+"NL",
+"EE",
+"D",
+"B",
+"DK",
+"FS",
+"L",
+"BI",
+"F",
+"E",
+"I",
+"SEE"
+],
+"type": "fleurs"
+},
+{
+"nom": "Callune (bruyère commune)",
+"latin": "Calluna vulgaris",
+"pays": [
+"E",
+"NL",
+"D",
+"DK",
+"FS",
+"BI",
+"PL",
+"F",
+"I"
+],
+"type": "fleurs",
+"fiche": "miel-de-bruyere"
+},
+{
+"nom": "Cabezote",
+"latin": "Carlina salicifolia",
+"pays": [
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Carline commune",
+"latin": "Carlina vulgaris",
+"pays": [
+"E",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Malpica",
+"latin": "Carlina xeranthemoides",
+"pays": [
+"CAN"
+],
+"type": "fleurs"
+},
+{
+"nom": "Châtaignier",
+"latin": "Castanea sativa",
+"pays": [
+"AL",
+"I",
+"E",
+"CH",
+"F",
+"EE",
+"A",
+"B",
+"D",
+"GR",
+"SEE",
+"BI",
+"DK",
+"NL"
+],
+"type": "fleurs",
+"fiche": "miel-de-chataignier"
+},
+{
+"nom": "Centaurée du solstice",
+"latin": "Centaurea solstitialis",
+"pays": [
+"I",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Bleuet",
+"latin": "Centaurea cyanus",
+"pays": [
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Caroubier",
+"latin": "Ceratonia siliqua",
+"pays": [
+"E",
+"I",
+"GR",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Tagasaste",
+"latin": "Chamaecytisus proliferus",
+"pays": [
+"CAN"
+],
+"type": "fleurs"
+},
+{
+"nom": "Cirse des champs",
+"latin": "Cirsium arvense",
+"pays": [
+"NL",
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Agrumes (oranger, citronnier)",
+"latin": "Citrus spp.",
+"pays": [
+"I",
+"E",
+"GR",
+"F"
+],
+"type": "fleurs",
+"fiche": "miel-d-oranger"
+},
+{
+"nom": "Coriandre",
+"latin": "Coriandrum sativum",
+"pays": [
+"SEE",
+"D"
+],
+"type": "fleurs"
+},
+{
+"nom": "Crambe",
+"latin": "Crambe spp.",
+"pays": [
+"NL"
+],
+"type": "fleurs"
+},
+{
+"nom": "Aubépine",
+"latin": "Crataegus monogyna",
+"pays": [
+"E",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Cynoglosse",
+"latin": "Cynoglossum officinale",
+"pays": [
+"NL"
+],
+"type": "fleurs"
+},
+{
+"nom": "Carotte sauvage",
+"latin": "Daucus carota",
+"pays": [
+"E",
+"F",
+"D",
+"DK"
+],
+"type": "fleurs"
+},
+{
+"nom": "Diplotaxis fausse roquette",
+"latin": "Diplotaxis erucoides",
+"pays": [
+"E",
+"I",
+"F",
+"P"
+],
+"type": "fleurs"
+},
+{
+"nom": "Badasse",
+"latin": "Dorycnium pentaphyllum",
+"pays": [
+"E",
+"I"
+],
+"type": "fleurs"
+},
+{
+"nom": "Tajinaste",
+"latin": "Echium brevirame",
+"pays": [
+"CAN"
+],
+"type": "fleurs"
+},
+{
+"nom": "Vipérine",
+"latin": "Echium spp.",
+"pays": [
+"E",
+"I",
+"NL",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Tajinaste blanc",
+"latin": "Echium virescens",
+"pays": [
+"CAN"
+],
+"type": "fleurs"
+},
+{
+"nom": "Épilobe en épi",
+"latin": "Epilobium angustifolium",
+"pays": [
+"FS"
+],
+"type": "fleurs"
+},
+{
+"nom": "Bruyère blanche (arborescente)",
+"latin": "Erica arborea",
+"pays": [
+"E",
+"I",
+"F",
+"HR",
+"GR"
+],
+"type": "fleurs",
+"fiche": "miel-de-bruyere"
+},
+{
+"nom": "Bruyère australe",
+"latin": "Erica australis",
+"pays": [
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Bruyère des neiges",
+"latin": "Erica carnea",
+"pays": [
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Bruyère cendrée",
+"latin": "Erica cinerea",
+"pays": [
+"E",
+"F",
+"BI",
+"P"
+],
+"type": "fleurs",
+"fiche": "miel-de-bruyere"
+},
+{
+"nom": "Bruyère manipuliflore",
+"latin": "Erica manipuliflora",
+"pays": [
+"AL",
+"GR",
+"HR"
+],
+"type": "fleurs"
+},
+{
+"nom": "Bruyère multiflore",
+"latin": "Erica multiflora",
+"pays": [
+"E",
+"HR",
+"I"
+],
+"type": "fleurs"
+},
+{
+"nom": "Bruyère à balais",
+"latin": "Erica scoparia",
+"pays": [
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Bruyère en ombelle",
+"latin": "Erica umbellata",
+"pays": [
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Bruyère vagabonde",
+"latin": "Erica vagans",
+"pays": [
+"E",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Panicaut champêtre",
+"latin": "Eryngium campestre",
+"pays": [
+"E",
+"AL"
+],
+"type": "fleurs"
+},
+{
+"nom": "Néflier du Japon",
+"latin": "Eriobotrya japonica",
+"pays": [
+"I",
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Eucalyptus",
+"latin": "Eucalyptus spp.",
+"pays": [
+"I",
+"E",
+"P",
+"GR",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Euphorbe petit-cyprès",
+"latin": "Euphorbia cyparissias",
+"pays": [
+"SEE"
+],
+"type": "fleurs"
+},
+{
+"nom": "Sarrasin",
+"latin": "Fagopyrum esculentum",
+"pays": [
+"EE",
+"PL",
+"D",
+"NL",
+"A",
+"F",
+"FS"
+],
+"type": "fleurs",
+"fiche": "miel-de-sarrasin"
+},
+{
+"nom": "Chardon laiteux",
+"latin": "Galactites tomentosa",
+"pays": [
+"I",
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Soja",
+"latin": "Glycine max",
+"pays": [
+"I"
+],
+"type": "fleurs"
+},
+{
+"nom": "Coton",
+"latin": "Gossypium hirsutum",
+"pays": [
+"GR",
+"SEE",
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Lierre",
+"latin": "Hedera helix",
+"pays": [
+"I",
+"E",
+"F",
+"HR"
+],
+"type": "fleurs"
+},
+{
+"nom": "Sulla",
+"latin": "Hedysarum coronarium",
+"pays": [
+"I",
+"E",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Tournesol",
+"latin": "Helianthus annuus",
+"pays": [
+"I",
+"E",
+"F",
+"EE",
+"SEE",
+"D",
+"AL",
+"GR",
+"FS"
+],
+"type": "fleurs"
+},
+{
+"nom": "Roquette blanche",
+"latin": "Hirschfeldia incana",
+"pays": [
+"CAN"
+],
+"type": "fleurs"
+},
+{
+"nom": "Hypécoum",
+"latin": "Hypecoum sp.",
+"pays": [
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Inule visqueuse",
+"latin": "Inula viscosa",
+"pays": [
+"I",
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Lavande vraie",
+"latin": "Lavandula angustifolia",
+"pays": [
+"E",
+"F",
+"I"
+],
+"type": "fleurs",
+"fiche": "miel-de-lavande"
+},
+{
+"nom": "Lavandin",
+"latin": "Lavandula x intermedia",
+"pays": [
+"F",
+"E",
+"HR",
+"SEE"
+],
+"type": "fleurs",
+"fiche": "miel-de-lavande"
+},
+{
+"nom": "Lavande aspic",
+"latin": "Lavandula latifolia",
+"pays": [
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Lavande papillon",
+"latin": "Lavandula stoechas",
+"pays": [
+"E",
+"P",
+"I",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Troène",
+"latin": "Ligustrum spp.",
+"pays": [
+"NL"
+],
+"type": "fleurs"
+},
+{
+"nom": "Lavande de mer (statice)",
+"latin": "Limonium vulgare",
+"pays": [
+"NL",
+"D"
+],
+"type": "fleurs"
+},
+{
+"nom": "Lotier",
+"latin": "Lotus spp.",
+"pays": [
+"E",
+"I",
+"P",
+"F",
+"HR",
+"FS"
+],
+"type": "fleurs"
+},
+{
+"nom": "Pommier",
+"latin": "Malus domestica",
+"pays": [
+"BI",
+"I",
+"E",
+"NL",
+"D",
+"F",
+"FS"
+],
+"type": "fleurs"
+},
+{
+"nom": "Luzerne",
+"latin": "Medicago sativa",
+"pays": [
+"I",
+"F",
+"E",
+"D",
+"FS"
+],
+"type": "fleurs"
+},
+{
+"nom": "Menthe",
+"latin": "Mentha spp.",
+"pays": [
+"E",
+"NL",
+"D"
+],
+"type": "fleurs"
+},
+{
+"nom": "Ficoïde glaciale",
+"latin": "Mesembryanthemum crystallinum",
+"pays": [
+"CAN"
+],
+"type": "fleurs"
+},
+{
+"nom": "Myosotis",
+"latin": "Myosotis spp.",
+"pays": [
+"B",
+"NL",
+"DK",
+"BI",
+"D",
+"A",
+"CH",
+"F",
+"I"
+],
+"type": "fleurs"
+},
+{
+"nom": "Myrte",
+"latin": "Myrtus communis",
+"pays": [
+"I",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Tabac",
+"latin": "Nicotiana tabacum",
+"pays": [
+"SEE"
+],
+"type": "fleurs"
+},
+{
+"nom": "Odontitès",
+"latin": "Odontites spp.",
+"pays": [
+"I"
+],
+"type": "fleurs"
+},
+{
+"nom": "Onagre",
+"latin": "Oenothera biennis",
+"pays": [
+"NL"
+],
+"type": "fleurs"
+},
+{
+"nom": "Sainfoin",
+"latin": "Onobrychis viciifolia",
+"pays": [
+"E",
+"I",
+"A",
+"EE",
+"SEE",
+"L",
+"F",
+"D",
+"CH",
+"BI"
+],
+"type": "fleurs"
+},
+{
+"nom": "Origan des Canaries",
+"latin": "Origanum virens",
+"pays": [
+"CAN"
+],
+"type": "fleurs"
+},
+{
+"nom": "Paliure (épine du Christ)",
+"latin": "Paliurus spina-christi",
+"pays": [
+"HR",
+"I",
+"GR",
+"SEE"
+],
+"type": "fleurs"
+},
+{
+"nom": "Avocatier",
+"latin": "Persea americana",
+"pays": [
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Phacélie",
+"latin": "Phacelia tanacetifolia",
+"pays": [
+"EE",
+"D",
+"NL",
+"B",
+"F",
+"FS"
+],
+"type": "fleurs"
+},
+{
+"nom": "Phlomis",
+"latin": "Phlomis sp.",
+"pays": [
+"GR"
+],
+"type": "fleurs"
+},
+{
+"nom": "Anis vert",
+"latin": "Pimpinella anisum",
+"pays": [
+"GR"
+],
+"type": "fleurs"
+},
+{
+"nom": "Cerisier",
+"latin": "Prunus avium",
+"pays": [
+"I",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Amandier",
+"latin": "Prunus dulcis",
+"pays": [
+"E",
+"D"
+],
+"type": "fleurs"
+},
+{
+"nom": "Cerisier de Sainte-Lucie",
+"latin": "Prunus mahaleb",
+"pays": [
+"I"
+],
+"type": "fleurs"
+},
+{
+"nom": "Arbres fruitiers",
+"latin": "Prunus spp.",
+"pays": [
+"EU"
+],
+"type": "fleurs"
+},
+{
+"nom": "Gaude",
+"latin": "Reseda luteola",
+"pays": [
+"E",
+"D"
+],
+"type": "fleurs"
+},
+{
+"nom": "Rétama",
+"latin": "Retama sphaerocarpa",
+"pays": [
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Bourdaine",
+"latin": "Rhamnus frangula",
+"pays": [
+"F",
+"FS"
+],
+"type": "fleurs"
+},
+{
+"nom": "Rhododendron",
+"latin": "Rhododendron spp.",
+"pays": [
+"I",
+"F",
+"A",
+"E",
+"CH",
+"D"
+],
+"type": "fleurs"
+},
+{
+"nom": "Robinier (« acacia »)",
+"latin": "Robinia pseudoacacia",
+"pays": [
+"EE",
+"SEE",
+"I",
+"D",
+"A",
+"E",
+"F",
+"CH",
+"B"
+],
+"type": "fleurs",
+"fiche": "miel-d-acacia"
+},
+{
+"nom": "Romarin",
+"latin": "Rosmarinus officinalis",
+"pays": [
+"E",
+"I",
+"F",
+"HR"
+],
+"type": "fleurs",
+"fiche": "miel-de-romarin"
+},
+{
+"nom": "Ronce",
+"latin": "Rubus spp.",
+"pays": [
+"E",
+"P",
+"AL",
+"I",
+"NL",
+"D",
+"CH",
+"BI",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Saule",
+"latin": "Salix spp.",
+"pays": [
+"E",
+"HR",
+"FS",
+"NL",
+"CH",
+"D",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Sauge officinale",
+"latin": "Salvia officinalis",
+"pays": [
+"HR",
+"GR"
+],
+"type": "fleurs"
+},
+{
+"nom": "Sarriette des montagnes",
+"latin": "Satureja montana",
+"pays": [
+"E",
+"I",
+"F",
+"HR"
+],
+"type": "fleurs"
+},
+{
+"nom": "Crapaudine",
+"latin": "Sideritis montana",
+"pays": [
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Crapaudine de Syrie",
+"latin": "Sideritis syriaca",
+"pays": [
+"I",
+"E",
+"GR"
+],
+"type": "fleurs"
+},
+{
+"nom": "Verge d'or",
+"latin": "Solidago virgaurea",
+"pays": [
+"I",
+"E",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Sorbier des oiseleurs",
+"latin": "Sorbus aucuparia",
+"pays": [
+"FS"
+],
+"type": "fleurs"
+},
+{
+"nom": "Genêt du Teide",
+"latin": "Spartocytisus supranubius",
+"pays": [
+"CAN"
+],
+"type": "fleurs"
+},
+{
+"nom": "Épiaire annuelle",
+"latin": "Stachys annua",
+"pays": [
+"I",
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Pissenlit",
+"latin": "Taraxacum officinale",
+"pays": [
+"I",
+"CH",
+"B",
+"D",
+"F",
+"A",
+"FS",
+"E"
+],
+"type": "fleurs"
+},
+{
+"nom": "Germandrée maritime",
+"latin": "Teucrium marum",
+"pays": [
+"I"
+],
+"type": "fleurs"
+},
+{
+"nom": "Germandrée",
+"latin": "Teucrium spp.",
+"pays": [
+"D"
+],
+"type": "fleurs"
+},
+{
+"nom": "Thym à tête",
+"latin": "Thymus capitatus",
+"pays": [
+"GR",
+"AL",
+"I",
+"HR",
+"E"
+],
+"type": "fleurs",
+"fiche": "miel-de-thym"
+},
+{
+"nom": "Serpolet",
+"latin": "Thymus serpyllum",
+"pays": [
+"E",
+"I",
+"F"
+],
+"type": "fleurs"
+},
+{
+"nom": "Thym commun",
+"latin": "Thymus vulgaris",
+"pays": [
+"E",
+"F"
+],
+"type": "fleurs",
+"fiche": "miel-de-thym"
+},
+{
+"nom": "Tilleul",
+"latin": "Tilia spp.",
+"pays": [
+"D",
+"NL",
+"PL",
+"EE",
+"SEE",
+"I",
+"E",
+"F",
+"CH",
+"B",
+"FS"
+],
+"type": "fleurs",
+"fiche": "miel-de-tilleul"
+},
+{
+"nom": "Trèfle d'Alexandrie",
+"latin": "Trifolium alexandrinum",
+"pays": [
+"I"
+],
+"type": "fleurs"
+},
+{
+"nom": "Trèfle incarnat",
+"latin": "Trifolium incarnatum",
+"pays": [
+"I",
+"F",
+"EE"
+],
+"type": "fleurs"
+},
+{
+"nom": "Trèfle violet",
+"latin": "Trifolium pratense",
+"pays": [
+"E",
+"I",
+"DK",
+"D",
+"GR",
+"F",
+"FS"
+],
+"type": "fleurs"
+},
+{
+"nom": "Trèfle blanc",
+"latin": "Trifolium repens",
+"pays": [
+"E",
+"F",
+"D",
+"HR",
+"FS",
+"DK",
+"PL",
+"NL",
+"B",
+"L",
+"BI",
+"I",
+"GR"
+],
+"type": "fleurs"
+},
+{
+"nom": "Airelle rouge",
+"latin": "Vaccinium vitis-idaea",
+"pays": [
+"FS"
+],
+"type": "fleurs"
+},
+{
+"nom": "Fève, vesce",
+"latin": "Vicia spp.",
+"pays": [
+"BI",
+"I"
+],
+"type": "fleurs"
+},
+{
+"nom": "Sapin blanc (miellat)",
+"latin": "Abies alba",
+"pays": [
+"CH",
+"D",
+"A",
+"DK",
+"I",
+"F",
+"HR",
+"FS"
+],
+"type": "miellat",
+"fiche": "miel-de-sapin"
+},
+{
+"nom": "Sapin de Céphalonie (miellat)",
+"latin": "Abies cephalonica",
+"pays": [
+"GR"
+],
+"type": "miellat"
+},
+{
+"nom": "Épicéa (miellat)",
+"latin": "Picea abies",
+"pays": [
+"A",
+"D",
+"I",
+"F",
+"FS"
+],
+"type": "miellat"
+},
+{
+"nom": "Pin (miellat)",
+"latin": "Pinus spp.",
+"pays": [
+"GR",
+"F",
+"AL",
+"E"
+],
+"type": "miellat"
+},
+{
+"nom": "Chêne et feuillus (miellat)",
+"latin": "Quercus spp.",
+"pays": [
+"B",
+"D",
+"E",
+"NL",
+"GR",
+"FS",
+"EE"
+],
+"type": "miellat"
+},
+{
+"nom": "Metcalfa (miellat)",
+"latin": "Metcalfa pruinosa",
+"pays": [
+"I",
+"F",
+"SLO"
+],
+"type": "miellat"
+}
+],
+"monde": [
+{
+"nom": "Miel de mānuka",
+"pays": [
+"nz"
+],
+"region": "Nouvelle-Zélande",
+"lon": 175.5,
+"lat": -39.0,
+"plante": "Mānuka (Leptospermum scoparium)",
+"note": "Défini officiellement depuis 2017 par cinq marqueurs : quatre composés chimiques du nectar et un marqueur ADN du pollen.",
+"src": [
+"Ministère des Industries primaires de Nouvelle-Zélande",
+"https://www.mpi.govt.nz/growing-and-harvesting/honey-and-bees/manuka-honey"
+]
+},
+{
+"nom": "Miel blanc du Tigré",
+"pays": [
+"et"
+],
+"region": "Tigré, Éthiopie",
+"lon": 39.6,
+"lat": 13.8,
+"plante": "Lamiacées, figuier de Barbarie, euphorbes",
+"note": "Miel blanc au parfum délicat, peu sucré, récolté de septembre à décembre.",
+"src": [
+"Fondation Slow Food (Sentinelle)",
+"https://www.fondazioneslowfood.com/en/slow-food-presidia/tigray-white-honey/"
+]
+},
+{
+"nom": "Miel du volcan Wenchi",
+"pays": [
+"et"
+],
+"region": "Oromia, Éthiopie",
+"lon": 37.9,
+"lat": 8.75,
+"plante": "Kosso (Hagenia abyssinica), bruyère arborescente",
+"note": "Parfum floral intense, notes de caramel grillé, texture crémeuse.",
+"src": [
+"Fondation Slow Food (Sentinelle)",
+"https://www.fondazioneslowfood.com/en/slow-food-presidia/wenchi-volcano-honey/"
+]
+},
+{
+"nom": "Miel de Rira",
+"pays": [
+"et"
+],
+"region": "Monts Balé, Éthiopie",
+"lon": 39.75,
+"lat": 6.75,
+"plante": "Millepertuis, Syzygium, bruyère arborescente, kosso",
+"note": "Goût intense et fruité, notes de caramel et de malt, récolté en avril et mai.",
+"src": [
+"Fondation Slow Food, Les miels d'Éthiopie",
+"https://www.fondazioneslowfood.com/wp-content/uploads/2018/01/ing_libretto_mieli_2015-2.pdf"
+]
+},
+{
+"nom": "Miel de Bore",
+"pays": [
+"et"
+],
+"region": "Guji, Éthiopie",
+"lon": 38.6,
+"lat": 6.4,
+"plante": "Schefflera abyssinica (miel blanc), Prunus africana (miel ambré)",
+"note": "Un miel blanc crémeux et presque beurré, et un miel ambré foncé.",
+"src": [
+"Fondation Slow Food, Les miels d'Éthiopie",
+"https://www.fondazioneslowfood.com/wp-content/uploads/2018/01/ing_libretto_mieli_2015-2.pdf"
+]
+},
+{
+"nom": "Miel des abeilles canudo",
+"pays": [
+"br"
+],
+"region": "Terre indigène Andirá-Marau, Amazonie (Brésil)",
+"lon": -57.3,
+"lat": -3.3,
+"plante": "Forêt amazonienne",
+"note": "Récolté par le peuple Sateré-Mawé auprès d'une abeille sans dard (Scaptotrigona xantotricha). Goût intense, texture liquide.",
+"src": [
+"Fondation Slow Food (Sentinelle)",
+"https://www.fondazioneslowfood.com/en/slow-food-presidia/satere-mawe-native-bees-honey/"
+]
+},
+{
+"nom": "Miel du Pantanal",
+"pays": [
+"br"
+],
+"region": "Mato Grosso et Mato Grosso do Sul (Brésil)",
+"lon": -56.8,
+"lat": -18.5,
+"plante": "Flore du Pantanal",
+"note": "Première indication géographique de miel au Brésil (indication de provenance, INPI), portée par environ 2 000 apiculteurs.",
+"src": [
+"Gouvernement du Mato Grosso do Sul",
+"https://www.semadesc.ms.gov.br/?p=308"
+]
+},
+{
+"nom": "Miel de mélipone",
+"pays": [
+"mx"
+],
+"region": "Péninsule du Yucatán (Mexique)",
+"lon": -89.0,
+"lat": 20.3,
+"plante": "Forêt tropicale",
+"note": "Produit par l'abeille sans dard Melipona beecheii, élevée selon une tradition maya.",
+"src": [
+"Slow Food",
+"https://www.slowfood.com/blog-and-news/preserving-ancient-beekeeping-traditions-in-mexico/"
+]
+},
+{
+"nom": "Miel de leatherwood",
+"pays": [
+"au"
+],
+"region": "Tasmanie (Australie)",
+"lon": 145.9,
+"lat": -42.3,
+"plante": "Leatherwood (Eucryphia lucida), arbre endémique des forêts humides",
+"note": "Cet arbre, qui ne pousse qu'en Tasmanie, dans les forêts humides de l'ouest, du centre et du sud de l'île, donne le miel de leatherwood.",
+"src": [
+"Gouvernement de Tasmanie, Private Forests Tasmania",
+"https://pft.tas.gov.au/tree-species/leatherwood"
+]
+},
+{
+"nom": "Miel de fleur d'oranger américain",
+"pays": [
+"us"
+],
+"region": "Floride, Texas, Arizona, Californie",
+"lon": -81.5,
+"lat": 27.8,
+"plante": "Agrumes",
+"note": "Blanc à ambre très clair, goût sucré et fruité, forte odeur d'orange.",
+"src": [
+"National Honey Board (États-Unis)",
+"https://honey.com/about-honey/honey-varietals"
+]
+},
+{
+"nom": "Miel de luzerne",
+"pays": [
+"us"
+],
+"region": "États de l'Ouest américain",
+"lon": -114.0,
+"lat": 42.5,
+"plante": "Luzerne (Medicago sativa)",
+"note": "Blanc à ambre très clair, goût doux, arôme de cire d'abeille.",
+"src": [
+"National Honey Board (États-Unis)",
+"https://honey.com/about-honey/honey-varietals"
+]
+},
+{
+"nom": "Miel de trèfle",
+"pays": [
+"us"
+],
+"region": "États-Unis",
+"lon": -95.0,
+"lat": 41.0,
+"plante": "Trèfles blanc, violet et mélilot",
+"note": "Doux, sucré et floral, issu d'un mélange de trèfles ; l'un des miels les plus courants des États-Unis.",
+"src": [
+"National Honey Board (États-Unis)",
+"https://honey.com/about-honey/honey-varietals"
+]
+},
+{
+"nom": "Miel de myrtille",
+"pays": [
+"us"
+],
+"region": "États-Unis",
+"plante": "Myrtillier",
+"note": "Arôme de feuille verte et de citron, fruité, finale légèrement beurrée.",
+"src": [
+"National Honey Board (États-Unis)",
+"https://honey.com/about-honey/honey-varietals"
+]
+},
+{
+"nom": "Miel d'avocatier",
+"pays": [
+"us"
+],
+"region": "États-Unis",
+"plante": "Avocatier",
+"note": "Ambre foncé, onctueux, notes de mélasse caramélisée.",
+"src": [
+"National Honey Board (États-Unis)",
+"https://honey.com/about-honey/honey-varietals"
+]
+}
+]
+}

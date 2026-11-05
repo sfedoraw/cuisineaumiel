@@ -57,9 +57,11 @@ Certains miels sont protégés par un signe officiel, contrôlé par l'INAO (Ins
 | IGP Miel de Provence | Miels monofloraux (lavande, romarin, thym…) et toutes fleurs de Provence |
 | IGP Miel d'Alsace | Acacia, toutes fleurs, tilleul, châtaignier, sapin, forêt |
 | IGP Miel des Cévennes | Miels monofloraux (châtaignier, bruyère, acacia, ronce…), polyfloral et miellat de sapin |
+| IGP Miel de tilleul de Picardie | Miel de tilleul de Picardie (enregistrée en 2025) |
+| IGP Miel des Landes | Miels des Landes, dont bruyère et châtaignier (enregistrée en 2026) |
 | Label Rouge | Miel de lavande et miel toutes fleurs de Provence |
 
-Le cahier des charges d'une IGP **Miel des Landes** a par ailleurs été approuvé par l'INAO en janvier 2026, dans le cadre d'une demande de reconnaissance.
+Deux IGP sont venues s'ajouter récemment : **Miel de tilleul de Picardie**, enregistrée par l'Union européenne en novembre 2025, et **Miel des Landes**, enregistrée le 15 octobre 2026. Retrouvez toutes les appellations sur [notre atlas des miels](/miels/atlas/).
 
 ## Lire l'étiquette d'un pot de miel
 
@@ -124,6 +126,7 @@ Non. La cristallisation est un phénomène naturel, qui dépend de la compositio
 - Union européenne, [directive (UE) 2024/1438](https://eur-lex.europa.eu/eli/dir/2024/1438/oj/fra) modifiant la directive 2001/110/CE relative au miel.
 - Institut national de la consommation, « [Les règles d'étiquetage du miel : ce qu'il faut savoir](https://inc-conso.fr/content/les-regles-detiquetage-du-miel-ce-quil-faut-savoir-avec-le-reseau-des-ctrc) », 2024, mis à jour en 2025.
 - INAO : [AOP Miel de sapin des Vosges](https://extranet.inao.gouv.fr/fichier/PNOCDCAOPMielSapinVosges112019.pdf), [AOP Miel de Corse](https://www.inao.gouv.fr/node/1722/printable/pdf), [IGP Miel de Provence](https://inao.gouv.fr/node/1443/printable/pdf), [IGP Miel d'Alsace](https://extranet.inao.gouv.fr/fichier/PNOCDC-MielAlsace-CN230201.pdf), [IGP Miel des Cévennes](https://extranet.inao.gouv.fr/fichier/CNIGPLRSTG-2010-212-IGP-MielDesCevennes-CDC.pdf), [IGP Miel des Landes](https://extranet.inao.gouv.fr/fichier/CDC-IGP-Miel-des-Landes-260126.pdf).
+- Commission européenne, [registre européen eAmbrosia](https://ec.europa.eu/agriculture/eambrosia/geographical-indications-register/), consulté le 5 novembre 2026.
 - Chambres d'agriculture, [réseau Bienvenue à la ferme](https://nievre.chambres-agriculture.fr/sinformer/je-suis-agriculteur/diversification/bienvenue-a-la-ferme).
 - AFP, « Récolte de miel 2026 : des abeilles déboussolées par la sécheresse », [Terre-net](https://www.terre-net.fr/environnement/article/904285/recolte-de-miel-2026-des-abeilles-deboussolees-par-la-secheresse), 2 octobre 2026.
 - Le monde de l'épicerie fine, « [Miel de France : consommateurs curieux, récolte en berne](https://monde-epicerie-fine.fr/etude-api-week-2026-miel-de-france/) », 5 octobre 2026.

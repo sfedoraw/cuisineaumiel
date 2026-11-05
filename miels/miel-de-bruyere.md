@@ -12,7 +12,7 @@ texture: Gélatineuse (callune), qui se liquéfie quand on la remue
 cristallisation: Moyenne, en gros cristaux arrondis
 recolte: Août à septembre (callune et bruyère cendrée) ; avril à mai (bruyère blanche)
 regions: Landes, Sologne, Limousin, Bretagne, Massif central, Corse ; en Europe Écosse, Irlande, Allemagne du Nord, Norvège
-labels: "Variétés de l'IGP Miel des Landes (en cours de reconnaissance)"
+labels: "Variétés de l'IGP Miel des Landes (enregistrée en 2026)"
 profil: 1,3,3,5,5
 teinte: #7A3A14
 mois: 4,5,8,9
@@ -43,7 +43,7 @@ Les fiches descriptives des miels monofloraux européens, publiées dans *Apidol
 - **Odeur** : moyenne à forte, boisée, florale et fruitée, chaude.
 - **Goût** : peu sucré, moyennement acide, moyennement amer, avec un arôme fort et une longue persistance en bouche.
 
-Le cahier des charges de l'IGP Miel des Landes, en cours de reconnaissance, le décrit comme brun-rouge à reflets roux, au goût intense et persistant, boisé, avec une légère amertume. La **bruyère cendrée** y est décrite avec des notes de fleurs séchées, de cuir et de réglisse, et un parfum d'amande.
+Le cahier des charges de l'IGP Miel des Landes, enregistrée par l'Union européenne en octobre 2026, le décrit comme brun-rouge à reflets roux, au goût intense et persistant, boisé, avec une légère amertume. La **bruyère cendrée** y est décrite avec des notes de fleurs séchées, de cuir et de réglisse, et un parfum d'amande.
 
 ## Une texture unique : le miel thixotrope
 
@@ -57,7 +57,7 @@ Le miel de callune contient naturellement plus d'eau que la plupart des miels : 
 
 La callune et la bruyère cendrée se récoltent en fin d'été, d'août à septembre. La bruyère blanche, au printemps.
 
-En France, les principales zones de production sont les **Landes de Gascogne**, la **Sologne**, le **Limousin**, la **Bretagne** intérieure, le Massif central, et la **Corse** pour la bruyère blanche. Le cahier des charges de l'**IGP Miel des Landes**, dont la demande de reconnaissance a été approuvée par l'INAO en janvier 2026, prévoit des variétés callune et bruyère cendrée.
+En France, les principales zones de production sont les **Landes de Gascogne**, la **Sologne**, le **Limousin**, la **Bretagne** intérieure, le Massif central, et la **Corse** pour la bruyère blanche. Le cahier des charges de l'**IGP Miel des Landes**, enregistrée par l'Union européenne le 15 octobre 2026, prévoit des variétés callune et bruyère cendrée.
 
 En Europe, le miel de callune est un emblème de l'**Écosse**, de l'**Irlande**, de la lande de Lunebourg en Allemagne, des Pays-Bas, du Danemark et de la Norvège.
 
@@ -109,7 +109,8 @@ Non. Aucun miel ne doit être donné aux enfants de moins d'un an, à cause du r
 ## Sources
 - Persano Oddo L., Piro R. et al., « [Main European unifloral honeys: descriptive sheets](https://doi.org/10.1051/apido:2004049) », *Apidologie*, 35 (Suppl. 1), S38-S81, 2004.
 - Persano Oddo L. et al., « [Botanical species giving unifloral honey in Europe](https://doi.org/10.1051/apido:2004045) », *Apidologie*, 35 (Suppl. 1), S82-S93, 2004.
-- INAO, [cahier des charges de l'IGP Miel des Landes](https://extranet.inao.gouv.fr/fichier/CDC-IGP-Miel-des-Landes-260126.pdf), demande de reconnaissance approuvée le 26 janvier 2026.
+- INAO, [cahier des charges de l'IGP Miel des Landes](https://extranet.inao.gouv.fr/fichier/CDC-IGP-Miel-des-Landes-260126.pdf), version approuvée par l'INAO le 26 janvier 2026.
+- Commission européenne, [registre européen eAmbrosia](https://ec.europa.eu/agriculture/eambrosia/geographical-indications-register/), IGP Miel des Landes (PGI-FR-03002), enregistrée le 15 octobre 2026.
 - Union européenne, [directive 2001/110/CE relative au miel](https://eur-lex.europa.eu/eli/dir/2001/110/oj).
 - AFP, « Récolte de miel 2026 : des abeilles déboussolées par la sécheresse », [Terre-net](https://www.terre-net.fr/environnement/article/904285/recolte-de-miel-2026-des-abeilles-deboussolees-par-la-secheresse), 2 octobre 2026.
 - Anses, « [Pas de miel pour les enfants de moins d'un an](https://www.anses.fr/fr/content/pas-de-miel-les-enfants-de-moins-dun-an) », 2023.
