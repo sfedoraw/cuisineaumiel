@@ -191,6 +191,8 @@ for (const r of recipes) {
 }
 
 // ---------- gabarits ----------
+// Version des fichiers CSS/JS : change à chaque modification, pour que les navigateurs ne gardent pas l'ancienne.
+const ASSET_V = require('crypto').createHash('md5').update(['style.css', 'main.js'].map((f) => fs.readFileSync(path.join(__dirname, 'static', f))).join('')).digest('hex').slice(0, 8);
 const logoSvg = `<svg viewBox="7 1 26 36" width="26" height="36" aria-hidden="true"><path d="M20 2C17.6 6.8 8.5 15.6 8.5 25a11.5 11.5 0 0 0 23 0C31.5 15.6 22.4 6.8 20 2z" fill="currentColor"/><path d="M14.2 27.5a6.4 6.4 0 0 1 .6-6.2" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>`;
 const searchIcon = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
 const clockIcon = `<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
@@ -225,7 +227,7 @@ ${ogImage ? `<meta property="og:image" content="${ogImage}">\n<meta name="twitte
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css?v=${ASSET_V}">
 ${extraHead}
 </head>
 <body${hero ? ' class="has-hero"' : ''}>
@@ -258,7 +260,7 @@ ${body}
   </div>
   <p class="fine">© ${today.getUTCFullYear()} cuisineaumiel.fr · Photos : Unsplash et Depositphotos · Le miel ne convient pas aux enfants de moins d'un an.</p>
 </footer>
-<script src="/main.js" defer></script>
+<script src="/main.js?v=${ASSET_V}" defer></script>
 </body>
 </html>`;
 }
