@@ -10,7 +10,8 @@ const ROOT = __dirname;
 const OUT = path.join(ROOT, '_site');
 const SITE = {
   name: 'Cuisine au miel',
-  url: 'https://cuisineaumiel.fr',
+  // Adresse publique du site (SITE_URL dans le déploiement tant que le domaine n'est pas branché).
+  url: (process.env.SITE_URL || 'https://cuisineaumiel.fr').replace(/\/$/, ''),
   tagline: 'Recettes sucrées et salées autour du miel',
   description:
     "Des recettes originales, sucrées et salées, pour cuisiner le miel au quotidien : entrées, plats, desserts, pâtisseries, boissons et conseils sur les variétés de miel.",
@@ -212,6 +213,7 @@ const own = (name, alt, { ratio = '16 / 9', eager = false, cls = '', sizes = '10
   `<img class="${cls}" src="/img/${name}-1000.jpg" srcset="/img/${name}-1000.jpg 1000w, /img/${name}-2000.jpg 2000w" sizes="${sizes}" alt="${esc(alt)}" style="aspect-ratio:${ratio}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 const shortCat = (c) => c.name.split(' &')[0];
 
+const DEFAULT_OG = 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=1200&q=70';
 function layout({ title, description, body, canonical, extraHead = '', ogImage = '', hero = '' }) {
   const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} · ${SITE.tagline}`;
   return `<!doctype html>
@@ -228,7 +230,9 @@ function layout({ title, description, body, canonical, extraHead = '', ogImage =
 <meta property="og:type" content="${ogImage ? 'article' : 'website'}">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="${SITE.url}${canonical}">
-${ogImage ? `<meta property="og:image" content="${ogImage}">\n<meta name="twitter:card" content="summary_large_image">` : ''}
+<meta property="og:image" content="${ogImage || DEFAULT_OG}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="${SITE.name}" href="/flux.xml">
@@ -396,7 +400,9 @@ ${posts.length ? `<section class="wrap block">${sectionTitle('Le magazine du mie
     </div>
   </div>
 </section>`;
-  return layout({ title: '', canonical: '/', body, hero: heroBanner() });
+  const ld = [{ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url + '/', inLanguage: 'fr-FR', description: SITE.description, publisher: { '@id': SITE.url + '/#org' }, potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: SITE.url + '/recettes/?q={search_term_string}' }, 'query-input': 'required name=search_term_string' } },
+    { '@context': 'https://schema.org', '@type': 'Organization', '@id': SITE.url + '/#org', name: SITE.name, url: SITE.url + '/', logo: SITE.url + '/favicon.svg', description: "Site de référence sur le miel en cuisine : recettes, guide des miels, atlas et magazine. Proposé par le GAEC des Deux Vallées.", parentOrganization: { '@type': 'Organization', name: 'GAEC des Deux Vallées' } }];
+  return layout({ title: '', canonical: '/', body, hero: heroBanner(), extraHead: ld.map(ldScript).join('') });
 }
 
 function pageHead(title, lede, photo, crumbs = '') {
@@ -675,6 +681,20 @@ function honeyId(x) {
 </section>`;
 }
 
+// « L'essentiel » : réponse courte en tête de fiche, lisible par les lecteurs pressés et les assistants IA.
+const lc = (t) => String(t || '').replace(/^./, (c) => c.toLowerCase());
+function essentiel(x) {
+  const n = x.nom.toLowerCase();
+  const items = [
+    x.plante && `Le ${n} provient de : ${plain(x.plante)}.`,
+    x.couleur && x.gout && `Il est ${lc(plain(x.couleur))}, avec un goût ${lc(plain(x.gout))}.`,
+    x.recolte && `Récolte : ${lc(plain(x.recolte))}.`,
+    x.regions && `Principales régions : ${plain(x.regions)}.`,
+    x.labels && `Signes officiels : ${plain(x.labels)}.`,
+    x.accords && `Il se marie bien avec : ${lc(plain(x.accords))}.`,
+  ].filter(Boolean);
+  return `<section class="essentiel" aria-label="L'essentiel"><h2>L'essentiel</h2><ul>${items.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></section>`;
+}
 function longPage(x) {
   const isHoney = x.kind === 'miel', isPost = x.kind === 'magazine';
   const trail = isPost ? [['Accueil', '/'], ['Magazine', '/magazine/'], [x.titre]] : [['Accueil', '/'], ['Le guide des miels', '/miels/'], [isHoney ? x.nom : x.titre]];
@@ -697,6 +717,7 @@ ${isHoney ? honeyId(x) : ''}
 <div class="wrap long">
   <article class="long-main">
     <p class="long-meta">${isPost ? `${esc(x.rubrique || 'Magazine')} · Publié le <time datetime="${published}">${dateFr(new Date(published))}</time> · ` : `Mis à jour le <time datetime="${modified}">${dateFr(new Date(modified))}</time> · `}${readTime(x.words)} min de lecture</p>
+    ${isHoney ? essentiel(x) : ''}
     ${toc(x.main)}
     <div class="prose">${markdown(x.main)}</div>
     ${faqHtml(x.faq)}
@@ -893,6 +914,35 @@ ${longBanner("L'atlas des miels", 'Tous les miels protégés d\'Europe, les plan
   return layout({ title: "L'atlas des miels : tous les miels AOP, IGP et monofloraux d'Europe et du monde", description: `Carte interactive et liste complète des miels : ${reg.length} miels AOP et IGP en Europe, ${A.europe.length} plantes à miel, et les grands miels du monde. Sources officielles.`, canonical: '/miels/atlas/', body, extraHead: ldScript(crumbsLd(trail)) + ldScript(faqLd(faq)) + ldScript({ '@context': 'https://schema.org', '@type': 'Dataset', name: "L'atlas des miels", description: 'Liste des miels protégés par une appellation en Europe, des plantes à miel européennes et de miels emblématiques du monde.', url: SITE.url + '/miels/atlas/', dateModified: A.maj, creator: { '@type': 'Organization', name: 'Cuisine au miel' }, isBasedOn: ['https://ec.europa.eu/agriculture/eambrosia/geographical-indications-register/', 'https://doi.org/10.1051/apido:2004045'] }) });
 }
 
+
+// Résumé du site pour les assistants IA (convention llms.txt).
+function llmsTxt() {
+  const line = (u, t, d) => `- [${plain(t)}](${SITE.url}${u})${d ? `: ${plain(d)}` : ''}`;
+  return `# ${SITE.name}
+
+> Site français consacré au miel en cuisine : ${recipes.length} recettes au miel sucrées et salées, un guide complet des variétés de miel avec une fiche sourcée par miel, un atlas de tous les miels protégés d'Europe et du monde, et un magazine d'actualité sur le miel et l'apiculture. Proposé par le GAEC des Deux Vallées.
+
+Règles éditoriales : chaque fiche et chaque article cite ses sources (textes officiels européens, INAO, revues scientifiques comme Apidologie, organismes publics). Aucune allégation de santé : le miel est présenté comme un aliment de plaisir et de bien-être, conformément au règlement (CE) n° 1924/2006. Le miel ne convient pas aux enfants de moins d'un an (recommandation de l'Anses).
+
+## Guide des miels
+${line('/miels/', 'Le guide des miels', 'toutes les variétés, leur goût, leur couleur, leur saison et leurs usages')}
+${honeys.map((h) => line(h.url, h.titre, h.resume)).join('\n')}
+${HAS_ATLAS ? line('/miels/atlas/', "L'atlas des miels", "liste de tous les miels AOP et IGP d'Europe, des plantes à miel et des grands miels du monde, avec cartes") : ''}
+
+## Guides pratiques
+${pillars.map((g) => line(g.url, g.titre, g.resume)).join('\n')}
+
+## Magazine
+${posts.map((a) => line(a.url, a.titre, a.resume)).join('\n')}
+
+## Recettes
+${line('/recettes/', 'Toutes les recettes au miel', '')}
+${CATEGORIES.map((c) => line(`/categories/${c.slug}/`, c.name, '')).join('\n')}
+
+## Recettes récentes
+${recipes.slice(0, 30).map((r) => line(r.url, r.titre, r.resume)).join('\n')}
+`;
+}
 // ---------- construction ----------
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
@@ -917,6 +967,8 @@ for (const f of fs.readdirSync(path.join(ROOT, 'pages')).filter((f) => f.endsWit
 write('404.html', layout({ title: 'Page introuvable', canonical: '/404.html', body: `<section class="wrap page-head"><h1>Oups, cette page a fondu.</h1><p class="lede">Elle n'existe pas ou plus. <a href="/recettes/">Voir toutes les recettes</a>.</p></section>` }));
 write('flux.xml', rss());
 write('sitemap.xml', sitemap(urls));
-write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE.url}/sitemap.xml\n`);
+const AI_BOTS = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot', 'CCBot', 'Meta-ExternalAgent', 'MistralAI-User', 'DuckAssistBot'];
+write('robots.txt', `# Cuisine au miel : moteurs de recherche et assistants IA bienvenus.\nUser-agent: *\nAllow: /\n\n${AI_BOTS.map((b) => `User-agent: ${b}\nAllow: /`).join('\n\n')}\n\nSitemap: ${SITE.url}/sitemap.xml\n`);
+write('llms.txt', llmsTxt());
 
 console.log(`✓ ${recipes.length} recettes publiées, ${urls.length} pages générées dans _site/`);

@@ -431,3 +431,7 @@ h3 { font-size: .98rem; font-weight: 600; }
 @media (max-width: 520px) { .stats b { font-size: 1.8rem; } .atlas-table th:nth-child(4), .atlas-table td:nth-child(4) { display: none; } }
 .table-wrap { max-height: 560px; overflow-y: auto; }
 .map-fr text { font: 600 26px var(--font); fill: var(--ink); paint-order: stroke; stroke: #F4F2EF; stroke-width: 6px; pointer-events: none; }
+.essentiel { background: var(--tint); border-radius: var(--radius); padding: 20px 24px; margin: 0 0 24px; }
+.essentiel h2 { margin: 0 0 8px; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.essentiel ul { margin: 0; padding-left: 18px; }
+.essentiel li { margin: 4px 0; }
