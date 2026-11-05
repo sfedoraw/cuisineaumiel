@@ -618,6 +618,56 @@ function postCard(a) {
 }
 const bannerImgCard = (a) => /^\d/.test(a.photo || '') ? picture(a.photo, a.titre, { sizes: '(min-width: 1000px) 380px, 90vw', ratio: '16 / 10' }) : own(a.photo || 'chef-sel', a.titre, { ratio: '16 / 10', sizes: '(min-width: 1000px) 380px, 90vw' });
 
+
+// ---------- carte d'identité visuelle d'un miel ----------
+const GEO = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'geo.json'), 'utf8'));
+const MOIS_COURTS = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+const PROFIL = ['Douceur', 'Acidité', 'Amertume', 'Intensité', 'Longueur'];
+const CRIST = ['', 'Très lente', 'Lente', 'Moyenne', 'Rapide', 'Très rapide'];
+const nums = (v) => String(v || '').split(',').map((x) => +x.trim()).filter((x) => !Number.isNaN(x));
+const listOf = (v) => (Array.isArray(v) ? v : String(v || '').split(',')).map((x) => x.trim()).filter(Boolean);
+function franceMap(zones, color) {
+  const { w, h, proj } = GEO.france;
+  const pt = (lon, lat) => [(lon - proj.lon0) * proj.k * proj.c, (proj.lat1 - lat) * proj.k];
+  const dots = zones.map(([name, lon, lat]) => { const [x, y] = pt(+lon, +lat); const right = x < w * 0.62; return `<g><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="15" fill="${color}" stroke="#1C1917" stroke-width="3"/><text x="${(x + (right ? 22 : -22)).toFixed(1)}" y="${(y + 11).toFixed(1)}" text-anchor="${right ? 'start' : 'end'}">${esc(name)}</text></g>`; }).join('');
+  return `<svg class="fr-map" viewBox="-40 -10 ${w + 80} ${h + 20}" role="img" aria-label="Carte des zones de production en France : ${esc(zones.map((z) => z[0]).join(', '))}"><path d="${GEO.france.d}" fill="#F4F2EF" stroke="#A8A29E" stroke-width="1.2"/>${dots}</svg>`;
+}
+function honeyId(x) {
+  if (!x.profil) return '';
+  const prof = nums(x.profil), months = nums(x.mois), crist = +x.crist || 3;
+  const zones = String(x.zones || '').split(';').map((z) => z.split('|')).filter((z) => z.length === 3);
+  const src = x.profil_source === 'apidologie' ? "Profil établi d'après les fiches descriptives européennes (<em>Apidologie</em>, 2004)." : 'Profil indicatif établi par la rédaction à partir des sources citées.';
+  return `<section class="honey-id wrap" aria-label="Carte d'identité du ${esc(x.nom.toLowerCase())}">
+  <div class="hid-card hid-color">
+    <h2>La couleur</h2>
+    <div class="swatch" style="--c:${esc(x.teinte || '#D9A440')}"><span></span></div>
+    <p>${inline(x.couleur || '')}</p>
+    <h3>Cristallisation</h3>
+    <div class="gauge" role="img" aria-label="Cristallisation : ${CRIST[crist]}">${[1, 2, 3, 4, 5].map((i) => `<i${i <= crist ? ' class="on"' : ''}></i>`).join('')}</div>
+    <p class="gauge-label"><span>Très lente</span><b>${CRIST[crist]}</b><span>Rapide</span></p>
+  </div>
+  <div class="hid-card hid-taste">
+    <h2>Le profil de goût</h2>
+    <dl class="bars">${PROFIL.map((l, i) => `<div><dt>${l}</dt><dd><span class="bar" style="--v:${(prof[i] || 0) / 5}"></span><span class="sr">${prof[i] || 0} sur 5</span></dd></div>`).join('')}</dl>
+    <p class="hid-note">${src}</p>
+  </div>
+  <div class="hid-card hid-cal">
+    <h2>La récolte</h2>
+    <ol class="months">${MOIS_COURTS.map((m, i) => `<li${months.includes(i + 1) ? ' class="on"' : ''} title="${MOIS[i]}"><span>${m}</span></li>`).join('')}</ol>
+    <p>${inline(x.recolte || '')}</p>
+  </div>
+  <div class="hid-card hid-map">
+    <h2>Où en France ?</h2>
+    ${zones.length ? franceMap(zones, x.teinte || '#D9A440') : ''}
+  </div>
+  ${x.accords || x.boissons ? `<div class="hid-card hid-pairs">
+    <h2>Les accords</h2>
+    <ul class="chips">${listOf(x.accords).map((a) => `<li>${esc(a)}</li>`).join('')}</ul>
+    ${x.boissons ? `<h3>Avec quoi le boire</h3><ul class="chips chips-drink">${listOf(x.boissons).map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
+  </div>` : ''}
+</section>`;
+}
+
 function longPage(x) {
   const isHoney = x.kind === 'miel', isPost = x.kind === 'magazine';
   const trail = isPost ? [['Accueil', '/'], ['Magazine', '/magazine/'], [x.titre]] : [['Accueil', '/'], ['Le guide des miels', '/miels/'], [isHoney ? x.nom : x.titre]];
@@ -635,7 +685,8 @@ function longPage(x) {
   };
   const others = isHoney ? honeys.filter((h) => h !== x) : isPost ? posts.filter((a) => a !== x).slice(0, 3) : pillars.filter((g) => g !== x);
   const body = `
-${longBanner(esc(isHoney ? x.nom : x.titre), esc(x.resume), x.photo, crumbsHtml(trail))}
+${longBanner(esc(isHoney ? x.nom : x.titre), esc(x.resume), x.photo, crumbsHtml(trail)).replace('class="page-banner"', isHoney && x.profil ? 'class="page-banner banner-id"' : 'class="page-banner"')}
+${isHoney ? honeyId(x) : ''}
 <div class="wrap long">
   <article class="long-main">
     <p class="long-meta">${isPost ? `${esc(x.rubrique || 'Magazine')} · Publié le <time datetime="${published}">${dateFr(new Date(published))}</time> · ` : `Mis à jour le <time datetime="${modified}">${dateFr(new Date(modified))}</time> · `}${readTime(x.words)} min de lecture</p>
@@ -660,6 +711,51 @@ ${isHoney ? `<section class="block"><div class="wrap">${sectionTitle('Les autres
   });
 }
 
+
+// ---------- graphiques du guide : nuancier, calendrier des miellées, carte du goût ----------
+const lum = (hex) => { const n = parseInt(String(hex).slice(1), 16); return 0.2126 * (n >> 16) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255); };
+function colorScale() {
+  const list = honeys.filter((h) => h.teinte).sort((a, b) => lum(b.teinte) - lum(a.teinte));
+  return `<figure class="viz viz-scale"><figcaption><h3>Du plus clair au plus foncé</h3><p>La couleur du miel annonce souvent son goût : les miels clairs sont doux, les miels foncés plus puissants.</p></figcaption>
+  <ol class="scale">${list.map((h) => `<li><a href="${h.url}"><span class="dot" style="--c:${h.teinte}"></span><span class="nm">${esc(shortHoney(h.nom))}</span></a></li>`).join('')}</ol></figure>`;
+}
+function harvestCalendar() {
+  const list = honeys.filter((h) => h.mois).sort((a, b) => Math.min(...nums(a.mois)) - Math.min(...nums(b.mois)));
+  return `<figure class="viz viz-cal" id="calendrier"><figcaption><h3>Le calendrier des miellées</h3><p>Les mois de récolte de chaque miel en France. Le mois en cours est surligné.</p></figcaption>
+  <div class="gantt" role="table" aria-label="Calendrier des récoltes de miel">
+    <div class="g-row g-head" role="row"><span role="columnheader">Miel</span>${MOIS_COURTS.map((m, i) => `<span role="columnheader" data-m="${i + 1}" title="${MOIS[i]}">${m}</span>`).join('')}</div>
+    ${list.map((h) => { const ms = nums(h.mois); return `<div class="g-row" role="row"><a role="rowheader" href="${h.url}">${esc(shortHoney(h.nom))}</a>${MOIS_COURTS.map((m, i) => `<span role="cell" data-m="${i + 1}"${ms.includes(i + 1) ? ` class="on" style="--c:${h.teinte}" aria-label="${MOIS[i]} : récolte"` : ` aria-label="${MOIS[i]}"`}></span>`).join('')}</div>`; }).join('')}
+  </div></figure>`;
+}
+function tasteMap() {
+  const list = honeys.filter((h) => h.profil);
+  const W = 560, H = 380, P = 48;
+  const pts = list.map((h) => { const p = nums(h.profil); return { h, x: P + 20 + ((p[3] + p[4]) / 10) * (W - 2 * P - 40), y: H - P - 10 - ((p[0] - p[2] + 5) / 10) * (H - 2 * P - 20) }; });
+  // Écarte les points qui se superposent, puis place chaque étiquette là où elle ne chevauche rien.
+  for (let k = 0; k < 40; k++) for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+    const a = pts[i], b = pts[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+    if (d < 27) { const dx = (a.x - b.x) || 1, dy = a.y - b.y, n = Math.hypot(dx, dy) || 1, m = (27 - d) / 2; a.x += dx / n * m; a.y += dy / n * m; b.x -= dx / n * m; b.y -= dy / n * m; }
+  }
+  const boxes = pts.map(({ x, y }) => [x - 12, y - 12, x + 12, y + 12]);
+  const hit = (r) => boxes.some((b) => r[0] < b[2] && r[2] > b[0] && r[1] < b[3] && r[3] > b[1]) || r[0] < 4 || r[2] > W - 4;
+  for (const p of pts) {
+    const name = shortHoney(p.h.nom), w = name.length * 7.6;
+    const tries = [[15, 4, 'start'], [-15, 4, 'end'], [0, -17, 'middle'], [0, 26, 'middle'], [15, -14, 'start'], [15, 22, 'start'], [-15, -14, 'end'], [-15, 22, 'end']];
+    const rectOf = (t) => { const x0 = t[2] === 'start' ? p.x + t[0] : t[2] === 'end' ? p.x + t[0] - w : p.x - w / 2; return [x0, p.y + t[1] - 12, x0 + w, p.y + t[1] + 3]; };
+    const cost = (r) => boxes.reduce((s, b) => s + Math.max(0, Math.min(r[2], b[2]) - Math.max(r[0], b[0])) * Math.max(0, Math.min(r[3], b[3]) - Math.max(r[1], b[1])), 0) + (r[0] < 4 || r[2] > W - 4 ? 1e6 : 0);
+    const best = tries.find((t) => !hit(rectOf(t))) || tries.reduce((a, t) => (cost(rectOf(t)) < cost(rectOf(a)) ? t : a));
+    boxes.push(rectOf(best)); p.lab = best;
+  }
+  return `<figure class="viz viz-taste"><figcaption><h3>La carte des goûts</h3><p>Plus un miel est à droite, plus il est intense et long en bouche. Plus il est haut, plus il est doux ; plus il est bas, plus il a d'amertume.</p></figcaption>
+  <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Carte des goûts des miels selon l'intensité et la douceur">
+    <rect x="${P}" y="${P / 2}" width="${W - 2 * P}" height="${H - 1.5 * P}" rx="16" fill="#FFF4DE"/>
+    <line x1="${W / 2}" y1="${P / 2}" x2="${W / 2}" y2="${H - P}" stroke="#E7E5E4" stroke-dasharray="4 6"/><line x1="${P}" y1="${(H - P / 2) / 2 + P / 4}" x2="${W - P}" y2="${(H - P / 2) / 2 + P / 4}" stroke="#E7E5E4" stroke-dasharray="4 6"/>
+    <text x="${W / 2}" y="${H - 14}" text-anchor="middle" class="ax">Intensité et longueur en bouche →</text>
+    <text x="16" y="${H / 2}" text-anchor="middle" class="ax" transform="rotate(-90 16 ${H / 2})">← Amertume · Douceur →</text>
+    ${pts.map(({ h, x, y, lab }) => `<a href="${h.url}"><circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="11" fill="${h.teinte}" stroke="#1C1917" stroke-width="1.5"/><text x="${(x + lab[0]).toFixed(0)}" y="${(y + lab[1]).toFixed(0)}" text-anchor="${lab[2]}" class="lb">${esc(shortHoney(h.nom))}</text></a>`).join('')}
+  </svg></figure>`;
+}
+
 function guideHub() {
   const fam = [['clair', 'Les miels clairs', 'Doux et délicats, ils accompagnent sans dominer.'], ['ambre', 'Les miels ambrés', 'Floraux ou aromatiques, le cœur de la gamme.'], ['fonce', 'Les miels foncés', 'Puissants, maltés ou boisés, ils s\'affirment.']];
   const trail = [['Accueil', '/'], ['Le guide des miels']];
@@ -668,6 +764,11 @@ ${longBanner('Le guide des miels', `${honeys.length} miels décryptés, leur go�
 <section class="wrap block-tight">
   <div class="hub-intro prose"><p>Un miel prend le goût des fleurs, des arbres ou du miellat que les abeilles ont récoltés. Chaque fiche de ce guide décrit un miel en détail : la plante d'origine, la couleur, le goût, la texture, la saison de récolte, les régions de production, les labels, et surtout la façon de l'utiliser en cuisine, avec nos recettes. Les informations s'appuient sur des sources reconnues, citées en bas de chaque fiche.</p></div>
   ${fam.map(([k, t, sub]) => { const l = honeys.filter((h) => h.famille === k); return l.length ? `${sectionTitle(t, sub)}<div class="honey-grid">${l.map(honeyTile).join('')}</div>` : ''; }).join('\n')}
+</section>
+<section class="wrap block">
+  ${sectionTitle('Les miels en un coup d\'œil', 'Couleur, goût et saison de récolte')}
+  ${colorScale()}
+  <div class="viz-duo">${tasteMap()}${harvestCalendar()}</div>
 </section>
 <section class="wrap block">
   ${sectionTitle('Comprendre le miel', 'Histoire, ruche, fraude, achat')}

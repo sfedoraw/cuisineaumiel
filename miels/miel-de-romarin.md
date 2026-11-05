@@ -13,6 +13,14 @@ cristallisation: Moyenne, en cristaux fins
 recolte: Mars à mai, le plus précoce des miels français
 regions: Languedoc (Corbières, Narbonnais), Provence, Corse ; en Europe surtout Espagne
 labels: "Peut être vendu sous IGP Miel de Provence quand il est récolté dans l'aire"
+profil: 3,1,0,2,1
+teinte: #F5ECC6
+mois: 3,4,5
+crist: 3
+zones: Corbières|2.8|43.0;Provence|5.4|43.55;Corse|8.9|42.1
+accords: Fraise, rhubarbe, citron, poire, amande, chèvre frais, brousse, petits légumes
+boissons: Vin blanc sec du Languedoc, thé blanc, infusion de verveine
+profil_source: apidologie
 maj: 2026-11-05
 ---
 Le miel de romarin ouvre chaque année la saison apicole. Dans le Sud de la France, c'est le **premier miel récolté**, dès le mois de mars. Très clair, il devient blanc et crémeux en cristallisant, avec une saveur fine, florale, légèrement végétale. Du Moyen Âge au début du XXe siècle, le « miel de Narbonne », où domine le romarin des Corbières, a été le miel le plus célèbre de France.

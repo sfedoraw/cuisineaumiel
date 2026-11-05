@@ -13,6 +13,14 @@ cristallisation: Moyenne
 recolte: Avril à juin en France ; début de l'été en Grèce
 regions: Garrigues de Provence, du Languedoc et des Cévennes ; Grèce (Crète), Sicile, Espagne
 labels: "Peut être vendu sous IGP Miel de Provence quand il est récolté dans l'aire"
+profil: 3,3,0,4,3
+teinte: #C98A2B
+mois: 5,6
+crist: 3
+zones: Provence|5.5|43.6;Gard|4.2|43.95;Hérault|3.4|43.7;Ardèche|4.4|44.5
+accords: Agneau, chèvre, feta, figue, amande, citron, olive, yaourt grec
+boissons: Rosé et rouge du Sud, thé à la menthe, eau pétillante citronnée
+profil_source: apidologie
 maj: 2026-11-05
 ---
 Le miel de thym a le goût des collines du Sud. Ambré, chaud, très aromatique, il évoque la garrigue au soleil. C'est un miel assez rare en France, parce que le thym pousse en touffes dispersées et que sa miellée dépend beaucoup de la pluie de printemps. En Grèce, en revanche, le miel de thym est une institution, en particulier en Crète. Voici comment le reconnaître et le cuisiner.

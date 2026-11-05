@@ -95,3 +95,9 @@ document.querySelectorAll('.carousel').forEach((c) => {
   window.addEventListener('resize', update);
   update();
 });
+
+// Calendrier des miellées : surligne le mois en cours.
+(() => {
+  const m = new Date().getMonth() + 1;
+  document.querySelectorAll(`.gantt [data-m="${m}"]`).forEach((el) => el.classList.add('now'));
+})();

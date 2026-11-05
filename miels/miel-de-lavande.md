@@ -13,6 +13,14 @@ cristallisation: Moyenne, en cristaux fins
 recolte: Juillet à début août
 regions: Provence (plateau de Valensole, Haute-Provence, Drôme provençale, Vaucluse) ; en Europe aussi Espagne
 labels: "IGP Miel de Provence ; Label Rouge possible pour le miel de lavande de Provence"
+profil: 3,3,0,3,3
+teinte: #EFCB55
+mois: 7,8
+crist: 3
+zones: Valensole|6.0|43.85;Haute-Provence|5.9|44.15;Vaucluse|5.3|44.05;Drôme provençale|5.1|44.4
+accords: Abricot, pêche, figue, fraise, amande, chèvre frais, agneau
+boissons: Rosé de Provence, muscat, citronnade, thé blanc
+profil_source: apidologie
 maj: 2026-11-05
 ---
 Le miel de lavande, c'est la Provence en pot. Doré quand il est liquide, il devient blanc crème en cristallisant, avec une texture fine et fondante. En bouche, il est floral et fruité, sans amertume, avec parfois une étonnante note de cassis. C'est l'un des miels français les plus connus à l'étranger, et l'un des rares protégés par une indication géographique.

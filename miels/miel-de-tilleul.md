@@ -13,6 +13,14 @@ cristallisation: Moyenne, en cristaux plutôt fins
 recolte: Fin juin à juillet
 regions: Alsace (forêt de la Hardt), Bourgogne, Franche-Comté, Drôme ; en Europe surtout Europe centrale et orientale
 labels: "Variété reconnue par l'IGP Miel d'Alsace"
+profil: 3,1,2,4,4
+teinte: #E6C341
+mois: 6,7
+crist: 3
+zones: Hardt (Alsace)|7.5|47.8;Franche-Comté|6.0|47.3;Bourgogne|4.8|47.3;Drôme|5.3|44.3
+accords: Citron, menthe, verveine, poire, abricot, chèvre frais, lait
+boissons: Thé vert, infusion de verveine, cidre doux, vin blanc sec
+profil_source: apidologie
 maj: 2026-11-05
 ---
 Quand on le goûte pour la première fois, le miel de tilleul surprend : derrière la douceur arrive une fraîcheur presque mentholée, puis une note boisée qui reste en bouche. C'est un miel de caractère sous des airs de miel clair, très apprécié en Europe centrale et dans l'est de la France. On le retrouve aussi bien dans une tasse de lait chaud que dans une pâtisserie aux agrumes.

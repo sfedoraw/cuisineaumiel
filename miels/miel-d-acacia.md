@@ -13,6 +13,14 @@ cristallisation: Très lente, il reste liquide de longs mois
 recolte: Mai, sur une floraison courte de deux à trois semaines
 regions: Sud-Ouest, Centre, Bourgogne, Alsace ; en Europe surtout Hongrie, Roumanie, Italie
 labels: "Variété reconnue par l'IGP Miel d'Alsace"
+profil: 5,1,0,1,1
+teinte: #F3E7B0
+mois: 5
+crist: 1
+zones: Landes|-0.8|44.0;Sologne|1.9|47.5;Bourgogne|4.5|47.0;Alsace|7.5|48.4;Cévennes|3.8|44.2
+accords: Citron, gingembre, yaourt, fromage frais, chèvre jeune, fraise, thé vert
+boissons: Thé vert, citronnade, infusions, vin blanc sec
+profil_source: apidologie
 maj: 2026-11-05
 ---
 Le miel d'acacia est souvent le premier miel que l'on goûte enfant, et celui que l'on garde ensuite pour le thé, le yaourt ou la vinaigrette. Presque transparent, très doux, il ne masque jamais les autres saveurs. C'est aussi un miel étonnant : il reste liquide pendant des mois, là où la plupart des miels se figent en quelques semaines. Voici tout ce qu'il faut savoir pour le reconnaître, le choisir et le cuisiner.

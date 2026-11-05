@@ -13,6 +13,14 @@ cristallisation: Assez rapide, en cristaux grossiers
 recolte: Fin juillet à septembre
 regions: Bretagne, Normandie, Limousin, Auvergne ; dans le monde surtout Pologne, Ukraine, Russie, Chine, Canada, États-Unis
 labels: "Pas de signe officiel spécifique en France"
+profil: 2,2,2,5,5
+teinte: #3A1A0E
+mois: 8,9
+crist: 4
+zones: Bretagne|-2.8|48.0;Normandie|-0.5|48.9;Limousin|1.6|45.9;Auvergne|3.0|45.3
+accords: Pomme, poire, noix, châtaigne, chocolat noir, caramel au beurre salé, épices
+boissons: Cidre brut, bière ambrée, café, thé noir
+profil_source: redaction
 maj: 2026-11-05
 ---
 Le miel de sarrasin ne ressemble à aucun autre. Presque noir dans le pot, il a un parfum de malt et de mélasse, et un goût si puissant qu'il divise les amateurs. En Bretagne, c'est un miel de tradition, compagnon naturel des galettes de blé noir et du pain d'épices. En Europe de l'Est et en Amérique du Nord, il est aussi très apprécié. Si vous aimez les saveurs franches, c'est un miel à découvrir absolument.

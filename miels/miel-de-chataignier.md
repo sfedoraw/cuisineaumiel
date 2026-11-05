@@ -13,6 +13,14 @@ cristallisation: Lente
 recolte: Fin juin à juillet
 regions: Cévennes, Ardèche, Limousin, Périgord, Corse, Bretagne, Alsace ; en Europe surtout Italie, Espagne, Portugal
 labels: "Variété des IGP Miel d'Alsace et Miel des Cévennes ; châtaigneraie dans l'AOP Miel de Corse"
+profil: 1,1,5,5,5
+teinte: #5C2A12
+mois: 6,7
+crist: 2
+zones: Cévennes|3.8|44.2;Ardèche|4.3|44.8;Limousin|1.6|45.7;Périgord|0.9|45.1;Bretagne|-3.0|48.1;Alsace|7.4|48.7;Corse|9.1|42.3
+accords: Châtaigne, poire, figue, noix, gibier, canard, chocolat noir, roquefort
+boissons: Bière brune, cidre brut, vin rouge léger, café
+profil_source: apidologie
 maj: 2026-11-05
 ---
 Il y a ceux qui l'adorent et ceux qui le trouvent trop fort. Le miel de châtaignier ne laisse personne indifférent : sombre, presque rouge à la lumière, il a un goût boisé, tannique, et une amertume qui reste longtemps en bouche. C'est justement ce caractère qui en fait un formidable ingrédient de cuisine, capable de tenir tête aux épices, au gibier, au chocolat et aux fromages affinés.

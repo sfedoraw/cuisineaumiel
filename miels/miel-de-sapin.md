@@ -13,6 +13,14 @@ cristallisation: Très lente, parfois absente
 recolte: Juillet à août, selon les années
 regions: Vosges, Alsace, Jura, Massif central, Pyrénées ; en Europe Forêt-Noire, Alpes, Grèce (sapin de Céphalonie)
 labels: "AOP Miel de sapin des Vosges ; variété de l'IGP Miel d'Alsace"
+profil: 3,1,0,3,3
+teinte: #3F2B12
+mois: 7,8
+crist: 1
+zones: Vosges|6.9|48.1;Alsace|7.3|48.55;Jura|5.9|46.6;Massif central|2.9|45.3;Pyrénées|0.5|42.95
+accords: Champignons, gibier, châtaigne, noix, pomme, genièvre, munster, comté
+boissons: Pinot noir d'Alsace, bière de garde, thé noir fumé, vin chaud
+profil_source: apidologie
 maj: 2026-11-05
 ---
 Le miel de sapin est un miel à part : il ne vient pas des fleurs. Les abeilles le fabriquent à partir du **miellat**, un liquide sucré que des pucerons rejettent après s'être nourris de la sève des sapins. Le résultat est un miel sombre, aux reflets verts, au parfum balsamique de forêt, peu sucré et sans amertume. Dans les Vosges, il est protégé par l'une des plus anciennes appellations d'origine de France.

@@ -13,6 +13,14 @@ cristallisation: Moyenne, en gros cristaux arrondis
 recolte: Août à septembre (callune et bruyère cendrée) ; avril à mai (bruyère blanche)
 regions: Landes, Sologne, Limousin, Bretagne, Massif central, Corse ; en Europe Écosse, Irlande, Allemagne du Nord, Norvège
 labels: "Variétés de l'IGP Miel des Landes (en cours de reconnaissance)"
+profil: 1,3,3,5,5
+teinte: #7A3A14
+mois: 4,5,8,9
+crist: 3
+zones: Landes|-0.8|44.1;Sologne|1.9|47.55;Limousin|1.7|45.7;Bretagne|-3.2|48.25;Corse|9.0|42.0
+accords: Noix, noisette, avoine, pomme, mûre, cèpes, brebis, chocolat noir
+boissons: Thé noir, bière ambrée, cidre, café
+profil_source: apidologie
 maj: 2026-11-05
 ---
 Le miel de bruyère est l'un des miels les plus étonnants d'Europe. Celui de **callune**, la bruyère commune des landes, a une texture gélatineuse unique : dans le pot, il tient comme une gelée, puis devient liquide dès qu'on le remue. Son goût est intense, boisé, presque caramélisé, avec une légère amertume. En Écosse, en Irlande et dans le nord de l'Allemagne, c'est un miel de prestige. En France, on le récolte dans les Landes, en Sologne, dans le Limousin, en Bretagne et en Corse.

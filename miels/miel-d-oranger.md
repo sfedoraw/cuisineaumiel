@@ -13,6 +13,14 @@ cristallisation: Moyenne, en cristaux fins
 recolte: Mars à mai
 regions: Espagne (Valence, Andalousie), Italie (Sicile, Calabre), Maroc, Israël, États-Unis (Floride, Californie), Mexique, Brésil ; en France, petites quantités en Corse
 labels: "Pas de signe officiel spécifique en France"
+profil: 3,1,0,3,2
+teinte: #F5E9BC
+mois: 3,4,5
+crist: 3
+zones: Corse|9.4|42.1
+accords: Orange, amande, pistache, datte, figue, cannelle, cardamome, semoule
+boissons: Thé à la menthe, café à la cardamome, citronnade
+profil_source: apidologie
 maj: 2026-11-05
 ---
 Il suffit d'ouvrir un pot pour être transporté dans un verger d'agrumes au printemps. Le miel d'oranger, que l'on appelle aussi miel de fleurs d'agrumes, est très clair, doux et délicatement parfumé. Il rappelle l'eau de fleur d'oranger, mais en plus subtil. C'est le miel des pâtisseries orientales, des tajines et des desserts méditerranéens. La France en produit très peu : la plupart des pots viennent d'Espagne, d'Italie ou du Maroc.

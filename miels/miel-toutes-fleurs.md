@@ -13,6 +13,14 @@ cristallisation: Variable, souvent assez rapide pour les miels de printemps
 recolte: Du printemps à la fin de l'été
 regions: Partout en France ; signes officiels en Provence, en Alsace et en Corse
 labels: "IGP Miel de Provence (toutes fleurs, Label Rouge possible), IGP Miel d'Alsace (toutes fleurs), AOP Miel de Corse"
+profil: 3,2,1,3,3
+teinte: #D9A440
+mois: 4,5,6,7,8
+crist: 3
+zones: Provence|5.6|43.7;Alsace|7.4|48.3;Corse|9.1|42.2;Cévennes|3.8|44.2;Bretagne|-3.0|48.1;Centre|1.8|47.2;Massif central|2.9|45.3
+accords: Tous les usages : pâtisserie, laquages, vinaigrettes, tartines, yaourt
+boissons: Thé, infusions, lait chaud, citronnade
+profil_source: redaction
 maj: 2026-11-05
 ---
 Le miel toutes fleurs est le miel le plus courant, et souvent le plus sous-estimé. Il n'a pas une plante unique pour signature, mais il raconte un paysage : les arbres fruitiers d'un verger au printemps, les ronces et les trèfles d'une haie en été, les fleurs sauvages d'une prairie de montagne. Deux pots de toutes fleurs ne se ressemblent jamais tout à fait, et c'est ce qui en fait la richesse.
