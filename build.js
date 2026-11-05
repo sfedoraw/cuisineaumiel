@@ -602,7 +602,39 @@ const isoDate = (d) => (d instanceof Date ? d : new Date(d || today)).toISOStrin
 function toc(md) {
   const hs = [...md.matchAll(/^##\s+(.*)$/gm)].map((m) => m[1]);
   if (hs.length < 3) return '';
-  return `<nav class="toc" aria-label="Sommaire"><p>Au sommaire</p><ol>${hs.map((h) => `<li><a href="#${slugify(h)}">${inline(h)}</a></li>`).join('')}</ol></nav>`;
+  return `<nav class="toc" aria-label="Sommaire"><p class="toc-title"><span>Au sommaire</span><small>${hs.length} parties</small></p><ol>${hs.map((h, i) => `<li><a href="#${slugify(h)}"><span class="toc-n">${String(i + 1).padStart(2, '0')}</span><span>${inline(h)}</span></a></li>`).join('')}</ol></nav>`;
+}
+function sideToc(md) {
+  const hs = [...md.matchAll(/^##\s+(.*)$/gm)].map((m) => m[1]);
+  if (hs.length < 3) return '';
+  return `<nav class="side-toc" aria-label="Dans cet article"><p>Dans cet article</p><div class="st-bar"><span></span></div><ol>${hs.map((h) => `<li><a href="#${slugify(h)}">${inline(h)}</a></li>`).join('')}</ol></nav>`;
+}
+function sideMarket(x, linked) {
+  const pool = recipes.slice(0, 40);
+  const picks = (linked && linked.length ? linked : [...pool].sort((a, b) => hash(a.slug + x.url) - hash(b.slug + x.url))).filter((r) => r !== recipes[0]).slice(0, 3);
+  const day = recipes[0];
+  const ico = (d) => `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const tools = [
+    ['/recettes/', ico('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'), 'Chercher une recette', 'Par miel, ingrédient ou envie'],
+    ...(HAS_ATLAS ? [['/miels/atlas/', ico('<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/>'), "L'atlas des miels", 'Tous les miels protégés, sur la carte']] : []),
+    ['/guide/trouver-un-apiculteur/', ico('<path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>'), 'Trouver un apiculteur', 'Bien acheter son miel'],
+  ];
+  return `<div class="sm-day">
+      <a href="${day.url}">
+        <span class="sm-media">${picture(day.photo, day.titre, { ratio: '4 / 3', sizes: '320px' })}<span class="sm-badge">Recette du jour</span></span>
+        <span class="sm-body"><b>${esc(day.titre)}</b><small>${clockIcon} ${totalTime(day)} · 🍯 ${esc(shortHoney(day.miel))}</small><span class="sm-cta">Voir la recette →</span></span>
+      </a>
+    </div>
+    <div class="sm-box"><h2>${linked && linked.length ? 'Cuisinez ce miel' : 'Envie de cuisiner ?'}</h2>
+      <ul class="sm-list">${picks.map((r) => `<li><a href="${r.url}">${picture(r.photo, r.titre, { ratio: '1 / 1', sizes: '64px' })}<span><b>${esc(r.titre)}</b><small>${totalTime(r)}</small></span></a></li>`).join('')}</ul>
+      <a class="sm-more" href="/recettes/">Les ${recipes.length} recettes →</a>
+    </div>
+    <div class="sm-box sm-tools"><h2>Nos outils</h2>
+      <ul>${tools.map(([u, i, t, d]) => `<li><a href="${u}"><span class="sm-ico">${i}</span><span><b>${t}</b><small>${d}</small></span></a></li>`).join('')}</ul>
+    </div>
+    <div class="sm-box sm-guide"><h2>Le guide des miels</h2>
+      <ol>${pillars.map((g) => `<li><a href="${g.url}">${esc(g.titre_court || g.titre)}</a></li>`).join('')}<li><a href="/miels/">Toutes les fiches miels</a></li></ol>
+    </div>`;
 }
 const faqHtml = (faq) => faq.length ? `<section class="faq" id="questions-frequentes"><h2>Questions fréquentes</h2>${faq.map((f) => `<details><summary>${inline(f.q)}</summary>${markdown(f.a)}</details>`).join('')}</section>` : '';
 const sourcesHtml = (src) => src.length ? `<section class="sources" id="sources"><h2>Sources</h2><ol>${src.map((s) => `<li>${inline(s)}</li>`).join('')}</ol></section>` : '';
@@ -727,7 +759,8 @@ ${isHoney ? honeyId(x) : ''}
   <aside class="long-side">
     ${facts.length ? `<div class="facts"><h2>Fiche d'identité</h2><dl>${facts.map(([k, v]) => `<dt>${k}</dt><dd>${inline(v)}</dd>`).join('')}</dl></div>` : ''}
     ${isHoney ? `<div class="side-box"><h2>Où l'acheter</h2><p>Chez un apiculteur, sur un marché ou à la ferme : notre guide pour <a href="/guide/trouver-un-apiculteur/">trouver un apiculteur près de chez vous</a>.</p></div>` : ''}
-    <div class="side-box"><h2>Le guide des miels</h2><ul>${pillars.map((g) => `<li><a href="${g.url}">${esc(g.titre_court || g.titre)}</a></li>`).join('')}${HAS_ATLAS ? `<li><a href="/miels/atlas/">L'atlas des miels du monde</a></li>` : ''}</ul></div>
+    ${sideMarket(x, linked)}
+    ${sideToc(x.main)}
   </aside>
 </div>
 ${isHoney ? `<section class="wrap block related">${sectionTitle(`Recettes au ${esc(x.nom.replace(/^Miel /, 'miel '))}`, linked.length ? 'Avec ce miel' : 'Bientôt sur le site : en attendant, toutes nos recettes')}${grid(linked.length ? linked : recipes.slice(0, 6))}</section>` : ''}
@@ -975,6 +1008,25 @@ function aboutPage() {
     [svg('<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/>'), 'Aucune promesse santé', "Le miel est un aliment de plaisir et de bien-être. Nous respectons la loi : pas d'allégation de santé."],
     [svg('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'), 'Toute la transparence', 'Origine, étiquette, appellations, fraude : les clés pour choisir un vrai miel.'],
   ];
+  const simg = (id, alt) => picture(id, alt, { ratio: '4 / 3', sizes: '(min-width: 900px) 560px, 100vw' });
+  const stories = [
+    [simg('1752776132399-59fb3579e854', 'Rayon de miel'), "L'alchimie de la ruche", 'Une œuvre collective', [
+      "Le miel naît d'un travail d'équipe d'une précision étonnante. Les butineuses récoltent le nectar des fleurs ou le miellat, puis le transmettent à leurs sœurs de la ruche, de bouche en bouche. À chaque étape, les abeilles l'enrichissent de leurs propres enzymes.",
+      "Vient ensuite la patience : déposé dans les alvéoles, le nectar est ventilé par le battement de milliers d'ailes jusqu'à perdre l'essentiel de son eau. Quand il est mûr, les abeilles le scellent sous un fin couvercle de cire, l'opercule. Le miel est prêt, et il se conserve remarquablement bien.",
+    ]],
+    [simg('1774284266228-27698569b2fd', 'Pots de miels de couleurs différentes'), 'Mille miels, mille terroirs', 'Le reflet d\'un paysage', [
+      "Il n'existe pas un miel, mais des centaines. Presque blanc ou presque noir, liquide comme un sirop ou crémeux comme un beurre, doux et floral ou puissant et boisé : chaque miel porte la signature d'une fleur, d'une forêt, d'une saison.",
+      "L'acacia est d'une douceur limpide, le châtaignier franc et légèrement amer, la lavande parfumée comme un été en Provence, le sapin des Vosges sombre et balsamique. Goûter un miel, c'est voyager. Nos <a href=\"/miels/\">fiches miels</a> et notre <a href=\"/miels/atlas/\">atlas</a> vous emmènent partout en France et dans le monde.",
+    ]],
+    [own('chef-dressage', 'Assiette dressée avec du miel', { ratio: '4 / 3', sizes: '(min-width: 900px) 560px, 100vw' }), 'Un ingrédient de chef', 'Bien plus qu\'une tartine', [
+      "En cuisine, le miel est un formidable allié. Il caramélise une volaille, laque un légume rôti, arrondit une vinaigrette, réveille un fromage, parfume un thé ou une pâtisserie. Il garde les gâteaux moelleux et donne de belles couleurs dorées.",
+      "Chaque variété a son caractère, et donc ses accords. Un miel doux pour sucrer sans masquer, un miel corsé pour tenir tête à un plat de caractère. Nos recettes vous montrent comment en tirer le meilleur, du petit-déjeuner au dîner.",
+    ]],
+    [simg('1784873230783-967a9263d4c4', 'Petit-déjeuner au miel'), 'Énergie, sport et bien-être', 'Le compagnon des journées actives', [
+      "Sportifs du dimanche ou passionnés, randonneurs, cyclistes, coureurs : beaucoup glissent un peu de miel dans leur sac. Nous vous proposons des idées gourmandes pour accompagner vos journées actives : petits-déjeuners, barres et encas maison, boissons pour avant et après l'effort.",
+      "Le miel est avant tout un aliment de plaisir, à savourer dans le cadre d'une alimentation variée et équilibrée et d'une bonne hygiène de vie. Nous ne lui prêtons aucune vertu miraculeuse : c'est la loi, et c'est aussi notre conviction.",
+    ]],
+  ];
   const trail = [['Accueil', '/'], ['À propos']];
   const body = `
 <section class="about-hero">
@@ -983,7 +1035,7 @@ function aboutPage() {
     ${crumbsHtml(trail)}
     <p class="kicker">À propos</p>
     <h1>Mieux comprendre le miel,<br><em>pour mieux l'utiliser.</em></h1>
-    <p>Connu depuis la nuit des temps, et pourtant si mal connu aujourd'hui.</p>
+    <p>Connu depuis la nuit des temps, déposé dans les tombes des pharaons, chanté par les poètes… et pourtant si mal connu aujourd'hui. Bienvenue chez celles et ceux qui veulent le redécouvrir.</p>
   </div>
 </section>
 
@@ -992,7 +1044,9 @@ function aboutPage() {
     <p class="kicker">Notre conviction</p>
     <h2>Le miel mérite mieux qu'une place de second rôle.</h2>
     <p>On le range parmi les sucres, on le réduit à la tartine du matin, on le soupçonne parfois de tous les défauts. Pendant ce temps, il est devenu l'un des aliments les plus fraudés au monde, coupé au sirop et vendu sous de fausses origines.</p>
-    <p>Étrange destin pour l'un des produits les plus extraordinaires que la nature nous offre. Nous avons créé ce site pour <b>rétablir la vérité</b>, avec nos armes : des faits, des sources et de bonnes recettes.</p>
+    <p>Étrange destin pour l'un des produits les plus extraordinaires que la nature nous offre. Pourquoi tant de méfiance ? À qui profite cette confusion ? La question mérite d'être posée.</p>
+    <p>Nous avons créé ce site pour <b>rétablir la vérité</b>, avec nos armes : des faits vérifiés, des sources solides et de bonnes recettes. Pas de discours miracle, pas de mode passagère. Juste le miel, tel qu'il est, et tout ce qu'il peut apporter à votre table.</p>
+    <p>Car mieux le connaître, c'est mieux le choisir. Et mieux le choisir, c'est soutenir celles qui le font naître : les abeilles, et les femmes et les hommes qui veillent sur elles.</p>
   </div>
   <blockquote class="am-quote"><p>« C'est de l'or à l'état pur, et les abeilles en sont les reines. »</p></blockquote>
 </section>
@@ -1004,6 +1058,11 @@ function aboutPage() {
     <div><b>${nbAppellations}</b><span>appellations recensées dans l'atlas</span></div>
     <div><b>${nbSources}</b><span>sources citées</span></div>
   </div>
+</section>
+
+<section class="wrap block about-stories">
+  ${sectionTitle('Le miel, ce trésor', 'Quatre raisons de le regarder autrement')}
+  ${stories.map(([im, k, t, ps], i) => `<article class="about-story${i % 2 ? ' rev' : ''}"><div class="as-img">${im}</div><div class="as-txt"><p class="kicker">${k}</p><h3>${t}</h3>${ps.map((x) => `<p>${x}</p>`).join('')}</div></article>`).join('')}
 </section>
 
 <section class="wrap block">
@@ -1032,8 +1091,14 @@ function aboutPage() {
     <div>
       <p class="kicker">Qui sommes-nous ?</p>
       <h2>Proposé par le GAEC des Deux Vallées</h2>
-      <p>Une exploitation agricole attachée à son territoire et passionnée par le monde des abeilles. Nous avons créé Cuisine au miel pour partager cette passion et donner à chacun les clés pour comprendre, choisir et cuisiner le miel.</p>
+      <p>Derrière Cuisine au miel, il y a une exploitation agricole attachée à son territoire, au rythme des saisons et au respect du vivant. Une famille de passionnés qui a appris, au fil des années, à regarder les abeilles avec admiration.</p>
+      <p>Nous avons créé ce site pour partager cette passion et donner à chacun les clés pour comprendre, choisir et cuisiner le miel. Un projet sincère, que nous faisons grandir chaque jour, avec une nouvelle recette et de nouvelles fiches.</p>
     </div>
+  </div>
+  <div class="about-cta">
+    <h2>Le miel n'a pas fini de <em>vous surprendre.</em></h2>
+    <p>Commencez par une recette, une fiche ou une carte : il y a toujours quelque chose à découvrir.</p>
+    <p class="about-cta-btns"><a class="btn" href="/recettes/">Voir les recettes</a> <a class="btn-outline" href="/miels/">Explorer les miels</a></p>
   </div>
   <p class="disclaimer">Le miel ne doit pas être donné aux enfants de moins d'un an, même cuit, en raison du risque de botulisme infantile (<a href="https://www.anses.fr/fr/content/pas-de-miel-les-enfants-de-moins-dun-an">recommandation de l'Anses</a>).</p>
 </section>`;

@@ -134,3 +134,27 @@ document.querySelectorAll('.carousel').forEach((c) => {
     d.addEventListener('mouseleave', () => hl(d.dataset.id, false));
   });
 })();
+
+// Sommaire latéral : section active et progression de lecture.
+(() => {
+  const nav = document.querySelector('.side-toc');
+  if (!nav) return;
+  const links = [...nav.querySelectorAll('a')];
+  const heads = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1)))).filter(Boolean);
+  const bar = nav.querySelector('.st-bar span');
+  const main = document.querySelector('.long-main');
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    let cur = 0;
+    heads.forEach((h, i) => { if (h.getBoundingClientRect().top < 140) cur = i; });
+    links.forEach((a, i) => a.classList.toggle('on', i === cur));
+    if (main && bar) {
+      const r = main.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (innerHeight * 0.4 - r.top) / r.height));
+      bar.style.width = (p * 100).toFixed(1) + '%';
+    }
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+})();
