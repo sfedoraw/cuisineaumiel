@@ -203,3 +203,28 @@ document.querySelectorAll('.carousel').forEach((c) => {
   });
   document.addEventListener('visibilitychange', () => { if (!el.hidden && document.visibilityState === 'visible') wake(); });
 })();
+
+// Calculateur sucre vers miel.
+(() => {
+  const s = document.getElementById('t-sugar');
+  if (!s) return;
+  const part = document.getElementById('t-part'), bake = document.getElementById('t-bake');
+  const $ = (id) => document.getElementById(id);
+  const r5 = (x) => Math.round(x / 5) * 5;
+  const calc = () => {
+    const sugar = Math.max(0, parseFloat(s.value) || 0), p = parseInt(part.value, 10) / 100;
+    const replaced = sugar * p, honey = replaced * 0.85;
+    $('t-part-o').textContent = Math.round(p * 100) + ' %';
+    $('t-warn').hidden = p <= 0.5;
+    $('o-honey').textContent = r5(honey) + ' g';
+    const cs = honey / 21;
+    $('o-spoons').textContent = honey < 10 ? 'soit moins d\'une cuillère à soupe' : `soit environ ${Math.round(cs)} cuillère${Math.round(cs) > 1 ? 's' : ''} à soupe`;
+    $('o-sugar').textContent = r5(sugar - replaced) + ' g';
+    $('o-liquid').textContent = Math.round(honey * 0.18) + ' ml';
+    const soda = honey * 0.008;
+    $('o-soda').textContent = soda < 0.6 ? '1 petite pincée' : soda < 1.5 ? '1 pincée (environ 1 g)' : `environ ${soda.toFixed(1).replace('.', ',')} g`;
+    document.querySelectorAll('.o-bake').forEach((li) => { li.hidden = !bake.checked; });
+  };
+  [s, part, bake].forEach((el) => el.addEventListener('input', calc));
+  calc();
+})();

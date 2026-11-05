@@ -205,7 +205,7 @@ for (const r of recipes) {
 const ASSET_V = require('crypto').createHash('md5').update(['style.css', 'main.js'].map((f) => fs.readFileSync(path.join(__dirname, 'static', f))).join('')).digest('hex').slice(0, 8);
 // Logo médaillon (piste A) : la goutte se remplit de miel.
 const DROP = 'M13 1C10.6 5.8 1.5 14.6 1.5 24a11.5 11.5 0 0 0 23 0C24.5 14.6 15.4 5.8 13 1z';
-const logoMedal = (id) => `<svg class="medal" viewBox="0 0 280 280" role="img" aria-label="Cuisine au miel"><circle cx="140" cy="140" r="130" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="140" cy="140" r="119" fill="none" stroke="currentColor" stroke-width="1"/><g transform="translate(118 44) scale(1.7)"><clipPath id="${id}"><path d="${DROP}"/></clipPath><g clip-path="url(#${id})"><g class="lv"><path class="wv" d="M-10 0q2.5-1.6 5 0t5 0 5 0 5 0 5 0 5 0 5 0 5 0 5 0 5 0V40H-10z" fill="#F2A516"/></g></g><path d="${DROP}" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.2 26.5a6.4 6.4 0 0 1 .6-6.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g><text x="140" y="150" text-anchor="middle" class="m-k">CUISINE</text><text x="140" y="197" text-anchor="middle" class="m-n">au miel</text><path d="M104 216h72" stroke="currentColor" stroke-width="1"/><circle cx="140" cy="216" r="2.5" fill="currentColor"/></svg>`;
+const logoMedal = (id) => `<svg class="medal" viewBox="0 0 280 280" role="img" aria-label="Cuisine au miel"><circle cx="140" cy="140" r="130" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="140" cy="140" r="119" fill="none" stroke="currentColor" stroke-width="1"/><g transform="translate(115.5 36) scale(1.9)"><clipPath id="${id}"><path d="${DROP}"/></clipPath><g clip-path="url(#${id})"><g class="lv"><path class="wv2" d="M-20 17q2.5-2.2 5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0 V40H-20z" fill="#F8C766"/><path class="wv" d="M-20 18.5q2.5-2.6 5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0t5 0 V40H-20z" fill="#F2A516"/></g></g><path d="${DROP}" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.2 26.5a6.4 6.4 0 0 1 .6-6.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g><text x="140" y="150" text-anchor="middle" class="m-k">CUISINE</text><text x="140" y="197" text-anchor="middle" class="m-n">au miel</text><path d="M104 216h72" stroke="currentColor" stroke-width="1"/><circle cx="140" cy="216" r="2.5" fill="currentColor"/></svg>`;
 const logoSvg = `<svg viewBox="7 1 26 36" width="26" height="36" aria-hidden="true"><path d="M20 2C17.6 6.8 8.5 15.6 8.5 25a11.5 11.5 0 0 0 23 0C31.5 15.6 22.4 6.8 20 2z" fill="currentColor"/><path d="M14.2 27.5a6.4 6.4 0 0 1 .6-6.2" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>`;
 const searchIcon = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
 const clockIcon = `<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
@@ -622,6 +622,7 @@ function sideMarket(x, linked) {
   const tools = [
     ['/recettes/', ico('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'), 'Chercher une recette', 'Par miel, ingrédient ou envie'],
     ...(HAS_ATLAS ? [['/miels/atlas/', ico('<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/>'), "L'atlas des miels", 'Tous les miels protégés, sur la carte']] : []),
+    ['/outils/sucre-miel/', ico('<path d="M4 7h16M4 12h10M4 17h7"/><path d="M17 14l3 3-3 3"/>'), 'Sucre → miel', 'Adaptez vos recettes'],
     ['/guide/trouver-un-apiculteur/', ico('<path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>'), 'Trouver un apiculteur', 'Bien acheter son miel'],
   ];
   return `<div class="sm-day">
@@ -1110,6 +1111,59 @@ function aboutPage() {
   return layout({ title: 'À propos', description: "Cuisine au miel, proposé par le GAEC des Deux Vallées : mieux comprendre le miel pour mieux l'utiliser. Recettes, guide des miels, atlas et magazine, avec des sources solides et sans promesse santé.", canonical: '/a-propos/', body, extraHead: ldScript(crumbsLd(trail)) + ldScript({ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'À propos de Cuisine au miel', url: SITE.url + '/a-propos/', about: { '@id': SITE.url + '/#org' } }) });
 }
 
+function sugarTool() {
+  const trail = [['Accueil', '/'], ['Outils', '/outils/sucre-miel/'], ['Remplacer le sucre par du miel']];
+  const faq = [
+    { q: 'Combien de miel pour remplacer 100 g de sucre ?', a: 'Comptez environ 85 g de miel pour 100 g de sucre remplacés. Le miel a un pouvoir sucrant un peu plus élevé et il apporte de l\'eau.' },
+    { q: 'Peut-on remplacer tout le sucre par du miel ?', a: 'Pour la pâtisserie, on conseille de commencer par la moitié du sucre. Au-delà, la texture change : gâteau plus dense, plus humide et qui colore plus vite.' },
+    { q: 'Pourquoi baisser la température du four ?', a: 'Les sucres du miel caramélisent plus vite que le sucre blanc. En baissant le four d\'environ 15 °C, le gâteau dore sans brûler.' },
+  ];
+  const body = `
+${pageHead('Remplacer le sucre par du miel', 'Le calculateur pour adapter n\'importe quelle recette : quantité de miel, liquide à retirer, bicarbonate et température du four.', 'decoupe-cuisine', crumbsHtml(trail))}
+<section class="wrap block tool">
+  <div class="tool-card">
+    <div class="tool-in">
+      <label for="t-sugar">Sucre dans la recette</label>
+      <div class="tool-num"><input id="t-sugar" type="number" inputmode="decimal" min="0" max="2000" step="5" value="200"><span>g</span></div>
+      <label for="t-part">Part du sucre à remplacer : <output id="t-part-o">50 %</output></label>
+      <input id="t-part" type="range" min="10" max="100" step="5" value="50">
+      <p class="tool-warn" id="t-warn" hidden>Au-delà de 50 %, la texture change nettement : faites un essai.</p>
+      <label class="tool-check"><input id="t-bake" type="checkbox" checked> C'est une recette cuite au four</label>
+    </div>
+    <div class="tool-out" aria-live="polite">
+      <div class="to-main"><span>Miel</span><b id="o-honey">85 g</b><small id="o-spoons">soit environ 4 cuillères à soupe</small></div>
+      <ul>
+        <li><span>Sucre restant</span><b id="o-sugar">100 g</b></li>
+        <li><span>Liquide à retirer</span><b id="o-liquid">15 ml</b></li>
+        <li class="o-bake"><span>Bicarbonate à ajouter</span><b id="o-soda">1 pincée</b></li>
+        <li class="o-bake"><span>Four</span><b>−15 °C</b></li>
+      </ul>
+    </div>
+  </div>
+  <div class="prose tool-txt">
+    <h2>Comment ça marche</h2>
+    <p>Le miel n'est pas un sucre comme les autres. Il contient généralement <b>15 à 20 % d'eau</b> (la directive européenne fixe un maximum de 20 % pour la plupart des miels), il sucre un peu plus que le sucre blanc à poids égal, il est légèrement acide et il colore plus vite à la cuisson. Pour réussir la substitution, on ajuste donc quatre choses :</p>
+    <ol>
+      <li><b>La quantité</b> : environ 85 g de miel pour 100 g de sucre remplacés.</li>
+      <li><b>Les liquides</b> : on retire un peu de lait, d'eau ou de jus pour compenser l'eau du miel, environ 18 ml pour 100 g de miel.</li>
+      <li><b>Le bicarbonate</b> : une petite pincée neutralise l'acidité du miel et aide la pâte à lever.</li>
+      <li><b>Le four</b> : on baisse d'environ 15 °C pour éviter que le gâteau ne brunisse trop vite.</li>
+    </ol>
+    <p>Ces repères sont ceux des services de vulgarisation agricole américains et des pâtissiers. Ils restent indicatifs : chaque recette réagit différemment, et le goût du miel compte. Un miel doux comme l'acacia s'efface ; un miel de châtaignier ou de sarrasin marque la recette. Voir nos <a href="/miels/">fiches miels</a> pour choisir.</p>
+    <h2>Les bons réflexes</h2>
+    <ul>
+      <li>Huilez légèrement la cuillère ou la tasse : le miel glisse tout seul.</li>
+      <li>Incorporez le miel avec les ingrédients liquides, pour une pâte homogène.</li>
+      <li>Pour les biscuits croustillants, gardez une partie du sucre : le miel rend les pâtes plus moelleuses.</li>
+      <li>Le miel ne doit pas être donné aux enfants de moins d'un an, même cuit.</li>
+    </ul>
+  </div>
+  ${faqHtml(faq)}
+  ${sourcesHtml(['University of Kentucky, Cooperative Extension, « [Honey](https://fcs.mgcafe.uky.edu/commodity/honey) », fiche Plate it up! Kentucky Proud.', 'The Kitchn, « [4 rules for successfully swapping honey for sugar in any baked goods](https://www.thekitchn.com/4-rules-for-successfully-swapping-honey-for-sugar-in-any-baked-goods-230156) ».', 'Union européenne, [directive 2001/110/CE relative au miel](https://eur-lex.europa.eu/eli/dir/2001/110/oj), annexe II.', 'Anses, « [Pas de miel pour les enfants de moins d\'un an](https://www.anses.fr/fr/content/pas-de-miel-les-enfants-de-moins-dun-an) », 2023.'])}
+</section>`;
+  return layout({ title: 'Remplacer le sucre par du miel : le calculateur', description: 'Combien de miel pour remplacer le sucre ? Notre calculateur gratuit adapte vos recettes : quantité de miel, liquide à retirer, bicarbonate et température du four.', canonical: '/outils/sucre-miel/', body, extraHead: [crumbsLd(trail), faqLd(faq), { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Calculateur sucre vers miel', applicationCategory: 'LifestyleApplication', operatingSystem: 'Tous', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }, url: SITE.url + '/outils/sucre-miel/', inLanguage: 'fr-FR' }].map(ldScript).join('\n') });
+}
+
 // ---------- construction ----------
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
@@ -1127,6 +1181,7 @@ write('recettes/index.html', archive());
 recipes.forEach((r, i) => { write(`recettes/${r.slug}/index.html`, recipePage(r, i)); urls.push(r.url); });
 for (const c of CATEGORIES) { write(`categories/${c.slug}/index.html`, categoryPage(c)); urls.push(`/categories/${c.slug}/`); }
 write('a-propos/index.html', aboutPage()); urls.push('/a-propos/');
+write('outils/sucre-miel/index.html', sugarTool()); urls.push('/outils/sucre-miel/');
 for (const f of (fs.existsSync(path.join(ROOT, 'pages')) ? fs.readdirSync(path.join(ROOT, 'pages')) : []).filter((f) => f.endsWith('.md') && f !== 'a-propos.md')) {
   const p = staticPage(f);
   write(`${p.slug}/index.html`, p.html);
