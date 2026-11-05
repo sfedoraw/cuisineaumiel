@@ -270,7 +270,7 @@ ${body}
       <a href="/flux.xml">Flux RSS</a>
     </nav>
   </div>
-  <p class="fine">© ${today.getUTCFullYear()} cuisineaumiel.fr · Photos : Unsplash et Depositphotos · Le miel ne convient pas aux enfants de moins d'un an.</p>
+  <p class="fine">© ${today.getUTCFullYear()} cuisineaumiel.fr · Le miel ne convient pas aux enfants de moins d'un an.</p>
 </footer>
 <script src="/main.js?v=${ASSET_V}" defer></script>
 </body>
