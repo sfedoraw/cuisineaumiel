@@ -158,3 +158,48 @@ document.querySelectorAll('.carousel').forEach((c) => {
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   update();
 })();
+
+// Mode cuisine : une étape à la fois, en grand, écran maintenu allumé.
+(() => {
+  const btn = document.querySelector('[data-cook]');
+  if (!btn) return;
+  const steps = [...document.querySelectorAll('.steps li')].map((li) => li.innerHTML);
+  const title = document.querySelector('.recipe-head h1')?.textContent || '';
+  const el = document.createElement('div');
+  el.className = 'cook'; el.hidden = true;
+  el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', 'Mode cuisine');
+  el.innerHTML = `<div class="cook-top"><div><b></b><small class="cook-wake"></small></div><div class="cook-actions"><button type="button" class="cook-tab">Ingrédients</button><button type="button" class="cook-x" aria-label="Quitter le mode cuisine">Quitter</button></div></div>
+  <div class="cook-body" aria-live="polite"></div>
+  <div class="cook-foot"><button type="button" class="cook-prev">← Précédent</button><div class="cook-dots"></div><button type="button" class="cook-next">Suivant →</button></div>`;
+  document.body.appendChild(el);
+  el.querySelector('.cook-top b').textContent = title;
+  const body = el.querySelector('.cook-body'), prev = el.querySelector('.cook-prev'), next = el.querySelector('.cook-next');
+  const dots = el.querySelector('.cook-dots');
+  let i = -1, lock = null, last = null;
+  const ingredients = () => [...document.querySelectorAll('.ingredients-box li')].map((li) => `<li><label><input type="checkbox"><span>${li.querySelector('[data-qty]')?.innerHTML || li.textContent}</span></label></li>`).join('');
+  const render = () => {
+    if (i < 0) body.innerHTML = `<p class="cook-n">Avant de commencer</p><ul class="cook-ing">${ingredients()}</ul>`;
+    else body.innerHTML = `<p class="cook-n">Étape ${i + 1} sur ${steps.length}</p><p class="cook-step">${steps[i]}</p>`;
+    prev.disabled = i < 0;
+    next.textContent = i < 0 ? 'Commencer →' : i === steps.length - 1 ? 'Bon appétit !' : 'Suivant →';
+    dots.innerHTML = steps.map((_, k) => `<span class="${k <= i ? 'on' : ''}"></span>`).join('');
+    body.scrollTop = 0;
+  };
+  const wake = async () => {
+    try { lock = await navigator.wakeLock.request('screen'); el.querySelector('.cook-wake').textContent = 'L\'écran reste allumé'; } catch (e) { el.querySelector('.cook-wake').textContent = ''; }
+  };
+  const open = () => { last = document.activeElement; i = -1; render(); el.hidden = false; document.body.style.overflow = 'hidden'; next.focus(); wake(); };
+  const close = () => { el.hidden = true; document.body.style.overflow = ''; try { lock && lock.release(); } catch (e) {} lock = null; last && last.focus(); };
+  btn.addEventListener('click', open);
+  el.querySelector('.cook-x').addEventListener('click', close);
+  el.querySelector('.cook-tab').addEventListener('click', () => { i = -1; render(); });
+  prev.addEventListener('click', () => { if (i > -1) { i--; render(); } });
+  next.addEventListener('click', () => { if (i < steps.length - 1) { i++; render(); } else close(); });
+  document.addEventListener('keydown', (e) => {
+    if (el.hidden) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowRight') next.click();
+    else if (e.key === 'ArrowLeft') prev.click();
+  });
+  document.addEventListener('visibilitychange', () => { if (!el.hidden && document.visibilityState === 'visible') wake(); });
+})();
