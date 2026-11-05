@@ -26,6 +26,12 @@ jobs:
         with:
           node-version: 22
       - run: node build.js
+        env:
+          # À retirer, avec la ligne base-path, le jour où cuisineaumiel.fr est branché.
+          SITE_URL: https://sfedoraw.github.io/cuisineaumiel
+      # Adresse provisoire sfedoraw.github.io/cuisineaumiel/ tant que cuisineaumiel.fr n'est pas branché.
+      # Le jour où le domaine fonctionne : supprimer cette ligne.
+      - run: node base-path.js /cuisineaumiel
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
