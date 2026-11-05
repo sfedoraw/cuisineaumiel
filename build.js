@@ -389,7 +389,7 @@ function pageHead(title, lede, photo, crumbs = '') {
   <div class="banner-inner">${crumbs}<h1>${title}</h1>${lede ? `<p>${lede}</p>` : ''}</div>
 </section>`;
 }
-const BANNER = { 'aperitifs-entrees': 'salade-maison', plats: 'chef-sel', desserts: 'pappardelle-bandeau', patisserie: 'vieux-livre', 'petit-dejeuner': 'salade-printemps', boissons: 'decoupe-cuisine', 'sauces-condiments': 'decoupe-legumes' };
+const BANNER = { 'aperitifs-entrees': 'salade-maison', plats: 'pappardelle-bandeau', desserts: 'decoupe-cuisine', patisserie: 'vieux-livre', 'petit-dejeuner': 'salade-printemps', boissons: 'chef-sel', 'sauces-condiments': 'decoupe-legumes' };
 
 function categoryPage(c) {
   const list = recipes.filter((r) => r.cat === c);
