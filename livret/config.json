@@ -2,7 +2,7 @@
   "chapitres": [
     { "titre": "Cocktails", "alcool": true, "recettes": [
       { "slug": "bees-knees", "photo": "beesknees", "court": "Bee’s Knees" },
-      { "slug": "gold-rush", "photo": "goldrush", "court": "Gold Rush" },
+      { "slug": "gold-rush", "photo": "goldrush", "court": "Gold Rush", "pos": "62% center" },
       { "slug": "canchanchara", "photo": "canchanchara", "court": "Canchánchara" } ] },
     { "titre": "Entrées", "recettes": [
       { "slug": "chevre-chaud-miel-thym-noix", "photo": "chevre", "court": "Chèvre chaud au miel de thym et aux noix" },
@@ -14,7 +14,7 @@
       { "slug": "saumon-glace-miel-soja-gingembre", "photo": "saumon", "court": "Saumon glacé miel, soja et gingembre" } ] },
     { "titre": "Desserts", "recettes": [
       { "slug": "creme-brulee-miel-lavande", "photo": "creme", "court": "Crème brûlée au miel de lavande" },
-      { "slug": "nougat-glace-miel-pistaches", "photo": "nougat", "court": "Nougat glacé au miel et aux pistaches" },
+      { "slug": "nougat-glace-miel-pistaches", "photo": "nougat", "court": "Nougat glacé au miel et aux pistaches", "pos": "38% center" },
       { "slug": "pain-epices-traditionnel", "photo": "painepices", "court": "Pain d’épices traditionnel", "dense": true } ] }
   ],
   "intro": [

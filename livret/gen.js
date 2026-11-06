@@ -178,7 +178,13 @@ for (const ch of recipes) {
     const meta = [
       ['Préparation', r.preparation], ['Cuisson', r.cuisson], ['Repos', r.repos], ['Pour', r.portions && (/\D/.test(r.portions) ? r.portions : r.portions + ' pers.')],
     ].filter((m) => m[1]);
-    const ingr = '<div class="grp">' + r.groups.map((g) => `<div class="g">${g.name ? `<h5>${typo(g.name)}</h5>` : ''}<ul>${g.items.map((it) => `<li>${typo(it)}</li>`).join('')}</ul></div>`).join('') + '</div>';
+    const gHtml = (g) => `<div class="g">${g.name ? `<h5>${typo(g.name)}</h5>` : ''}<ul>${g.items.map((it) => `<li>${typo(it)}</li>`).join('')}</ul></div>`;
+    let ingr;
+    if (r.dense) { // deux colonnes équilibrées
+      const total = r.groups.reduce((a, g) => a + g.items.length, 0); let acc = 0; const c1 = [], c2 = [];
+      for (const g of r.groups) { (acc < total / 2 ? c1 : c2).push(g); acc += g.items.length; }
+      ingr = `<div class="grp"><div>${c1.map(gHtml).join('')}</div><div>${c2.map(gHtml).join('')}</div></div>`;
+    } else ingr = r.groups.map(gHtml).join('');
     page('recipe' + (r.dense ? ' dense' : '') + (ch.alcool ? ' cocktail' : ''), `
       <div class="in">
         <p class="kicker">${typo(ch.titre)} · ${String(i + 1).padStart(2, '0')}</p>

@@ -118,14 +118,15 @@ h2, .cover h1 { text-wrap: balance; }
 .dense .cols { grid-template-columns: 1fr; gap: 4mm; }
 .dense .ingr { padding: 3.2mm 4mm 2.4mm; }
 .dense .ingr .grp { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6mm; }
-.dense .ingr .g { break-inside: avoid; }
+.dense .ingr .g { padding-bottom: 1.6mm; }
+.dense .ingr .g + .g h5 { margin-top: 2mm; }
 .dense .steps li { font-size: 7.2pt; line-height: 1.45; margin-bottom: 1.8mm; }
 .dense .ingr li { font-size: 7pt; padding: .55mm 0 .55mm 3mm; }
 .dense .ingr li::before { top: 1.8mm; }
 .dense .r-intro { font-size: 8.6pt; }
 
 /* 4e de couverture */
-.back .back-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(43, 27, 10, .78), rgba(43, 27, 10, .9) 55%, rgba(30, 18, 6, .97)); }
+.back .back-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30, 18, 6, .72), rgba(30, 18, 6, .82) 45%, rgba(30, 18, 6, .94)); }
 .back-in { position: absolute; inset: calc(var(--b) + 14mm) calc(var(--b) + 14mm) auto; color: #F5E9D3; text-align: center; display: flex; flex-direction: column; align-items: center; }
 .back-mark { width: 16mm; color: #F8C766; margin-bottom: 4mm; }
 .back-logo { max-width: 34mm; max-height: 24mm; margin-bottom: 5mm; }
@@ -143,3 +144,8 @@ h2, .cover h1 { text-wrap: balance; }
 .back-foot .medal { width: 13mm; flex: none; }
 .back-foot span { font: 400 6pt/1.55 'Mont'; }
 .back-foot i { font-style: normal; color: #F8C766; }
+.dense .steps ol { column-count: 2; column-gap: 6mm; }
+.dense .steps li { break-inside: avoid; }
+.dense .ingr li { padding: .4mm 0 .4mm 3mm; }
+.dense .ingr li::before { top: 1.6mm; }
+.dense .meta { margin: 3mm 0 3.5mm; }
