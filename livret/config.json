@@ -4,11 +4,11 @@
       { "slug": "bees-knees", "photo": "beesknees", "court": "Bee’s Knees" },
       { "slug": "gold-rush", "photo": "goldrush", "court": "Gold Rush", "pos": "62% center" },
       { "slug": "canchanchara", "photo": "canchanchara", "court": "Canchánchara" } ] },
-    { "titre": "Entrées", "recettes": [
+    { "titre": "Entrées", "apres": ["histoire", "fleur"], "recettes": [
       { "slug": "chevre-chaud-miel-thym-noix", "photo": "chevre", "court": "Chèvre chaud au miel de thym et aux noix" },
       { "slug": "figues-roties-miel-jambon-cru", "photo": "figues", "court": "Figues rôties au miel et jambon cru" },
       { "slug": "feta-rotie-miel-origan", "photo": "feta", "court": "Feta rôtie au miel et à l’origan" } ] },
-    { "titre": "Plats", "recettes": [
+    { "titre": "Plats", "apres": ["palette", "etiquette"], "recettes": [
       { "slug": "magret-canard-miel-orange-epices", "photo": "magret", "court": "Magret de canard au miel et à l’orange" },
       { "slug": "tajine-agneau-pruneaux-miel", "photo": "tajine", "court": "Tajine d’agneau aux pruneaux et au miel", "dense": true },
       { "slug": "saumon-glace-miel-soja-gingembre", "photo": "saumon", "court": "Saumon glacé miel, soja et gingembre" } ] },

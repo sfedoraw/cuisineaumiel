@@ -1,0 +1,68 @@
+{
+  "histoire": {
+    "rubrique": "Histoire",
+    "titre": "Neuf mille ans de douceur",
+    "photo": "art-histoire",
+    "chapeau": "Bien avant le sucre, il y avait le miel. L’humanité le récolte, le cuisine et le célèbre depuis le Néolithique.",
+    "corps": [
+      "En 2015, une équipe internationale publie dans la revue Nature l’analyse de plus de 6 400 poteries préhistoriques. Des traces de cire d’abeille y apparaissent dès le VIIᵉ millénaire avant notre ère, en Anatolie : les premiers agriculteurs exploitaient déjà les colonies d’abeilles il y a environ 9 000 ans.",
+      "Dans la Cueva de la Araña, près de Valence, en Espagne, une peinture rupestre montre une silhouette accrochée à des cordes, la main plongée dans un essaim sauvage. En Égypte, vers 2400 avant notre ère, un relief du temple solaire du pharaon Niouserrê représente des apiculteurs qui récoltent les rayons et mettent le miel en jarres.",
+      "Les Grecs et les Romains sucrent leurs gâteaux et leur vin au miel, et le recueil de cuisine attribué à Apicius en fait un ingrédient central de ses sauces. Au Moyen Âge, le miel parfume les pains d’épices et les hypocras. Il faudra attendre l’essor du sucre de betterave, au XIXᵉ siècle, pour qu’il cède sa place de premier édulcorant d’Europe."
+    ],
+    "chiffres": [
+      ["9 000 ans", "les plus anciennes traces de cire d’abeille sur des poteries néolithiques"],
+      ["2400 av. J.-C.", "la première scène d’apiculture connue, en Égypte"],
+      ["XIXᵉ siècle", "le sucre de betterave détrône le miel en Europe"]
+    ],
+    "sources": "Roffet-Salque M. et al., « Widespread exploitation of the honeybee by early Neolithic farmers », Nature 527, 2015 · Crane E., The World History of Beekeeping and Honey Hunting, Routledge, 1999."
+  },
+  "fleur": {
+    "rubrique": "Le saviez-vous ?",
+    "titre": "De la fleur au pot",
+    "photo": "art-fleur",
+    "chapeau": "Le miel n’est pas un nectar simplement récolté : c’est une lente transformation, entièrement réalisée par les abeilles.",
+    "corps": [
+      "Tout commence par une butineuse. Elle aspire le nectar des fleurs, ou le miellat que certains insectes déposent sur les sapins et les chênes, et le stocke dans son jabot. Des enzymes s’y mettent aussitôt au travail : l’invertase découpe le saccharose en deux sucres plus simples, le glucose et le fructose.",
+      "De retour à la ruche, le nectar passe d’abeille en abeille, puis il est déposé dans les alvéoles. Les ouvrières ventilent alors la ruche de leurs ailes pour faire évaporer l’eau. Quand le miel est assez concentré, elles scellent chaque alvéole d’un opercule de cire.",
+      "L’apiculteur ne récolte que les cadres operculés. Le miel est extrait par centrifugation, filtré pour retirer les morceaux de cire, laissé à reposer, puis mis en pot. La réglementation est claire : on ne peut rien lui ajouter, ni rien lui retirer de ce qui lui est propre."
+    ],
+    "chiffres": [
+      ["20 %", "d’eau au maximum dans la plupart des miels, selon la directive européenne"],
+      ["0", "ingrédient ajouté autorisé : le miel est un produit naturel pur"],
+      ["2 origines", "le nectar des fleurs, ou le miellat (sapin, chêne, forêt)"]
+    ],
+    "sources": "Codex Alimentarius, norme pour le miel CXS 12-1981 · Directive 2001/110/CE relative au miel, modifiée par la directive (UE) 2024/1438."
+  },
+  "palette": {
+    "rubrique": "Dégustation",
+    "titre": "La palette des miels",
+    "photo": "art-palette",
+    "chapeau": "Du blanc presque laiteux au brun profond, chaque miel raconte une fleur, un terroir, une saison. Petit guide pour les marier en cuisine.",
+    "palette": [
+      ["#F7EBC3", "Acacia", "Très doux, vanillé, reste liquide longtemps. Sucre sans masquer : cocktails, yaourts."],
+      ["#F3E3B3", "Colza", "Blanc et crémeux, il cristallise vite. Parfait sur les tartines."],
+      ["#EFCF7B", "Lavande", "Floral et parfumé. Crèmes, fromages frais, desserts d’été."],
+      ["#EDBE5A", "Oranger", "Notes de fleur d’oranger. Tajines, pâtisseries orientales."],
+      ["#D99A2B", "Thym", "Ambré, aromatique, puissant. Chèvre, agneau, grillades."],
+      ["#A8621A", "Châtaignier", "Corsé, légère amertume. Fromages affinés, gibier, bourbon."],
+      ["#6E3B12", "Sapin", "Miellat sombre, malté, peu sucré. Canard, pain d’épices."],
+      ["#4A2410", "Sarrasin", "Presque noir, très puissant. Pain d’épices, crêpes."]
+    ],
+    "encart": "Un miel cristallisé n’est pas un défaut ! Tout dépend de l’équilibre entre glucose et fructose : le colza fige en quelques jours, l’acacia reste liquide des mois. Pour le fluidifier, un bain-marie tiède suffit, sans jamais le faire bouillir.",
+    "sources": "Codex Alimentarius CXS 12-1981 · INAO : Miel de sapin des Vosges AOP, Miel de Provence IGP, Miel de Corse – Mele di Corsica AOP."
+  },
+  "etiquette": {
+    "rubrique": "Bien choisir",
+    "titre": "Lire l’étiquette d’un pot de miel",
+    "photo": "art-etiquette",
+    "chapeau": "Le miel est l’un des aliments les plus fraudés au monde. Bonne nouvelle : l’étiquette en dit long, à condition de savoir la lire.",
+    "grand": ["46 %", "des lots de miel importés contrôlés aux frontières de l’Union européenne (147 sur 320, en 2021-2022) présentaient des indices d’ajout de sirop de sucre."],
+    "liste": [
+      ["L’origine", "Depuis le 14 juin 2026, les pays d’origine d’un mélange de miels doivent figurer sur l’étiquette, dans l’ordre décroissant, avec le pourcentage de chacun. Fini les vagues « mélange de miels originaires et non originaires de l’UE »."],
+      ["La fleur", "Un « miel de lavande » doit provenir entièrement ou principalement de cette fleur, et en présenter les caractéristiques."],
+      ["Les signes officiels", "AOP, IGP et Label rouge garantissent un cahier des charges contrôlé, comme pour le miel de sapin des Vosges ou le miel de Provence."],
+      ["Le producteur", "Acheter chez l’apiculteur, c’est connaître le rucher, la récolte et la personne qui a rempli le pot."]
+    ],
+    "sources": "Commission européenne, action coordonnée de l’UE « From the Hives », mars 2023 · Directive (UE) 2024/1438 · INAO."
+  }
+}

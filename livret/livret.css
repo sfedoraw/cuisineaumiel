@@ -149,3 +149,62 @@ h2, .cover h1 { text-wrap: balance; }
 .dense .ingr li { padding: .4mm 0 .4mm 3mm; }
 .dense .ingr li::before { top: 1.6mm; }
 .dense .meta { margin: 3mm 0 3.5mm; }
+
+/* Pages magazine */
+.mag { background: #FFFDF8; }
+.a-hero { position: absolute; left: 0; right: 0; top: 0; height: calc(var(--b) + 64mm); background-size: cover; background-position: center; }
+.a-hero-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(25, 14, 3, .05) 30%, rgba(25, 14, 3, .78)); }
+.a-head { position: absolute; left: calc(var(--b) + var(--m)); right: calc(var(--b) + var(--m)); bottom: 5mm; color: #fff; }
+.a-head .kicker { color: #F8C766; display: inline-block; padding: 1mm 2.4mm; border: .3mm solid rgba(248, 199, 102, .8); border-radius: 1mm; }
+.a-head h2 { font: 600 21pt/1.06 'Playfair'; margin-top: 2.4mm; text-shadow: 0 .4mm 3mm rgba(0, 0, 0, .3); text-wrap: balance; }
+.a-in { position: absolute; top: calc(var(--b) + 64mm + 5mm); left: calc(var(--b) + var(--m)); right: calc(var(--b) + var(--m)); bottom: calc(var(--b) + 13mm); }
+.a-chapo { font: italic 400 9.6pt/1.45 'Playfair'; color: var(--amber); margin-bottom: 4mm; padding-bottom: 3.5mm; border-bottom: .25mm solid var(--line); }
+.a-cols { column-count: 2; column-gap: 5.5mm; }
+.a-cols p { font: 400 7.25pt/1.52 'Mont'; margin-bottom: 2mm; text-align: justify; hyphens: auto; }
+.a-cols p.first::first-letter { font: 600 22pt/0.8 'Playfair'; float: left; color: var(--amber); margin: .8mm 1.4mm 0 0; }
+.a-figs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; margin-top: 3mm; padding-top: 3mm; border-top: .25mm solid var(--line); }
+.a-figs b { display: block; font: italic 600 13pt/1 'Playfair'; color: var(--amber); margin-bottom: 1.2mm; }
+.a-figs span { font: 400 6.2pt/1.4 'Mont'; color: var(--soft); display: block; }
+.a-pal { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6mm 5mm; }
+.sw { display: flex; gap: 2.6mm; align-items: flex-start; }
+.sw i { flex: none; width: 7mm; height: 9.5mm; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; box-shadow: inset 0 -.8mm 1.6mm rgba(0, 0, 0, .15), 0 .3mm 1mm rgba(0, 0, 0, .12); }
+.sw b { display: block; font: italic 600 9.4pt 'Playfair'; }
+.sw span { font: 400 6.5pt/1.38 'Mont'; color: var(--soft); }
+.a-strip { display: flex; height: 2.2mm; margin: 4mm 0 3.5mm; border-radius: 1mm; overflow: hidden; }
+.a-strip i { flex: 1; }
+.a-box { display: flex; gap: 3mm; padding: 3.4mm 4mm; background: var(--tint); border-radius: 2mm; }
+.a-box .drop { flex: none; }
+.a-box p { font: 400 7.1pt/1.5 'Mont'; }
+.a-big { display: flex; gap: 4mm; align-items: center; padding: 3.5mm 4.5mm; background: var(--deep); color: #F5E9D3; border-radius: 2mm; margin-bottom: 4mm; }
+.a-big b { font: italic 600 30pt/1 'Playfair'; color: #F8C766; flex: none; }
+.a-big p { font: 400 7.1pt/1.45 'Mont'; }
+.a-list { list-style: none; }
+.a-list li { display: flex; gap: 3mm; margin-bottom: 2.6mm; }
+.a-list li > span { flex: none; width: 5.4mm; height: 5.4mm; border-radius: 50%; border: .3mm solid var(--honey); color: var(--amber); font: italic 600 8pt/5mm 'Playfair'; text-align: center; }
+.a-list p { font: 400 7.2pt/1.5 'Mont'; }
+.a-list b { font-weight: 600; color: var(--ink); }
+.a-src { position: absolute; left: 0; right: 0; bottom: 0; font: 400 5.5pt/1.45 'Mont'; color: #9C8A70; padding-top: 2mm; border-top: .2mm solid var(--line); }
+.a-src b { font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); margin-right: 1mm; }
+.toc-grid { gap: 3.6mm; margin-top: 4mm; }
+.toc-ch li { line-height: 1.7; }
+.intro .secrets { bottom: 4mm; }
+.toc .intro-cta { bottom: 3mm; padding: 4mm 5mm; }
+.toc .intro-cta .qr { width: 16mm; height: 16mm; }
+.a-cols p { font-size: 7.9pt; line-height: 1.56; margin-bottom: 2.4mm; }
+.a-cols p.first::first-letter { font-size: 25pt; }
+.a-figs { margin-top: 4mm; padding-top: 4mm; }
+.a-figs b { font-size: 15pt; }
+.a-figs span { font-size: 6.8pt; }
+.a-chapo { font-size: 10.4pt; }
+.a-list li { margin-bottom: 4mm; }
+.a-list p { font-size: 8.1pt; line-height: 1.55; }
+.a-big { padding: 5mm; margin-bottom: 6mm; }
+.a-big b { font-size: 36pt; }
+.a-big p { font-size: 7.8pt; }
+.sw span { font-size: 7pt; }
+.sw b { font-size: 10pt; }
+.a-pal { gap: 3.4mm 5mm; }
+.a-box p { font-size: 7.6pt; }
+.a-pal { gap: 2.6mm 5mm; }
+.a-strip { margin: 3.2mm 0 3mm; }
+.mag-histoire .a-figs, .mag-fleur .a-figs { margin-top: 7mm; }

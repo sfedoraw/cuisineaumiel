@@ -137,7 +137,12 @@ page('cover', `
 // 2. Introduction
 const toc = [];
 let n = 4;
-for (const ch of recipes) for (const r of ch.recettes) { toc.push({ ch: ch.titre, titre: r.titre, page: n + 1 }); n += 2; }
+const ART = JSON.parse(fs.readFileSync(path.join(OUT, 'articles.json'), 'utf8'));
+const artToc = [];
+for (const ch of recipes) {
+  for (const r of ch.recettes) { toc.push({ ch: ch.titre, titre: r.titre, page: n + 1 }); n += 2; }
+  for (const a of ch.apres || []) { n += 1; artToc.push({ id: a, page: n }); }
+}
 page('intro', `
   <div class="in">
     <p class="kicker">Avant-propos</p>
@@ -145,9 +150,9 @@ page('intro', `
     <div class="rule">${drop()}</div>
     ${cfg.intro.map((p, i) => `<p class="lede-p${i ? '' : ' first'}">${typo(p)}</p>`).join('')}
     <p class="sign">${typo(cfg.signature)}</p>
-    <div class="intro-cta">
-      <img class="qr" src="${cfg.qrSite}" alt="">
-      <div><b>Plus de 50 recettes vous attendent</b><span>Recettes, guide des miels, atlas des miels du monde et outils pratiques sur <i>cuisineaumiel.fr</i></span></div>
+    <div class="secrets">
+      <h3>Trois secrets pour cuisiner le miel</h3>
+      ${cfg.secrets.map((s, i) => `<div class="secret"><span class="num">${i + 1}</span><p><b>${typo(s[0])}</b> ${typo(s[1])}</p></div>`).join('')}
     </div>
   </div>`);
 
@@ -155,16 +160,36 @@ page('intro', `
 const tocHtml = recipes.map((ch) => `<div class="toc-ch"><h3>${typo(ch.titre)}</h3><ol>${ch.recettes.map((r) => {
   const t = toc.find((x) => x.titre === r.titre);
   return `<li><span>${typo(r.court || r.titre)}</span><i></i><b>${t.page}</b></li>`;
-}).join('')}</ol></div>`).join('');
+}).join('')}</ol></div>`).join('') + `<div class="toc-ch"><h3>Les pages magazine</h3><ol>${artToc.map((a) => `<li><span>${typo(ART[a.id].titre)}</span><i></i><b>${a.page}</b></li>`).join('')}</ol></div>`;
 page('toc', `
   <div class="in">
     <p class="kicker">Sommaire</p>
     <div class="toc-grid">${tocHtml}</div>
-    <div class="secrets">
-      <h3>Trois secrets pour cuisiner le miel</h3>
-      ${cfg.secrets.map((s, i) => `<div class="secret"><span class="num">${i + 1}</span><p><b>${typo(s[0])}</b> ${typo(s[1])}</p></div>`).join('')}
+    <div class="intro-cta">
+      <img class="qr" src="${cfg.qrSite}" alt="">
+      <div><b>Plus de 50 recettes vous attendent</b><span>Recettes, guide des miels, atlas des miels du monde et outils pratiques sur <i>cuisineaumiel.fr</i></span></div>
     </div>
   </div>`);
+
+// Pages magazine
+function article(id) {
+  const a = ART[id];
+  let body = '';
+  if (a.corps) body += `<div class="a-cols">${a.corps.map((p, i) => `<p${i ? '' : ' class="first"'}>${typo(p)}</p>`).join('')}</div>`;
+  if (a.chiffres) body += `<div class="a-figs">${a.chiffres.map((c) => `<div><b>${typo(c[0])}</b><span>${typo(c[1])}</span></div>`).join('')}</div>`;
+  if (a.palette) body += `<div class="a-pal">${a.palette.map((c) => `<div class="sw"><i style="background:${c[0]}"></i><div><b>${typo(c[1])}</b><span>${typo(c[2])}</span></div></div>`).join('')}</div><div class="a-strip">${a.palette.map((c) => `<i style="background:${c[0]}"></i>`).join('')}</div>`;
+  if (a.encart) body += `<div class="a-box">${drop()}<p>${typo(a.encart)}</p></div>`;
+  if (a.grand) body += `<div class="a-big"><b>${typo(a.grand[0])}</b><p>${typo(a.grand[1])}</p></div>`;
+  if (a.liste) body += `<ol class="a-list">${a.liste.map((l, i) => `<li><span>${i + 1}</span><p><b>${typo(l[0])}.</b> ${typo(l[1])}</p></li>`).join('')}</ol>`;
+  page('mag mag-' + id, `
+    <div class="a-hero" style="background-image:url('${photo(a.photo)}')"><div class="a-hero-shade"></div>
+      <div class="a-head"><p class="kicker">${typo(a.rubrique)}</p><h2>${typo(a.titre)}</h2></div></div>
+    <div class="a-in">
+      <p class="a-chapo">${typo(a.chapeau)}</p>
+      ${body}
+      <p class="a-src"><b>Sources</b> ${typo(a.sources)}</p>
+    </div>`);
+}
 
 // Recettes : photo à gauche, recette à droite.
 let idx = 0;
@@ -199,6 +224,7 @@ for (const ch of recipes) {
         ${ch.alcool ? `<p class="evin">L’abus d’alcool est dangereux pour la santé, à consommer avec modération.</p>` : ''}
       </div>`);
   });
+  for (const id of ch.apres || []) article(id);
 }
 
 // 4e de couverture : L'Île aux Abeilles
