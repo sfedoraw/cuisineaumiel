@@ -1,0 +1,54 @@
+{
+  "chapitres": [
+    { "titre": "Cocktails", "alcool": true, "recettes": [
+      { "slug": "bees-knees", "photo": "beesknees", "court": "Bee’s Knees" },
+      { "slug": "gold-rush", "photo": "goldrush", "court": "Gold Rush" },
+      { "slug": "canchanchara", "photo": "canchanchara", "court": "Canchánchara" } ] },
+    { "titre": "Entrées", "recettes": [
+      { "slug": "chevre-chaud-miel-thym-noix", "photo": "chevre", "court": "Chèvre chaud au miel de thym et aux noix" },
+      { "slug": "figues-roties-miel-jambon-cru", "photo": "figues", "court": "Figues rôties au miel et jambon cru" },
+      { "slug": "feta-rotie-miel-origan", "photo": "feta", "court": "Feta rôtie au miel et à l’origan" } ] },
+    { "titre": "Plats", "recettes": [
+      { "slug": "magret-canard-miel-orange-epices", "photo": "magret", "court": "Magret de canard au miel et à l’orange" },
+      { "slug": "tajine-agneau-pruneaux-miel", "photo": "tajine", "court": "Tajine d’agneau aux pruneaux et au miel", "dense": true },
+      { "slug": "saumon-glace-miel-soja-gingembre", "photo": "saumon", "court": "Saumon glacé miel, soja et gingembre" } ] },
+    { "titre": "Desserts", "recettes": [
+      { "slug": "creme-brulee-miel-lavande", "photo": "creme", "court": "Crème brûlée au miel de lavande" },
+      { "slug": "nougat-glace-miel-pistaches", "photo": "nougat", "court": "Nougat glacé au miel et aux pistaches" },
+      { "slug": "pain-epices-traditionnel", "photo": "painepices", "court": "Pain d’épices traditionnel", "dense": true } ] }
+  ],
+  "intro": [
+    "Il y a dans chaque pot de miel un paysage : une garrigue de thym, une forêt de sapins, un champ de lavande en plein été. En cuisine, le miel est bien plus qu’un sucre : il caramélise une viande, arrondit une sauce, parfume une crème et adoucit un cocktail.",
+    "Nous avons réuni ici douze recettes emblématiques, trois cocktails, trois entrées, trois plats et trois desserts, pour vous accompagner de l’apéritif jusqu’au café. Elles sont simples, généreuses, et chacune vous indique le miel qui lui va le mieux.",
+    "Car choisir son miel, c’est déjà cuisiner. Belles tablées !"
+  ],
+  "signature": "L’équipe de cuisineaumiel.fr",
+  "secrets": [
+    ["Doucement sur le feu.", "Une chaleur trop vive estompe les arômes les plus délicats du miel. Pour napper ou laquer, ajoutez-le en fin de cuisson."],
+    ["Moins de miel que de sucre.", "Comptez environ 85 g de miel pour 100 g de sucre, retirez un peu de liquide et baissez le four d’environ 15 °C : le miel colore plus vite."],
+    ["Chaque miel a son caractère.", "Acacia et fleurs pour la douceur, lavande et oranger pour le parfum, châtaignier et sapin pour la puissance."]
+  ],
+  "qrSite": "qr-site.svg",
+  "ile": {
+    "nom": "L’Île aux Abeilles",
+    "surtitre": "Le miel de ces recettes",
+    "accroche": "Du rucher à votre table, un miel qui a du goût.",
+    "texte": [
+      "Ces douze recettes sont nées d’un pot de miel. Le nôtre est récolté avec patience, au rythme des floraisons, puis mis en pot avec soin pour garder intacts ses arômes."
+    ],
+    "points": [
+      "Des miels doux, fleuris ou corsés, pour chaque recette",
+      "Commandez en ligne et recevez votre miel chez vous",
+      "Coffrets et idées cadeaux toute l’année"
+    ],
+    "cta": "Commandez votre miel",
+    "contact": "[site de commande] · [téléphone] · [e-mail]",
+    "qr": "",
+    "logo": ""
+  },
+  "repli": {
+    "couverture": "chef-dressage", "dos": "decoupe-cuisine", "beesknees": "chef-sel", "goldrush": "chef-sel", "canchanchara": "chef-sel",
+    "chevre": "salade-maison", "figues": "salade-printemps", "feta": "salade-maison", "magret": "chef-dressage", "tajine": "pappardelle",
+    "saumon": "chef-dressage", "creme": "vieux-livre", "nougat": "vieux-livre", "painepices": "vieux-livre"
+  }
+}
