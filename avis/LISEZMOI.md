@@ -7,7 +7,8 @@ Tant que `data/avis.json` a une adresse `api` vide, la section « Vos avis » n'
 
 - **Les notes** (1 à 5 étoiles) comptent tout de suite. Une seule note par personne et par recette pendant 30 jours.
 - **Les commentaires** attendent votre validation : rien n'est publié sans vous.
-- **La page de modération** est à l'adresse `https://<votre-worker>/admin?cle=<votre mot de passe>` : un bouton « Publier », un bouton « Supprimer ».
+- **Les photos « Je l'ai fait ! »** : le lecteur peut joindre une photo de sa réalisation. Elle est réduite dans son navigateur (1080 px) avant l'envoi, puis attend votre validation, comme les commentaires. Une fois publiée, elle apparaît sous la recette dans « Ils l'ont fait ». Une photo non validée est effacée au bout de 60 jours.
+- **La page de modération** est à l'adresse `https://<votre-worker>/admin?cle=<votre mot de passe>` : un bouton « Publier » (avec ou sans la photo), un bouton « Supprimer ».
 - **Les étoiles dans Google** : à chaque construction du site (tous les jours), la moyenne réelle est ajoutée aux données structurées de la recette (`aggregateRating`). Aucune note n'est jamais inventée.
 
 ## Mise en place (10 minutes, une seule fois)

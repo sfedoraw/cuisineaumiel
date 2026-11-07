@@ -1,0 +1,23 @@
+name: Lettre de la semaine
+
+on:
+  schedule:
+    # Chaque vendredi à 7 h UTC (8 h ou 9 h à Paris). Ne fait rien tant que Brevo n'est pas configuré.
+    - cron: '0 7 * * 5'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lettre:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node build.js
+      - run: node newsletter.js
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}

@@ -35,5 +35,9 @@
   "the-glace-peche-miel": ["ete"],
   "travers-porc-miel-moutarde": ["printemps", "ete"],
   "veloute-carottes-miel-gingembre": ["automne", "hiver"],
-  "vinaigrette-miel-moutarde": ["printemps", "ete"]
+  "vinaigrette-miel-moutarde": ["printemps", "ete"],
+  "bredele-miel-epices": ["hiver"],
+  "mendiants-chocolat-miel-fruits-secs": ["hiver"],
+  "nonnettes-miel-orange": ["hiver"],
+  "vin-chaud-miel-epices": ["hiver"]
 }

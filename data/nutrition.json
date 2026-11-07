@@ -1,0 +1,1605 @@
+{
+ "source": "Table de composition nutritionnelle des aliments Ciqual 2025, Anses (Licence Ouverte Etalab 2.0)",
+ "negligeables": "^(sel|poivre|fleur de sel|glacons?|quelques|eau|bouquet|brins?|feuilles? de (sauge|menthe)|petit bouquet|batons? de cannelle|clous? de girofle|etoiles? de badiane|rondelles de gingembre|morceau de gingembre|gousses? de vanille|piment|sachets? de (the|levure)|zeste)|cannelle|cumin|curcuma|paprika|gingembre en poudre|ras-el-hanout|quatre-epices|epices|muscade|anis|safran|origan|thym|romarin|coriandre|persil|piment|levure|bicarbonate|eau de fleur|worcestershire|sriracha|graines de (cumin|moutarde)|poivre en grains|clou de girofle|extrait de vanille",
+ "exclure": "vin rouge|rhum|^cidre|sake|mirin",
+ "regles": [
+  {
+   "m": "^miel",
+   "c": "31008",
+   "cs": 21,
+   "d": 1.4
+  },
+  {
+   "m": "^(fleur de )?sel$",
+   "c": "11017",
+   "cs": 18
+  },
+  {
+   "m": "jus de citron vert",
+   "c": "2031"
+  },
+  {
+   "m": "jus de citron",
+   "c": "2028"
+  },
+  {
+   "m": "jus d.orange",
+   "c": "2070"
+  },
+  {
+   "m": "jus de pomme",
+   "c": "2074"
+  },
+  {
+   "m": "vinaigre de cidre",
+   "c": "11090"
+  },
+  {
+   "m": "vinaigre balsamique",
+   "c": "11091"
+  },
+  {
+   "m": "vinaigre",
+   "c": "11018"
+  },
+  {
+   "m": "huile d.olive",
+   "c": "17270",
+   "d": 0.92
+  },
+  {
+   "m": "huile de noix",
+   "c": "17220",
+   "d": 0.92
+  },
+  {
+   "m": "huile de sesame",
+   "c": "17400",
+   "d": 0.92
+  },
+  {
+   "m": "huile de coco",
+   "c": "16040",
+   "d": 0.92
+  },
+  {
+   "m": "^huile",
+   "c": "17130",
+   "d": 0.92
+  },
+  {
+   "m": "beurre clarifie",
+   "c": "16401"
+  },
+  {
+   "m": "beurre demi-sel",
+   "c": "16402"
+  },
+  {
+   "m": "^beurre",
+   "c": "16400"
+  },
+  {
+   "m": "farine t45",
+   "c": "9440",
+   "cs": 8
+  },
+  {
+   "m": "farine de seigle",
+   "c": "9532",
+   "cs": 8
+  },
+  {
+   "m": "^farine",
+   "c": "9435",
+   "cs": 8
+  },
+  {
+   "m": "sucre roux|cassonade",
+   "c": "31017",
+   "cs": 12
+  },
+  {
+   "m": "^sucre",
+   "c": "31016",
+   "cs": 12
+  },
+  {
+   "m": "flocons d.avoine|granola",
+   "c": "32140",
+   "cs": 6
+  },
+  {
+   "m": "fecule",
+   "c": "9510",
+   "cs": 8
+  },
+  {
+   "m": "poudre d.amande|amandes?",
+   "c": "15041",
+   "cs": 7
+  },
+  {
+   "m": "noisettes?",
+   "c": "15004",
+   "cs": 8
+  },
+  {
+   "m": "pistaches",
+   "c": "15044"
+  },
+  {
+   "m": "cerneaux de noix|fruits secs melanges",
+   "c": "15005"
+  },
+  {
+   "m": "graines de sesame",
+   "c": "15010",
+   "cs": 9
+  },
+  {
+   "m": "graines de courge",
+   "c": "15064"
+  },
+  {
+   "m": "graines de tournesol",
+   "c": "15011"
+  },
+  {
+   "m": "fruits secs",
+   "c": "13046"
+  },
+  {
+   "m": "fruits confits",
+   "c": "31021"
+  },
+  {
+   "m": "marmelade",
+   "c": "31039"
+  },
+  {
+   "m": "pruneaux",
+   "c": "13042"
+  },
+  {
+   "m": "chocolat noir|pepites de chocolat",
+   "c": "31085"
+  },
+  {
+   "m": "speculoos",
+   "c": "24009"
+  },
+  {
+   "m": "oeufs?$|oeufs? ",
+   "c": "22000",
+   "u": 50
+  },
+  {
+   "m": "jaunes? d.oeufs?",
+   "c": "22002",
+   "u": 18
+  },
+  {
+   "m": "blancs? d.oeufs?",
+   "c": "22001",
+   "u": 32
+  },
+  {
+   "m": "lait entier",
+   "c": "19023"
+  },
+  {
+   "m": "^lait",
+   "c": "19041"
+  },
+  {
+   "m": "creme liquide",
+   "c": "19417"
+  },
+  {
+   "m": "creme fraiche",
+   "c": "19410"
+  },
+  {
+   "m": "yaourt grec",
+   "c": "19860"
+  },
+  {
+   "m": "yaourt",
+   "c": "19593"
+  },
+  {
+   "m": "feta",
+   "c": "12060"
+  },
+  {
+   "m": "ricotta",
+   "c": "19585"
+  },
+  {
+   "m": "parmesan",
+   "c": "12120"
+  },
+  {
+   "m": "mascarpone",
+   "c": "19584"
+  },
+  {
+   "m": "burrata",
+   "c": "12072"
+  },
+  {
+   "m": "fromage frais",
+   "c": "12068"
+  },
+  {
+   "m": "camembert",
+   "c": "12006",
+   "u": 250
+  },
+  {
+   "m": "crottins? de chevre",
+   "c": "12832",
+   "u": 60
+  },
+  {
+   "m": "boules? de glace",
+   "c": "39515",
+   "u": 50
+  },
+  {
+   "m": "tofu",
+   "c": "20904"
+  },
+  {
+   "m": "pommes? de terre",
+   "c": "4008"
+  },
+  {
+   "m": "pommes?\\b",
+   "c": "13039",
+   "u": 150
+  },
+  {
+   "m": "tranches fines de pomme",
+   "c": "13039",
+   "u": 10
+  },
+  {
+   "m": "poires?",
+   "c": "13037",
+   "u": 160
+  },
+  {
+   "m": "bananes?",
+   "c": "13005",
+   "u": 120
+  },
+  {
+   "m": "figues?",
+   "c": "13012",
+   "u": 50
+  },
+  {
+   "m": "peches?",
+   "c": "13043",
+   "u": 140
+  },
+  {
+   "m": "coings",
+   "c": "13010",
+   "k": 0.8
+  },
+  {
+   "m": "framboises",
+   "c": "13015"
+  },
+  {
+   "m": "fruits rouges",
+   "c": "13997"
+  },
+  {
+   "m": "fruits (de saison|frais)",
+   "c": "13039"
+  },
+  {
+   "m": "citrons? vert",
+   "c": "13067",
+   "u": 60
+  },
+  {
+   "m": "citrons?",
+   "c": "13009",
+   "u": 100
+  },
+  {
+   "m": "oranges?",
+   "c": "13034",
+   "u": 150
+  },
+  {
+   "m": "carottes?",
+   "c": "20009",
+   "u": 100
+  },
+  {
+   "m": "panais",
+   "c": "20181",
+   "u": 150
+  },
+  {
+   "m": "betteraves?",
+   "c": "20091",
+   "u": 150
+  },
+  {
+   "m": "courge",
+   "c": "20138",
+   "k": 0.8
+  },
+  {
+   "m": "oignons? rouges?",
+   "c": "20238",
+   "u": 100
+  },
+  {
+   "m": "botte d.oignons",
+   "c": "20034",
+   "u": 150
+  },
+  {
+   "m": "oignons? nouveaux",
+   "c": "20034",
+   "u": 30
+  },
+  {
+   "m": "oignons?",
+   "c": "20034",
+   "u": 100
+  },
+  {
+   "m": "echalotes?",
+   "c": "20097",
+   "u": 30
+  },
+  {
+   "m": "gousses? d.ail|^ail",
+   "c": "11000",
+   "u": 5
+  },
+  {
+   "m": "tomates? cerises?",
+   "c": "20172"
+  },
+  {
+   "m": "coulis de tomate",
+   "c": "20260"
+  },
+  {
+   "m": "concentre de tomate",
+   "c": "20068",
+   "cs": 16
+  },
+  {
+   "m": "roquette|mesclun",
+   "c": "20272"
+  },
+  {
+   "m": "moutarde a l.ancienne",
+   "c": "11021"
+  },
+  {
+   "m": "moutarde",
+   "c": "11013"
+  },
+  {
+   "m": "sauce soja",
+   "c": "11104",
+   "d": 1.1
+  },
+  {
+   "m": "saumon",
+   "c": "26036",
+   "u": 130
+  },
+  {
+   "m": "crevettes",
+   "c": "10021"
+  },
+  {
+   "m": "magrets? de canard",
+   "c": "36206",
+   "u": 350
+  },
+  {
+   "m": "filets? mignons?",
+   "c": "28204"
+  },
+  {
+   "m": "travers de porc",
+   "c": "28400",
+   "k": 0.6
+  },
+  {
+   "m": "jambon cru",
+   "c": "28800",
+   "u": 15
+  },
+  {
+   "m": "jambon",
+   "c": "28102",
+   "k": 0.85
+  },
+  {
+   "m": "agneau",
+   "c": "21504",
+   "k": 0.8
+  },
+  {
+   "m": "ailes de poulet",
+   "c": "36023",
+   "k": 0.7
+  },
+  {
+   "m": "hauts de cuisse",
+   "c": "36019"
+  },
+  {
+   "m": "cuisses? de poulet",
+   "c": "36002",
+   "u": 220
+  },
+  {
+   "m": "tranches? de baguette",
+   "c": "7001",
+   "u": 20
+  },
+  {
+   "m": "baguette",
+   "c": "7001",
+   "u": 250
+  },
+  {
+   "m": "tranches? de pain",
+   "c": "7100",
+   "u": 50
+  },
+  {
+   "m": "pitas?",
+   "c": "7180",
+   "u": 70
+  },
+  {
+   "m": "pate feuilletee",
+   "c": "23424",
+   "u": 230
+  },
+  {
+   "m": "pate filo",
+   "c": "23445",
+   "u": 250
+  },
+  {
+   "m": "gelatine",
+   "c": "11007",
+   "u": 2
+  },
+  {
+   "m": "bouillon|fond de",
+   "c": "25930"
+  }
+ ],
+ "aliments": {
+  "2028": {
+   "n": "Jus de citron, pur jus",
+   "kcal": 29.4,
+   "p": 0.4,
+   "g": 6.1,
+   "s": 2.4,
+   "l": 0.29,
+   "ags": 0.038,
+   "f": 0.4,
+   "sel": 0.053
+  },
+  "2031": {
+   "n": "Jus de citron vert, pur jus",
+   "kcal": 25.7,
+   "p": 0.25,
+   "g": 1.69,
+   "s": 1.69,
+   "l": 0.23,
+   "ags": 0.026,
+   "f": 0.45,
+   "sel": 0.026
+  },
+  "2070": {
+   "n": "Jus d'orange, pur jus",
+   "kcal": 45.4,
+   "p": 0.61,
+   "g": 9.61,
+   "s": 9.61,
+   "l": 0.11,
+   "ags": 0.053,
+   "f": 0.28,
+   "sel": 0.012
+  },
+  "2074": {
+   "n": "Jus de pomme, pur jus",
+   "kcal": 48.9,
+   "p": 0.17,
+   "g": 11.4,
+   "s": 10.9,
+   "l": 0.14,
+   "ags": 0.046,
+   "f": 0.23,
+   "sel": 0.022
+  },
+  "4008": {
+   "n": "Pomme de terre, sans peau, crue",
+   "kcal": 80,
+   "p": 2.02,
+   "g": 16.2,
+   "s": 0.78,
+   "l": 0.09,
+   "ags": 0.026,
+   "f": 2.2,
+   "sel": 0.00055
+  },
+  "7001": {
+   "n": "Pain blanc (par ex. : baguette, boule…)",
+   "kcal": 287,
+   "p": 8.27,
+   "g": 58.3,
+   "s": 2.3,
+   "l": 1.4,
+   "ags": 0.45,
+   "f": 2.7,
+   "sel": 1.25
+  },
+  "7100": {
+   "n": "Pain de campagne",
+   "kcal": 253,
+   "p": 7.52,
+   "g": 50,
+   "s": 2.5,
+   "l": 1.3,
+   "ags": 0.42,
+   "f": 4.3,
+   "sel": 1.18
+  },
+  "7180": {
+   "n": "Pain pita",
+   "kcal": 249,
+   "p": 7.48,
+   "g": 48.8,
+   "s": 2.51,
+   "l": 1.5,
+   "ags": 0.2,
+   "f": 3.7,
+   "sel": 1.2
+  },
+  "9435": {
+   "n": "Farine de blé tendre ou froment T65",
+   "kcal": 346,
+   "p": 10,
+   "g": 71.5,
+   "s": 1.5,
+   "l": 1,
+   "ags": 0,
+   "f": 3.5,
+   "sel": 0.03
+  },
+  "9440": {
+   "n": "Farine de blé tendre ou froment T45 (pour pâtisserie)",
+   "kcal": 355,
+   "p": 8.44,
+   "g": 76.5,
+   "s": 0.44,
+   "l": 0.82,
+   "ags": 0.13,
+   "f": 2.5,
+   "sel": 0.098
+  },
+  "9510": {
+   "n": "Amidon de maïs ou fécule de maïs",
+   "kcal": 365,
+   "p": 0.26,
+   "g": 90.4,
+   "s": 0,
+   "l": 0.05,
+   "ags": 0.009,
+   "f": 0.9,
+   "sel": 0.023
+  },
+  "9532": {
+   "n": "Farine de seigle T85",
+   "kcal": 345,
+   "p": 9.82,
+   "g": 68.7,
+   "s": 0.93,
+   "l": 1.33,
+   "ags": 0.15,
+   "f": 8,
+   "sel": 0.005
+  },
+  "10021": {
+   "n": "Crevette, crue",
+   "kcal": 99,
+   "p": 19.7,
+   "g": 3.21,
+   "s": 0,
+   "l": 0.84,
+   "ags": 0.22,
+   "f": 0,
+   "sel": 0.45
+  },
+  "11000": {
+   "n": "Ail, cru",
+   "kcal": 109,
+   "p": 5.31,
+   "g": 18.6,
+   "s": 1.2,
+   "l": 0.25,
+   "ags": 0.005,
+   "f": 5.8,
+   "sel": 0.023
+  },
+  "11007": {
+   "n": "Gélatine, sèche",
+   "kcal": 348,
+   "p": 86.9,
+   "g": 0,
+   "s": 0,
+   "l": 0.1,
+   "ags": 0.036,
+   "f": 0,
+   "sel": 0.75
+  },
+  "11013": {
+   "n": "Moutarde",
+   "kcal": 151,
+   "p": 6.92,
+   "g": 4.33,
+   "s": 1.73,
+   "l": 11.2,
+   "ags": 1.1,
+   "f": 0.5,
+   "sel": 6.3
+  },
+  "11017": {
+   "n": "Sel blanc alimentaire, non iodé, non fluoré (marin, ignigène ou gemme)",
+   "kcal": 0,
+   "p": 0,
+   "g": 0,
+   "s": 0,
+   "l": 0,
+   "ags": 0,
+   "f": 0,
+   "sel": 97.8
+  },
+  "11018": {
+   "n": "Vinaigre",
+   "kcal": 22.5,
+   "p": 0.04,
+   "g": 0.95,
+   "s": 0.04,
+   "l": 0.1,
+   "ags": 0,
+   "f": 0,
+   "sel": 0.013
+  },
+  "11021": {
+   "n": "Moutarde à l'ancienne",
+   "kcal": 142,
+   "p": 6.6,
+   "g": 2.2,
+   "s": 2.2,
+   "l": 9.9,
+   "ags": 0.61,
+   "f": 4.5,
+   "sel": 4.9
+  },
+  "11090": {
+   "n": "Vinaigre de cidre",
+   "kcal": 4,
+   "p": 0,
+   "g": 0.93,
+   "s": 0.4,
+   "l": 0,
+   "ags": 0,
+   "f": 0,
+   "sel": 0.013
+  },
+  "11091": {
+   "n": "Vinaigre balsamique",
+   "kcal": 91.7,
+   "p": 0.69,
+   "g": 18,
+   "s": 18,
+   "l": 0.3,
+   "ags": 0,
+   "f": 0.75,
+   "sel": 0.068
+  },
+  "11104": {
+   "n": "Sauce soja, préemballée",
+   "kcal": 39.9,
+   "p": 7.25,
+   "g": 1.72,
+   "s": 0,
+   "l": 0.25,
+   "ags": 0.003,
+   "f": 0.9,
+   "sel": 13.1
+  },
+  "12006": {
+   "n": "Camembert au lait cru ou thermisé",
+   "kcal": 267,
+   "p": 20.7,
+   "g": 0,
+   "s": 0.1,
+   "l": 20.3,
+   "ags": 14.1,
+   "f": 0,
+   "sel": 1.45
+  },
+  "12060": {
+   "n": "Fromage type feta, au lait de vache 100%",
+   "kcal": 273,
+   "p": 15.4,
+   "g": 1.22,
+   "s": 0.84,
+   "l": 22.6,
+   "ags": 14.1,
+   "f": 0,
+   "sel": 2.51
+  },
+  "12068": {
+   "n": "Fromage frais ou spécialité fromagère non affinée, nature, à tartiner, en barquette, non allégée en matière grasse",
+   "kcal": 225,
+   "p": 6.25,
+   "g": 3.31,
+   "s": 3.31,
+   "l": 20.7,
+   "ags": 13,
+   "f": 0,
+   "sel": 0.9
+  },
+  "12072": {
+   "n": "Burrata",
+   "kcal": 259,
+   "p": 10.8,
+   "g": 0.93,
+   "s": 0.55,
+   "l": 23.4,
+   "ags": 15.4,
+   "f": 0,
+   "sel": 0.53
+  },
+  "12120": {
+   "n": "Parmesan",
+   "kcal": 411,
+   "p": 31.1,
+   "g": 1.14,
+   "s": 0,
+   "l": 31,
+   "ags": 20.6,
+   "f": 0,
+   "sel": 1.57
+  },
+  "12832": {
+   "n": "Crottin de chèvre, au lait cru",
+   "kcal": 384,
+   "p": 23.2,
+   "g": 0,
+   "s": 0,
+   "l": 32.6,
+   "ags": 24.1,
+   "f": 0,
+   "sel": 1.01
+  },
+  "13005": {
+   "n": "Banane, chair sans peau, crue",
+   "kcal": 87.6,
+   "p": 1.06,
+   "g": 19.7,
+   "s": 15.6,
+   "l": 0.25,
+   "ags": 0.005,
+   "f": 2.7,
+   "sel": 0.0065
+  },
+  "13009": {
+   "n": "Citron, chair sans peau, sans pépins, cru",
+   "kcal": 24.3,
+   "p": 0.25,
+   "g": 1.56,
+   "s": 0.8,
+   "l": 0.25,
+   "ags": 0.005,
+   "f": 0.25,
+   "sel": 0.0065
+  },
+  "13010": {
+   "n": "Coing, cru",
+   "kcal": 59,
+   "p": 0.4,
+   "g": 12.5,
+   "s": 6.3,
+   "l": 0.1,
+   "ags": 0.01,
+   "f": 1.9,
+   "sel": 0.01
+  },
+  "13012": {
+   "n": "Figue, crue",
+   "kcal": 67.6,
+   "p": 1.19,
+   "g": 13.5,
+   "s": 12.2,
+   "l": 0.25,
+   "ags": 0.005,
+   "f": 4.1,
+   "sel": 0.013
+  },
+  "13015": {
+   "n": "Framboise, crue",
+   "kcal": 47.9,
+   "p": 1.19,
+   "g": 5.83,
+   "s": 5.4,
+   "l": 0.8,
+   "ags": 0.13,
+   "f": 4.3,
+   "sel": 0.0065
+  },
+  "13034": {
+   "n": "Orange, chair sans peau, sans pépins, crue",
+   "kcal": 42,
+   "p": 0.75,
+   "g": 8.03,
+   "s": 7.6,
+   "l": 0.25,
+   "ags": 0.005,
+   "f": 2.7,
+   "sel": 0.0065
+  },
+  "13037": {
+   "n": "Poire, chair et peau, crue",
+   "kcal": 56.6,
+   "p": 0.36,
+   "g": 12.3,
+   "s": 9.75,
+   "l": 0.27,
+   "ags": 0.067,
+   "f": 2.9,
+   "sel": 0.0045
+  },
+  "13039": {
+   "n": "Pomme, chair et peau, crue",
+   "kcal": 54,
+   "p": 0.25,
+   "g": 11.6,
+   "s": 10.6,
+   "l": 0.25,
+   "ags": 0.052,
+   "f": 1.4,
+   "sel": 0.0037
+  },
+  "13042": {
+   "n": "Pruneau, sans noyau, sec",
+   "kcal": 229,
+   "p": 1.63,
+   "g": 55.4,
+   "s": 38.1,
+   "l": 0.4,
+   "ags": 0.16,
+   "f": 5.1,
+   "sel": 0.0065
+  },
+  "13043": {
+   "n": "Pêche, chair et peau, sans noyau, crue",
+   "kcal": 37.9,
+   "p": 0.91,
+   "g": 7.55,
+   "s": 6.83,
+   "l": 0.25,
+   "ags": 0.019,
+   "f": 1.5,
+   "sel": 0.0014
+  },
+  "13046": {
+   "n": "Raisin sec",
+   "kcal": 322,
+   "p": 3,
+   "g": 73.2,
+   "s": 70.3,
+   "l": 0.9,
+   "ags": 0.31,
+   "f": 4.2,
+   "sel": 0.013
+  },
+  "13067": {
+   "n": "Citron vert ou lime, chair sans peau, sans pépins, cru",
+   "kcal": 39.3,
+   "p": 1.13,
+   "g": 3.14,
+   "s": 2.1,
+   "l": 0.15,
+   "ags": 0.005,
+   "f": 4.3,
+   "sel": 0.015
+  },
+  "13997": {
+   "n": "Fruits rouges, crus (framboises, fraises, groseilles, cassis)",
+   "kcal": 46,
+   "p": 1,
+   "g": 7,
+   "s": 6.99,
+   "l": 0.5,
+   "ags": 0,
+   "f": 4.5,
+   "sel": 0.01
+  },
+  "15004": {
+   "n": "Noisette, sans sel ajouté",
+   "kcal": 632,
+   "p": 14.4,
+   "g": 7.16,
+   "s": 4.9,
+   "l": 56.9,
+   "ags": 4.75,
+   "f": 11.6,
+   "sel": 0.0065
+  },
+  "15005": {
+   "n": "Noix, cerneau, séchée",
+   "kcal": 709,
+   "p": 13.3,
+   "g": 6.88,
+   "s": 3,
+   "l": 67.3,
+   "ags": 6.45,
+   "f": 6.7,
+   "sel": 0.065
+  },
+  "15010": {
+   "n": "Sésame, graine",
+   "kcal": 606,
+   "p": 17.7,
+   "g": 12.8,
+   "s": 0.3,
+   "l": 49.7,
+   "ags": 6.96,
+   "f": 11.8,
+   "sel": 0.05
+  },
+  "15011": {
+   "n": "Tournesol, graine",
+   "kcal": 653,
+   "p": 21.3,
+   "g": 10.1,
+   "s": 2.62,
+   "l": 55.5,
+   "ags": 6.23,
+   "f": 6.4,
+   "sel": 0.023
+  },
+  "15041": {
+   "n": "Amande, émondée, sans sel ajouté",
+   "kcal": 631,
+   "p": 21.4,
+   "g": 8.76,
+   "s": 4.63,
+   "l": 52.5,
+   "ags": 3.95,
+   "f": 9.9,
+   "sel": 0.048
+  },
+  "15044": {
+   "n": "Pistache, grillée, sans sel ajouté",
+   "kcal": 631,
+   "p": 18.4,
+   "g": 14.9,
+   "s": 7.75,
+   "l": 51.6,
+   "ags": 6.45,
+   "f": 10.2,
+   "sel": 0.012
+  },
+  "15064": {
+   "n": "Courge, graine, séchée",
+   "kcal": 618,
+   "p": 29.5,
+   "g": 5.39,
+   "s": 1.4,
+   "l": 49.1,
+   "ags": 8.66,
+   "f": 6,
+   "sel": 0.018
+  },
+  "16040": {
+   "n": "Huile ou graisse de coco, sans précision",
+   "kcal": 897,
+   "p": 0,
+   "g": 0.41,
+   "s": 0,
+   "l": 99.5,
+   "ags": 84.5,
+   "f": 0,
+   "sel": 0
+  },
+  "16400": {
+   "n": "Beurre à 80% MG minimum, doux",
+   "kcal": 753,
+   "p": 0.64,
+   "g": 0.71,
+   "s": 0.71,
+   "l": 83,
+   "ags": 60,
+   "f": 0,
+   "sel": 0.035
+  },
+  "16401": {
+   "n": "Huile de beurre ou beurre concentré",
+   "kcal": 900,
+   "p": 0.28,
+   "g": 0,
+   "s": 0,
+   "l": 99.9,
+   "ags": 61.9,
+   "f": 0,
+   "sel": 0.005
+  },
+  "16402": {
+   "n": "Beurre à 80% MG, demi-sel",
+   "kcal": 725,
+   "p": 0.75,
+   "g": 0.5,
+   "s": 0.5,
+   "l": 80,
+   "ags": 56.5,
+   "f": 0,
+   "sel": 1.9
+  },
+  "17130": {
+   "n": "Huile de colza",
+   "kcal": 900,
+   "p": 0,
+   "g": 0,
+   "s": 0,
+   "l": 100,
+   "ags": 7.26,
+   "f": 0,
+   "sel": 0.0014
+  },
+  "17220": {
+   "n": "Huile de noix",
+   "kcal": 900,
+   "p": 0,
+   "g": 0,
+   "s": 0,
+   "l": 100,
+   "ags": 10,
+   "f": 0,
+   "sel": 0
+  },
+  "17270": {
+   "n": "Huile d'olive vierge extra",
+   "kcal": 899,
+   "p": 0.25,
+   "g": 0,
+   "s": 0,
+   "l": 99.9,
+   "ags": 15.2,
+   "f": 0,
+   "sel": 0.0065
+  },
+  "17400": {
+   "n": "Huile de sésame",
+   "kcal": 900,
+   "p": 0,
+   "g": 0,
+   "s": 0,
+   "l": 100,
+   "ags": 14.9,
+   "f": 0,
+   "sel": 0
+  },
+  "19023": {
+   "n": "Lait entier, UHT",
+   "kcal": 64.6,
+   "p": 3.46,
+   "g": 4.77,
+   "s": 4.64,
+   "l": 3.55,
+   "ags": 2.08,
+   "f": 0,
+   "sel": 0.093
+  },
+  "19041": {
+   "n": "Lait demi-écrémé, UHT",
+   "kcal": 47.7,
+   "p": 3.48,
+   "g": 5,
+   "s": 4.96,
+   "l": 1.56,
+   "ags": 0.97,
+   "f": 0,
+   "sel": 0.088
+  },
+  "19410": {
+   "n": "Crème 30% MG, épaisse, rayon frais",
+   "kcal": 285,
+   "p": 2.32,
+   "g": 1.38,
+   "s": 1.38,
+   "l": 29.9,
+   "ags": 19.5,
+   "f": 1.5,
+   "sel": 0.065
+  },
+  "19417": {
+   "n": "Crème 30% MG, fluide, UHT",
+   "kcal": 293,
+   "p": 2.2,
+   "g": 3.69,
+   "s": 2.93,
+   "l": 30,
+   "ags": 18.6,
+   "f": 0,
+   "sel": 0.068
+  },
+  "19584": {
+   "n": "Mascarpone",
+   "kcal": 369,
+   "p": 6,
+   "g": 3.1,
+   "s": 2.99,
+   "l": 37,
+   "ags": 25.9,
+   "f": 0.25,
+   "sel": 0.13
+  },
+  "19585": {
+   "n": "Ricotta",
+   "kcal": 145,
+   "p": 8.13,
+   "g": 4.09,
+   "s": 3.69,
+   "l": 10.7,
+   "ags": 7.38,
+   "f": 0,
+   "sel": 0.27
+  },
+  "19593": {
+   "n": "Yaourt ou lait fermenté, nature",
+   "kcal": 50.1,
+   "p": 3.83,
+   "g": 4.26,
+   "s": 4,
+   "l": 1.68,
+   "ags": 1.08,
+   "f": 0,
+   "sel": 0.1
+  },
+  "19860": {
+   "n": "Yaourt à la grecque nature",
+   "kcal": 103,
+   "p": 3.02,
+   "g": 3.73,
+   "s": 3.11,
+   "l": 8.16,
+   "ags": 5.26,
+   "f": 0.071,
+   "sel": 0.08
+  },
+  "20009": {
+   "n": "Carotte, crue",
+   "kcal": 30.2,
+   "p": 0.78,
+   "g": 5.16,
+   "s": 4.85,
+   "l": 0.25,
+   "ags": 0.075,
+   "f": 2.9,
+   "sel": 0.12
+  },
+  "20034": {
+   "n": "Oignon, cru",
+   "kcal": 39,
+   "p": 1.1,
+   "g": 6.25,
+   "s": 4.8,
+   "l": 0.62,
+   "ags": 0.2,
+   "f": 1.7,
+   "sel": 0.098
+  },
+  "20068": {
+   "n": "Tomate, concentré, appertisé",
+   "kcal": 99.2,
+   "p": 4.4,
+   "g": 17.1,
+   "s": 13.3,
+   "l": 0.53,
+   "ags": 0.1,
+   "f": 4.2,
+   "sel": 0.27
+  },
+  "20091": {
+   "n": "Betterave rouge, crue",
+   "kcal": 40.2,
+   "p": 1.61,
+   "g": 6.34,
+   "s": 6.34,
+   "l": 0.17,
+   "ags": 0.027,
+   "f": 2.8,
+   "sel": 0.2
+  },
+  "20097": {
+   "n": "Échalote, crue",
+   "kcal": 61.7,
+   "p": 1.81,
+   "g": 12.2,
+   "s": 3.3,
+   "l": 0.25,
+   "ags": 0.005,
+   "f": 2.6,
+   "sel": 0.013
+  },
+  "20138": {
+   "n": "Courge butternut (doubeurre), chair sans peau, crue",
+   "kcal": 30.5,
+   "p": 1,
+   "g": 5.4,
+   "s": 2.2,
+   "l": 0.1,
+   "ags": 0.021,
+   "f": 2,
+   "sel": 0.01
+  },
+  "20172": {
+   "n": "Tomate cerise, crue",
+   "kcal": 31.8,
+   "p": 1.31,
+   "g": 5.62,
+   "s": 4.8,
+   "l": 0.25,
+   "ags": 0.005,
+   "f": 1.2,
+   "sel": 0.0065
+  },
+  "20181": {
+   "n": "Panais, cru",
+   "kcal": 67.9,
+   "p": 1.2,
+   "g": 12.6,
+   "s": 4.8,
+   "l": 0.3,
+   "ags": 0.05,
+   "f": 4.9,
+   "sel": 0.025
+  },
+  "20238": {
+   "n": "Oignon rouge, cru",
+   "kcal": 35,
+   "p": 1.31,
+   "g": 5.63,
+   "s": 5.2,
+   "l": 0.4,
+   "ags": 0.14,
+   "f": 2.5,
+   "sel": 0.0065
+  },
+  "20260": {
+   "n": "Tomate, coulis, appertisé (purée de tomates mi-réduite à 11%)",
+   "kcal": 45.5,
+   "p": 2.05,
+   "g": 7.57,
+   "s": 5.5,
+   "l": 0.2,
+   "ags": 0.08,
+   "f": 2.6,
+   "sel": 0.88
+  },
+  "20272": {
+   "n": "Mesclun ou salade, mélange de jeunes pousses",
+   "kcal": 22,
+   "p": 2,
+   "g": 2.5,
+   "s": 0,
+   "l": 0,
+   "ags": 0,
+   "f": 2,
+   "sel": 0.048
+  },
+  "20904": {
+   "n": "Tofu nature, préemballé",
+   "kcal": 147,
+   "p": 13.4,
+   "g": 2.87,
+   "s": 0.57,
+   "l": 8.5,
+   "ags": 1.35,
+   "f": 0.25,
+   "sel": 0.025
+  },
+  "21504": {
+   "n": "Agneau, épaule crue",
+   "kcal": 170,
+   "p": 18.3,
+   "g": 0.45,
+   "s": 0.25,
+   "l": 10.6,
+   "ags": 3.87,
+   "f": 0,
+   "sel": 0.2
+  },
+  "22000": {
+   "n": "Oeuf cru",
+   "kcal": 140,
+   "p": 12.8,
+   "g": 0.06,
+   "s": 0.06,
+   "l": 9.83,
+   "ags": 2.64,
+   "f": 0,
+   "sel": 0.31
+  },
+  "22001": {
+   "n": "Oeuf, blanc (blanc d'oeuf), cru",
+   "kcal": 48.1,
+   "p": 10.9,
+   "g": 0.73,
+   "s": 0.71,
+   "l": 0.17,
+   "ags": 0,
+   "f": 0,
+   "sel": 0.42
+  },
+  "22002": {
+   "n": "Oeuf, jaune (jaune d'oeuf), cru",
+   "kcal": 307,
+   "p": 15.5,
+   "g": 1.09,
+   "s": 0.56,
+   "l": 26.7,
+   "ags": 9.55,
+   "f": 0,
+   "sel": 0.048
+  },
+  "23424": {
+   "n": "Pâte feuilletée, pur beurre, préemballée, crue",
+   "kcal": 370,
+   "p": 5.47,
+   "g": 40,
+   "s": 3,
+   "l": 20,
+   "ags": 14,
+   "f": 3,
+   "sel": 1.68
+  },
+  "23445": {
+   "n": "Pâte phyllo ou pâte filo, crue",
+   "kcal": 289,
+   "p": 7.1,
+   "g": 50.7,
+   "s": 0.18,
+   "l": 6,
+   "ags": 1.47,
+   "f": 1.9,
+   "sel": 1.21
+  },
+  "24009": {
+   "n": "Spéculoos",
+   "kcal": 476,
+   "p": 5.63,
+   "g": 71.2,
+   "s": 32.5,
+   "l": 18.1,
+   "ags": 7.81,
+   "f": 3,
+   "sel": 0.92
+  },
+  "25930": {
+   "n": "Bouillon de boeuf, déshydraté reconstitué",
+   "kcal": 6.14,
+   "p": 0.85,
+   "g": 0.36,
+   "s": 0,
+   "l": 0.15,
+   "ags": 0.057,
+   "f": 0,
+   "sel": 0.33
+  },
+  "26036": {
+   "n": "Saumon, élevage, cru",
+   "kcal": 193,
+   "p": 20.5,
+   "g": 0,
+   "s": 0,
+   "l": 12.4,
+   "ags": 2.15,
+   "f": 0.125,
+   "sel": 0.16
+  },
+  "28102": {
+   "n": "Porc, rouelle de jambon crue",
+   "kcal": 149,
+   "p": 20.2,
+   "g": 0,
+   "s": 0,
+   "l": 7.56,
+   "ags": 0,
+   "f": 0,
+   "sel": 0.14
+  },
+  "28204": {
+   "n": "Porc, filet mignon cru",
+   "kcal": 123,
+   "p": 21.2,
+   "g": 0.4,
+   "s": 0,
+   "l": 4.09,
+   "ags": 1.69,
+   "f": 0,
+   "sel": 0.11
+  },
+  "28400": {
+   "n": "Porc, travers cru",
+   "kcal": 237,
+   "p": 18,
+   "g": 0.6,
+   "s": 0,
+   "l": 18,
+   "ags": 7.16,
+   "f": 0,
+   "sel": 0.12
+  },
+  "28800": {
+   "n": "Jambon cru",
+   "kcal": 239,
+   "p": 25.9,
+   "g": 4.27,
+   "s": 0.75,
+   "l": 13.2,
+   "ags": 5.09,
+   "f": 0,
+   "sel": 5.67
+  },
+  "31008": {
+   "n": "Miel",
+   "kcal": 331,
+   "p": 0.65,
+   "g": 82.1,
+   "s": 81.1,
+   "l": 0,
+   "ags": 0,
+   "f": 0,
+   "sel": 0.01
+  },
+  "31016": {
+   "n": "Sucre blanc",
+   "kcal": 399,
+   "p": 0,
+   "g": 99.7,
+   "s": 99.7,
+   "l": 0,
+   "ags": 0,
+   "f": 0,
+   "sel": 0.0054
+  },
+  "31017": {
+   "n": "Sucre roux",
+   "kcal": 393,
+   "p": 0.12,
+   "g": 98.1,
+   "s": 97,
+   "l": 0,
+   "ags": 0,
+   "f": 0,
+   "sel": 0.07
+  },
+  "31021": {
+   "n": "Ecorce d'orange confite",
+   "kcal": 307,
+   "p": 0.59,
+   "g": 75.6,
+   "s": 65.2,
+   "l": 0.083,
+   "ags": 0.033,
+   "f": 1.1,
+   "sel": 0.1
+  },
+  "31039": {
+   "n": "Marmelade d'orange ou confiture d'orange (extra ou classique)",
+   "kcal": 245,
+   "p": 0.25,
+   "g": 59.3,
+   "s": 56.9,
+   "l": 0.4,
+   "ags": 0.14,
+   "f": 1.5,
+   "sel": 0.015
+  },
+  "31085": {
+   "n": "Chocolat noir 40% de cacao et plus, à pâtisser, tablette",
+   "kcal": 546,
+   "p": 6.39,
+   "g": 51.4,
+   "s": 41.6,
+   "l": 33.1,
+   "ags": 22,
+   "f": 8.76,
+   "sel": 0.015
+  },
+  "32140": {
+   "n": "Flocons d'avoine",
+   "kcal": 369,
+   "p": 10.6,
+   "g": 57.7,
+   "s": 1.04,
+   "l": 7.82,
+   "ags": 1.37,
+   "f": 11.2,
+   "sel": 0.011
+  },
+  "36002": {
+   "n": "Poulet, cuisse, viande et peau crue",
+   "kcal": 192,
+   "p": 17.3,
+   "g": 0,
+   "s": 0,
+   "l": 13.5,
+   "ags": 3.85,
+   "f": 0,
+   "sel": 0.22
+  },
+  "36019": {
+   "n": "Poulet, haut de cuisse, viande crue",
+   "kcal": 116,
+   "p": 19.7,
+   "g": 0,
+   "s": 0,
+   "l": 4.12,
+   "ags": 1.1,
+   "f": 0,
+   "sel": 0.24
+  },
+  "36023": {
+   "n": "Poulet, aile, viande et peau crues",
+   "kcal": 181,
+   "p": 20.4,
+   "g": 0,
+   "s": 0,
+   "l": 11,
+   "ags": 3.04,
+   "f": 0,
+   "sel": 0.22
+  },
+  "36206": {
+   "n": "Canard, magret cru",
+   "kcal": 337,
+   "p": 17.9,
+   "g": 0.1,
+   "s": 0.1,
+   "l": 29.4,
+   "ags": 8.95,
+   "f": 0,
+   "sel": 0.21
+  },
+  "39515": {
+   "n": "Glace ou crème glacée, en bac",
+   "kcal": 191,
+   "p": 2.55,
+   "g": 26.1,
+   "s": 21.9,
+   "l": 8.4,
+   "ags": 5.44,
+   "f": 1.5,
+   "sel": 0.12
+  }
+ }
+}

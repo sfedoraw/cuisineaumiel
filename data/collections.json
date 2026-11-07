@@ -1,0 +1,90 @@
+[
+  {
+    "slug": "noel",
+    "titre": "Recettes de Noël au miel",
+    "court": "Noël au miel",
+    "photo": "1642511842792-993e9b8cd0f8",
+    "lede": "Pain d'épices, bredele, nonnettes, jambon glacé, vin chaud et cadeaux gourmands : tout le menu des fêtes, de l'apéritif aux douceurs à offrir.",
+    "intro": "Décembre est le mois du miel. Il parfume les biscuits de l'Avent, laque les viandes de fête, adoucit le vin chaud et se glisse dans les cadeaux faits maison. Voici nos recettes pour un Noël au miel, rangées comme un repas de fête. Pensez à préparer les biscuits et le pain d'épices quelques jours à l'avance : ils sont meilleurs après un temps de repos.",
+    "sections": [
+      { "titre": "Pour l'apéritif", "recettes": ["camembert-roti-chataignier-romarin", "chevre-chaud-miel-thym-noix", "noix-caramelisees-miel-fleur-de-sel", "chutney-figues-miel", "figues-roties-miel-jambon-cru"] },
+      { "titre": "Le plat de fête", "recettes": ["jambon-glace-miel-girofle", "magret-canard-miel-orange-epices", "filet-mignon-porc-miel-romarin", "saumon-glace-miel-soja-gingembre", "courge-rotie-miel-sauge-noisettes"] },
+      { "titre": "Les desserts", "recettes": ["nougat-glace-miel-pistaches", "poires-pochees-miel-vin-epice", "baklava-miel-pistaches", "cheesecake-miel-sans-cuisson", "creme-brulee-miel-lavande"] },
+      { "titre": "Biscuits et douceurs de l'Avent", "recettes": ["bredele-miel-epices", "nonnettes-miel-orange", "pain-epices-traditionnel", "mendiants-chocolat-miel-fruits-secs", "madeleines-miel", "brioche-miel-tressee"] },
+      { "titre": "Cadeaux gourmands faits maison", "recettes": ["mendiants-chocolat-miel-fruits-secs", "confiture-coings-miel-bruyere-vanille", "miel-pimente-maison", "granola-miel-noisettes", "nonnettes-miel-orange"] },
+      { "titre": "Boissons chaudes", "recettes": ["vin-chaud-miel-epices", "chocolat-chaud-miel", "jus-pomme-chaud-epices-miel-oranger", "grog-miel-citron-cannelle", "lait-or-curcuma-miel"] }
+    ],
+    "conseils": [
+      "Choisissez un miel de caractère pour les plats de fête : châtaignier ou sapin pour les viandes et le pain d'épices, oranger ou lavande pour les desserts délicats.",
+      "Le miel brûle plus vite que le sucre : couvrez les viandes glacées d'une feuille d'aluminium en fin de cuisson si elles colorent trop.",
+      "Les biscuits au miel durcissent à la sortie du four puis ramollissent en quelques jours dans une boîte en fer : préparez-les à l'avance.",
+      "Pour offrir, un pot de miel de votre région accompagne parfaitement un pain d'épices ou un sachet de mendiants."
+    ],
+    "faq": [
+      { "q": "Quel miel choisir pour le pain d'épices de Noël ?", "a": "Un miel de caractère, comme le châtaignier ou le sapin, donne un pain d'épices plus parfumé et plus sombre. Un miel toutes fleurs donne un goût plus doux, apprécié des enfants." },
+      { "q": "Peut-on préparer les biscuits de Noël au miel à l'avance ?", "a": "Oui, et c'est même conseillé. Les bredele, les nonnettes et le pain d'épices sont meilleurs après deux ou trois jours de repos dans une boîte hermétique." },
+      { "q": "Les enfants peuvent-ils manger les recettes de Noël au miel ?", "a": "Oui, à partir d'un an. Le miel ne doit pas être donné aux enfants de moins d'un an, même cuit dans un gâteau, comme le recommande l'Anses. Les boissons à base de vin sont réservées aux adultes." }
+    ]
+  },
+  {
+    "slug": "airfryer",
+    "titre": "Recettes au miel au Airfryer",
+    "court": "Au Airfryer",
+    "photo": "decoupe-cuisine",
+    "lede": "Ailes de poulet laquées, légumes rôtis, fromages fondants, fruits caramélisés : nos recettes au miel qui se font très bien à la friteuse sans huile.",
+    "intro": "La friteuse sans huile (ou Airfryer) est un petit four à chaleur tournante très puissant. Elle convient parfaitement aux recettes rôties de ce site, à condition de respecter quelques repères. Les temps et températures indiqués dans les recettes sont donnés pour un four traditionnel : adaptez-les avec les conseils ci-dessous, et surveillez la première fois, car chaque appareil chauffe différemment.",
+    "sections": [
+      { "titre": "Viandes, poissons et tofu", "recettes": ["ailes-poulet-miel-piment", "poulet-laque-miel-citron-ail", "saumon-glace-miel-soja-gingembre", "tofu-croustillant-miel-gingembre"] },
+      { "titre": "Légumes rôtis", "recettes": ["carottes-roties-miel-cumin-feta", "legumes-racines-rotis-miel", "courge-rotie-miel-sauge-noisettes"] },
+      { "titre": "Fromages chauds", "recettes": ["camembert-roti-chataignier-romarin", "chevre-chaud-miel-thym-noix", "feta-rotie-miel-origan"] },
+      { "titre": "Fruits et douceurs", "recettes": ["peches-roties-miel-romarin", "figues-roties-miel-jambon-cru", "granola-miel-noisettes"] }
+    ],
+    "conseils": [
+      "Baissez la température d'environ 20 °C par rapport à la recette au four.",
+      "Comptez environ 20 % de temps en moins, et vérifiez la cuisson quelques minutes avant la fin.",
+      "Ne surchargez pas le panier : une seule couche, pour que l'air circule. Faites deux fournées si besoin.",
+      "Le miel brûle vite à la chaleur tournante : badigeonnez la laque au miel dans les 5 dernières minutes de cuisson plutôt qu'au début.",
+      "Secouez le panier ou retournez les morceaux à mi-cuisson pour une coloration régulière.",
+      "Pour le camembert ou la feta, posez-les dans un petit plat ou une feuille de papier cuisson pour que le fromage ne coule pas dans le panier."
+    ],
+    "faq": [
+      { "q": "Peut-on mettre du miel dans un Airfryer ?", "a": "Oui, mais le miel caramélise et brûle plus vite que le sucre, surtout avec la chaleur tournante très proche de la résistance. Ajoutez-le de préférence en fin de cuisson, et baissez un peu la température." },
+      { "q": "Comment adapter une recette au four pour l'Airfryer ?", "a": "En règle générale, on baisse la température d'environ 20 °C et on réduit le temps d'environ 20 %. Vérifiez la cuisson avant la fin, car chaque appareil chauffe différemment." },
+      { "q": "Faut-il préchauffer l'Airfryer ?", "a": "Quelques minutes de préchauffage donnent une meilleure coloration, surtout pour les viandes et les légumes. Suivez la notice de votre appareil." }
+    ]
+  },
+  {
+    "slug": "sans-four",
+    "titre": "Recettes au miel sans four",
+    "court": "Sans four",
+    "photo": "pappardelle-bandeau",
+    "auto": "sans-four",
+    "lede": "À la poêle, à la casserole ou en cocotte : toutes nos recettes au miel qui se préparent sans allumer le four. Idéal en petite cuisine, en location ou quand le four est déjà pris.",
+    "intro": "Pas de four, ou un four déjà occupé par le rôti ? Le miel se travaille aussi très bien sur le feu : il laque une viande à la poêle, caramélise des fruits secs, parfume une sauce ou une boisson chaude. Voici toutes nos recettes qui se font uniquement sur la plaque de cuisson.",
+    "conseils": [
+      "À la poêle, ajoutez le miel en fin de cuisson et à feu moyen : il caramélise en quelques secondes et peut vite brûler.",
+      "Pour une laque brillante, déglacez la poêle avec le mélange miel et sauce (soja, vinaigre, jus d'agrume) et laissez réduire en enrobant.",
+      "Dans une boisson chaude, ajoutez le miel quand le liquide est chaud mais pas bouillant, pour garder ses arômes."
+    ],
+    "faq": [
+      { "q": "Peut-on faire caraméliser du miel à la poêle ?", "a": "Oui. Le miel caramélise même plus vite que le sucre. Faites-le à feu moyen, sans le quitter des yeux, et retirez la poêle du feu dès qu'il dore." }
+    ]
+  },
+  {
+    "slug": "sans-cuisson",
+    "titre": "Recettes au miel sans cuisson (ou presque)",
+    "court": "Sans cuisson",
+    "photo": "salade-printemps",
+    "auto": "sans-cuisson",
+    "lede": "Sauces, tartines, boissons, petits-déjeuners et douceurs : nos recettes au miel prêtes sans cuisson, ou avec moins de 5 minutes de feu.",
+    "intro": "Le miel est l'ingrédient parfait des recettes express : il se mélange à froid, sucre sans cuisson et apporte immédiatement du goût. Voici nos recettes qui ne demandent pas de four et, au plus, quelques minutes de feu.",
+    "conseils": [
+      "Pour mélanger le miel à froid dans une vinaigrette ou un yaourt, délayez-le d'abord avec un peu de liquide (vinaigre, jus de citron, lait).",
+      "Un miel liquide comme l'acacia se mélange plus facilement qu'un miel cristallisé.",
+      "Huilez légèrement la cuillère : le miel glissera tout seul."
+    ],
+    "faq": [
+      { "q": "Le miel se mélange-t-il à froid ?", "a": "Oui, surtout un miel liquide comme l'acacia. Un miel cristallisé se délaie plus facilement dans un peu de liquide tiède avant d'être ajouté." }
+    ]
+  }
+]
