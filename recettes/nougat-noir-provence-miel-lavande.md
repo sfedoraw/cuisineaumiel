@@ -1,6 +1,6 @@
 ---
 titre: Nougat noir de Provence au miel de lavande
-date: 2026-11-25
+date: 2026-11-17
 categorie: desserts
 miel: Miel de lavande
 photo: 1768676123985-2d619acafeb8

@@ -1,6 +1,6 @@
 ---
 titre: Canard rôti au miel et aux épices de Noël
-date: 2026-12-09
+date: 2026-11-26
 categorie: plats
 miel: Miel de thym
 photo: 1611489142329-5f62cfa43e6e

@@ -1,6 +1,6 @@
 ---
 titre: Saint-Jacques snackées, beurre au miel et à l'orange
-date: 2026-12-05
+date: 2026-11-24
 categorie: plats
 miel: Miel d'oranger
 photo: 1750874693225-006612ff09d7

@@ -1,6 +1,6 @@
 ---
 titre: Pain d'épices de Noël aux fruits confits et à l'orange
-date: 2026-11-21
+date: 2026-11-14
 categorie: patisserie
 miel: Miel de châtaignier
 photo: 1768216604548-e49f808e8d55

@@ -1,6 +1,6 @@
 ---
 titre: Sablés de Noël au miel de sapin
-date: 2026-11-14
+date: 2026-11-10
 categorie: patisserie
 miel: Miel de sapin
 photo: 1513806562344-c75007ad303f

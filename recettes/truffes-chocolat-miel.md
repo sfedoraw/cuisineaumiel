@@ -1,6 +1,6 @@
 ---
 titre: Truffes au chocolat et au miel
-date: 2026-11-18
+date: 2026-11-12
 categorie: desserts
 miel: Miel d'acacia
 photo: 1775201630951-665651af1747

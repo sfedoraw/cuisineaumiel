@@ -1,6 +1,6 @@
 ---
 titre: Toasts de pain d'épices, foie gras et confit d'oignons au miel
-date: 2026-12-02
+date: 2026-11-21
 categorie: aperitifs-entrees
 miel: Miel de châtaignier
 photo: 1771154136172-0633db70b7dc
