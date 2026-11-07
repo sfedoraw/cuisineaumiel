@@ -1,6 +1,6 @@
 {
  "source": "Table de composition nutritionnelle des aliments Ciqual 2025, Anses (Licence Ouverte Etalab 2.0)",
- "negligeables": "^(sel|poivre|fleur de sel|glacons?|quelques|eau|bouquet|brins?|feuilles? de (sauge|menthe)|petit bouquet|batons? de cannelle|clous? de girofle|etoiles? de badiane|rondelles de gingembre|morceau de gingembre|gousses? de vanille|piment|sachets? de (the|levure)|zeste)|cannelle|cumin|curcuma|paprika|gingembre en poudre|ras-el-hanout|quatre-epices|epices|muscade|anis|safran|origan|thym|romarin|coriandre|persil|piment|levure|bicarbonate|eau de fleur|worcestershire|sriracha|graines de (cumin|moutarde)|poivre en grains|clou de girofle|extrait de vanille",
+ "negligeables": "^(sel|poivre|fleur de sel|glacons?|quelques|eau|bouquet|brins?|feuilles? de (sauge|menthe)|petit bouquet|batons? de cannelle|clous? de girofle|etoiles? de badiane|rondelles de gingembre|morceau de gingembre|gousses? de vanille|piment|sachets? de (the|levure)|zeste)|cannelle|cumin|curcuma|paprika|gingembre en poudre|ras-el-hanout|quatre-epices|epices|muscade|anis|safran|origan|thym|romarin|coriandre|persil|piment|levure|bicarbonate|eau de fleur|worcestershire|sriracha|graines de (cumin|moutarde)|poivre en grains|clou de girofle|extrait de vanille|gingembre|armagnac",
  "exclure": "vin rouge|rhum|^cidre|sake|mirin",
  "regles": [
   {
@@ -13,6 +13,52 @@
    "m": "^(fleur de )?sel$",
    "c": "11017",
    "cs": 18
+  },
+  {
+   "m": "foie gras mi-cuit",
+   "c": "8321"
+  },
+  {
+   "m": "foie gras",
+   "c": "8328"
+  },
+  {
+   "m": "noix de saint-jacques",
+   "c": "10045",
+   "u": 30
+  },
+  {
+   "m": "canard entier",
+   "c": "36204",
+   "k": 0.55
+  },
+  {
+   "m": "chapon|poularde",
+   "c": "36050",
+   "k": 0.6
+  },
+  {
+   "m": "creme de marrons",
+   "c": "15013"
+  },
+  {
+   "m": "marrons",
+   "c": "15039"
+  },
+  {
+   "m": "pain d.epices",
+   "c": "23200",
+   "u": 30
+  },
+  {
+   "m": "pain azyme",
+   "c": "7114",
+   "u": 10
+  },
+  {
+   "m": "cacao",
+   "c": "18100",
+   "cs": 7
   },
   {
    "m": "jus de citron vert",
@@ -567,6 +613,17 @@
    "f": 4.3,
    "sel": 1.18
   },
+  "7114": {
+   "n": "Pain azyme, préemballé",
+   "kcal": 372,
+   "p": 10.7,
+   "g": 74.9,
+   "s": 3.14,
+   "l": 1.67,
+   "ags": 0.32,
+   "f": 5.41,
+   "sel": 0.076
+  },
   "7180": {
    "n": "Pain pita",
    "kcal": 249,
@@ -577,6 +634,28 @@
    "ags": 0.2,
    "f": 3.7,
    "sel": 1.2
+  },
+  "8321": {
+   "n": "Foie gras, canard, entier, cuit",
+   "kcal": 526,
+   "p": 8.41,
+   "g": 0.026,
+   "s": 0.026,
+   "l": 54.6,
+   "ags": 23,
+   "f": 0.35,
+   "sel": 1.11
+  },
+  "8328": {
+   "n": "Foie gras, canard, cru",
+   "kcal": 600,
+   "p": 5.94,
+   "g": 1.41,
+   "s": 1.14,
+   "l": 63.4,
+   "ags": 28.1,
+   "f": 0,
+   "sel": 0.52
   },
   "9435": {
    "n": "Farine de blé tendre ou froment T65",
@@ -632,6 +711,17 @@
    "ags": 0.22,
    "f": 0,
    "sel": 0.45
+  },
+  "10045": {
+   "n": "Coquille Saint-Jacques, noix, crue",
+   "kcal": 83.6,
+   "p": 17.9,
+   "g": 1.15,
+   "s": 0,
+   "l": 0.84,
+   "ags": 0.094,
+   "f": 0,
+   "sel": 0.34
   },
   "11000": {
    "n": "Ail, cru",
@@ -985,6 +1075,28 @@
    "f": 6.4,
    "sel": 0.023
   },
+  "15013": {
+   "n": "Crème de marron ou confiture de châtaigne, préemballée",
+   "kcal": 278,
+   "p": 0.95,
+   "g": 65.9,
+   "s": 51.5,
+   "l": 0.66,
+   "ags": 0.13,
+   "f": 2.28,
+   "sel": 0.014
+  },
+  "15039": {
+   "n": "Châtaigne ou marron, appertisé",
+   "kcal": 145,
+   "p": 1.96,
+   "g": 28.8,
+   "s": 3.9,
+   "l": 1.4,
+   "ags": 0.4,
+   "f": 4,
+   "sel": 0.13
+  },
   "15041": {
    "n": "Amande, émondée, sans sel ajouté",
    "kcal": 631,
@@ -1105,6 +1217,17 @@
    "ags": 14.9,
    "f": 0,
    "sel": 0
+  },
+  "18100": {
+   "n": "Cacao, sans sucres ajoutés, poudre soluble",
+   "kcal": 387,
+   "p": 22.4,
+   "g": 11.6,
+   "s": 0.9,
+   "l": 20.6,
+   "ags": 12.4,
+   "f": 29.5,
+   "sel": 0.11
   },
   "19023": {
    "n": "Lait entier, UHT",
@@ -1370,6 +1493,17 @@
    "f": 0,
    "sel": 0.048
   },
+  "23200": {
+   "n": "Pain d'épices, préemballé",
+   "kcal": 318,
+   "p": 3.14,
+   "g": 71.8,
+   "s": 40.8,
+   "l": 1.15,
+   "ags": 0.24,
+   "f": 3.78,
+   "sel": 0.62
+  },
   "23424": {
    "n": "Pâte feuilletée, pur beurre, préemballée, crue",
    "kcal": 370,
@@ -1578,6 +1712,28 @@
    "ags": 3.04,
    "f": 0,
    "sel": 0.22
+  },
+  "36050": {
+   "n": "Chapon, viande et peau crues",
+   "kcal": 195,
+   "p": 19.9,
+   "g": 0,
+   "s": 0,
+   "l": 12.8,
+   "ags": 1.5,
+   "f": 0,
+   "sel": 0.14
+  },
+  "36204": {
+   "n": "Canard, viande et peau crues",
+   "kcal": 273,
+   "p": 17.4,
+   "g": 0,
+   "s": 0,
+   "l": 22.6,
+   "ags": 7.47,
+   "f": 0,
+   "sel": 0.14
   },
   "36206": {
    "n": "Canard, magret cru",
