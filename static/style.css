@@ -1175,3 +1175,29 @@ h3 { font-size: .98rem; font-weight: 600; }
 .footer .nl-ft .nl-text p:last-child, .footer .nl-ft .nl-legal { color: inherit; opacity: .75; }
 @media (max-width: 800px) { .nl { grid-template-columns: 1fr; } }
 @media (max-width: 420px) { .nl-form { grid-template-columns: 1fr; } .nl-form .btn { justify-self: start; } }
+
+/* Proposer une recette : prendre la fiche en photo */
+.snap { display: grid; gap: 8px; padding: 14px; margin-bottom: 4px; border-radius: 16px; background: var(--tint); }
+.wl-form .snap-btn { display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px 16px; border-radius: 12px; background: #fff; border: 1.5px dashed #E9C98A; color: var(--accent); }
+.snap-btn:hover, .snap-btn:focus-within { border-color: var(--honey); }
+.snap-btn input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.snap-btn span { display: grid; color: var(--ink); font-weight: 400; }
+.snap-btn small { color: var(--ink-soft); font-size: .82rem; }
+.snap.is-busy .snap-btn { opacity: .6; pointer-events: none; }
+.snap-msg { margin: 0; font-size: .9rem; color: #B91C1C; }
+.snap-msg.ok { color: #166534; }
+.snap-note { margin: 0; font-size: .76rem; color: var(--ink-soft); }
+
+/* Encart « Proposez votre recette » */
+.share-cta { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 18px 24px; padding: clamp(20px, 3.5vw, 32px); border-radius: var(--radius); background: var(--tint); border: 1px solid #F1E2C4; }
+.share-ico { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: #fff; color: var(--accent); font-size: 1.8rem; box-shadow: var(--shadow); }
+.share-cta .kicker { margin: 0 0 4px; }
+.share-cta h2 { margin: 0 0 6px; font-size: clamp(1.2rem, 2.4vw, 1.5rem); }
+.share-cta p:last-child { margin: 0; color: var(--ink-soft); }
+.share-cta .btn { white-space: nowrap; }
+.share-recipe { margin: 28px 0 10px; grid-template-columns: auto 1fr; }
+.share-recipe .btn { grid-column: 2; justify-self: start; }
+.share-archive { margin: 36px 0; }
+@media (max-width: 760px) { .share-cta { grid-template-columns: auto 1fr; } .share-cta .btn { grid-column: 1 / -1; justify-self: start; } .share-ico { width: 52px; height: 52px; } }
+@media print { .share-cta { display: none; } }
+.snap-btn svg { flex: none; width: 24px; height: 24px; }

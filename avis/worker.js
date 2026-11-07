@@ -22,6 +22,41 @@ function photoBytes(dataUrl) {
   for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
   return out[0] === 0xff && out[1] === 0xd8 ? out : null; // signature JPEG
 }
+// Appel direct à l'API Claude (pas de SDK : le Worker est collé tel quel dans Cloudflare, sans étape de build).
+const RECETTE_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['lisible', 'titre', 'portions', 'preparation', 'cuisson', 'miel', 'ingredients', 'etapes'],
+  properties: {
+    lisible: { type: 'boolean', description: "false si la photo ne montre pas une recette lisible" },
+    titre: { type: 'string' }, portions: { type: 'string' }, preparation: { type: 'string' }, cuisson: { type: 'string' },
+    miel: { type: 'string', description: 'Le miel cité, ou une chaîne vide' },
+    ingredients: { type: 'array', items: { type: 'string' } },
+    etapes: { type: 'array', items: { type: 'string' } },
+  },
+};
+async function lireRecette(env, b64) {
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'anthropic-beta': 'server-side-fallback-2026-07-01', 'content-type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-opus-5-5',
+      max_tokens: 4000,
+      fallbacks: 'default',
+      output_config: { effort: 'low', format: { type: 'json_schema', schema: RECETTE_SCHEMA } },
+      system: "Tu recopies fidèlement une fiche recette photographiée (manuscrite ou imprimée) pour remplir un formulaire, en français. Une ligne par ingrédient avec sa quantité, une étape par élément, dans l'ordre. N'invente rien : laisse vide ce qui n'est pas écrit. Corrige seulement l'orthographe évidente. Si l'image ne montre pas une recette, mets lisible à false.",
+      messages: [{ role: 'user', content: [{ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: b64 } }, { type: 'text', text: 'Recopie cette recette.' }] }],
+    }),
+  });
+  if (!r.ok) return null;
+  const d = await r.json();
+  if (d.stop_reason !== 'end_turn') return null;
+  const t = (d.content || []).find((c) => c.type === 'text');
+  try {
+    const o = JSON.parse(t.text);
+    const s = (v, n) => clean(v, n);
+    return { lisible: !!o.lisible, titre: s(o.titre, 140), portions: s(o.portions, 40), preparation: s(o.preparation, 40), cuisson: s(o.cuisson, 40), miel: s(o.miel, 80), ingredients: (o.ingredients || []).slice(0, 40).map((x) => s(x, 160)), etapes: (o.etapes || []).slice(0, 30).map((x) => s(x, 800)) };
+  } catch (e) { return null; }
+}
 const jpeg = (body, cache) => new Response(body, { headers: { 'content-type': 'image/jpeg', 'cache-control': cache, 'access-control-allow-origin': '*', 'x-content-type-options': 'nosniff' } });
 
 export default {
@@ -47,6 +82,24 @@ export default {
     if (req.method === 'GET' && parts[0] === 'photo' && /^[a-z0-9]{6,30}$/.test(parts[1] || '')) {
       const img = await env.AVIS.get(`f:${parts[1]}`, 'arrayBuffer');
       return img ? jpeg(img, 'public, max-age=31536000, immutable') : json({ erreur: 'introuvable' }, 404, origin);
+    }
+
+    // « Proposer une recette » : lecture d'une photo de fiche recette par Claude (5 par personne et par jour).
+    // Nécessite le secret ANTHROPIC_API_KEY. Le résultat remplit le formulaire ; rien n'est publié ici.
+    if (parts[0] === 'lire' && req.method === 'POST') {
+      if (!ORIGINS.includes(origin)) return json({ erreur: 'origine' }, 403, origin);
+      if (!env.ANTHROPIC_API_KEY) return json({ erreur: 'indisponible' }, 503, origin);
+      let b; try { b = await req.json(); } catch (e) { return json({ erreur: 'format' }, 400, origin); }
+      const photo = photoBytes(b.photo);
+      if (!photo) return json({ erreur: 'photo' }, 400, origin);
+      const day = new Date().toISOString().slice(0, 10);
+      const who = await sha(`${req.headers.get('cf-connecting-ip') || ''}|lire|${day}|${env.ADMIN_KEY}`);
+      const used = +(await env.AVIS.get(`l:${who}`)) || 0;
+      if (used >= 5) return json({ erreur: 'quota' }, 429, origin);
+      await env.AVIS.put(`l:${who}`, String(used + 1), { expirationTtl: 60 * 60 * 26 });
+      const out = await lireRecette(env, b.photo.split(',')[1]);
+      if (!out) return json({ erreur: 'lecture' }, 502, origin);
+      return json({ ...out, reste: 4 - used }, 200, origin);
     }
 
     // Avis d'une recette.
