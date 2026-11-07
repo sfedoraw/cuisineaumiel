@@ -319,7 +319,7 @@ document.querySelectorAll('[data-share]').forEach((b) => b.addEventListener('cli
 }));
 
 // Liens e-mail assemblés au clic (limite le spam).
-document.querySelectorAll('[data-mail]').forEach((a) => a.addEventListener('click', (e) => {
+document.querySelectorAll('a[data-mail]').forEach((a) => a.addEventListener('click', (e) => {
   e.preventDefault();
   location.href = `mailto:${a.dataset.mail}@${a.dataset.domain}?subject=${a.dataset.subject || ''}&body=${a.dataset.body || ''}`;
 }));
@@ -378,4 +378,259 @@ document.querySelectorAll('[data-mail]').forEach((a) => a.addEventListener('clic
     const body = `Bonjour,\n\nJe souhaite être inscrit(e) sur la liste d'attente de l'annuaire des apiculteurs partenaires de Cuisine au miel.\n\nNom et prénom : ${v('nom')}\nExploitation : ${v('exploitation')}\nDépartement : ${dep}\nCommune : ${v('commune')}\nE-mail : ${v('email')}\nTéléphone : ${v('tel')}\nMiels : ${v('miels')}\nSite ou réseaux : ${v('site')}\n\nMerci !`;
     location.href = `mailto:${f.dataset.mail}@${f.dataset.domain}?subject=${encodeURIComponent("Liste d'attente annuaire : " + v('exploitation'))}&body=${encodeURIComponent(body)}`;
   });
+})();
+
+// ---------- Mon carnet, préférences, recette au hasard, frigo, proposer une recette ----------
+// Tout est gardé dans le navigateur du visiteur (aucun compte). Chaque accès au stockage est protégé.
+const CAM = (() => {
+  const get = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } };
+  const set = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+  let idx = null;
+  const index = () => idx || (idx = fetch('/recettes.json').then((r) => r.json()).catch(() => []));
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  return {
+    carnet: () => get('cam-carnet', []), setCarnet: (l) => set('cam-carnet', [...new Set(l)]),
+    prefs: () => get('cam-prefs', []), setPrefs: (l) => set('cam-prefs', l),
+    frigo: () => get('cam-frigo', []), setFrigo: (l) => set('cam-frigo', l),
+    index, esc,
+    excluded: (x) => { const p = get('cam-prefs', []); return !!x && p.some((k) => String(x).split(' ').includes(k)); },
+  };
+})();
+const heart = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-9.3-9.4C1.4 7.6 3.6 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c3.6 0 5.8 3.6 4.5 7.1-1.8 4.8-9.3 9.4-9.3 9.4z"/></svg>';
+const miniCard = (r) => `<article class="card" data-slug="${r.s}" data-x="${r.x.join(' ')}"><button type="button" class="save" data-save="${r.s}" aria-pressed="false" aria-label="Ajouter « ${CAM.esc(r.t)} » à mon carnet">${heart}<span class="save-txt">Mon carnet</span></button><a href="${r.u}"><div class="card-media"><img src="${r.i}" alt="${CAM.esc(r.t)}" loading="lazy" style="aspect-ratio:3 / 4"><span class="card-honey">🍯 ${CAM.esc(r.m)}</span></div><span class="card-cat">${CAM.esc(r.c)}</span><h3>${CAM.esc(r.t)}</h3><div class="card-meta"><span class="time">⏱ ${r.d}</span></div></a></article>`;
+
+// Cœurs « Mon carnet » : état, compteur dans l'en-tête, petite animation.
+const syncHearts = () => {
+  const c = CAM.carnet();
+  document.querySelectorAll('[data-save]').forEach((b) => {
+    const on = c.includes(b.dataset.save);
+    b.classList.toggle('is-on', on);
+    b.setAttribute('aria-pressed', on);
+    const t = b.querySelector('.save-txt'); if (t && b.classList.contains('rf-btn')) t.textContent = on ? 'Dans mon carnet' : 'Mon carnet';
+  });
+  document.querySelectorAll('.carnet-count').forEach((n) => { n.textContent = c.length; n.hidden = !c.length; });
+};
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-save]');
+  if (!b) return;
+  e.preventDefault();
+  const c = CAM.carnet(), k = b.dataset.save, on = !c.includes(k);
+  CAM.setCarnet(on ? [k, ...c] : c.filter((x) => x !== k));
+  b.classList.remove('pop'); void b.offsetWidth; if (on) b.classList.add('pop');
+  syncHearts();
+  document.dispatchEvent(new CustomEvent('cam:carnet'));
+});
+syncHearts();
+
+// Préférences « Je ne mange pas de… » : masque les recettes concernées dans les listes.
+const applyPrefs = () => {
+  const p = CAM.prefs();
+  document.querySelectorAll('[data-prefs]').forEach((d) => {
+    d.querySelectorAll('input').forEach((i) => { i.checked = p.includes(i.value); });
+    const n = d.querySelector('.prefs-count'); n.textContent = p.length; n.hidden = !p.length;
+  });
+  let hidden = 0;
+  document.querySelectorAll('.cards .card[data-x]').forEach((c) => {
+    const ex = CAM.excluded(c.dataset.x);
+    c.classList.toggle('pref-off', ex);
+    if (ex && !c.closest('#carnet-grid')) hidden++;
+  });
+  document.querySelectorAll('.hidden-note').forEach((n) => {
+    n.hidden = !hidden;
+    n.innerHTML = `${hidden} recette${hidden > 1 ? 's' : ''} masquée${hidden > 1 ? 's' : ''} selon vos préférences. <button type="button" class="linklike" data-prefs-open>Modifier</button>`;
+  });
+  const w = document.querySelector('.diet-warn');
+  if (w) {
+    const D = { viande: 'de la viande', porc: 'du porc', poisson: 'du poisson ou des fruits de mer', lait: 'des produits laitiers', gluten: 'du gluten', oeuf: 'des œufs', coque: 'des fruits à coque', alcool: 'de l\'alcool' };
+    const hit = p.filter((k) => w.dataset.x.split(' ').includes(k));
+    w.hidden = !hit.length;
+    w.textContent = hit.length ? `Attention : d'après ses ingrédients, cette recette contient ${hit.map((k) => D[k]).join(', ')}, que vous avez choisi d'éviter.` : '';
+  }
+  document.dispatchEvent(new CustomEvent('cam:prefs'));
+};
+document.addEventListener('change', (e) => {
+  const box = e.target.closest('[data-prefs]');
+  if (!box) return;
+  CAM.setPrefs([...box.querySelectorAll('input:checked')].map((i) => i.value));
+  applyPrefs();
+});
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('[data-prefs-open]')) return;
+  const d = document.querySelector('[data-prefs]'); if (d) { d.open = true; d.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+});
+applyPrefs();
+
+// Une recette au hasard (en respectant les préférences).
+document.addEventListener('click', async (e) => {
+  const a = e.target.closest('[data-random]');
+  if (!a) return;
+  e.preventDefault();
+  const all = await CAM.index();
+  const pool = all.filter((r) => !CAM.excluded(r.x.join(' ')) && r.u !== location.pathname);
+  const r = pool[Math.floor(Math.random() * pool.length)];
+  if (r) location.href = r.u;
+});
+
+// Filtres rapides de la page des recettes : moins de 30 min, petit budget, végétarien.
+(() => {
+  const grid = document.getElementById('all');
+  const btns = [...document.querySelectorAll('[data-quick]')];
+  if (!grid || !btns.length) return;
+  const empty = document.querySelector('.empty');
+  const test = { rapide: (c) => +c.dataset.min <= 30, budget: (c) => c.dataset.budget === '1', veggie: (c) => !/\b(viande|poisson)\b/.test(c.dataset.x || '') };
+  const apply = () => {
+    const on = btns.filter((b) => b.getAttribute('aria-pressed') === 'true').map((b) => b.dataset.quick);
+    let shown = 0;
+    grid.querySelectorAll('.card').forEach((c) => {
+      const ok = on.every((k) => test[k](c));
+      c.classList.toggle('quick-off', !ok);
+      if (ok && !c.hidden && !c.classList.contains('pref-off')) shown++;
+    });
+    if (empty) empty.hidden = shown > 0;
+  };
+  btns.forEach((b) => b.addEventListener('click', () => { b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); apply(); }));
+  const q = new URLSearchParams(location.search).get('filtre');
+  if (q) btns.filter((b) => q.split(',').includes(b.dataset.quick)).forEach((b) => b.setAttribute('aria-pressed', 'true'));
+  document.getElementById('filtre-q')?.addEventListener('input', () => setTimeout(apply));
+  document.querySelectorAll('.chip').forEach((c) => c.addEventListener('click', () => setTimeout(apply)));
+  document.addEventListener('cam:prefs', apply);
+  apply();
+})();
+
+// Page « Mon carnet ».
+(() => {
+  const root = document.querySelector('[data-carnet]');
+  if (!root) return;
+  const grid = root.querySelector('#carnet-grid'), bar = root.querySelector('.carnet-bar'), empty = root.querySelector('.carnet-empty'), list = root.querySelector('.carnet-list');
+  // Lien partagé : /carnet/?r=slug1,slug2 propose d'ajouter les recettes.
+  const shared = (new URLSearchParams(location.search).get('r') || '').split(',').filter(Boolean);
+  const render = async () => {
+    const all = await CAM.index();
+    const by = Object.fromEntries(all.map((r) => [r.s, r]));
+    const c = CAM.carnet().filter((k) => by[k]);
+    grid.innerHTML = c.map((k) => miniCard(by[k])).join('');
+    bar.hidden = !c.length; empty.hidden = !!c.length;
+    root.querySelector('.carnet-n').textContent = `${c.length} recette${c.length > 1 ? 's' : ''} dans votre carnet`;
+    if (!c.length) list.hidden = true;
+    const imp = shared.filter((k) => by[k] && !c.includes(k));
+    let box = root.querySelector('.carnet-import');
+    if (imp.length && !box) {
+      box = document.createElement('div'); box.className = 'carnet-import';
+      box.innerHTML = `<p>On vous a envoyé ${imp.length} recette${imp.length > 1 ? 's' : ''} : ${imp.map((k) => `<a href="${by[k].u}">${CAM.esc(by[k].t)}</a>`).join(', ')}.</p><button type="button" class="btn">Ajouter à mon carnet</button>`;
+      box.querySelector('button').addEventListener('click', () => { CAM.setCarnet([...imp, ...CAM.carnet()]); box.remove(); history.replaceState(null, '', '/carnet/'); render(); });
+      root.prepend(box);
+    }
+    syncHearts(); applyPrefs();
+    if (!list.hidden) drawList(c.map((k) => by[k]));
+  };
+  const drawList = (rs) => {
+    root.querySelector('.carnet-groups').innerHTML = rs.map((r) => `<div class="menu-g"><h3>${CAM.esc(r.t)} <small>(${CAM.esc(r.p)})</small></h3><ul>${r.g.map((x) => `<li><label><input type="checkbox"><span>${CAM.esc(x)}</span></label></li>`).join('')}</ul></div>`).join('');
+  };
+  root.querySelector('[data-carnet-list]').addEventListener('click', async () => {
+    list.hidden = !list.hidden;
+    if (!list.hidden) { await render(); list.scrollIntoView({ behavior: 'smooth' }); }
+  });
+  root.querySelector('[data-carnet-share]').addEventListener('click', async (e) => {
+    const url = `${location.origin}/carnet/?r=${CAM.carnet().join(',')}`;
+    const b = e.currentTarget;
+    try {
+      if (navigator.share) { await navigator.share({ title: 'Mon carnet de recettes au miel', url }); return; }
+      await navigator.clipboard.writeText(url); const old = b.textContent; b.textContent = 'Lien copié !'; setTimeout(() => { b.textContent = old; }, 2000);
+    } catch (err) {}
+  });
+  const clear = root.querySelector('[data-carnet-clear]');
+  clear.addEventListener('click', () => {
+    if (clear.dataset.sure) { CAM.setCarnet([]); delete clear.dataset.sure; clear.textContent = 'Tout retirer'; render(); return; }
+    clear.dataset.sure = '1'; clear.textContent = 'Confirmer : tout retirer ?';
+    setTimeout(() => { delete clear.dataset.sure; clear.textContent = 'Tout retirer'; }, 4000);
+  });
+  document.addEventListener('cam:carnet', () => setTimeout(render, 250));
+  render();
+})();
+
+// Outil « Que cuisiner avec ce que j'ai ? ».
+(() => {
+  const root = document.querySelector('[data-frigo]');
+  if (!root) return;
+  const boxes = [...root.querySelectorAll('.frigo-opts input')], out = root.querySelector('.frigo-res'), n = root.querySelector('.frigo-n'), reset = root.querySelector('[data-frigo-reset]');
+  const labels = Object.fromEntries(boxes.map((b) => [b.value, b.nextElementSibling.textContent]));
+  boxes.forEach((b) => { b.checked = CAM.frigo().includes(b.value); });
+  const run = async () => {
+    const have = boxes.filter((b) => b.checked).map((b) => b.value);
+    CAM.setFrigo(have); reset.hidden = !have.length;
+    if (!have.length) { out.innerHTML = ''; n.textContent = 'Cochez au moins un ingrédient pour voir les idées.'; return; }
+    const all = await CAM.index();
+    const res = all.filter((r) => !CAM.excluded(r.x.join(' ')))
+      .map((r) => { const ok = r.f.filter((k) => have.includes(k)); return { r, ok, miss: r.f.filter((k) => !have.includes(k)) }; })
+      .filter((x) => x.ok.length)
+      .sort((a, b) => (b.ok.length * 2 - b.miss.length) - (a.ok.length * 2 - a.miss.length) || (a.miss.length - b.miss.length) || (a.r.n - b.r.n));
+    const ready = res.filter((x) => !x.miss.length).length;
+    n.innerHTML = res.length ? `<b>${res.length} idée${res.length > 1 ? 's' : ''}</b>${ready ? `, dont <b>${ready}</b> à faire tout de suite` : ''}.` : 'Aucune recette avec ces ingrédients. Cochez-en un ou deux autres.';
+    out.innerHTML = res.slice(0, 24).map(({ r, ok, miss }) => `<li class="fr"><a href="${r.u}"><img src="${r.i}" alt="" loading="lazy"><span class="fr-t"><b>${CAM.esc(r.t)}</b><small>${CAM.esc(r.c)} · ${r.d}</small>
+      <span class="fr-ok">${ok.length} de vos ingrédients : ${ok.map((k) => CAM.esc(labels[k] || k)).join(', ')}</span>
+      ${miss.length ? `<span class="fr-miss">Il vous manque : ${miss.map((k) => CAM.esc(labels[k] || k)).join(', ')}</span>` : '<span class="fr-all">Vous avez tout !</span>'}</span></a></li>`).join('');
+  };
+  root.addEventListener('change', (e) => { if (e.target.closest('.frigo-opts')) run(); });
+  document.addEventListener('cam:prefs', run);
+  reset.addEventListener('click', () => { boxes.forEach((b) => { b.checked = false; }); run(); });
+  run();
+})();
+
+// Proposer une recette : ouvre la messagerie avec la recette rédigée.
+(() => {
+  const f = document.getElementById('propose-form');
+  if (!f) return;
+  const v = (k) => (f.elements[k].value || '').trim();
+  const text = () => `Bonjour,\n\nVoici ma recette pour Cuisine au miel.\n\nRECETTE : ${v('titre')}\nCatégorie : ${v('categorie')}\nPour : ${v('portions')}\nPréparation : ${v('prep')} · Cuisson : ${v('cuisson')}\nMiel : ${v('miel')}\n\nINGRÉDIENTS\n${v('ingredients')}\n\nPRÉPARATION\n${v('etapes')}\n\nASTUCE / HISTOIRE\n${v('astuce')}\n\nPrénom : ${v('prenom')}\nVille : ${v('ville')}\nE-mail : ${v('email')}\n\nJe suis l'auteur de cette recette (ou elle vient de ma famille) et j'accepte qu'elle soit publiée sur cuisineaumiel.fr, adaptée si besoin, avec mon prénom.`;
+  f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const ok = v('prenom') && /.+@.+\..+/.test(v('email')) && v('titre') && v('ingredients') && v('etapes') && f.elements.accord.checked;
+    f.querySelector('.wl-err').hidden = !!ok;
+    if (!ok) return;
+    location.href = `mailto:${f.dataset.mail}@${f.dataset.domain}?subject=${encodeURIComponent('Ma recette : ' + v('titre'))}&body=${encodeURIComponent(text())}`;
+  });
+  f.querySelector('[data-propose-copy]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(text()); f.querySelector('.propose-copied').hidden = false; } catch (e) {}
+  });
+})();
+
+// Avis des lecteurs (service Cloudflare, voir avis/LISEZMOI.md).
+(() => {
+  const root = document.querySelector('[data-avis]');
+  if (!root) return;
+  const api = root.dataset.avis, slug = root.dataset.slug;
+  const f = root.querySelector('.avis-form'), msg = root.querySelector('.avis-msg'), list = root.querySelector('.avis-list');
+  const star = (on) => `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z" fill="${on ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.6"/></svg>`;
+  const load = async () => {
+    try {
+      const d = await (await fetch(`${api}/avis/${slug}`)).json();
+      if (d.n) {
+        root.querySelector('.avis-moy').textContent = String(d.moy).replace('.', ',');
+        root.querySelector('.avis-n').textContent = `${d.n} note${d.n > 1 ? 's' : ''}`;
+        root.querySelector('.avis-stars').innerHTML = [1, 2, 3, 4, 5].map((i) => star(d.moy >= i - 0.25)).join('');
+      }
+      list.innerHTML = (d.commentaires || []).map((c) => `<li><p class="avis-who"><b>${CAM.esc(c.prenom)}</b><span class="avis-stars">${[1, 2, 3, 4, 5].map((i) => star(i <= c.note)).join('')}</span><time>${new Date(c.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</time></p><p>${CAM.esc(c.texte)}</p></li>`).join('');
+    } catch (e) {}
+  };
+  let done = false;
+  try { done = JSON.parse(localStorage.getItem('cam-avis') || '[]').includes(slug); } catch (e) {}
+  const say = (t, ok) => { msg.hidden = false; msg.textContent = t; msg.classList.toggle('ok', !!ok); };
+  if (done) { f.querySelector('.avis-rate').disabled = true; say('Merci, vous avez déjà noté cette recette.', true); }
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const note = f.querySelector('input[name=note]:checked');
+    if (!note) return say('Choisissez une note de 1 à 5 étoiles.');
+    const btn = f.querySelector('button'); btn.disabled = true;
+    try {
+      const r = await fetch(`${api}/avis/${slug}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ note: +note.value, prenom: f.elements.prenom.value, texte: f.elements.texte.value, site: f.elements.site.value }) });
+      const d = await r.json();
+      if (r.ok) {
+        try { const l = JSON.parse(localStorage.getItem('cam-avis') || '[]'); l.push(slug); localStorage.setItem('cam-avis', JSON.stringify(l)); } catch (err) {}
+        say(d.moderation ? 'Merci ! Votre note est comptée, et votre commentaire apparaîtra après relecture.' : 'Merci, votre note est comptée !', true);
+        f.reset(); load();
+      } else say(d.erreur === 'deja' ? 'Vous avez déjà noté cette recette. Merci !' : 'Oups, l\'envoi n\'a pas marché. Réessayez dans un instant.');
+    } catch (err) { say('Oups, l\'envoi n\'a pas marché. Réessayez dans un instant.'); }
+    btn.disabled = false;
+  });
+  load();
 })();
