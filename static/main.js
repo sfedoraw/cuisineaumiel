@@ -589,6 +589,43 @@ document.addEventListener('click', async (e) => {
     if (!ok) return;
     location.href = `mailto:${f.dataset.mail}@${f.dataset.domain}?subject=${encodeURIComponent('Ma recette : ' + v('titre'))}&body=${encodeURIComponent(text())}`;
   });
+  // Photo de la fiche : lue par le service (avis/worker.js, route /lire), puis le formulaire est pré-rempli.
+  const snap = f.querySelector('[data-snap]');
+  if (snap) {
+    const inp = snap.querySelector('input'), msg = snap.querySelector('.snap-msg');
+    const say = (t, ok) => { msg.hidden = false; msg.textContent = t; msg.classList.toggle('ok', !!ok); };
+    const shrink = (file) => new Promise((ok, ko) => {
+      const im = new Image(), u = URL.createObjectURL(file);
+      im.onload = () => {
+        const k = Math.min(1, 1600 / Math.max(im.naturalWidth, im.naturalHeight));
+        const c = document.createElement('canvas'); c.width = Math.round(im.naturalWidth * k); c.height = Math.round(im.naturalHeight * k);
+        c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(u);
+        let q = 0.85, out = c.toDataURL('image/jpeg', q);
+        while (out.length > 780000 && q > 0.4) { q -= 0.12; out = c.toDataURL('image/jpeg', q); }
+        ok(out);
+      };
+      im.onerror = () => { URL.revokeObjectURL(u); ko(); };
+      im.src = u;
+    });
+    const put = (k, val) => { if (val && f.elements[k]) f.elements[k].value = val; };
+    inp.addEventListener('change', async () => {
+      const file = inp.files[0]; inp.value = '';
+      if (!file) return;
+      snap.classList.add('is-busy'); say('Lecture de votre recette… (quelques secondes)', true);
+      try {
+        const r = await fetch(`${snap.dataset.snap}/lire`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ photo: await shrink(file) }) });
+        const d = await r.json();
+        if (!r.ok) throw d.erreur || 'x';
+        if (!d.lisible) { say('Nous n\'avons pas réussi à lire une recette sur cette photo. Essayez avec plus de lumière, la fiche bien à plat.'); return; }
+        put('titre', d.titre); put('portions', d.portions); put('prep', d.preparation); put('cuisson', d.cuisson); put('miel', d.miel);
+        put('ingredients', d.ingredients.join('\n')); put('etapes', d.etapes.join('\n'));
+        say(`C'est rempli ! Relisez et corrigez si besoin, puis complétez votre prénom et votre e-mail.${d.reste >= 0 ? ` (${d.reste} photo${d.reste > 1 ? 's' : ''} restante${d.reste > 1 ? 's' : ''} aujourd'hui)` : ''}`, true);
+        f.elements.titre.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (err) {
+        say(err === 'quota' ? 'Vous avez atteint la limite de 5 photos pour aujourd\'hui. Vous pouvez remplir le formulaire à la main, ou réessayer demain.' : err === 'photo' ? 'Cette image ne peut pas être lue. Essayez une photo au format JPEG ou PNG.' : 'La lecture n\'a pas marché. Réessayez dans un instant, ou remplissez le formulaire à la main.');
+      } finally { snap.classList.remove('is-busy'); }
+    });
+  }
   f.querySelector('[data-propose-copy]').addEventListener('click', async () => {
     try { await navigator.clipboard.writeText(text()); f.querySelector('.propose-copied').hidden = false; } catch (e) {}
   });

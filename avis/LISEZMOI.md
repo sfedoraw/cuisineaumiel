@@ -26,3 +26,13 @@ Tant que `data/avis.json` a une adresse `api` vide, la section « Vos avis » n'
 ```
 
 Le site se reconstruit, et la section « Vos avis » apparaît sur toutes les recettes.
+
+## Proposer une recette en photo (facultatif)
+
+Sur la page « Proposer une recette », le lecteur peut photographier sa fiche : Claude (l'IA d'Anthropic) la lit et remplit le formulaire. Le lecteur relit puis envoie, comme avant ; rien n'est publié sans vous. Limite : 5 photos par personne et par jour. Coût : environ 1 à 2 centimes par photo.
+
+1. Créer un compte sur https://platform.claude.com, ajouter un moyen de paiement (avec une limite de dépense mensuelle, par exemple 10 €), puis **API keys** > **Create key**.
+2. Dans le Worker Cloudflare : **Settings** > **Variables and Secrets** > **Add** > type **Secret** : nom `ANTHROPIC_API_KEY`, valeur = la clé.
+3. Dans `data/avis.json`, mettre `"lecture": true`.
+
+Le bouton « Prendre ma fiche en photo » apparaît alors, et les encarts de l'accueil et des recettes mettent la fonction en avant.

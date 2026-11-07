@@ -420,6 +420,18 @@ function honeyCards() {
 }
 
 // Bandeau « Noël au miel » sur l'accueil, en novembre et décembre seulement (le site est reconstruit chaque jour).
+// Encart « Proposez votre recette » (version photo quand la lecture automatique est active).
+const camSvg = '<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>';
+function shareCta(cls = '') {
+  const snap = AVIS.api && AVIS.lecture;
+  return `<aside class="share-cta ${cls}">
+  <span class="share-ico">${snap ? camSvg : '✍️'}</span>
+  <div><p class="kicker">${snap ? 'Nouveau : votre recette en photo' : 'Votre recette sur le site'}</p>
+  <h2>${snap ? 'Une recette au miel ? Prenez-la en photo' : 'Une recette au miel à partager ?'}</h2>
+  <p>${snap ? 'Photographiez votre fiche, manuscrite ou imprimée : le formulaire se remplit tout seul. Vous relisez, vous envoyez, et les meilleures sont publiées avec votre prénom.' : 'Une recette de famille, une trouvaille de saison ? Envoyez-la : les meilleures sont publiées avec votre prénom.'}</p></div>
+  <a class="btn" href="/proposer-une-recette/">${snap ? 'Prendre ma recette en photo' : 'Proposer ma recette'}</a>
+</aside>`;
+}
 function noelPromo() {
   const c = COLLECTIONS.find((x) => x.slug === 'noel');
   if (!c || ![10, 11].includes(today.getUTCMonth())) return '';
@@ -454,6 +466,7 @@ function home() {
 </section>
 ${noelPromo()}
 ${NEWS.formulaire ? `<section class="wrap block">${newsletterBox('nl-home')}</section>` : ''}
+<section class="wrap block">${shareCta('share-home')}</section>
 
 <section class="block">
   <div class="wrap">${sectionTitle('Les miels', 'Un miel pour chaque recette')}</div>
@@ -572,6 +585,7 @@ ${printSheet(r)}
       ${nutritionHtml(r)}
       <div class="print-partner"><p>Fiche offerte par <b>MesAbeilles.fr</b></p><p>Retrouvez cette recette et bien d'autres sur cuisineaumiel.fr</p></div>
       ${avisHtml(r)}
+      ${shareCta('share-recipe')}
       <p class="credits">Photos : ${esc(r.credit)}${r.honey.credit ? ` et ${esc(r.honey.credit)}` : ''} sur <a href="https://unsplash.com/fr" rel="nofollow">Unsplash</a>.</p>
     </div>
   </div>
@@ -640,6 +654,7 @@ ${pageHead('Toutes les recettes', `${recipes.length} recettes au miel, de l'apé
   </div>
   <p class="empty" hidden>Aucune recette ne correspond. Essayez un autre mot ou retirez un filtre.</p>
   ${grid(recipes, 'all')}
+  ${shareCta('share-archive')}
   ${exploreHtml()}
 </section>`;
   return layout({ title: 'Toutes les recettes', description: `Les ${recipes.length} recettes au miel de cuisineaumiel.fr.`, canonical: '/recettes/', body });
@@ -1422,7 +1437,7 @@ function toolsHub() {
     ['/recettes/airfryer/', ico('<rect x="4" y="3" width="16" height="18" rx="4"/><circle cx="12" cy="11" r="4"/><path d="M8 18h8"/>'), 'Recettes au Airfryer', 'Nos recettes au miel adaptées à la friteuse sans huile, avec les bons réglages.', 'Nouveau'],
     ['/recettes/sans-four/', ico('<path d="M3 12h18"/><path d="M5 12a7 7 0 0 0 14 0"/><path d="M9 4c0 2 2 2 2 4M14 4c0 2 2 2 2 4"/>'), 'Sans four', 'À la poêle ou à la casserole : les recettes qui se font sans allumer le four.', ''],
     ['/carnet/', ico('<path d="M12 20.5s-7.5-4.6-9.3-9.4C1.4 7.6 3.6 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c3.6 0 5.8 3.6 4.5 7.1-1.8 4.8-9.3 9.4-9.3 9.4z"/>'), 'Mon carnet de recettes', 'Gardez vos recettes préférées d\'un clic sur le cœur, sans créer de compte, et faites la liste de courses.', 'Nouveau'],
-    ['/proposer-une-recette/', ico('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>'), 'Proposer votre recette', 'Vous avez une recette au miel de famille ? Envoyez-la : les meilleures sont publiées avec votre prénom.', 'Nouveau'],
+    ['/proposer-une-recette/', ico('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>'), 'Proposer votre recette', AVIS.api && AVIS.lecture ? 'Prenez votre fiche recette en photo : le formulaire se remplit tout seul. Les meilleures sont publiées avec votre prénom.' : 'Vous avez une recette au miel de famille ? Envoyez-la : les meilleures sont publiées avec votre prénom.', 'Nouveau'],
     ['/outils/sucre-miel/', ico('<path d="M4 7h16M4 12h10M4 17h7"/><path d="M17 14l3 3-3 3"/>'), 'Remplacer le sucre par du miel', 'Le calculateur qui adapte n\'importe quelle recette : quantité de miel, liquide, bicarbonate et four.', 'Nouveau'],
     ['/outils/calendrier-des-miellees/', ico('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'), 'Le calendrier des miellées', 'Quand récolte-t-on chaque miel ? Les grands miels de France, mois par mois.', 'Nouveau'],
     ['/outils/quel-miel/', ico('<path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/>'), 'Quel miel est fait pour vous ?', 'Le quiz en 5 questions pour trouver le miel qui vous ressemble.', 'Quiz'],
@@ -1845,6 +1860,11 @@ ${pageHead('Proposez votre recette au miel', 'Une recette de grand-mère, une tr
     </div>
     <form class="wl-form" id="propose-form" data-mail="${PARTNER_MAIL[0]}" data-domain="${PARTNER_MAIL[1]}" novalidate>
       <h3>Ma recette</h3>
+      ${AVIS.api && AVIS.lecture ? `<div class="snap" data-snap="${esc(AVIS.api.replace(/\/$/, ''))}">
+        <label class="snap-btn"><input type="file" accept="image/*" capture="environment"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span><b>Prendre ma fiche en photo</b><small>Le formulaire se remplit tout seul, vous n'avez plus qu'à relire.</small></span></label>
+        <p class="snap-msg" role="status" hidden></p>
+        <p class="snap-note">5 photos par jour au plus. La photo est lue par un service d'intelligence artificielle (Claude, d'Anthropic) pour remplir le formulaire, puis n'est pas conservée par cuisineaumiel.fr. Photographiez une recette à vous, pas la page d'un livre.</p>
+      </div>` : ''}
       <div class="wl-row"><label>Prénom<input name="prenom" required autocomplete="given-name"></label><label><span>Ville <small>(facultatif)</small></span><input name="ville" autocomplete="address-level2"></label></div>
       <label>E-mail<input name="email" type="email" required autocomplete="email"><small class="fhint">Pour vous prévenir de la publication. Il ne sera jamais affiché.</small></label>
       <label>Nom de la recette<input name="titre" required placeholder="Ex. : Tarte aux noix et miel de châtaignier de ma grand-mère"></label>
