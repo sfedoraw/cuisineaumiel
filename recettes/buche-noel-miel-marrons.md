@@ -1,6 +1,6 @@
 ---
 titre: Bûche de Noël au miel et aux marrons
-date: 2026-11-28
+date: 2026-11-26
 categorie: patisserie
 miel: Miel de châtaignier
 photo: 1672772994067-70ca0ef9f6b8

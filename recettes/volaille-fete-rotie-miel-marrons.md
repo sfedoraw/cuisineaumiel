@@ -1,6 +1,6 @@
 ---
 titre: Volaille de fête rôtie au miel et aux marrons
-date: 2026-12-01
+date: 2026-11-29
 categorie: plats
 miel: Miel de sapin
 photo: 1672787380741-6fe6c7450668

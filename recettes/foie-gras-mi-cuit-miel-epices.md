@@ -1,6 +1,6 @@
 ---
 titre: Foie gras mi-cuit au miel et aux épices
-date: 2026-11-19
+date: 2026-11-17
 categorie: aperitifs-entrees
 miel: Miel d'acacia
 photo: 1758972574371-57cf8c42bae8
