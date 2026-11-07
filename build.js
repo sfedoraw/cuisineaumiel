@@ -1585,7 +1585,7 @@ function shopBox(r) {
     <p class="shop-k">Le miel de cette recette</p>
     <p class="shop-t"><b>${esc(r.miel || 'Miel')}</b>${h ? ` · <a href="${h.url}">la fiche</a>` : ''}</p>
     <p class="shop-d">${esc(SHOP.accroche || '')}</p>
-    <a class="btn shop-btn" href="${esc(SHOP.url)}" rel="noopener" target="_blank" data-shop="${r.slug}">${esc(SHOP.bouton || 'Voir la boutique')} chez ${esc(SHOP.nom || '')} →</a>
+    <a class="btn shop-btn" href="${esc(SHOP.url)}"${/^https?:/.test(SHOP.url) ? ' rel="noopener" target="_blank"' : ''} data-shop="${r.slug}">${esc(SHOP.bouton || 'Voir la boutique')}${SHOP.nom ? ` chez ${esc(SHOP.nom)}` : ''} →</a>
   </aside>`;
 }
 
