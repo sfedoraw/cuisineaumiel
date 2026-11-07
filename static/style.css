@@ -1098,3 +1098,80 @@ h3 { font-size: .98rem; font-weight: 600; }
 @media print { .avis { display: none !important; } }
 
 [hidden] { display: none !important; }
+
+/* ---------- Collections : Noël, Airfryer, sans four, sans cuisson ---------- */
+.coll-nav { margin-bottom: 26px; }
+.coll-intro { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(20px, 4vw, 48px); align-items: start; margin-bottom: 40px; }
+.coll-intro > p { font-size: 1.08rem; line-height: 1.75; color: var(--ink-soft); margin: 0; }
+.coll-tips { margin: 0; }
+.coll-tips ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+@media (max-width: 860px) { .coll-intro { grid-template-columns: 1fr; } }
+.coll-intro + .section-title, .cards + .section-title { margin-top: 48px; }
+.promo { position: relative; display: block; min-height: 300px; border-radius: 28px; overflow: hidden; color: #fff; text-decoration: none; }
+.promo > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+.promo:hover > img { transform: scale(1.03); }
+.promo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(28,25,23,.85) 0%, rgba(28,25,23,.55) 50%, rgba(28,25,23,.1) 100%); }
+.promo-in { position: relative; z-index: 1; display: grid; gap: 10px; justify-items: start; max-width: 560px; padding: clamp(26px, 5vw, 56px); }
+.promo-in .kicker { color: var(--honey); margin: 0; }
+.promo-in b { font-size: clamp(1.7rem, 3.6vw, 2.6rem); line-height: 1.1; }
+.promo-in > span:not(.kicker):not(.btn) { color: #E7E5E4; }
+.promo-in .btn { margin-top: 8px; background: var(--honey); color: var(--ink); }
+
+/* ---------- Appli installable ---------- */
+.ft-app { margin-top: 16px; }
+.ft-app-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1.5px solid rgba(255,255,255,.35); border-radius: 999px; background: transparent; color: #fff; font: 600 .88rem var(--font); cursor: pointer; }
+.ft-app-btn:hover { border-color: var(--honey); color: var(--honey); }
+.ft-app-ios { margin: 10px 0 0; font-size: .85rem; color: #D6D3D1; }
+.offline { text-align: center; padding: 80px 0; }
+.offline .lede { margin-inline: auto; }
+
+/* Valeurs nutritionnelles estimées */
+.nutri { border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 20px; }
+.nutri summary { list-style: none; cursor: pointer; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding: 18px 26px; }
+.nutri summary::-webkit-details-marker { display: none; }
+.nutri summary span { font-weight: 700; font-size: 1.05rem; }
+.nutri summary b { color: var(--accent); font-variant-numeric: tabular-nums; }
+.nutri summary small { color: var(--ink-soft); flex: 1; }
+.nutri summary::after { content: '▾'; color: var(--ink-soft); transition: transform .2s; }
+.nutri[open] summary::after { transform: rotate(180deg); }
+.nutri table { width: calc(100% - 52px); margin: 0 26px 12px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.nutri caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.nutri th, .nutri td { padding: 7px 0; border-top: 1px solid var(--line); font-size: .93rem; }
+.nutri th { text-align: left; font-weight: 500; }
+.nutri td { text-align: right; font-weight: 600; }
+.nutri td small { font-weight: 400; color: var(--ink-soft); }
+.nutri tr.sub th { padding-left: 16px; font-weight: 400; color: var(--ink-soft); }
+.nutri p { margin: 0 26px 20px; font-size: .82rem; color: var(--ink-soft); }
+@media print { .nutri { display: none; } }
+@media (max-width: 600px) { .nutri summary { padding: 16px 18px; } .nutri table { width: calc(100% - 36px); margin: 0 18px 12px; } .nutri p { margin: 0 18px 18px; } }
+
+/* Photos des lecteurs « Je l'ai fait ! » */
+.avis-photo { grid-column: 1 / -1; display: grid; gap: 8px; }
+.avis-fields .avis-photo-btn { display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px 16px; border: 1.5px dashed #E9C98A; border-radius: 14px; background: #fff; color: var(--accent); font-size: .95rem; }
+.avis-photo-btn:hover, .avis-photo-btn:focus-within { border-color: var(--honey); background: var(--tint); }
+.avis-photo-btn input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.avis-photo-btn span { display: grid; color: var(--ink); }
+.avis-photo-btn small { font-weight: 500; }
+.avis-preview { position: relative; margin: 0; width: 140px; }
+.avis-preview img { border-radius: 12px; aspect-ratio: 1; }
+.avis-preview button { position: absolute; top: 6px; right: 6px; width: 28px; height: 28px; border-radius: 50%; border: 0; background: rgba(28, 25, 23, .75); color: #fff; font-size: 1.1rem; line-height: 1; cursor: pointer; }
+.avis-photo-note { margin: 0; font-size: .78rem; font-weight: 400; color: var(--ink-soft); }
+.avis-gal { margin-top: 20px; }
+.avis-gal ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+.avis-gal li { display: grid; gap: 4px; font-size: .8rem; color: var(--ink-soft); }
+.avis-gal img { border-radius: 12px; aspect-ratio: 1; }
+.avis-img img { margin-top: 10px; max-width: 260px; border-radius: 12px; }
+
+/* Lettre d'information */
+.nl { display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px 36px; align-items: center; padding: clamp(22px, 4vw, 40px); border-radius: var(--radius); background: var(--tint); }
+.nl h2 { margin-bottom: 6px; }
+.nl-text p:last-child { margin: 0; color: var(--ink-soft); }
+.nl-form { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+.nl-form input[type=email] { font: inherit; padding: 12px 18px; border: 1.5px solid #E9C98A; border-radius: 999px; background: #fff; min-width: 0; }
+.nl-legal, .nl-msg { grid-column: 1 / -1; margin: 0; font-size: .8rem; color: var(--ink-soft); }
+.nl-msg { font-size: .92rem; color: #B91C1C; }
+.nl-msg.ok { color: #166534; }
+.footer .nl-ft { max-width: 1200px; margin: 0 auto 36px; background: rgba(255, 255, 255, .06); color: inherit; }
+.footer .nl-ft .nl-text p:last-child, .footer .nl-ft .nl-legal { color: inherit; opacity: .75; }
+@media (max-width: 800px) { .nl { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .nl-form { grid-template-columns: 1fr; } .nl-form .btn { justify-self: start; } }

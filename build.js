@@ -226,6 +226,7 @@ const own = (name, alt, { ratio = '16 / 9', eager = false, cls = '', sizes = '10
   `<img class="${cls}" src="/img/${name}-1000.jpg" srcset="/img/${name}-1000.jpg 1000w, /img/${name}-2000.jpg 2000w" sizes="${sizes}" alt="${esc(alt)}" style="aspect-ratio:${ratio}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 const shortCat = (c) => c.name.split(' &')[0];
 
+const appSvg = `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>`;
 const DEFAULT_OG = 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=1200&q=70';
 function layout({ title, description, body, canonical, extraHead = '', ogImage = '', hero = '' }) {
   const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} · ${SITE.tagline}`;
@@ -249,6 +250,9 @@ function layout({ title, description, body, canonical, extraHead = '', ogImage =
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Cuisine au miel">
 <link rel="alternate" type="application/rss+xml" title="${SITE.name}" href="/flux.xml">
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -276,14 +280,16 @@ ${hero}
 ${body}
 </main>
 <footer class="footer">
+  ${newsletterBox('nl-ft')}
   <div class="ft">
     <div class="ft-brand">
       <a class="ft-logo" href="/" aria-label="Cuisine au miel, accueil"><svg viewBox="0 0 26 36" width="30" height="42" aria-hidden="true"><path d="M13 1C10.6 5.8 1.5 14.6 1.5 24a11.5 11.5 0 0 0 23 0C24.5 14.6 15.4 5.8 13 1z" fill="#F2A516"/><path d="M7.2 26.5a6.4 6.4 0 0 1 .6-6.2" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg><span><small>Cuisine</small><b>au miel</b></span></a>
       <p>Recettes, savoirs et carte des miels, avec des sources solides. Un site proposé par le <a href="/a-propos/">GAEC des Deux Vallées</a>, apiculteurs.</p>
       <a class="ft-cta" href="/recettes/">Voir les ${recipes.length} recettes →</a>
+      <div class="ft-app" data-install hidden><button type="button" class="ft-app-btn">${appSvg} Installer l'appli</button><p class="ft-app-ios" hidden>Sur iPhone : touchez <b>Partager</b>, puis <b>Sur l'écran d'accueil</b>.</p></div>
     </div>
     <nav class="ft-cols" aria-label="Pied de page">
-      <div><h2>Recettes</h2><a href="/recettes/">Toutes les recettes</a><a href="/categories/desserts/">Desserts</a><a href="/categories/plats/">Plats</a><a href="/categories/aperitifs-entrees/">Apéritifs et entrées</a><a href="/recettes/saison/${saisonNow ? saisonNow.slug : 'automne'}/">Recettes de saison</a><a href="/carnet/">Mon carnet</a><a href="/proposer-une-recette/">Proposer une recette</a></div>
+      <div><h2>Recettes</h2><a href="/recettes/">Toutes les recettes</a><a href="/categories/desserts/">Desserts</a><a href="/categories/plats/">Plats</a><a href="/categories/aperitifs-entrees/">Apéritifs et entrées</a><a href="/recettes/saison/${saisonNow ? saisonNow.slug : 'automne'}/">Recettes de saison</a>${[10, 11].includes(today.getUTCMonth()) ? '<a href="/recettes/noel/">Noël au miel</a>' : ''}<a href="/recettes/airfryer/">Au Airfryer</a><a href="/carnet/">Mon carnet</a><a href="/proposer-une-recette/">Proposer une recette</a></div>
       <div><h2>Le miel</h2><a href="/miels/">Le guide des miels</a>${HAS_ATLAS ? '<a href="/miels/atlas/">L\'atlas des miels</a>' : ''}<a href="/guide/glossaire-du-miel/">Le glossaire</a><a href="/guide/produits-de-la-ruche/">Les produits de la ruche</a><a href="/magazine/">Magazine</a></div>
       <div><h2>Outils</h2><a href="/outils/frigo/">Que cuisiner avec mon frigo ?</a><a href="/outils/sucre-miel/">Remplacer le sucre</a><a href="/outils/quel-miel/">Quel miel pour vous ?</a><a href="/outils/menu-de-la-semaine/">Menu de la semaine</a><a href="/outils/calendrier-des-miellees/">Calendrier des miellées</a><a href="/outils/">Tous les outils</a></div>
       <div><h2>Apiculteurs</h2><a href="/apiculteurs-partenaires/">Nos apiculteurs partenaires</a><a href="/guide/trouver-un-apiculteur/">Bien acheter son miel</a><a href="/apiculteurs-partenaires/#liste-attente">Vous êtes apiculteur ?</a><a href="/a-propos/">À propos</a></div>
@@ -413,6 +419,12 @@ function honeyCards() {
   }).join('\n');
 }
 
+// Bandeau « Noël au miel » sur l'accueil, en novembre et décembre seulement (le site est reconstruit chaque jour).
+function noelPromo() {
+  const c = COLLECTIONS.find((x) => x.slug === 'noel');
+  if (!c || ![10, 11].includes(today.getUTCMonth())) return '';
+  return `<section class="wrap block"><a class="promo" href="${c.url}">${bannerImg(c.photo)}<span class="promo-in"><span class="kicker">Les fêtes approchent</span><b>${esc(c.titre)}</b><span>${esc(c.lede)}</span><span class="btn">Voir les ${c.all.length} recettes →</span></span></a></section>`;
+}
 function home() {
   const byCat = CATEGORIES.map((c) => ({ c, list: recipes.filter((r) => r.cat === c).slice(0, 10) })).filter((x) => x.list.length);
   const first = byCat.find((x) => x.c.slug === 'plats') || byCat[0];
@@ -440,6 +452,8 @@ function home() {
   ${FILTERS.map(([id, , list], i) => `<div class="panel" id="f-${id}"${i ? ' hidden' : ''}>${grid(list.slice(0, 12))}</div>`).join('\n')}
   <div class="more"><a class="btn-outline" href="/recettes/">Voir plus de recettes</a></div>
 </section>
+${noelPromo()}
+${NEWS.formulaire ? `<section class="wrap block">${newsletterBox('nl-home')}</section>` : ''}
 
 <section class="block">
   <div class="wrap">${sectionTitle('Les miels', 'Un miel pour chaque recette')}</div>
@@ -467,7 +481,7 @@ ${posts.length ? `<section class="wrap block">${sectionTitle('Le magazine du mie
 
 function pageHead(title, lede, photo, crumbs = '') {
   return `<section class="page-banner">
-  ${own(photo, '', { cls: 'banner-bg', ratio: 'auto', eager: true })}
+  ${bannerImg(photo)}
   <div class="banner-inner">${crumbs}<h1>${title}</h1>${lede ? `<p>${lede}</p>` : ''}</div>
 </section>`;
 }
@@ -494,6 +508,7 @@ function recipePage(r, i) {
     recipeYield: `${r.portions} ${r.unite || 'personnes'}`, recipeCategory: r.cat.name, recipeCuisine: 'Française',
     keywords: ['miel', r.miel, ...r.tags].join(', '), recipeIngredient: r.ingredientsList,
     recipeInstructions: r.steps.map((s) => ({ '@type': 'HowToStep', text: s.replace(/\*\*/g, '').replace(/\[(.+?)\]\(.+?\)/g, '$1') })),
+    ...nutritionLd(r),
     ...(NOTES[r.slug] && NOTES[r.slug].n ? { aggregateRating: { '@type': 'AggregateRating', ratingValue: NOTES[r.slug].moy, ratingCount: NOTES[r.slug].n, bestRating: 5, worstRating: 1 } } : {}),
   };
   const body = `
@@ -554,6 +569,7 @@ ${printSheet(r)}
       <ol class="steps">${r.steps.map((s) => `<li>${inline(s)}</li>`).join('')}</ol>
       ${r.conseil ? `<div class="tip"><h2>🐝 Le conseil</h2>${r.conseil}</div>` : ''}
       ${r.variantes ? `<div class="variants"><h2>Variantes</h2>${r.variantes}</div>` : ''}
+      ${nutritionHtml(r)}
       <div class="print-partner"><p>Fiche offerte par <b>MesAbeilles.fr</b></p><p>Retrouvez cette recette et bien d'autres sur cuisineaumiel.fr</p></div>
       ${avisHtml(r)}
       <p class="credits">Photos : ${esc(r.credit)}${r.honey.credit ? ` et ${esc(r.honey.credit)}` : ''} sur <a href="https://unsplash.com/fr" rel="nofollow">Unsplash</a>.</p>
@@ -1403,6 +1419,8 @@ function toolsHub() {
   const ico = (d) => `<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
   const tools = [
     ['/outils/frigo/', ico('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 10h14M9 6v2M9 13v3"/>'), "Que cuisiner avec ce que j'ai ?", 'Cochez ce qu\'il y a dans votre frigo et vos placards : on vous propose les recettes au miel qui collent.', 'Nouveau'],
+    ['/recettes/airfryer/', ico('<rect x="4" y="3" width="16" height="18" rx="4"/><circle cx="12" cy="11" r="4"/><path d="M8 18h8"/>'), 'Recettes au Airfryer', 'Nos recettes au miel adaptées à la friteuse sans huile, avec les bons réglages.', 'Nouveau'],
+    ['/recettes/sans-four/', ico('<path d="M3 12h18"/><path d="M5 12a7 7 0 0 0 14 0"/><path d="M9 4c0 2 2 2 2 4M14 4c0 2 2 2 2 4"/>'), 'Sans four', 'À la poêle ou à la casserole : les recettes qui se font sans allumer le four.', ''],
     ['/carnet/', ico('<path d="M12 20.5s-7.5-4.6-9.3-9.4C1.4 7.6 3.6 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c3.6 0 5.8 3.6 4.5 7.1-1.8 4.8-9.3 9.4-9.3 9.4z"/>'), 'Mon carnet de recettes', 'Gardez vos recettes préférées d\'un clic sur le cœur, sans créer de compte, et faites la liste de courses.', 'Nouveau'],
     ['/proposer-une-recette/', ico('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>'), 'Proposer votre recette', 'Vous avez une recette au miel de famille ? Envoyez-la : les meilleures sont publiées avec votre prénom.', 'Nouveau'],
     ['/outils/sucre-miel/', ico('<path d="M4 7h16M4 12h10M4 17h7"/><path d="M17 14l3 3-3 3"/>'), 'Remplacer le sucre par du miel', 'Le calculateur qui adapte n\'importe quelle recette : quantité de miel, liquide, bicarbonate et four.', 'Nouveau'],
@@ -1529,8 +1547,9 @@ const ACCORDS = [
 const exploreHtml = (r) => {
   const ss = r ? SAISONS.filter((sa) => inSaison(r, sa)) : SAISONS;
   const aa = r ? ACCORD_PAGES.filter((a) => a.list.includes(r)) : ACCORD_PAGES;
-  if (!ss.length && !aa.length) return '';
-  return `<div class="explore">${ss.length ? `<div><h2>${r ? 'De saison' : 'Recettes de saison'}</h2><ul class="chips">${ss.map((sa) => `<li${sa === saisonNow ? ' class="on"' : ''}><a href="/recettes/saison/${sa.slug}/">${sa.nom} <small>${saisonList(sa).length}</small></a></li>`).join('')}</ul></div>` : ''}${aa.length ? `<div><h2>${r ? 'Dans les mêmes accords' : 'Les accords au miel'}</h2><ul class="chips">${aa.map((a) => `<li><a href="/recettes/${a.slug}/">Miel et ${a.nom} <small>${a.list.length}</small></a></li>`).join('')}</ul></div>` : ''}</div>`;
+  const cc = r ? COLLECTIONS.filter((c) => c.all.includes(r)) : COLLECTIONS;
+  if (!ss.length && !aa.length && !cc.length) return '';
+  return `<div class="explore">${cc.length ? `<div><h2>${r ? 'Dans nos sélections' : 'Nos sélections'}</h2><ul class="chips">${cc.map((c) => `<li><a href="${c.url}">${esc(c.court || c.titre)} <small>${c.all.length}</small></a></li>`).join('')}</ul></div>` : ''}${ss.length ? `<div><h2>${r ? 'De saison' : 'Recettes de saison'}</h2><ul class="chips">${ss.map((sa) => `<li${sa === saisonNow ? ' class="on"' : ''}><a href="/recettes/saison/${sa.slug}/">${sa.nom} <small>${saisonList(sa).length}</small></a></li>`).join('')}</ul></div>` : ''}${aa.length ? `<div><h2>${r ? 'Dans les mêmes accords' : 'Les accords au miel'}</h2><ul class="chips">${aa.map((a) => `<li><a href="/recettes/${a.slug}/">Miel et ${a.nom} <small>${a.list.length}</small></a></li>`).join('')}</ul></div>` : ''}</div>`;
 };
 const accordList = (re) => recipes.filter((r) => re.test(normTxt([r.titre, ...(r.ingredientsList || [])].join(' '))));
 const ACCORD_PAGES = ACCORDS.map(([slug, nom, re, intro]) => ({ slug: `miel-et-${slug}`, nom, intro, list: accordList(re) })).filter((a) => a.list.length >= 3);
@@ -1546,9 +1565,154 @@ ${pageHead(`Miel et ${a.nom} : ${a.list.length} recettes`, a.intro, 'decoupe-cui
   return layout({ title: `Miel et ${a.nom} : ${a.list.length} recettes`, description: `${a.list.length} recettes qui associent le miel et ${a.nom === 'fromage' ? 'le fromage' : a.nom}. ${a.intro}`.slice(0, 300), canonical: `/recettes/${a.slug}/`, body, extraHead: [crumbsLd(trail), { '@context': 'https://schema.org', '@type': 'ItemList', name: `Recettes miel et ${a.nom}`, itemListElement: a.list.map((r, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE.url + r.url })) }].map(ldScript).join('\n') });
 }
 
+// ---------- collections thématiques : Noël, Airfryer, sans four, sans cuisson ----------
+// data/collections.json : sections de recettes choisies à la main, ou liste automatique (« auto »).
+const COLLECTIONS = (fs.existsSync(path.join(ROOT, 'data', 'collections.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'collections.json'), 'utf8')) : []).map((c) => {
+  const bySlug = Object.fromEntries(recipes.map((r) => [r.slug, r]));
+  const usesOven = (r) => /\bfour\b|enfourn/i.test(r.steps.join(' '));
+  const AUTO = {
+    'sans-four': () => recipes.filter((r) => minutes(r.cuisson) > 5 && !usesOven(r)),
+    'sans-cuisson': () => recipes.filter((r) => minutes(r.cuisson) <= 5 && !usesOven(r)),
+  };
+  const sections = c.auto ? [{ titre: '', list: AUTO[c.auto]() }] : (c.sections || []).map((x) => ({ titre: x.titre, list: x.recettes.map((k) => bySlug[k]).filter(Boolean) })).filter((x) => x.list.length);
+  const all = [...new Set(sections.flatMap((x) => x.list))];
+  return { ...c, url: `/recettes/${c.slug}/`, sections, all };
+}).filter((c) => c.all.length >= 3);
+function collectionPage(c) {
+  const trail = [['Accueil', '/'], ['Recettes', '/recettes/'], [c.court || c.titre]];
+  const faq = (c.faq || []).map((f) => ({ q: f.q, a: f.a }));
+  const body = `
+${pageHead(c.titre, c.lede, c.photo, crumbsHtml(trail))}
+<section class="wrap block-tight">
+  <nav class="season-nav coll-nav" aria-label="Collections">${COLLECTIONS.map((x) => `<a href="${x.url}"${x === c ? ' aria-current="page"' : ''}>${esc(x.court || x.titre)}</a>`).join('')}</nav>
+  <div class="coll-intro"><p>${inline(c.intro || '')}</p>${(c.conseils || []).length ? `<div class="tip coll-tips"><h2>🐝 Nos conseils</h2><ul>${c.conseils.map((t) => `<li>${inline(t)}</li>`).join('')}</ul></div>` : ''}</div>
+  ${c.sections.map((x) => `${x.titre ? sectionTitle(esc(x.titre), `${x.list.length} recette${x.list.length > 1 ? 's' : ''}`) : sectionTitle(`${x.list.length} recettes`, '')}${grid(x.list)}`).join('\n  ')}
+  ${faqHtml(faq)}
+</section>`;
+  return layout({ title: c.titre, description: c.lede, canonical: c.url, body, extraHead: [crumbsLd(trail), faqLd(faq), { '@context': 'https://schema.org', '@type': 'ItemList', name: c.titre, itemListElement: c.all.map((r, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE.url + r.url })) }].filter(Boolean).map(ldScript).join('\n') });
+}
+
 // ---------- boutique, carnet, frigo, proposer une recette ----------
 // data/boutique.json : la boutique de miel de l'apiculteur. L'encart n'apparaît que si « url » est rempli.
 // data/avis.json : adresse du service d'avis (Cloudflare Worker, voir avis/LISEZMOI.md). Vide = section masquée.
+// ── Valeurs nutritionnelles estimées (table Ciqual de l'Anses) ──
+// Affichées seulement si chaque ingrédient est reconnu ou négligeable (sel, épices, herbes, eau…).
+const NUTRI = fs.existsSync(path.join(ROOT, 'data', 'nutrition.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'nutrition.json'), 'utf8')) : null;
+const NUTRI_RULES = NUTRI ? NUTRI.regles.map((x) => ({ ...x, re: new RegExp(x.m) })) : [];
+const NUTRI_NEG = NUTRI ? new RegExp(NUTRI.negligeables) : null;
+const NUTRI_EXCL = NUTRI ? new RegExp(NUTRI.exclure) : null;
+const NUTRI_MISS = new Map();
+const num = (s) => (s === '½' ? 0.5 : s === '¼' ? 0.25 : s === '¾' ? 0.75 : parseFloat(s.replace(',', '.')));
+function nutriLine(line) {
+  const t = nrm(plain(line)).replace(/’/g, "'").replace(/\s+/g, ' ').trim();
+  const m = t.match(/^(\d+(?:[.,]\d+)?|½|¼|¾)\s*(kg|g|cl|ml|l|c\. a soupe|c\. a cafe|pincees?)?\s+(?:de |d')?(.*)$/);
+  const qty = m ? num(m[1]) : null, unit = m ? m[2] || '' : '', rest = m ? m[3] : t;
+  const name = rest.replace(/\s*\(.*?\)/g, '').split(/ ou /)[0].trim();
+  if (NUTRI_EXCL.test(name)) return { excl: true };
+  const rule = NUTRI_RULES.find((x) => x.re.test(name));
+  if (unit.startsWith('pincee')) return rule ? { g: 0.4 * qty, a: NUTRI.aliments[rule.c] } : { g: 0 };
+  if (!rule || qty == null) return NUTRI_NEG.test(name) ? { g: 0 } : null;
+  const d = rule.d || 1;
+  let g;
+  if (unit === 'g') g = qty; else if (unit === 'kg') g = qty * 1000;
+  else if (unit === 'cl') g = qty * 10 * d; else if (unit === 'ml') g = qty * d; else if (unit === 'l') g = qty * 1000 * d;
+  else if (unit === 'c. a soupe') g = qty * (rule.cs || 15 * d);
+  else if (unit === 'c. a cafe') g = qty * (rule.cs || 15 * d) / 3;
+  else {
+    const w = rest.match(/(?:de|d'environ|environ)\s+(\d+(?:[.,]\d+)?)\s*(kg|g)\b/);
+    if (w) g = qty * num(w[1]) * (w[2] === 'kg' ? 1000 : 1);
+    else if (rule.u) g = qty * rule.u;
+    else return NUTRI_NEG.test(name) ? { g: 0 } : null;
+  }
+  return { g: g * (rule.k || 1), a: NUTRI.aliments[rule.c] };
+}
+const nutritionOf = (r) => {
+  if (!NUTRI) return null;
+  if (r._nutri !== undefined) return r._nutri;
+  const tot = { kcal: 0, p: 0, g: 0, s: 0, l: 0, ags: 0, f: 0, sel: 0 };
+  let ok = true, mass = 0;
+  for (const line of r.ingredientsList) {
+    const x = nutriLine(line);
+    if (x && x.excl) { ok = false; break; }
+    if (!x) { ok = false; NUTRI_MISS.set(plain(line), (NUTRI_MISS.get(plain(line)) || 0) + 1); continue; }
+    if (x.a) { mass += x.g; for (const k in tot) tot[k] += x.a[k] * x.g / 100; }
+  }
+  if (!ok) return (r._nutri = null);
+  // Pots, bocaux, sauces : une « portion » n'a pas de sens, on donne les valeurs pour 100 g.
+  const per100 = /^(pots?|bocaux|bocal)$/i.test(r.unite || '') || r.portions === 1;
+  const div = per100 ? mass / 100 : r.portions;
+  for (const k in tot) tot[k] /= div;
+  tot.per100 = per100;
+  return (r._nutri = tot);
+};
+const fmtN = (v) => (v < 0.05 ? '&lt; 0,1' : v < 10 ? v.toFixed(1).replace('.', ',') : String(Math.round(v)));
+function nutritionHtml(r) {
+  const n = nutritionOf(r);
+  if (!n) return '';
+  const unit = n.per100 ? '100 g' : r.unite ? `1 ${esc(r.unite.replace(/(x|s)$/, ''))}` : '1 personne';
+  const rows = [['Énergie', `${Math.round(n.kcal)} kcal <small>(${Math.round(n.kcal * 4.184)} kJ)</small>`], ['Matières grasses', `${fmtN(n.l)} g`], ['dont acides gras saturés', `${fmtN(n.ags)} g`, 1], ['Glucides', `${fmtN(n.g)} g`], ['dont sucres', `${fmtN(n.s)} g`, 1], ['Fibres', `${fmtN(n.f)} g`], ['Protéines', `${fmtN(n.p)} g`], ['Sel', `${fmtN(n.sel)} g`]];
+  return `<details class="nutri">
+  <summary><span>Valeurs nutritionnelles</span><b>≈ ${Math.round(n.kcal)} kcal</b><small>${n.per100 ? 'pour 100 g' : `par portion (${unit})`}</small></summary>
+  <table><caption>Pour ${unit}, estimation</caption><tbody>${rows.map(([a, b, sub]) => `<tr${sub ? ' class="sub"' : ''}><th scope="row">${a}</th><td>${b}</td></tr>`).join('')}</tbody></table>
+  <p>Estimation calculée à partir de la <a href="https://ciqual.anses.fr/" rel="nofollow">table Ciqual 2025 de l'Anses</a> pour les ingrédients crus de la recette, ${n.per100 ? 'ramenés à 100 g de préparation' : 'divisés par le nombre de portions'}. Les pertes à la cuisson, les marinades non consommées et les marques choisies font varier ces valeurs : elles sont données à titre indicatif.</p>
+</details>`;
+}
+const nutritionLd = (r) => {
+  const n = nutritionOf(r);
+  if (!n) return {};
+  const g = (v) => `${v < 0.05 ? '0' : fmtN(v).replace(',', '.')} g`;
+  return { nutrition: { '@type': 'NutritionInformation', servingSize: n.per100 ? '100 g' : r.unite ? `1 ${r.unite.replace(/s$/, '')}` : '1 portion', calories: `${Math.round(n.kcal)} kcal`, fatContent: g(n.l), saturatedFatContent: g(n.ags), carbohydrateContent: g(n.g), sugarContent: g(n.s), fiberContent: g(n.f), proteinContent: g(n.p), sodiumContent: `${Math.round(n.sel * 400)} mg` } };
+};
+
+// ── Lettre d'information (Brevo) ──
+// data/newsletter.json : « formulaire » = adresse du formulaire Brevo (vide = encart masqué partout).
+// La lettre de la semaine est générée ici (/newsletter/apercu/) et envoyée par newsletter.js (GitHub Actions).
+const NEWS = fs.existsSync(path.join(ROOT, 'data', 'newsletter.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'newsletter.json'), 'utf8')) : {};
+function newsletterBox(cls = '') {
+  if (!NEWS.formulaire) return '';
+  return `<div class="nl ${cls}">
+  <div class="nl-text"><p class="kicker">La lettre du vendredi</p><h2>Les nouvelles recettes au miel, une fois par semaine</h2><p>Recettes, miels de saison et articles du magazine. Désinscription en un clic.</p></div>
+  <form class="nl-form" action="${esc(NEWS.formulaire)}" method="post" target="_blank" data-nl>
+    <label class="sr" for="nl-${cls || 'x'}">Votre adresse e-mail</label>
+    <input id="nl-${cls || 'x'}" type="email" name="EMAIL" required autocomplete="email" placeholder="votre@adresse.fr">
+    <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+    <input type="hidden" name="locale" value="fr">
+    <button class="btn" type="submit">Je m'inscris</button>
+    <p class="nl-legal">Votre adresse sert uniquement à envoyer cette lettre (service Brevo). Vous pourrez vous désinscrire à tout moment.</p>
+    <p class="nl-msg" role="status" hidden></p>
+  </form>
+</div>`;
+}
+function weeklyEmail() {
+  const since = new Date(today.getTime() - 7 * 864e5);
+  let recs = recipes.filter((r) => r.date > since).slice(0, 4);
+  if (recs.length < 2) recs = recipes.slice(0, 3);
+  const arts = posts.filter((p) => p.date > since && p.date <= today).slice(0, 2);
+  const ALC = /\b(vin|rhum|grog)\b/i;
+  recs = [...recs].sort((a, b) => ALC.test(a.titre) - ALC.test(b.titre));
+  const u = (p) => `${SITE.url}${p}?utm_source=newsletter&utm_medium=email`;
+  const btn = (href, t) => `<a href="${href}" style="display:inline-block;background:#B45309;color:#ffffff;text-decoration:none;font-weight:700;padding:12px 22px;border-radius:999px">${t}</a>`;
+  const recHtml = recs.map((r) => `<tr><td style="padding:0 0 26px"><a href="${u(r.url)}"><img src="${img(r.photo, 1120)}" width="560" alt="${esc(r.titre)}" style="display:block;width:100%;max-width:560px;height:auto;border-radius:16px;border:0"></a>
+<p style="margin:14px 0 4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#B45309;font-weight:700">${esc(r.cat.name)} · ${totalTime(r)} · ${esc(shortHoney(r.miel))}</p>
+<h2 style="margin:0 0 6px;font-size:22px;line-height:1.25"><a href="${u(r.url)}" style="color:#1C1917;text-decoration:none">${esc(r.titre)}</a></h2>
+<p style="margin:0 0 12px;color:#57534E">${esc(r.resume)}</p>${btn(u(r.url), 'Voir la recette')}</td></tr>`).join('');
+  const artHtml = arts.length ? `<tr><td style="padding:6px 0 20px;border-top:1px solid #E7E5E4"><p style="margin:18px 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#B45309;font-weight:700">Au magazine</p>${arts.map((a) => `<p style="margin:0 0 12px"><a href="${u(a.url)}" style="color:#1C1917;font-weight:700;font-size:17px">${esc(a.titre)}</a><br><span style="color:#57534E">${esc(a.resume || '')}</span></p>`).join('')}</td></tr>` : '';
+  const subject = `Cette semaine au miel : ${recs.slice(0, 2).map((r) => r.titre).join(', ')}${recs.length > 2 ? '…' : ''}`;
+  const html = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>${esc(subject)}</title></head>
+<body style="margin:0;background:#F4F2EF;font:16px/1.55 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#1C1917">
+<span style="display:none;max-height:0;overflow:hidden">${esc(recs.map((r) => r.titre).join(' · '))}</span>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F4F2EF"><tr><td align="center" style="padding:24px 12px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:22px"><tr><td style="padding:28px 20px 8px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+<tr><td style="padding:0 0 22px;text-align:center"><a href="${u('/')}" style="text-decoration:none;color:#1C1917;font-size:24px;font-weight:800">🍯 Cuisine <span style="color:#B45309">au miel</span></a><p style="margin:6px 0 0;color:#57534E">Les nouveautés de la semaine</p></td></tr>
+${recHtml}${artHtml}
+<tr><td style="padding:18px 0 4px;border-top:1px solid #E7E5E4;text-align:center">${btn(u('/recettes/'), `Les ${recipes.length} recettes`)}</td></tr>
+</table></td></tr></table>
+<p style="max-width:560px;margin:18px auto 0;font-size:12px;color:#78716C;text-align:center">${recs.some((r) => ALC.test(r.titre)) ? "L'abus d'alcool est dangereux pour la santé, à consommer avec modération.<br>" : ''}Le miel ne convient pas aux enfants de moins d'un an (Anses).<br>Vous recevez cette lettre car vous vous êtes inscrit sur cuisineaumiel.fr. <a href="{{ unsubscribe }}" style="color:#78716C">Se désinscrire</a></p>
+</td></tr></table></body></html>`;
+  return { subject, html };
+}
+
 const AVIS = fs.existsSync(path.join(ROOT, 'data', 'avis.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'avis.json'), 'utf8')) : {};
 // Notes réelles lues au moment de la construction, pour les étoiles dans les résultats Google.
 const NOTES = (() => {
@@ -1569,11 +1733,17 @@ function avisHtml(r) {
     <div class="avis-fields">
       <label>Prénom<input name="prenom" maxlength="40" autocomplete="given-name"></label>
       <label><span>Votre commentaire <small>(facultatif)</small></span><textarea name="texte" rows="3" maxlength="1200" placeholder="Réussie ? Une variante, une astuce ?"></textarea></label>
+      <div class="avis-photo">
+        <label class="avis-photo-btn"><input type="file" name="photo" accept="image/*"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Je l'ai fait ! <small>Ajouter ma photo (facultatif)</small></span></label>
+        <figure class="avis-preview" hidden><img alt="Aperçu de votre photo"><button type="button" aria-label="Retirer la photo">×</button></figure>
+        <p class="avis-photo-note">Votre photo est publiée après relecture. En l'envoyant, vous confirmez en être l'auteur et acceptez sa publication sur cuisineaumiel.fr. Évitez les visages et les informations personnelles.</p>
+      </div>
       <input name="site" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
     </div>
     <button class="btn" type="submit">Envoyer mon avis</button>
     <p class="avis-msg" role="status" hidden></p>
   </form>
+  <div class="avis-gal" hidden><h3>Ils l'ont fait</h3><ul></ul></div>
   <ol class="avis-list"></ol>
 </section>`;
 }
@@ -1721,6 +1891,9 @@ write('outils/sucre-miel/index.html', sugarTool()); urls.push('/outils/sucre-mie
 write('outils/frigo/index.html', frigoPage()); urls.push('/outils/frigo/');
 write('proposer-une-recette/index.html', proposerPage()); urls.push('/proposer-une-recette/');
 write('carnet/index.html', carnetPage());
+{ const mail = weeklyEmail(); write('newsletter/apercu/index.html', mail.html); write('newsletter/semaine.json', JSON.stringify({ sujet: mail.subject })); }
+write('hors-ligne/index.html', layout({ title: 'Hors connexion', canonical: '/hors-ligne/', extraHead: '<meta name="robots" content="noindex">', body: `<section class="wrap page-head offline"><h1>Pas de connexion pour le moment</h1><p class="lede">Cette page n'a pas encore été enregistrée sur votre téléphone. Les recettes de <a href="/carnet/">votre carnet</a> et les pages déjà visitées restent disponibles hors connexion.</p><p><a class="btn" href="/carnet/">Ouvrir mon carnet</a></p></section>` }));
+for (const c of COLLECTIONS) { write(`${c.url.slice(1)}index.html`, collectionPage(c)); urls.push(c.url); }
 write('recettes.json', JSON.stringify(recipeIndex()));
 for (const sa of SAISONS) { write(`recettes/saison/${sa.slug}/index.html`, saisonPage(sa)); urls.push(`/recettes/saison/${sa.slug}/`); }
 for (const a of ACCORD_PAGES) { write(`recettes/${a.slug}/index.html`, accordPage(a)); urls.push(`/recettes/${a.slug}/`); }
@@ -1740,3 +1913,8 @@ write('robots.txt', `# Cuisine au miel : moteurs de recherche et assistants IA b
 write('llms.txt', llmsTxt());
 
 console.log(`✓ ${recipes.length} recettes publiées, ${urls.length} pages générées dans _site/`);
+if (process.env.NUTRI_REPORT) {
+  const ok = recipes.filter((r) => nutritionOf(r));
+  console.log(`Nutrition : ${ok.length}/${recipes.length} recettes`);
+  for (const [l, n] of [...NUTRI_MISS].sort((a, b) => b[1] - a[1])) console.log(`  ? ${l} (${n})`);
+}

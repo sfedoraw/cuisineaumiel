@@ -600,6 +600,30 @@ document.addEventListener('click', async (e) => {
   if (!root) return;
   const api = root.dataset.avis, slug = root.dataset.slug;
   const f = root.querySelector('.avis-form'), msg = root.querySelector('.avis-msg'), list = root.querySelector('.avis-list');
+  const gal = root.querySelector('.avis-gal');
+  // Photo « Je l'ai fait ! » : réduite dans le navigateur (1080 px, JPEG) avant l'envoi.
+  let photo = '';
+  const fileIn = f.elements.photo, prev = f.querySelector('.avis-preview');
+  const shrink = (file) => new Promise((ok, ko) => {
+    const im = new Image(), u = URL.createObjectURL(file);
+    im.onload = () => {
+      const k = Math.min(1, 1080 / Math.max(im.naturalWidth, im.naturalHeight));
+      const c = document.createElement('canvas'); c.width = Math.round(im.naturalWidth * k); c.height = Math.round(im.naturalHeight * k);
+      c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(u);
+      let q = 0.82, out = c.toDataURL('image/jpeg', q);
+      while (out.length > 780000 && q > 0.4) { q -= 0.12; out = c.toDataURL('image/jpeg', q); }
+      ok(out);
+    };
+    im.onerror = () => { URL.revokeObjectURL(u); ko(); };
+    im.src = u;
+  });
+  const clearPhoto = () => { photo = ''; fileIn.value = ''; prev.hidden = true; };
+  fileIn.addEventListener('change', async () => {
+    const file = fileIn.files[0];
+    if (!file) return clearPhoto();
+    try { photo = await shrink(file); prev.querySelector('img').src = photo; prev.hidden = false; } catch (e) { clearPhoto(); say('Cette image ne peut pas être lue. Essayez une photo au format JPEG ou PNG.'); }
+  });
+  prev.querySelector('button').addEventListener('click', clearPhoto);
   const star = (on) => `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z" fill="${on ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.6"/></svg>`;
   const load = async () => {
     try {
@@ -609,7 +633,11 @@ document.addEventListener('click', async (e) => {
         root.querySelector('.avis-n').textContent = `${d.n} note${d.n > 1 ? 's' : ''}`;
         root.querySelector('.avis-stars').innerHTML = [1, 2, 3, 4, 5].map((i) => star(d.moy >= i - 0.25)).join('');
       }
-      list.innerHTML = (d.commentaires || []).map((c) => `<li><p class="avis-who"><b>${CAM.esc(c.prenom)}</b><span class="avis-stars">${[1, 2, 3, 4, 5].map((i) => star(i <= c.note)).join('')}</span><time>${new Date(c.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</time></p><p>${CAM.esc(c.texte)}</p></li>`).join('');
+      const ph = (c) => `${api}/photo/${encodeURIComponent(c.photo)}`;
+      list.innerHTML = (d.commentaires || []).map((c) => `<li><p class="avis-who"><b>${CAM.esc(c.prenom)}</b><span class="avis-stars">${[1, 2, 3, 4, 5].map((i) => star(i <= c.note)).join('')}</span><time>${new Date(c.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</time></p>${c.texte ? `<p>${CAM.esc(c.texte)}</p>` : ''}${c.photo ? `<a class="avis-img" href="${ph(c)}" target="_blank" rel="noopener"><img src="${ph(c)}" alt="La recette réalisée par ${CAM.esc(c.prenom)}" loading="lazy"></a>` : ''}</li>`).join('');
+      const pics = (d.commentaires || []).filter((c) => c.photo).slice(0, 12);
+      gal.hidden = !pics.length;
+      gal.querySelector('ul').innerHTML = pics.map((c) => `<li><a href="${ph(c)}" target="_blank" rel="noopener"><img src="${ph(c)}" alt="Réalisée par ${CAM.esc(c.prenom)}" loading="lazy"></a><span>${CAM.esc(c.prenom)}</span></li>`).join('');
     } catch (e) {}
   };
   let done = false;
@@ -622,15 +650,55 @@ document.addEventListener('click', async (e) => {
     if (!note) return say('Choisissez une note de 1 à 5 étoiles.');
     const btn = f.querySelector('button'); btn.disabled = true;
     try {
-      const r = await fetch(`${api}/avis/${slug}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ note: +note.value, prenom: f.elements.prenom.value, texte: f.elements.texte.value, site: f.elements.site.value }) });
+      const r = await fetch(`${api}/avis/${slug}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ note: +note.value, prenom: f.elements.prenom.value, texte: f.elements.texte.value, site: f.elements.site.value, ...(photo ? { photo } : {}) }) });
       const d = await r.json();
       if (r.ok) {
         try { const l = JSON.parse(localStorage.getItem('cam-avis') || '[]'); l.push(slug); localStorage.setItem('cam-avis', JSON.stringify(l)); } catch (err) {}
         say(d.moderation ? 'Merci ! Votre note est comptée, et votre commentaire apparaîtra après relecture.' : 'Merci, votre note est comptée !', true);
-        f.reset(); load();
-      } else say(d.erreur === 'deja' ? 'Vous avez déjà noté cette recette. Merci !' : 'Oups, l\'envoi n\'a pas marché. Réessayez dans un instant.');
+        f.reset(); clearPhoto(); load();
+      } else say(d.erreur === 'deja' ? 'Vous avez déjà noté cette recette. Merci !' : d.erreur === 'photo' ? 'La photo est trop lourde ou dans un format inattendu. Essayez-en une autre.' : 'Oups, l\'envoi n\'a pas marché. Réessayez dans un instant.');
     } catch (err) { say('Oups, l\'envoi n\'a pas marché. Réessayez dans un instant.'); }
     btn.disabled = false;
   });
   load();
 })();
+
+// Appli installable : service worker, bouton « Installer l'appli », recettes du carnet hors connexion.
+(() => {
+  if (!('serviceWorker' in navigator) || location.hostname === 'localhost' && !location.search.includes('sw')) return;
+  navigator.serviceWorker.register('/sw.js').then(() => navigator.serviceWorker.ready).then((reg) => {
+    const urls = () => CAM.index().then((all) => all.filter((r) => CAM.carnet().includes(r.s)).map((r) => r.u));
+    const send = () => urls().then((u) => reg.active && reg.active.postMessage({ type: 'carnet', urls: u }));
+    send(); document.addEventListener('cam:carnet', send);
+  }).catch(() => {});
+})();
+(() => {
+  const box = document.querySelector('[data-install]');
+  if (!box) return;
+  const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  if (standalone) return;
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  let evt = null;
+  addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); evt = e; box.hidden = false; });
+  if (ios) { box.hidden = false; }
+  box.querySelector('button').addEventListener('click', async () => {
+    if (evt) { evt.prompt(); try { await evt.userChoice; } catch (e) {} evt = null; box.hidden = true; }
+    else box.querySelector('.ft-app-ios').hidden = false;
+  });
+})();
+
+// Lettre d'information : inscription Brevo sans quitter la page.
+document.querySelectorAll('form[data-nl]').forEach((f) => {
+  const msg = f.querySelector('.nl-msg');
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (f.elements.email_address_check.value) return;
+    const btn = f.querySelector('button'); btn.disabled = true;
+    try {
+      await fetch(f.action, { method: 'POST', body: new FormData(f), mode: 'no-cors' });
+      msg.textContent = 'Presque fini ! Confirmez votre inscription dans l\'e-mail que vous allez recevoir.';
+      msg.className = 'nl-msg ok'; f.elements.EMAIL.value = '';
+    } catch (err) { msg.textContent = 'Oups, l\'inscription n\'a pas marché. Réessayez dans un instant.'; msg.className = 'nl-msg'; }
+    msg.hidden = false; btn.disabled = false;
+  });
+});
