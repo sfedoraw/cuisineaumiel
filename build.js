@@ -268,6 +268,7 @@ ${extraHead}
   <nav class="nav nav-right" aria-label="Navigation secondaire">
     <a href="/miels/">Les miels</a>
     <a href="/magazine/">Magazine</a>
+    <a class="nav-carnet" href="/carnet/" aria-label="Mon carnet de recettes" title="Mon carnet de recettes">${heartSvg}<b class="carnet-count" hidden></b></a>
   </nav>
 </header>
 ${hero}
@@ -282,9 +283,9 @@ ${body}
       <a class="ft-cta" href="/recettes/">Voir les ${recipes.length} recettes →</a>
     </div>
     <nav class="ft-cols" aria-label="Pied de page">
-      <div><h2>Recettes</h2><a href="/recettes/">Toutes les recettes</a><a href="/categories/desserts/">Desserts</a><a href="/categories/plats/">Plats</a><a href="/categories/aperitifs-entrees/">Apéritifs et entrées</a><a href="/recettes/saison/${saisonNow ? saisonNow.slug : 'automne'}/">Recettes de saison</a></div>
+      <div><h2>Recettes</h2><a href="/recettes/">Toutes les recettes</a><a href="/categories/desserts/">Desserts</a><a href="/categories/plats/">Plats</a><a href="/categories/aperitifs-entrees/">Apéritifs et entrées</a><a href="/recettes/saison/${saisonNow ? saisonNow.slug : 'automne'}/">Recettes de saison</a><a href="/carnet/">Mon carnet</a><a href="/proposer-une-recette/">Proposer une recette</a></div>
       <div><h2>Le miel</h2><a href="/miels/">Le guide des miels</a>${HAS_ATLAS ? '<a href="/miels/atlas/">L\'atlas des miels</a>' : ''}<a href="/guide/glossaire-du-miel/">Le glossaire</a><a href="/guide/produits-de-la-ruche/">Les produits de la ruche</a><a href="/magazine/">Magazine</a></div>
-      <div><h2>Outils</h2><a href="/outils/sucre-miel/">Remplacer le sucre</a><a href="/outils/quel-miel/">Quel miel pour vous ?</a><a href="/outils/menu-de-la-semaine/">Menu de la semaine</a><a href="/outils/calendrier-des-miellees/">Calendrier des miellées</a><a href="/outils/">Tous les outils</a></div>
+      <div><h2>Outils</h2><a href="/outils/frigo/">Que cuisiner avec mon frigo ?</a><a href="/outils/sucre-miel/">Remplacer le sucre</a><a href="/outils/quel-miel/">Quel miel pour vous ?</a><a href="/outils/menu-de-la-semaine/">Menu de la semaine</a><a href="/outils/calendrier-des-miellees/">Calendrier des miellées</a><a href="/outils/">Tous les outils</a></div>
       <div><h2>Apiculteurs</h2><a href="/apiculteurs-partenaires/">Nos apiculteurs partenaires</a><a href="/guide/trouver-un-apiculteur/">Bien acheter son miel</a><a href="/apiculteurs-partenaires/#liste-attente">Vous êtes apiculteur ?</a><a href="/a-propos/">À propos</a></div>
     </nav>
   </div>
@@ -309,12 +310,55 @@ const level = (r) => {
   const n = LEVEL[(r.difficulte || '').toLowerCase()] || 2;
   return `<span class="level" title="Difficulté : ${esc(r.difficulte)}"><span class="sr">Difficulté : ${esc(r.difficulte)}</span>${[1, 2, 3].map((i) => dropIcon(i <= n)).join('')}</span>`;
 };
-const MEAT = /poulet|porc|boeuf|bœuf|veau|agneau|canard|jambon|lard|bacon|magret|saumon|thon|crevette|poisson|cabillaud|dorade|chorizo|saucisse|dinde|caille|lapin|anchois|gélatine|gelatine/i;
+const MEAT = /poulet|porc|boeuf|bœuf|\bveau\b|agneau|canard|jambon|lard|bacon|magret|saumon|thon|crevette|poisson|cabillaud|dorade|chorizo|saucisse|dinde|caille|lapin|anchois|gélatine|gelatine/i;
 const isVeggie = (r) => !MEAT.test(r.ingredientsList.join(' ') + ' ' + r.titre);
+
+// ---------- préférences alimentaires, budget et ingrédients (carnet, frigo, filtres) ----------
+// Repérage automatique à partir de la liste d'ingrédients : indicatif, on invite à vérifier les étiquettes.
+const nrm = (t) => String(t || '').toLowerCase().replace(/œ/g, 'oe').replace(/æ/g, 'ae').normalize('NFD').replace(/[̀-ͯ]/g, '');
+const DIETS = [
+  ['viande', 'la viande', /poulet|\bporc|boeuf|\bveau\b|agneau|canard|jambon|\blard|bacon|magret|chorizo|saucisse|\bdinde|\bcailles?\b|lapin|travers|gelatine|volaille/],
+  ['porc', 'le porc', /\bporc|jambon|\blard|bacon|chorizo|saucisse|travers de porc|gelatine/],
+  ['poisson', 'le poisson, les fruits de mer', /saumon|thon|crevette|poisson|cabillaud|dorade|anchois|moule|saint-jacques|sauce poisson/],
+  ['lait', 'les produits laitiers', /\blait\b(?! de coco| d'amande| d'avoine| vegetal)|beurre(?! de cacahuete)|creme(?! de coco)|yaourt|fromage|feta|chevre|ricotta|mascarpone|camembert|halloumi|parmesan|mozzarella|burrata|comte|roquefort|skyr|glace vanille|chocolat au lait|speculoos|brioche/],
+  ['gluten', 'le gluten', /farine(?! de riz| de mais| de sarrasin| de pois chiche| d'amande)|\bpain\b|baguette|brioche|pate feuilletee|pate brisee|pate sablee|pate filo|filo|biscuit|speculoos|chapelure|semoule|boulgour|avoine|granola|\bble\b|orge|seigle|epeautre|sauce soja|pitas?\b|\bpates\b|muesli/],
+  ['oeuf', 'les œufs', /\boeufs?\b|jaunes? d'oeufs?|blancs? d'oeufs?/],
+  ['coque', 'les fruits à coque', /\bnoix\b(?! de coco| de muscade)|noisette|amande|pistache|cajou|pecan|pignon|macadamia|cacahuete|arachide|praline|nougat|fruits secs melanges/],
+  ['alcool', "l'alcool", /\bvin\b|rhum|cognac|biere|calvados|whisky|liqueur|porto|armagnac|kirsch|cidre brut|\bsake\b|mirin|grand marnier|cointreau/],
+];
+const recipeText = (r) => nrm(r.ingredientsList.join(' | '));
+const dietsOf = (r) => DIETS.filter(([, , re]) => re.test(recipeText(r))).map(([k]) => k);
+// Petit budget : aucun ingrédient cher (champ « budget: petit » ou « budget: moyen » pour forcer).
+const PRICEY = /magret|canard|agneau|filet mignon|filets mignons|saumon|crevette|saint-jacques|boeuf|veau|pistache|pignon|macadamia|safran|gousse de vanille|jambon cru|jambon demi-sel de 3 kg|burrata|cepe|truffe|champagne|foie gras/;
+const isCheap = (r) => (r.budget ? nrm(r.budget).startsWith('petit') : !PRICEY.test(recipeText(r)));
+// Ingrédients du « frigo » : [clé, libellé, rayon, motif].
+const FRIGO = [
+  ['pomme', 'Pommes', 'Fruits', /\bpommes?\b(?! de terre)|jus de pomme/], ['poire', 'Poires', 'Fruits', /\bpoires?\b/], ['figue', 'Figues', 'Fruits', /figue/], ['orange', 'Oranges', 'Fruits', /\boranges?\b/], ['citron', 'Citrons', 'Fruits', /citron/], ['banane', 'Bananes', 'Fruits', /banane/], ['peche', 'Pêches', 'Fruits', /\bpeches?\b/], ['fruits-rouges', 'Fruits rouges', 'Fruits', /fruits rouges|framboise|fraise|myrtille/], ['coing', 'Coings', 'Fruits', /coing/], ['pruneau', 'Pruneaux', 'Fruits', /pruneau/], ['fruits-secs', 'Fruits secs', 'Fruits', /fruits secs|raisins secs|abricots secs|cranberr|fruits confits/],
+  ['carotte', 'Carottes', 'Légumes', /carotte/], ['courge', 'Courge', 'Légumes', /courge|butternut|potiron|potimarron/], ['oignon', 'Oignons', 'Légumes', /oignon|echalote/], ['ail', 'Ail', 'Légumes', /\bail\b|gousses? d'ail/], ['pomme-de-terre', 'Pommes de terre', 'Légumes', /pommes? de terre/], ['tomate', 'Tomates', 'Légumes', /tomate/], ['betterave', 'Betteraves', 'Légumes', /betterave/], ['panais', 'Panais', 'Légumes', /panais/], ['salade', 'Salade, roquette', 'Légumes', /roquette|mesclun|salade|epinard/], ['gingembre', 'Gingembre', 'Légumes', /gingembre/], ['herbes', 'Herbes fraîches', 'Légumes', /persil|coriandre|menthe|basilic|ciboulette|aneth/],
+  ['lait', 'Lait', 'Crèmerie', /\blait\b(?! de coco)/], ['beurre', 'Beurre', 'Crèmerie', /beurre(?! de cacahuete)/], ['creme', 'Crème', 'Crèmerie', /creme(?! de coco)/], ['yaourt', 'Yaourt', 'Crèmerie', /yaourt|skyr|fromage blanc/], ['oeuf', 'Œufs', 'Crèmerie', /\boeufs?\b|jaunes? d'oeufs?|blancs? d'oeufs?/], ['fromage-frais', 'Ricotta, fromage frais', 'Crèmerie', /ricotta|mascarpone|fromage frais|burrata|philadelphia/], ['chevre', 'Chèvre', 'Crèmerie', /chevre|crottin/], ['feta', 'Feta', 'Crèmerie', /feta/], ['fromage', 'Autres fromages', 'Crèmerie', /camembert|halloumi|parmesan|comte|roquefort|mozzarella|brie|reblochon/],
+  ['poulet', 'Poulet', 'Viandes et poissons', /poulet|\bdinde/], ['porc', 'Porc', 'Viandes et poissons', /porc|travers/], ['jambon', 'Jambon', 'Viandes et poissons', /jambon|lardon|bacon/], ['canard', 'Canard', 'Viandes et poissons', /canard|magret/], ['agneau', 'Agneau', 'Viandes et poissons', /agneau/], ['saumon', 'Saumon', 'Viandes et poissons', /saumon/], ['crevettes', 'Crevettes', 'Viandes et poissons', /crevette/], ['tofu', 'Tofu', 'Viandes et poissons', /tofu/],
+  ['farine', 'Farine', 'Épicerie', /farine/], ['avoine', "Flocons d'avoine", 'Épicerie', /avoine|granola|muesli/], ['chocolat', 'Chocolat', 'Épicerie', /chocolat|cacao/], ['noix', 'Noix', 'Épicerie', /\bnoix\b(?! de coco| de muscade)/], ['noisettes', 'Noisettes', 'Épicerie', /noisette/], ['amandes', 'Amandes', 'Épicerie', /amande/], ['pistaches', 'Pistaches', 'Épicerie', /pistache/], ['pate', 'Pâte feuilletée ou filo', 'Épicerie', /pate feuilletee|pate brisee|filo/], ['pain', 'Pain', 'Épicerie', /\bpain\b|baguette|pitas?\b|brioche/], ['sesame', 'Sésame', 'Épicerie', /sesame/], ['soja', 'Sauce soja', 'Épicerie', /sauce soja/], ['moutarde', 'Moutarde', 'Épicerie', /moutarde/], ['vinaigre', 'Vinaigre', 'Épicerie', /vinaigre/], ['epices', 'Épices douces (cannelle, vanille…)', 'Épicerie', /cannelle|vanille|badiane|girofle|quatre-epices|muscade|cardamome/], ['the', 'Thé', 'Épicerie', /\bthe\b/],
+];
+const frigoOf = (r) => { const t = recipeText(r); return FRIGO.filter(([, , , re]) => re.test(t)).map(([k]) => k); };
+// Index léger des recettes, lu par le carnet, le frigo, le hasard et les préférences.
+const recipeIndex = () => recipes.map((r) => ({ s: r.slug, t: r.titre, u: r.url, i: img(r.photo, 480), c: shortCat(r.cat), m: shortHoney(r.miel), d: totalTime(r), n: totalMin(r), l: LEVEL[(r.difficulte || '').toLowerCase()] || 2, b: isCheap(r) ? 1 : 0, x: dietsOf(r), f: frigoOf(r), p: `${r.portions} ${r.unite || 'pers.'}`, g: r.ingredientsList.map(plain) }));
+const heartSvg = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-9.3-9.4C1.4 7.6 3.6 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c3.6 0 5.8 3.6 4.5 7.1-1.8 4.8-9.3 9.4-9.3 9.4z"/></svg>`;
+const saveBtn = (r, cls = 'save') => `<button type="button" class="${cls}" data-save="${r.slug}" aria-pressed="false" aria-label="Ajouter « ${esc(r.titre)} » à mon carnet" title="Ajouter à mon carnet">${heartSvg}<span class="save-txt">Mon carnet</span></button>`;
+const diceSvg = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1.2" fill="currentColor"/><circle cx="16" cy="16" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="16" cy="8" r="1.2" fill="currentColor"/><circle cx="8" cy="16" r="1.2" fill="currentColor"/></svg>`;
+// Panneau « Je ne mange pas de… », mémorisé dans le navigateur.
+const prefsPanel = () => `<details class="prefs" data-prefs>
+  <summary><span>Je ne mange pas de…</span><b class="prefs-count" hidden></b></summary>
+  <div class="prefs-body">
+    <p>Cochez ce que vous ne mangez pas : ces recettes seront masquées partout sur le site, sur cet appareil.</p>
+    <div class="prefs-opts">${DIETS.map(([k, l]) => `<label class="pref"><input type="checkbox" value="${k}"><span>${l.replace(/^(la |le |les |l')/, (m) => '').replace(/^./, (c) => c.toUpperCase())}</span></label>`).join('')}</div>
+    <p class="prefs-note">Repérage automatique d'après la liste des ingrédients : vérifiez toujours les étiquettes en cas d'allergie.</p>
+  </div>
+</details>`;
 
 // Carte recette en portrait : photo, catégorie, titre, difficulté et temps.
 function card(r, { eager = false } = {}) {
-  return `<article class="card" data-cat="${r.cat.slug}" data-search="${searchData(r)}">
+  return `<article class="card" data-cat="${r.cat.slug}" data-search="${searchData(r)}" data-slug="${r.slug}" data-min="${totalMin(r)}" data-budget="${isCheap(r) ? 1 : 0}" data-x="${dietsOf(r).join(' ')}">
+  ${saveBtn(r)}
   <a href="${r.url}">
     <div class="card-media">
       ${picture(r.photo, r.titre, { sizes: '(min-width: 1200px) 220px, (min-width: 700px) 30vw, 46vw', ratio: '3 / 4', eager })}
@@ -450,6 +494,7 @@ function recipePage(r, i) {
     recipeYield: `${r.portions} ${r.unite || 'personnes'}`, recipeCategory: r.cat.name, recipeCuisine: 'Française',
     keywords: ['miel', r.miel, ...r.tags].join(', '), recipeIngredient: r.ingredientsList,
     recipeInstructions: r.steps.map((s) => ({ '@type': 'HowToStep', text: s.replace(/\*\*/g, '').replace(/\[(.+?)\]\(.+?\)/g, '$1') })),
+    ...(NOTES[r.slug] && NOTES[r.slug].n ? { aggregateRating: { '@type': 'AggregateRating', ratingValue: NOTES[r.slug].moy, ratingCount: NOTES[r.slug].n, bestRating: 5, worstRating: 1 } } : {}),
   };
   const body = `
 ${printSheet(r)}
@@ -482,9 +527,11 @@ ${printSheet(r)}
     <div class="rf-actions">
       <button type="button" class="rf-btn rf-main" data-cook title="Plein écran, une étape à la fois, écran toujours allumé">${RF.chef}<span>Mode cuisine</span></button><span class="rf-hint">Plein écran, étape par étape, écran allumé</span>
       <button type="button" class="rf-btn" onclick="window.print()" aria-label="Imprimer la fiche recette au format A4" title="Une page A4 propre, sans publicité, à garder en cuisine">${RF.print}<span>Fiche A4</span></button>
+      ${saveBtn(r, 'rf-btn rf-save')}
       <button type="button" class="rf-btn" data-share aria-label="Partager la recette">${RF.share}<span>Partager</span></button>
     </div>
   </div>
+  <p class="diet-warn" data-x="${dietsOf(r).join(' ')}" hidden></p>
   <div class="recipe-grid">
     <aside class="ingredients-box" data-base="${r.portions}">
       <div class="box-head">
@@ -498,6 +545,7 @@ ${printSheet(r)}
       ${r.ingredientsHtml}
       <button type="button" class="print-btn" onclick="window.print()">Imprimer la recette</button>
       <a class="tool-link" href="/outils/sucre-miel/">Adapter vos recettes : remplacez le sucre par du miel →</a>
+      ${shopBox(r)}
     </aside>
     <div class="recipe-main">
       ${r.intro ? `<div class="intro">${r.intro}</div>` : ''}
@@ -507,6 +555,7 @@ ${printSheet(r)}
       ${r.conseil ? `<div class="tip"><h2>🐝 Le conseil</h2>${r.conseil}</div>` : ''}
       ${r.variantes ? `<div class="variants"><h2>Variantes</h2>${r.variantes}</div>` : ''}
       <div class="print-partner"><p>Fiche offerte par <b>MesAbeilles.fr</b></p><p>Retrouvez cette recette et bien d'autres sur cuisineaumiel.fr</p></div>
+      ${avisHtml(r)}
       <p class="credits">Photos : ${esc(r.credit)}${r.honey.credit ? ` et ${esc(r.honey.credit)}` : ''} sur <a href="https://unsplash.com/fr" rel="nofollow">Unsplash</a>.</p>
     </div>
   </div>
@@ -559,8 +608,21 @@ ${pageHead('Toutes les recettes', `${recipes.length} recettes au miel, de l'apé
       <button type="button" class="pill chip is-on" data-filter="">Toutes</button>
       ${CATEGORIES.map((c) => `<button type="button" class="pill chip" data-filter="${c.slug}">${shortCat(c)}</button>`).join('\n      ')}
     </div>
+    <div class="quick">
+      <div class="quick-toggles" role="group" aria-label="Filtres rapides">
+        <button type="button" class="qt" data-quick="rapide" aria-pressed="false">${clockIcon} Moins de 30 min</button>
+        <button type="button" class="qt" data-quick="budget" aria-pressed="false">€ Petit budget</button>
+        <button type="button" class="qt" data-quick="veggie" aria-pressed="false">🌿 Végétarien</button>
+      </div>
+      <div class="quick-more">
+        ${prefsPanel()}
+        <a class="qt qt-dice" href="/recettes/" data-random>${diceSvg} Une recette au hasard</a>
+        <a class="qt" href="/outils/frigo/">🧺 Avec ce que j'ai</a>
+      </div>
+    </div>
+    <p class="hidden-note" hidden></p>
   </div>
-  <p class="empty" hidden>Aucune recette ne correspond. Essayez un autre mot.</p>
+  <p class="empty" hidden>Aucune recette ne correspond. Essayez un autre mot ou retirez un filtre.</p>
   ${grid(recipes, 'all')}
   ${exploreHtml()}
 </section>`;
@@ -1340,6 +1402,9 @@ function toolsHub() {
   const trail = [['Accueil', '/'], ['Outils']];
   const ico = (d) => `<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
   const tools = [
+    ['/outils/frigo/', ico('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 10h14M9 6v2M9 13v3"/>'), "Que cuisiner avec ce que j'ai ?", 'Cochez ce qu\'il y a dans votre frigo et vos placards : on vous propose les recettes au miel qui collent.', 'Nouveau'],
+    ['/carnet/', ico('<path d="M12 20.5s-7.5-4.6-9.3-9.4C1.4 7.6 3.6 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c3.6 0 5.8 3.6 4.5 7.1-1.8 4.8-9.3 9.4-9.3 9.4z"/>'), 'Mon carnet de recettes', 'Gardez vos recettes préférées d\'un clic sur le cœur, sans créer de compte, et faites la liste de courses.', 'Nouveau'],
+    ['/proposer-une-recette/', ico('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>'), 'Proposer votre recette', 'Vous avez une recette au miel de famille ? Envoyez-la : les meilleures sont publiées avec votre prénom.', 'Nouveau'],
     ['/outils/sucre-miel/', ico('<path d="M4 7h16M4 12h10M4 17h7"/><path d="M17 14l3 3-3 3"/>'), 'Remplacer le sucre par du miel', 'Le calculateur qui adapte n\'importe quelle recette : quantité de miel, liquide, bicarbonate et four.', 'Nouveau'],
     ['/outils/calendrier-des-miellees/', ico('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'), 'Le calendrier des miellées', 'Quand récolte-t-on chaque miel ? Les grands miels de France, mois par mois.', 'Nouveau'],
     ['/outils/quel-miel/', ico('<path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/>'), 'Quel miel est fait pour vous ?', 'Le quiz en 5 questions pour trouver le miel qui vous ressemble.', 'Quiz'],
@@ -1481,6 +1546,155 @@ ${pageHead(`Miel et ${a.nom} : ${a.list.length} recettes`, a.intro, 'decoupe-cui
   return layout({ title: `Miel et ${a.nom} : ${a.list.length} recettes`, description: `${a.list.length} recettes qui associent le miel et ${a.nom === 'fromage' ? 'le fromage' : a.nom}. ${a.intro}`.slice(0, 300), canonical: `/recettes/${a.slug}/`, body, extraHead: [crumbsLd(trail), { '@context': 'https://schema.org', '@type': 'ItemList', name: `Recettes miel et ${a.nom}`, itemListElement: a.list.map((r, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE.url + r.url })) }].map(ldScript).join('\n') });
 }
 
+// ---------- boutique, carnet, frigo, proposer une recette ----------
+// data/boutique.json : la boutique de miel de l'apiculteur. L'encart n'apparaît que si « url » est rempli.
+// data/avis.json : adresse du service d'avis (Cloudflare Worker, voir avis/LISEZMOI.md). Vide = section masquée.
+const AVIS = fs.existsSync(path.join(ROOT, 'data', 'avis.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'avis.json'), 'utf8')) : {};
+// Notes réelles lues au moment de la construction, pour les étoiles dans les résultats Google.
+const NOTES = (() => {
+  if (!AVIS.api) return {};
+  try { return JSON.parse(require('child_process').execFileSync('curl', ['-sf', '--max-time', '15', `${AVIS.api.replace(/\/$/, '')}/notes`], { encoding: 'utf8' })); } catch (e) { console.warn('⚠ Avis : notes indisponibles, construction sans les étoiles.'); return {}; }
+})();
+const starsSvg = (v) => [1, 2, 3, 4, 5].map((i) => `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z" fill="${v >= i - 0.25 ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`).join('');
+function avisHtml(r) {
+  if (!AVIS.api) return '';
+  const n = NOTES[r.slug];
+  return `<section class="avis" id="avis" data-avis="${esc(AVIS.api.replace(/\/$/, ''))}" data-slug="${r.slug}">
+  <div class="avis-head">
+    <h2>Vos avis</h2>
+    <p class="avis-sum"><span class="avis-stars">${starsSvg(n ? n.moy : 0)}</span><b class="avis-moy">${n ? String(n.moy).replace('.', ',') : ''}</b><span class="avis-n">${n ? `${n.n} note${n.n > 1 ? 's' : ''}` : 'Soyez le premier à noter cette recette'}</span></p>
+  </div>
+  <form class="avis-form" novalidate>
+    <fieldset class="avis-rate"><legend>Votre note</legend><div class="rate-in">${[5, 4, 3, 2, 1].map((i) => `<input type="radio" name="note" value="${i}" id="n${i}"><label for="n${i}" title="${i} sur 5">${starsSvg(1).split('</svg>')[0]}</svg><span class="sr">${i} sur 5</span></label>`).join('')}</div></fieldset>
+    <div class="avis-fields">
+      <label>Prénom<input name="prenom" maxlength="40" autocomplete="given-name"></label>
+      <label><span>Votre commentaire <small>(facultatif)</small></span><textarea name="texte" rows="3" maxlength="1200" placeholder="Réussie ? Une variante, une astuce ?"></textarea></label>
+      <input name="site" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+    </div>
+    <button class="btn" type="submit">Envoyer mon avis</button>
+    <p class="avis-msg" role="status" hidden></p>
+  </form>
+  <ol class="avis-list"></ol>
+</section>`;
+}
+const SHOP = fs.existsSync(path.join(ROOT, 'data', 'boutique.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'boutique.json'), 'utf8')) : {};
+function shopBox(r) {
+  if (!SHOP.url) return '';
+  const h = honeyOf(r);
+  return `<aside class="shop-box">
+    <p class="shop-k">Le miel de cette recette</p>
+    <p class="shop-t"><b>${esc(r.miel || 'Miel')}</b>${h ? ` · <a href="${h.url}">la fiche</a>` : ''}</p>
+    <p class="shop-d">${esc(SHOP.accroche || '')}</p>
+    <a class="btn shop-btn" href="${esc(SHOP.url)}" rel="noopener" target="_blank" data-shop="${r.slug}">${esc(SHOP.bouton || 'Voir la boutique')} chez ${esc(SHOP.nom || '')} →</a>
+  </aside>`;
+}
+
+function carnetPage() {
+  const trail = [['Accueil', '/'], ['Mon carnet']];
+  const body = `
+${pageHead('Mon carnet de recettes', 'Vos recettes au miel préférées, gardées sur cet appareil. Touchez le cœur sur n\'importe quelle recette pour l\'ajouter.', 'chef-sel', crumbsHtml(trail))}
+<section class="wrap block-tight carnet" data-carnet>
+  <div class="carnet-bar" hidden>
+    <p class="carnet-n"></p>
+    <div class="carnet-actions">
+      <button type="button" class="btn-outline" data-carnet-list>Liste de courses</button>
+      <button type="button" class="btn-outline" data-carnet-share>Envoyer mon carnet</button>
+      <button type="button" class="btn-outline" data-carnet-clear>Tout retirer</button>
+    </div>
+  </div>
+  <div class="cards" id="carnet-grid"></div>
+  <div class="carnet-empty" hidden>
+    <div class="ce-ico">${heartSvg}</div>
+    <h2>Votre carnet est vide</h2>
+    <p>Touchez le cœur <span class="ce-mini">${heartSvg}</span> sur une recette : elle s'ajoute ici, sans compte ni inscription.</p>
+    <p class="ce-go"><a class="btn" href="/recettes/">Parcourir les ${recipes.length} recettes</a> <a class="btn-outline" href="/recettes/" data-random>Une recette au hasard</a></p>
+  </div>
+  <div class="carnet-list" hidden>
+    <h2>La liste de courses de mon carnet</h2>
+    <p class="menu-hint">Les ingrédients de toutes les recettes de votre carnet, pour les quantités indiquées dans chaque recette.</p>
+    <div class="carnet-groups"></div>
+    <button type="button" class="btn" onclick="window.print()">Imprimer la liste</button>
+  </div>
+  <p class="carnet-note">Votre carnet est enregistré dans ce navigateur. Pour le retrouver sur un autre appareil, utilisez « Envoyer mon carnet ».</p>
+</section>`;
+  return layout({ title: 'Mon carnet de recettes', description: 'Vos recettes au miel préférées, sauvegardées en un clic.', canonical: '/carnet/', body, extraHead: '<meta name="robots" content="noindex, follow">' }).replace('<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">\n', '');
+}
+
+function frigoPage() {
+  const trail = [['Accueil', '/'], ['Outils', '/outils/'], ["Que cuisiner avec ce que j'ai ?"]];
+  const used = FRIGO.filter(([k]) => recipes.some((r) => frigoOf(r).includes(k)));
+  const groups = [...new Set(used.map((x) => x[2]))];
+  const faq = [
+    { q: 'Comment trouver une recette avec les ingrédients que j\'ai ?', a: 'Cochez ce que vous avez dans votre frigo et vos placards. Les recettes au miel qui utilisent le plus de vos ingrédients apparaissent en premier, avec ce qu\'il vous manque.' },
+    { q: 'Faut-il cocher le miel, le sel ou l\'huile ?', a: 'Non : on part du principe que vous avez du miel, du sel, du poivre, de l\'huile, du sucre et de l\'eau. Cochez seulement les ingrédients principaux.' },
+    { q: 'Les recettes affichées tiennent-elles compte de mes préférences ?', a: 'Oui. Si vous avez indiqué ce que vous ne mangez pas (viande, porc, gluten…), ces recettes sont masquées.' },
+  ];
+  const body = `
+${pageHead("Que cuisiner avec ce que j'ai ?", 'Cochez ce qu\'il y a dans votre frigo et vos placards : nous vous proposons les recettes au miel qui collent, et ce qu\'il vous manque.', 'decoupe-cuisine', crumbsHtml(trail))}
+<section class="wrap block-tight frigo" data-frigo>
+  <div class="frigo-pick">
+    <div class="frigo-head"><h2>Dans ma cuisine, j'ai…</h2><button type="button" class="frigo-reset" data-frigo-reset hidden>Tout décocher</button></div>
+    ${groups.map((g) => `<fieldset class="frigo-g"><legend>${g}</legend><div class="frigo-opts">${used.filter((x) => x[2] === g).map(([k, l]) => `<label class="fi"><input type="checkbox" value="${k}"><span>${esc(l)}</span></label>`).join('')}</div></fieldset>`).join('\n    ')}
+    <p class="frigo-base">Toujours supposés dans vos placards : miel, sel, poivre, huile, sucre, eau.</p>
+    ${prefsPanel()}
+  </div>
+  <div class="frigo-out" aria-live="polite">
+    <p class="frigo-n">Cochez au moins un ingrédient pour voir les idées.</p>
+    <ol class="frigo-res"></ol>
+  </div>
+</section>
+<section class="wrap block">${faqHtml(faq)}</section>`;
+  return layout({ title: "Que cuisiner avec ce que j'ai ? Recettes au miel selon vos ingrédients", description: "Cochez les ingrédients de votre frigo et de vos placards : notre outil gratuit vous propose les recettes au miel à faire tout de suite, et ce qu'il vous manque.", canonical: '/outils/frigo/', body, extraHead: [crumbsLd(trail), faqLd(faq), { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Que cuisiner avec ce que j\'ai ?', applicationCategory: 'LifestyleApplication', operatingSystem: 'Tous', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }, url: SITE.url + '/outils/frigo/', inLanguage: 'fr-FR' }].map(ldScript).join('\n') });
+}
+
+function proposerPage() {
+  const trail = [['Accueil', '/'], ['Proposer une recette']];
+  const steps = [
+    ['1', 'Vous envoyez', 'Votre recette au miel : de famille, de saison, de tous les jours. Quelques lignes suffisent.'],
+    ['2', 'Nous testons', 'Nous la relisons, la cuisinons si besoin, et la mettons en forme : ingrédients, étapes, miel conseillé.'],
+    ['3', 'Elle est publiée', 'Avec votre prénom et votre ville si vous le souhaitez. Nous vous prévenons dès qu\'elle est en ligne.'],
+  ];
+  const body = `
+${pageHead('Proposez votre recette au miel', 'Une recette de grand-mère, une trouvaille de saison, un plat que tout le monde vous réclame ? Partagez-la : les meilleures sont publiées sur le site, avec votre prénom.', 'chef-sel', crumbsHtml(trail))}
+<section class="wrap block-tight">
+  <ol class="propose-steps">${steps.map(([n, t, d]) => `<li><span>${n}</span><div><h2>${t}</h2><p>${d}</p></div></li>`).join('')}</ol>
+</section>
+<section class="wrap block">
+  <div class="wl propose">
+    <div class="wl-intro">
+      <p class="kicker">Ce que nous cherchons</p>
+      <h2>Des recettes <em>vraies</em>, qui donnent envie</h2>
+      <ul class="propose-tips">
+        <li>Une recette où le miel a un vrai rôle : il laque, il équilibre, il parfume.</li>
+        <li>Des quantités précises et des étapes dans l'ordre : c'est ce qui fait une recette réussie.</li>
+        <li>Le miel que vous utilisez, et pourquoi celui-là.</li>
+        <li>Votre petite astuce, l'histoire du plat : c'est ce que les lecteurs préfèrent.</li>
+        <li>Une recette dont vous êtes l'auteur, ou que vous tenez de votre famille. Pas de copie d'un livre ou d'un site.</li>
+      </ul>
+      <p>Pas de promesse santé, s'il vous plaît : nous parlons de goût, de plaisir et de tradition. Et rappel : le miel ne convient pas aux enfants de moins d'un an.</p>
+    </div>
+    <form class="wl-form" id="propose-form" data-mail="${PARTNER_MAIL[0]}" data-domain="${PARTNER_MAIL[1]}" novalidate>
+      <h3>Ma recette</h3>
+      <div class="wl-row"><label>Prénom<input name="prenom" required autocomplete="given-name"></label><label><span>Ville <small>(facultatif)</small></span><input name="ville" autocomplete="address-level2"></label></div>
+      <label>E-mail<input name="email" type="email" required autocomplete="email"><small class="fhint">Pour vous prévenir de la publication. Il ne sera jamais affiché.</small></label>
+      <label>Nom de la recette<input name="titre" required placeholder="Ex. : Tarte aux noix et miel de châtaignier de ma grand-mère"></label>
+      <div class="wl-row"><label>Catégorie<select name="categorie">${CATEGORIES.map((c) => `<option>${esc(c.name)}</option>`).join('')}</select></label><label>Pour combien ?<input name="portions" inputmode="numeric" placeholder="4 personnes"></label></div>
+      <div class="wl-row"><label>Préparation<input name="prep" placeholder="20 min"></label><label>Cuisson<input name="cuisson" placeholder="35 min"></label></div>
+      <label>Le miel utilisé<input name="miel" list="miels-l" placeholder="Châtaignier, acacia, toutes fleurs…"><datalist id="miels-l">${honeys.map((h) => `<option value="${esc(h.nom)}">`).join('')}</datalist></label>
+      <label>Ingrédients<textarea name="ingredients" rows="6" required placeholder="Un ingrédient par ligne, avec la quantité :&#10;200 g de farine&#10;3 c. à soupe de miel de châtaignier"></textarea></label>
+      <label>Préparation<textarea name="etapes" rows="7" required placeholder="Les étapes dans l'ordre, une par ligne."></textarea></label>
+      <label><span>Votre astuce ou l'histoire de la recette <small>(facultatif)</small></span><textarea name="astuce" rows="3"></textarea></label>
+      <label class="propose-ok"><input type="checkbox" name="accord" required><span>Je suis l'auteur de cette recette (ou elle vient de ma famille) et j'accepte qu'elle soit publiée sur cuisineaumiel.fr, adaptée si besoin, avec mon prénom.</span></label>
+      <p class="wl-err" hidden>Merci de remplir votre prénom, votre e-mail, le nom de la recette, les ingrédients, la préparation, et de cocher l'accord.</p>
+      <button class="btn" type="submit">Envoyer ma recette</button>
+      <p class="pt-small">Votre messagerie s'ouvre avec la recette déjà rédigée : il ne reste qu'à l'envoyer (vous pouvez y joindre une photo). Rien ne s'ouvre ? <button type="button" class="linklike" data-propose-copy>Copier le texte</button> et <a href="#" data-mail="${PARTNER_MAIL[0]}" data-domain="${PARTNER_MAIL[1]}" data-subject="Ma%20recette">envoyez-le-nous par e-mail</a>.</p>
+      <p class="propose-copied" hidden>Texte copié : collez-le dans un e-mail.</p>
+    </form>
+  </div>
+</section>`;
+  return layout({ title: 'Proposez votre recette au miel', description: 'Envoyez votre recette au miel préférée : les meilleures sont publiées sur Cuisine au miel avec votre prénom.', canonical: '/proposer-une-recette/', body, extraHead: ldScript(crumbsLd(trail)) });
+}
+
 // ---------- construction ----------
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
@@ -1504,6 +1718,10 @@ write('outils/menu-de-la-semaine/index.html', menuPage()); urls.push('/outils/me
 write('outils/quel-miel/index.html', quizPage()); urls.push('/outils/quel-miel/');
 write('outils/calendrier-des-miellees/index.html', calendarPage()); urls.push('/outils/calendrier-des-miellees/');
 write('outils/sucre-miel/index.html', sugarTool()); urls.push('/outils/sucre-miel/');
+write('outils/frigo/index.html', frigoPage()); urls.push('/outils/frigo/');
+write('proposer-une-recette/index.html', proposerPage()); urls.push('/proposer-une-recette/');
+write('carnet/index.html', carnetPage());
+write('recettes.json', JSON.stringify(recipeIndex()));
 for (const sa of SAISONS) { write(`recettes/saison/${sa.slug}/index.html`, saisonPage(sa)); urls.push(`/recettes/saison/${sa.slug}/`); }
 for (const a of ACCORD_PAGES) { write(`recettes/${a.slug}/index.html`, accordPage(a)); urls.push(`/recettes/${a.slug}/`); }
 for (const f of (fs.existsSync(path.join(ROOT, 'pages')) ? fs.readdirSync(path.join(ROOT, 'pages')) : []).filter((f) => f.endsWith('.md') && f !== 'a-propos.md')) {
