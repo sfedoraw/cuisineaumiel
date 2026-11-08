@@ -680,20 +680,25 @@ document.addEventListener('click', async (e) => {
   let done = false;
   try { done = JSON.parse(localStorage.getItem('cam-avis') || '[]').includes(slug); } catch (e) {}
   const say = (t, ok) => { msg.hidden = false; msg.textContent = t; msg.classList.toggle('ok', !!ok); };
-  if (done) { f.querySelector('.avis-rate').disabled = true; say('Merci, vous avez déjà noté cette recette.', true); }
+  if (/[?&]avis=confirme/.test(location.search)) {
+    try { const l = JSON.parse(localStorage.getItem('cam-avis') || '[]'); if (!l.includes(slug)) { l.push(slug); localStorage.setItem('cam-avis', JSON.stringify(l)); } } catch (e) {}
+    done = true; f.querySelector('.avis-rate').disabled = true;
+    say('Merci, votre avis est confirmé ! Votre note est comptée, et votre commentaire apparaîtra après relecture.', true);
+    history.replaceState(null, '', location.pathname + location.hash);
+  } else if (done) { f.querySelector('.avis-rate').disabled = true; say('Merci, vous avez déjà noté cette recette.', true); }
   f.addEventListener('submit', async (e) => {
     e.preventDefault();
     const note = f.querySelector('input[name=note]:checked');
     if (!note) return say('Choisissez une note de 1 à 5 étoiles.');
+    if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(f.elements.email.value.trim())) { f.elements.email.focus(); return say('Indiquez votre adresse e-mail : vous recevrez un lien pour confirmer votre avis.'); }
     const btn = f.querySelector('button'); btn.disabled = true;
     try {
-      const r = await fetch(`${api}/avis/${slug}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ note: +note.value, prenom: f.elements.prenom.value, texte: f.elements.texte.value, site: f.elements.site.value, ...(photo ? { photo } : {}) }) });
+      const r = await fetch(`${api}/avis/${slug}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ note: +note.value, prenom: f.elements.prenom.value, email: f.elements.email.value.trim(), nouvelles: f.elements.nouvelles.checked, titre: (document.querySelector('h1') || {}).textContent || '', texte: f.elements.texte.value, site: f.elements.site.value, ...(photo ? { photo } : {}) }) });
       const d = await r.json();
       if (r.ok) {
-        try { const l = JSON.parse(localStorage.getItem('cam-avis') || '[]'); l.push(slug); localStorage.setItem('cam-avis', JSON.stringify(l)); } catch (err) {}
-        say(d.moderation ? 'Merci ! Votre note est comptée, et votre commentaire apparaîtra après relecture.' : 'Merci, votre note est comptée !', true);
-        f.reset(); clearPhoto(); load();
-      } else say(d.erreur === 'deja' ? 'Vous avez déjà noté cette recette. Merci !' : d.erreur === 'photo' ? 'La photo est trop lourde ou dans un format inattendu. Essayez-en une autre.' : 'Oups, l\'envoi n\'a pas marché. Réessayez dans un instant.');
+        say(`Presque fini ! Nous venons d'envoyer un e-mail à ${f.elements.email.value.trim()} : cliquez sur le lien qu'il contient pour confirmer votre avis (pensez à regarder dans les indésirables).`, true);
+        f.reset(); clearPhoto();
+      } else say({ deja: 'Vous avez déjà noté cette recette. Merci !', photo: 'La photo est trop lourde ou dans un format inattendu. Essayez-en une autre.', email: 'Cette adresse e-mail ne semble pas valide. Vérifiez-la.', jetable: 'Les adresses e-mail jetables ne sont pas acceptées. Utilisez votre adresse habituelle.', quota: 'Trop d\'envois aujourd\'hui depuis cette connexion. Réessayez demain.' }[d.erreur] || 'Oups, l\'envoi n\'a pas marché. Réessayez dans un instant.');
     } catch (err) { say('Oups, l\'envoi n\'a pas marché. Réessayez dans un instant.'); }
     btn.disabled = false;
   });

@@ -5,7 +5,9 @@ Tant que `data/avis.json` a une adresse `api` vide, la section « Vos avis » n'
 
 ## Ce que fait le service
 
-- **Les notes** (1 à 5 étoiles) comptent tout de suite. Une seule note par personne et par recette pendant 30 jours.
+- **Adresse e-mail obligatoire et confirmée** : le lecteur indique son e-mail, reçoit un lien et doit cliquer dessus. Rien ne compte avant ce clic (ni la note, ni le commentaire). Les adresses jetables (yopmail, mailinator…) sont refusées. Une seule note par adresse et par recette.
+- **Les notes** comptent dès la confirmation. Une seule note par connexion et par recette pendant 30 jours ; 10 e-mails de confirmation au plus par connexion et par jour.
+- **Les adresses des lecteurs** ne sont jamais publiées. Elles apparaissent sur la page de modération, et un bouton télécharge la liste complète (CSV : e-mail, prénom, nombre d'avis, accord pour recevoir des nouvelles). Seuls ceux qui ont coché la case acceptent la lettre d'information ; les autres peuvent être recontactés seulement au sujet de leur avis.
 - **Les commentaires** attendent votre validation : rien n'est publié sans vous.
 - **Les photos « Je l'ai fait ! »** : le lecteur peut joindre une photo de sa réalisation. Elle est réduite dans son navigateur (1080 px) avant l'envoi, puis attend votre validation, comme les commentaires. Une fois publiée, elle apparaît sous la recette dans « Ils l'ont fait ». Une photo non validée est effacée au bout de 60 jours.
 - **La page de modération** est à l'adresse `https://<votre-worker>/admin?cle=<votre mot de passe>` : un bouton « Publier » (avec ou sans la photo), un bouton « Supprimer ».
@@ -19,7 +21,9 @@ Tant que `data/avis.json` a une adresse `api` vide, la section « Vos avis » n'
 4. **Storage & Databases** > **KV** > **Create** : nommer l'espace `AVIS`.
 5. Dans le Worker : **Settings** > **Bindings** > **Add** > **KV namespace** : nom de variable `AVIS`, espace `AVIS`.
 6. Dans le Worker : **Settings** > **Variables and Secrets** > **Add** > type **Secret** : nom `ADMIN_KEY`, valeur = un mot de passe long de votre choix.
-7. Copier l'adresse du Worker (du type `https://avis-cuisineaumiel.<compte>.workers.dev`) et la mettre dans `data/avis.json` :
+7. **E-mails de confirmation (Brevo, gratuit jusqu'à 300 e-mails par jour)** : créer un compte sur https://www.brevo.com, puis **Senders, Domains & Dedicated IPs** > **Domains** > ajouter `cuisineaumiel.fr` et copier les enregistrements DNS proposés dans la zone OVH (sinon les e-mails finissent dans les indésirables). Ajouter l'expéditeur `bonjour@cuisineaumiel.fr`. Enfin **SMTP & API** > **API Keys** > **Generate**.
+8. Dans le Worker : **Settings** > **Variables and Secrets** : un **Secret** `BREVO_API_KEY` (la clé Brevo) et une variable texte `EXPEDITEUR` = `bonjour@cuisineaumiel.fr`.
+9. Copier l'adresse du Worker (du type `https://avis-cuisineaumiel.<compte>.workers.dev`) et la mettre dans `data/avis.json` :
 
 ```json
 { "api": "https://avis-cuisineaumiel.<compte>.workers.dev" }
