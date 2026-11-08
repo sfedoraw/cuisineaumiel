@@ -1757,6 +1757,9 @@ function avisHtml(r) {
     <fieldset class="avis-rate"><legend>Votre note</legend><div class="rate-in">${[5, 4, 3, 2, 1].map((i) => `<input type="radio" name="note" value="${i}" id="n${i}"><label for="n${i}" title="${i} sur 5">${starsSvg(1).split('</svg>')[0]}</svg><span class="sr">${i} sur 5</span></label>`).join('')}</div></fieldset>
     <div class="avis-fields">
       <label>Prénom<input name="prenom" maxlength="40" autocomplete="given-name"></label>
+      <label><span>Votre e-mail <small>(jamais publié)</small></span><input name="email" type="email" required maxlength="254" autocomplete="email" inputmode="email"></label>
+      <p class="avis-email-note">Vous recevrez un lien pour confirmer votre avis : il ne compte qu'après ce clic. Votre adresse reste privée ; elle sert seulement à vous recontacter au sujet de votre avis.</p>
+      <label class="avis-opt"><input type="checkbox" name="nouvelles"> J'accepte aussi de recevoir des nouvelles de Cuisine au miel (facultatif, désinscription en un clic).</label>
       <label><span>Votre commentaire <small>(facultatif)</small></span><textarea name="texte" rows="3" maxlength="1200" placeholder="Réussie ? Une variante, une astuce ?"></textarea></label>
       <div class="avis-photo">
         <label class="avis-photo-btn"><input type="file" name="photo" accept="image/*"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Je l'ai fait ! <small>Ajouter ma photo (facultatif)</small></span></label>

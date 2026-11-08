@@ -1082,7 +1082,11 @@ h3 { font-size: .98rem; font-weight: 600; }
 .avis-rate input:checked ~ label, .avis-rate label:hover, .avis-rate label:hover ~ label { color: var(--honey); }
 .avis-rate input:focus-visible + label { outline: 3px solid var(--honey); border-radius: 6px; }
 .avis-rate:disabled { opacity: .5; }
-.avis-fields { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; align-items: start; }
+.avis-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+.avis-fields > :nth-child(n+3) { grid-column: 1 / -1; }
+.avis-email-note { margin: -4px 0 0; font-size: .8rem; color: var(--ink-soft); }
+.avis-fields .avis-opt { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; font-size: .85rem; }
+.avis-fields .avis-opt input { margin-top: 3px; flex: none; width: 18px; height: 18px; accent-color: var(--accent); padding: 0; }
 .avis-fields label { display: grid; align-content: start; gap: 6px; font-size: .85rem; font-weight: 600; color: var(--ink-soft); }
 .avis-fields small { font-weight: 500; color: var(--muted); }
 .avis-fields input, .avis-fields textarea { font: inherit; font-size: .95rem; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: #fff; }
