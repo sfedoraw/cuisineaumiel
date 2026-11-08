@@ -200,6 +200,7 @@ h3 { font-size: .98rem; font-weight: 600; }
 .intro { font-size: 1.08rem; margin-bottom: 28px; }
 .steps { list-style: none; counter-reset: step; padding: 0; margin: 0 0 32px; }
 .steps li { counter-increment: step; position: relative; padding: 16px 18px 16px 66px; margin-bottom: 12px; background: var(--surface); border-radius: 16px; }
+.steps li { scroll-margin-top: 80px; }
 .steps li::before { content: counter(step); position: absolute; left: 16px; top: 14px; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; background: var(--honey); color: var(--ink); }
 .tip, .variants { border-radius: var(--radius); padding: 22px 26px; margin-bottom: 20px; }
 .tip { background: var(--tint); }

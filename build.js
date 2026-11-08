@@ -508,6 +508,13 @@ ${pageHead(c.name, c.intro, BANNER[c.slug] || 'chef-sel', `<nav class="crumbs" a
   return layout({ title: c.name, description: `Recettes au miel : ${c.name.toLowerCase()}. ${c.intro}`, canonical: `/categories/${c.slug}/`, body });
 }
 
+// Titre court d'une étape pour Google : sa première phrase, coupée proprement vers 60 caractères.
+function stepName(text) {
+  let t = text.split(/(?<=[.!?;:])\s/)[0].replace(/[.;:]$/, '').trim();
+  if (t.length > 60) t = t.slice(0, 60).replace(/[\s,]+\S*$/, '') + '…';
+  return t;
+}
+
 function recipePage(r, i) {
   const same = recipes.filter((x) => x !== r && x.cat === r.cat);
   const others = recipes.filter((x) => x !== r && x.cat !== r.cat);
@@ -520,7 +527,10 @@ function recipePage(r, i) {
     prepTime: isoDuration(r.preparation), cookTime: isoDuration(r.cuisson), totalTime: `PT${minutes(r.preparation) + minutes(r.cuisson) + minutes(r.repos)}M`,
     recipeYield: `${r.portions} ${r.unite || 'personnes'}`, recipeCategory: r.cat.name, recipeCuisine: 'Française',
     keywords: ['miel', r.miel, ...r.tags].join(', '), recipeIngredient: r.ingredientsList,
-    recipeInstructions: r.steps.map((s) => ({ '@type': 'HowToStep', text: s.replace(/\*\*/g, '').replace(/\[(.+?)\]\(.+?\)/g, '$1') })),
+    recipeInstructions: r.steps.map((s, n) => {
+      const text = s.replace(/\*\*/g, '').replace(/\[(.+?)\]\(.+?\)/g, '$1');
+      return { '@type': 'HowToStep', name: stepName(text), text, url: `${SITE.url}${r.url}#etape-${n + 1}` };
+    }),
     ...nutritionLd(r),
     ...(NOTES[r.slug] && NOTES[r.slug].n ? { aggregateRating: { '@type': 'AggregateRating', ratingValue: NOTES[r.slug].moy, ratingCount: NOTES[r.slug].n, bestRating: 5, worstRating: 1 } } : {}),
   };
@@ -579,7 +589,7 @@ ${printSheet(r)}
       ${r.intro ? `<div class="intro">${r.intro}</div>` : ''}
       <div class="steps-head"><h2>Préparation</h2><button type="button" class="cook-btn" data-cook><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.9V20h12v-6.1"/><path d="M6 14a4 4 0 1 1 2.6-7A4.5 4.5 0 0 1 17 6.1 4 4 0 1 1 18 14z"/></svg>Mode cuisine</button></div>
       <p class="cook-help"><b>Le mode cuisine ?</b> La recette passe en plein écran : les ingrédients à cocher, puis une étape à la fois en gros caractères, avec « Suivant » et « Précédent ». L'écran reste allumé pendant que vous cuisinez, même les mains occupées.</p>
-      <ol class="steps">${r.steps.map((s) => `<li>${inline(s)}</li>`).join('')}</ol>
+      <ol class="steps">${r.steps.map((s, n) => `<li id="etape-${n + 1}">${inline(s)}</li>`).join('')}</ol>
       ${r.conseil ? `<div class="tip"><h2>🐝 Le conseil</h2>${r.conseil}</div>` : ''}
       ${r.variantes ? `<div class="variants"><h2>Variantes</h2>${r.variantes}</div>` : ''}
       ${nutritionHtml(r)}
@@ -1096,7 +1106,7 @@ ${longBanner("L'atlas des miels", 'Tous les miels protégés d\'Europe, les plan
 
   <div class="long-foot">${faqHtml(faq)}${sourcesHtml(sources)}<p class="disclaimer">Le miel ne convient pas aux enfants de moins d'un an (recommandation de l'Anses).</p></div>
 </section>`;
-  return layout({ title: "L'atlas des miels : tous les miels AOP, IGP et monofloraux d'Europe et du monde", description: `Carte interactive et liste complète des miels : ${reg.length} miels AOP et IGP en Europe, ${A.europe.length} plantes à miel, et les grands miels du monde. Sources officielles.`, canonical: '/miels/atlas/', body, extraHead: ldScript(crumbsLd(trail)) + ldScript(faqLd(faq)) + ldScript({ '@context': 'https://schema.org', '@type': 'Dataset', name: "L'atlas des miels", description: 'Liste des miels protégés par une appellation en Europe, des plantes à miel européennes et de miels emblématiques du monde.', url: SITE.url + '/miels/atlas/', dateModified: A.maj, creator: { '@type': 'Organization', name: 'Cuisine au miel' }, isBasedOn: ['https://ec.europa.eu/agriculture/eambrosia/geographical-indications-register/', 'https://doi.org/10.1051/apido:2004045'] }) });
+  return layout({ title: "L'atlas des miels : tous les miels AOP, IGP et monofloraux d'Europe et du monde", description: `Carte interactive et liste complète des miels : ${reg.length} miels AOP et IGP en Europe, ${A.europe.length} plantes à miel, et les grands miels du monde. Sources officielles.`, canonical: '/miels/atlas/', body, extraHead: ldScript(crumbsLd(trail)) + ldScript(faqLd(faq)) + ldScript({ '@context': 'https://schema.org', '@type': 'Dataset', name: "L'atlas des miels", description: 'Liste des miels protégés par une appellation en Europe, des plantes à miel européennes et de miels emblématiques du monde.', url: SITE.url + '/miels/atlas/', dateModified: A.maj, license: 'https://creativecommons.org/licenses/by/4.0/', creator: { '@type': 'Organization', name: 'Cuisine au miel' }, isBasedOn: ['https://ec.europa.eu/agriculture/eambrosia/geographical-indications-register/', 'https://doi.org/10.1051/apido:2004045'] }) });
 }
 
 
