@@ -18,7 +18,7 @@ Faire son foie gras est plus simple qu'on ne le croit, et le miel y joue un rôl
 ## Ingrédients
 - 500 g de foie gras de canard cru déveiné
 - 1 c. à soupe de miel d'acacia
-- 8 g de sel fin
+- 7 g de sel fin
 - 2 g de poivre noir moulu
 - 1 pincée de quatre-épices
 - 2 c. à soupe d'armagnac (facultatif)

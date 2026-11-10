@@ -784,7 +784,7 @@ h3 { font-size: .98rem; font-weight: 600; }
   .ps-brand .medal { width: 26mm; height: 26mm; color: #1C1917; }
   .ps-brand .lv, .ps-brand .wv, .ps-brand .wv2 { animation: none !important; }
   .ps-cat { margin: 0 0 2mm; font-size: 8pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #B45309; }
-  .ps-title h1 { margin: 0 0 2mm; font-size: 21pt; line-height: 1.1; letter-spacing: -.01em; }
+  .ps-title .ps-h1 { margin: 0 0 2mm; font-size: 21pt; font-weight: 700; line-height: 1.1; letter-spacing: -.01em; }
   .ps-lede { margin: 0; font-size: 9.5pt; color: #57534E; }
   .ps-photo { width: 58mm; height: 40mm; object-fit: cover; border-radius: 4mm; }
   .ps-facts { list-style: none; margin: 4mm 0; padding: 3mm 4mm; display: flex; justify-content: space-between; gap: 3mm; background: #FFF4DE; border-radius: 3mm; }
@@ -1206,3 +1206,11 @@ h3 { font-size: .98rem; font-weight: 600; }
 @media (max-width: 760px) { .share-cta { grid-template-columns: auto 1fr; } .share-cta .btn { grid-column: 1 / -1; justify-self: start; } .share-ico { width: 52px; height: 52px; } }
 @media print { .share-cta { display: none; } }
 .snap-btn svg { flex: none; width: 24px; height: 24px; }
+
+.alcool { margin: 0 0 24px; font-size: .85rem; color: var(--ink-soft); }
+.cat-guide { max-width: 760px; margin: 8px auto 72px; padding: 28px 32px; background: var(--surface); border-radius: var(--radius); }
+.cat-guide h2 { margin-bottom: .6em; }
+.cat-guide p { margin: 0 0 .8em; color: var(--ink-soft); }
+.cat-guide a { color: var(--accent); font-weight: 600; }
+.cat-guide-more { margin-bottom: 0 !important; }
+@media (max-width: 620px) { .cat-guide { padding: 22px 18px; margin: 0 16px 56px; } }

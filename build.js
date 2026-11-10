@@ -362,8 +362,9 @@ const prefsPanel = () => `<details class="prefs" data-prefs>
 </details>`;
 
 // Carte recette en portrait : photo, catégorie, titre, difficulté et temps.
-function card(r, { eager = false } = {}) {
-  return `<article class="card" data-cat="${r.cat.slug}" data-search="${searchData(r)}" data-slug="${r.slug}" data-min="${totalMin(r)}" data-budget="${isCheap(r) ? 1 : 0}" data-x="${dietsOf(r).join(' ')}">
+// data-search (texte de recherche) seulement sur la page de toutes les recettes, la seule où la recherche s'en sert : l'accueil reste léger.
+function card(r, { eager = false, search = false } = {}) {
+  return `<article class="card" data-cat="${r.cat.slug}"${search ? ` data-search="${searchData(r)}"` : ''} data-slug="${r.slug}" data-min="${totalMin(r)}" data-budget="${isCheap(r) ? 1 : 0}" data-x="${dietsOf(r).join(' ')}">
   ${saveBtn(r)}
   <a href="${r.url}">
     <div class="card-media">
@@ -376,7 +377,7 @@ function card(r, { eager = false } = {}) {
   </a>
 </article>`;
 }
-const grid = (list, id = '') => `<div class="cards"${id ? ` id="${id}"` : ''}>${list.map((r) => card(r)).join('\n')}</div>`;
+const grid = (list, id = '') => `<div class="cards"${id ? ` id="${id}"` : ''}>${list.map((r) => card(r, { search: id === 'all' })).join('\n')}</div>`;
 const sectionTitle = (title, sub) => `<header class="section-title"><h2>${title}</h2>${sub ? `<p>${sub}</p>` : ''}</header>`;
 const carousel = (inner, label) => `<div class="carousel" aria-label="${esc(label)}">
   <button type="button" class="car-btn car-prev" aria-label="Précédent">${arrow('prev')}</button>
@@ -438,7 +439,7 @@ function noelPromo() {
   return `<section class="wrap block"><a class="promo" href="${c.url}">${bannerImg(c.photo)}<span class="promo-in"><span class="kicker">Les fêtes approchent</span><b>${esc(c.titre)}</b><span>${esc(c.lede)}</span><span class="btn">Voir les ${c.all.length} recettes →</span></span></a></section>`;
 }
 function home() {
-  const byCat = CATEGORIES.map((c) => ({ c, list: recipes.filter((r) => r.cat === c).slice(0, 10) })).filter((x) => x.list.length);
+  const byCat = CATEGORIES.map((c) => ({ c, list: recipes.filter((r) => r.cat === c).slice(0, 8) })).filter((x) => x.list.length);
   const first = byCat.find((x) => x.c.slug === 'plats') || byCat[0];
   const FILTERS = [
     ['nouveautes', 'Nouveautés', recipes],
@@ -461,7 +462,7 @@ function home() {
   <div class="pills" role="tablist" aria-label="Filtrer les recettes">
     ${FILTERS.map(([id, label], i) => `<button type="button" role="tab" class="pill${i ? '' : ' is-on'}" aria-selected="${!i}" data-panel="f-${id}">${label}</button>`).join('')}
   </div>
-  ${FILTERS.map(([id, , list], i) => `<div class="panel" id="f-${id}"${i ? ' hidden' : ''}>${grid(list.slice(0, 12))}</div>`).join('\n')}
+  ${FILTERS.map(([id, , list], i) => `<div class="panel" id="f-${id}"${i ? ' hidden' : ''}>${grid(list.slice(0, 8))}</div>`).join('\n')}
   <div class="more"><a class="btn-outline" href="/recettes/">Voir plus de recettes</a></div>
 </section>
 ${noelPromo()}
@@ -500,15 +501,55 @@ function pageHead(title, lede, photo, crumbs = '') {
 }
 const BANNER = { 'aperitifs-entrees': 'salade-maison', plats: 'pappardelle-bandeau', desserts: 'decoupe-cuisine', patisserie: 'vieux-livre', 'petit-dejeuner': 'salade-printemps', boissons: 'chef-sel', 'sauces-condiments': 'decoupe-legumes' };
 
+// Pages catégories : titre ciblé et petit guide « Quel miel choisir ? » (aide réelle au choix, pas du texte de remplissage).
+const M = (slug, nom) => `<a href="/miels/${slug}/">${nom}</a>`;
+const CAT_GUIDE = {
+  'aperitifs-entrees': { h1: 'Apéritifs et entrées au miel', title: 'Apéritifs et entrées au miel : recettes sucré-salé faciles', guide: [
+    `Avec les fromages forts (camembert, chèvre affiné, feta), choisissez un miel qui a du caractère : ${M('miel-de-chataignier', 'châtaignier')} ou ${M('miel-de-thym', 'thym')}. Un miel trop doux disparaît derrière le fromage.`,
+    `Avec le foie gras, les figues ou le jambon cru, un miel plus fin suffit : ${M('miel-d-acacia', 'acacia')} ou ${M('miel-de-lavande', 'lavande')}. Il arrondit le sel sans sucrer l'assiette.`,
+    `Pour laquer des légumes ou des fruits secs, une cuillère suffit, ajoutée en fin de cuisson : le miel colore et brûle plus vite que le sucre.`] },
+  plats: { h1: 'Plats au miel : viandes, poissons et plats végétariens', title: 'Plats au miel : recettes de viandes, poissons et légumes laqués', guide: [
+    `Pour une laque (poulet, porc, canard), prenez un miel liquide et assez typé, comme le ${M('miel-de-chataignier', 'châtaignier')}, le ${M('miel-de-sapin', 'sapin')} ou un ${M('miel-toutes-fleurs', 'toutes fleurs')}. Posez-la dans la dernière demi-heure : plus tôt, elle brûle.`,
+    `Avec le poisson et les sauces asiatiques (soja, gingembre), un ${M('miel-d-acacia', 'miel d\'acacia')} se dissout sans masquer le goût du plat.`,
+    `Pour les tajines et les plats aux épices douces, le ${M('miel-d-oranger', 'miel d\'oranger')} fait le lien entre les fruits secs et la viande.`] },
+  desserts: { h1: 'Desserts au miel : nos recettes gourmandes', title: 'Desserts au miel : recettes faciles et gourmandes', guide: [
+    `Pour les crèmes, panna cotta et glaces, choisissez un miel doux et clair : ${M('miel-d-acacia', 'acacia')} ou ${M('miel-de-lavande', 'lavande')} si vous voulez une note florale. Un miel puissant prendrait toute la place.`,
+    `Avec le chocolat, les fruits d'hiver et les marrons, un miel plus sombre tient la comparaison : ${M('miel-de-chataignier', 'châtaignier')} ou ${M('miel-de-bruyere', 'bruyère')}.`,
+    `Avec les fruits d'été (pêches, figues, fruits rouges), un ${M('miel-de-lavande', 'miel de lavande')} ou de ${M('miel-de-romarin', 'romarin')} souligne leur parfum.`,
+    `Le miel sucre plus que le sucre : pour adapter vos propres recettes, utilisez notre <a href="/outils/sucre-miel/">calculateur sucre → miel</a>.`] },
+  patisserie: { h1: 'Pâtisserie et boulangerie au miel', title: 'Pâtisserie au miel : pain d\'épices, biscuits et brioches', guide: [
+    `Le miel retient l'humidité : gâteaux, madeleines et pain d'épices restent moelleux plus longtemps. Il colore aussi plus vite, d'où des fours souvent un peu moins chauds.`,
+    `Pour le pain d'épices et les biscuits de Noël, les miels sombres donnent le goût traditionnel : ${M('miel-de-chataignier', 'châtaignier')}, ${M('miel-de-sapin', 'sapin')} ou ${M('miel-de-sarrasin', 'sarrasin')} pour les amateurs.`,
+    `Pour les brioches, financiers et madeleines, un miel doux (${M('miel-d-acacia', 'acacia')}, ${M('miel-toutes-fleurs', 'toutes fleurs')}) parfume sans dominer le beurre.`] },
+  'petit-dejeuner': { h1: 'Petit-déjeuner au miel', title: 'Petit-déjeuner au miel : granola, pancakes, tartines et bols', guide: [
+    `Sur un yaourt ou une tartine, le miel se déguste cru : c'est le moment de goûter un miel de caractère, ${M('miel-de-thym', 'thym')}, ${M('miel-de-lavande', 'lavande')} ou ${M('miel-de-tilleul', 'tilleul')}.`,
+    `Dans les pâtes à crêpes et à pancakes, un miel doux comme l'${M('miel-d-acacia', 'acacia')} se mélange facilement et ne masque pas le reste.`,
+    `Le miel ne convient pas aux enfants de moins d'un an.`] },
+  boissons: { h1: 'Boissons au miel, chaudes et froides', title: 'Boissons au miel : chocolat chaud, grog, citronnade, thé glacé', guide: [
+    `Ajoutez le miel quand la boisson est chaude mais plus bouillante : il se dissout bien et garde son parfum.`,
+    `Pour les boissons froides, dissolvez d'abord le miel dans un peu d'eau chaude, sinon il tombe au fond du verre.`,
+    `Un ${M('miel-d-acacia', 'miel d\'acacia')} reste discret ; un ${M('miel-d-oranger', 'miel d\'oranger')} va bien avec les agrumes et les épices ; un ${M('miel-de-sapin', 'miel de sapin')} donne un goût boisé aux grogs et aux boissons d'hiver.`] },
+  'sauces-condiments': { h1: 'Sauces et condiments au miel', title: 'Sauces et condiments au miel : vinaigrette, chutney, sauce barbecue', guide: [
+    `Dans une vinaigrette, une cuillère de miel arrondit l'acidité du vinaigre. Un ${M('miel-toutes-fleurs', 'toutes fleurs')} ou un ${M('miel-d-acacia', 'acacia')} conviennent à tout.`,
+    `Pour les chutneys et la sauce barbecue, un miel puissant (${M('miel-de-chataignier', 'châtaignier')}, ${M('miel-de-sarrasin', 'sarrasin')}) tient tête au vinaigre et aux épices.`] },
+};
+
 function categoryPage(c) {
   const list = recipes.filter((r) => r.cat === c);
+  const g = CAT_GUIDE[c.slug] || {};
+  const guide = g.guide ? `<section class="wrap cat-guide"><h2>Quel miel choisir ?</h2>${g.guide.map((p) => `<p>${p}</p>`).join('')}<p class="cat-guide-more"><a href="/miels/">Tous les miels et leurs usages en cuisine →</a></p></section>` : '';
   const body = `
-${pageHead(c.name, c.intro, BANNER[c.slug] || 'chef-sel', `<nav class="crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a> › <a href="/recettes/">Recettes</a></nav>`)}
-<section class="wrap block-tight">${catTabs(c.slug)}${grid(list)}</section>`;
-  return layout({ title: c.name, description: `Recettes au miel : ${c.name.toLowerCase()}. ${c.intro}`, canonical: `/categories/${c.slug}/`, body });
+${pageHead(esc(g.h1 || c.name), c.intro, BANNER[c.slug] || 'chef-sel', `<nav class="crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a> › <a href="/recettes/">Recettes</a></nav>`)}
+<section class="wrap block-tight">${catTabs(c.slug)}${grid(list)}</section>
+${guide}`;
+  return layout({ title: g.title || c.name, description: `${g.h1 || c.name} : ${list.length} recettes. ${c.intro}`, canonical: `/categories/${c.slug}/`, body });
 }
 
 // Titre court d'une étape pour Google : sa première phrase, coupée proprement vers 60 caractères.
+// Loi Évin : mention automatique dès qu'un ingrédient ou une variante contient de l'alcool (le vinaigre ne compte pas).
+const ALCOOL = /\bvins?\b|rhum|cognac|bi[eè]re|calvados|whisky|liqueur|porto|armagnac|kirsch|\bcidre\b|sak[eé]|mirin|grand marnier|cointreau|champagne|vodka|\bgin\b|pastis|marsala/i;
+const hasAlcohol = (r) => ALCOOL.test([...r.ingredientsList, r.variantes || ''].join(' ').replace(/vinaigre de (cidre|vin|xérès|riz)|vinaigre balsamique/gi, ''));
+
 function stepName(text) {
   let t = text.split(/(?<=[.!?;:])\s/)[0].replace(/[.;:]$/, '').trim();
   if (t.length > 60) t = t.slice(0, 60).replace(/[\s,]+\S*$/, '') + '…';
@@ -592,6 +633,7 @@ ${printSheet(r)}
       <ol class="steps">${r.steps.map((s, n) => `<li id="etape-${n + 1}">${inline(s)}</li>`).join('')}</ol>
       ${r.conseil ? `<div class="tip"><h2>🐝 Le conseil</h2>${r.conseil}</div>` : ''}
       ${r.variantes ? `<div class="variants"><h2>Variantes</h2>${r.variantes}</div>` : ''}
+      ${hasAlcohol(r) ? '<p class="alcool">Cette recette contient de l\'alcool. L\'abus d\'alcool est dangereux pour la santé, à consommer avec modération.</p>' : ''}
       ${nutritionHtml(r)}
       <div class="print-partner"><p>Fiche offerte par <b>MesAbeilles.fr</b></p><p>Retrouvez cette recette et bien d'autres sur cuisineaumiel.fr</p></div>
       ${avisHtml(r)}
@@ -619,7 +661,7 @@ function printSheet(r) {
     <div class="ps-brand">${logoMedal('ps-drop')}</div>
     <div class="ps-title">
       <p class="ps-cat">${esc(r.cat.name)} · Miel conseillé : ${esc(shortHoney(r.miel))}</p>
-      <h1>${esc(r.titre)}</h1>
+      <p class="ps-h1">${esc(r.titre)}</p>
       <p class="ps-lede">${esc(r.resume)}</p>
     </div>
     <img class="ps-photo" src="${img(r.photo, 700)}" alt="">
@@ -1618,7 +1660,7 @@ ${pageHead(c.titre, c.lede, c.photo, crumbsHtml(trail))}
 }
 
 // ---------- boutique, carnet, frigo, proposer une recette ----------
-// data/boutique.json : la boutique de miel de l'apiculteur. L'encart n'apparaît que si « url » est rempli.
+// data/boutique.json : la boutique de miel de l'apiculteur. L'encart n'apparaît que si « url » est une vraie adresse (https://…), pas « # ».
 // data/avis.json : adresse du service d'avis (Cloudflare Worker, voir avis/LISEZMOI.md). Vide = section masquée.
 // ── Valeurs nutritionnelles estimées (table Ciqual de l'Anses) ──
 // Affichées seulement si chaque ingrédient est reconnu ou négligeable (sel, épices, herbes, eau…).
@@ -1777,7 +1819,7 @@ function avisHtml(r) {
 }
 const SHOP = fs.existsSync(path.join(ROOT, 'data', 'boutique.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'boutique.json'), 'utf8')) : {};
 function shopBox(r) {
-  if (!SHOP.url) return '';
+  if (!/^https?:\/\//.test(SHOP.url || '')) return ''; // masqué tant qu'il n'y a pas de vraie boutique en ligne
   const h = honeyOf(r);
   return `<aside class="shop-box">
     <p class="shop-k">Le miel de cette recette</p>

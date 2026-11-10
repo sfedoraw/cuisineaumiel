@@ -6,7 +6,7 @@ miel: Miel de châtaignier
 photo: 1572929773424-93549dced6d0
 credit: khloe arledge
 preparation: 15 min
-cuisson: 35 min
+cuisson: 50 min
 portions: 4
 difficulte: Facile
 resume: Des poires entières pochées dans un vin rouge au miel, à la cannelle et à l'orange, puis servies avec leur sirop réduit.

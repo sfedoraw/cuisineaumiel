@@ -12,7 +12,7 @@ difficulte: Très facile
 resume: Le gâteau au yaourt de notre enfance, revisité avec du miel à la place d'une partie du sucre et imbibé d'un sirop au miel et au citron.
 tags: [gâteau, goûter, enfants, facile]
 ---
-Un gâteau de goûter qu'on peut préparer les yeux fermés, avec le pot de yaourt comme mesure. Le sirop au miel versé à la sortie du four le rend irrésistiblement moelleux.
+Un gâteau de goûter qu'on peut préparer les yeux fermés, en un seul saladier. Le sirop au miel versé à la sortie du four le rend irrésistiblement moelleux.
 
 ## Ingrédients
 ### Le gâteau
