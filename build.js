@@ -362,8 +362,9 @@ const prefsPanel = () => `<details class="prefs" data-prefs>
 </details>`;
 
 // Carte recette en portrait : photo, catégorie, titre, difficulté et temps.
-function card(r, { eager = false } = {}) {
-  return `<article class="card" data-cat="${r.cat.slug}" data-search="${searchData(r)}" data-slug="${r.slug}" data-min="${totalMin(r)}" data-budget="${isCheap(r) ? 1 : 0}" data-x="${dietsOf(r).join(' ')}">
+// data-search (texte de recherche) seulement sur la page de toutes les recettes, la seule où la recherche s'en sert : l'accueil reste léger.
+function card(r, { eager = false, search = false } = {}) {
+  return `<article class="card" data-cat="${r.cat.slug}"${search ? ` data-search="${searchData(r)}"` : ''} data-slug="${r.slug}" data-min="${totalMin(r)}" data-budget="${isCheap(r) ? 1 : 0}" data-x="${dietsOf(r).join(' ')}">
   ${saveBtn(r)}
   <a href="${r.url}">
     <div class="card-media">
@@ -376,7 +377,7 @@ function card(r, { eager = false } = {}) {
   </a>
 </article>`;
 }
-const grid = (list, id = '') => `<div class="cards"${id ? ` id="${id}"` : ''}>${list.map((r) => card(r)).join('\n')}</div>`;
+const grid = (list, id = '') => `<div class="cards"${id ? ` id="${id}"` : ''}>${list.map((r) => card(r, { search: id === 'all' })).join('\n')}</div>`;
 const sectionTitle = (title, sub) => `<header class="section-title"><h2>${title}</h2>${sub ? `<p>${sub}</p>` : ''}</header>`;
 const carousel = (inner, label) => `<div class="carousel" aria-label="${esc(label)}">
   <button type="button" class="car-btn car-prev" aria-label="Précédent">${arrow('prev')}</button>
@@ -438,7 +439,7 @@ function noelPromo() {
   return `<section class="wrap block"><a class="promo" href="${c.url}">${bannerImg(c.photo)}<span class="promo-in"><span class="kicker">Les fêtes approchent</span><b>${esc(c.titre)}</b><span>${esc(c.lede)}</span><span class="btn">Voir les ${c.all.length} recettes →</span></span></a></section>`;
 }
 function home() {
-  const byCat = CATEGORIES.map((c) => ({ c, list: recipes.filter((r) => r.cat === c).slice(0, 10) })).filter((x) => x.list.length);
+  const byCat = CATEGORIES.map((c) => ({ c, list: recipes.filter((r) => r.cat === c).slice(0, 8) })).filter((x) => x.list.length);
   const first = byCat.find((x) => x.c.slug === 'plats') || byCat[0];
   const FILTERS = [
     ['nouveautes', 'Nouveautés', recipes],
@@ -461,7 +462,7 @@ function home() {
   <div class="pills" role="tablist" aria-label="Filtrer les recettes">
     ${FILTERS.map(([id, label], i) => `<button type="button" role="tab" class="pill${i ? '' : ' is-on'}" aria-selected="${!i}" data-panel="f-${id}">${label}</button>`).join('')}
   </div>
-  ${FILTERS.map(([id, , list], i) => `<div class="panel" id="f-${id}"${i ? ' hidden' : ''}>${grid(list.slice(0, 12))}</div>`).join('\n')}
+  ${FILTERS.map(([id, , list], i) => `<div class="panel" id="f-${id}"${i ? ' hidden' : ''}>${grid(list.slice(0, 8))}</div>`).join('\n')}
   <div class="more"><a class="btn-outline" href="/recettes/">Voir plus de recettes</a></div>
 </section>
 ${noelPromo()}
