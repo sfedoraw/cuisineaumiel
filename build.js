@@ -624,7 +624,7 @@ function printSheet(r) {
     <div class="ps-brand">${logoMedal('ps-drop')}</div>
     <div class="ps-title">
       <p class="ps-cat">${esc(r.cat.name)} · Miel conseillé : ${esc(shortHoney(r.miel))}</p>
-      <h1>${esc(r.titre)}</h1>
+      <p class="ps-h1">${esc(r.titre)}</p>
       <p class="ps-lede">${esc(r.resume)}</p>
     </div>
     <img class="ps-photo" src="${img(r.photo, 700)}" alt="">
@@ -1623,7 +1623,7 @@ ${pageHead(c.titre, c.lede, c.photo, crumbsHtml(trail))}
 }
 
 // ---------- boutique, carnet, frigo, proposer une recette ----------
-// data/boutique.json : la boutique de miel de l'apiculteur. L'encart n'apparaît que si « url » est rempli.
+// data/boutique.json : la boutique de miel de l'apiculteur. L'encart n'apparaît que si « url » est une vraie adresse (https://…), pas « # ».
 // data/avis.json : adresse du service d'avis (Cloudflare Worker, voir avis/LISEZMOI.md). Vide = section masquée.
 // ── Valeurs nutritionnelles estimées (table Ciqual de l'Anses) ──
 // Affichées seulement si chaque ingrédient est reconnu ou négligeable (sel, épices, herbes, eau…).
@@ -1782,7 +1782,7 @@ function avisHtml(r) {
 }
 const SHOP = fs.existsSync(path.join(ROOT, 'data', 'boutique.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'boutique.json'), 'utf8')) : {};
 function shopBox(r) {
-  if (!SHOP.url) return '';
+  if (!/^https?:\/\//.test(SHOP.url || '')) return ''; // masqué tant qu'il n'y a pas de vraie boutique en ligne
   const h = honeyOf(r);
   return `<aside class="shop-box">
     <p class="shop-k">Le miel de cette recette</p>

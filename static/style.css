@@ -784,7 +784,7 @@ h3 { font-size: .98rem; font-weight: 600; }
   .ps-brand .medal { width: 26mm; height: 26mm; color: #1C1917; }
   .ps-brand .lv, .ps-brand .wv, .ps-brand .wv2 { animation: none !important; }
   .ps-cat { margin: 0 0 2mm; font-size: 8pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #B45309; }
-  .ps-title h1 { margin: 0 0 2mm; font-size: 21pt; line-height: 1.1; letter-spacing: -.01em; }
+  .ps-title .ps-h1 { margin: 0 0 2mm; font-size: 21pt; font-weight: 700; line-height: 1.1; letter-spacing: -.01em; }
   .ps-lede { margin: 0; font-size: 9.5pt; color: #57534E; }
   .ps-photo { width: 58mm; height: 40mm; object-fit: cover; border-radius: 4mm; }
   .ps-facts { list-style: none; margin: 4mm 0; padding: 3mm 4mm; display: flex; justify-content: space-between; gap: 3mm; background: #FFF4DE; border-radius: 3mm; }
