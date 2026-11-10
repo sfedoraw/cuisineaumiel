@@ -500,12 +500,48 @@ function pageHead(title, lede, photo, crumbs = '') {
 }
 const BANNER = { 'aperitifs-entrees': 'salade-maison', plats: 'pappardelle-bandeau', desserts: 'decoupe-cuisine', patisserie: 'vieux-livre', 'petit-dejeuner': 'salade-printemps', boissons: 'chef-sel', 'sauces-condiments': 'decoupe-legumes' };
 
+// Pages catégories : titre ciblé et petit guide « Quel miel choisir ? » (aide réelle au choix, pas du texte de remplissage).
+const M = (slug, nom) => `<a href="/miels/${slug}/">${nom}</a>`;
+const CAT_GUIDE = {
+  'aperitifs-entrees': { h1: 'Apéritifs et entrées au miel', title: 'Apéritifs et entrées au miel : recettes sucré-salé faciles', guide: [
+    `Avec les fromages forts (camembert, chèvre affiné, feta), choisissez un miel qui a du caractère : ${M('miel-de-chataignier', 'châtaignier')} ou ${M('miel-de-thym', 'thym')}. Un miel trop doux disparaît derrière le fromage.`,
+    `Avec le foie gras, les figues ou le jambon cru, un miel plus fin suffit : ${M('miel-d-acacia', 'acacia')} ou ${M('miel-de-lavande', 'lavande')}. Il arrondit le sel sans sucrer l'assiette.`,
+    `Pour laquer des légumes ou des fruits secs, une cuillère suffit, ajoutée en fin de cuisson : le miel colore et brûle plus vite que le sucre.`] },
+  plats: { h1: 'Plats au miel : viandes, poissons et plats végétariens', title: 'Plats au miel : recettes de viandes, poissons et légumes laqués', guide: [
+    `Pour une laque (poulet, porc, canard), prenez un miel liquide et assez typé, comme le ${M('miel-de-chataignier', 'châtaignier')}, le ${M('miel-de-sapin', 'sapin')} ou un ${M('miel-toutes-fleurs', 'toutes fleurs')}. Posez-la dans la dernière demi-heure : plus tôt, elle brûle.`,
+    `Avec le poisson et les sauces asiatiques (soja, gingembre), un ${M('miel-d-acacia', 'miel d\'acacia')} se dissout sans masquer le goût du plat.`,
+    `Pour les tajines et les plats aux épices douces, le ${M('miel-d-oranger', 'miel d\'oranger')} fait le lien entre les fruits secs et la viande.`] },
+  desserts: { h1: 'Desserts au miel : nos recettes gourmandes', title: 'Desserts au miel : recettes faciles et gourmandes', guide: [
+    `Pour les crèmes, panna cotta et glaces, choisissez un miel doux et clair : ${M('miel-d-acacia', 'acacia')} ou ${M('miel-de-lavande', 'lavande')} si vous voulez une note florale. Un miel puissant prendrait toute la place.`,
+    `Avec le chocolat, les fruits d'hiver et les marrons, un miel plus sombre tient la comparaison : ${M('miel-de-chataignier', 'châtaignier')} ou ${M('miel-de-bruyere', 'bruyère')}.`,
+    `Avec les fruits d'été (pêches, figues, fruits rouges), un ${M('miel-de-lavande', 'miel de lavande')} ou de ${M('miel-de-romarin', 'romarin')} souligne leur parfum.`,
+    `Le miel sucre plus que le sucre : pour adapter vos propres recettes, utilisez notre <a href="/outils/sucre-miel/">calculateur sucre → miel</a>.`] },
+  patisserie: { h1: 'Pâtisserie et boulangerie au miel', title: 'Pâtisserie au miel : pain d\'épices, biscuits et brioches', guide: [
+    `Le miel retient l'humidité : gâteaux, madeleines et pain d'épices restent moelleux plus longtemps. Il colore aussi plus vite, d'où des fours souvent un peu moins chauds.`,
+    `Pour le pain d'épices et les biscuits de Noël, les miels sombres donnent le goût traditionnel : ${M('miel-de-chataignier', 'châtaignier')}, ${M('miel-de-sapin', 'sapin')} ou ${M('miel-de-sarrasin', 'sarrasin')} pour les amateurs.`,
+    `Pour les brioches, financiers et madeleines, un miel doux (${M('miel-d-acacia', 'acacia')}, ${M('miel-toutes-fleurs', 'toutes fleurs')}) parfume sans dominer le beurre.`] },
+  'petit-dejeuner': { h1: 'Petit-déjeuner au miel', title: 'Petit-déjeuner au miel : granola, pancakes, tartines et bols', guide: [
+    `Sur un yaourt ou une tartine, le miel se déguste cru : c'est le moment de goûter un miel de caractère, ${M('miel-de-thym', 'thym')}, ${M('miel-de-lavande', 'lavande')} ou ${M('miel-de-tilleul', 'tilleul')}.`,
+    `Dans les pâtes à crêpes et à pancakes, un miel doux comme l'${M('miel-d-acacia', 'acacia')} se mélange facilement et ne masque pas le reste.`,
+    `Le miel ne convient pas aux enfants de moins d'un an.`] },
+  boissons: { h1: 'Boissons au miel, chaudes et froides', title: 'Boissons au miel : chocolat chaud, grog, citronnade, thé glacé', guide: [
+    `Ajoutez le miel quand la boisson est chaude mais plus bouillante : il se dissout bien et garde son parfum.`,
+    `Pour les boissons froides, dissolvez d'abord le miel dans un peu d'eau chaude, sinon il tombe au fond du verre.`,
+    `Un ${M('miel-d-acacia', 'miel d\'acacia')} reste discret ; un ${M('miel-d-oranger', 'miel d\'oranger')} va bien avec les agrumes et les épices ; un ${M('miel-de-sapin', 'miel de sapin')} donne un goût boisé aux grogs et aux boissons d'hiver.`] },
+  'sauces-condiments': { h1: 'Sauces et condiments au miel', title: 'Sauces et condiments au miel : vinaigrette, chutney, sauce barbecue', guide: [
+    `Dans une vinaigrette, une cuillère de miel arrondit l'acidité du vinaigre. Un ${M('miel-toutes-fleurs', 'toutes fleurs')} ou un ${M('miel-d-acacia', 'acacia')} conviennent à tout.`,
+    `Pour les chutneys et la sauce barbecue, un miel puissant (${M('miel-de-chataignier', 'châtaignier')}, ${M('miel-de-sarrasin', 'sarrasin')}) tient tête au vinaigre et aux épices.`] },
+};
+
 function categoryPage(c) {
   const list = recipes.filter((r) => r.cat === c);
+  const g = CAT_GUIDE[c.slug] || {};
+  const guide = g.guide ? `<section class="wrap cat-guide"><h2>Quel miel choisir ?</h2>${g.guide.map((p) => `<p>${p}</p>`).join('')}<p class="cat-guide-more"><a href="/miels/">Tous les miels et leurs usages en cuisine →</a></p></section>` : '';
   const body = `
-${pageHead(c.name, c.intro, BANNER[c.slug] || 'chef-sel', `<nav class="crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a> › <a href="/recettes/">Recettes</a></nav>`)}
-<section class="wrap block-tight">${catTabs(c.slug)}${grid(list)}</section>`;
-  return layout({ title: c.name, description: `Recettes au miel : ${c.name.toLowerCase()}. ${c.intro}`, canonical: `/categories/${c.slug}/`, body });
+${pageHead(esc(g.h1 || c.name), c.intro, BANNER[c.slug] || 'chef-sel', `<nav class="crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a> › <a href="/recettes/">Recettes</a></nav>`)}
+<section class="wrap block-tight">${catTabs(c.slug)}${grid(list)}</section>
+${guide}`;
+  return layout({ title: g.title || c.name, description: `${g.h1 || c.name} : ${list.length} recettes. ${c.intro}`, canonical: `/categories/${c.slug}/`, body });
 }
 
 // Titre court d'une étape pour Google : sa première phrase, coupée proprement vers 60 caractères.
