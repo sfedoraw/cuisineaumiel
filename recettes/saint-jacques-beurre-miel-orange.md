@@ -1,7 +1,7 @@
 ---
 titre: Saint-Jacques snackées, beurre au miel et à l'orange
 date: 2026-11-22
-categorie: plats
+categorie: aperitifs-entrees
 miel: Miel d'oranger
 photo: 1750874693225-006612ff09d7
 credit: Geoffrey Moffett
@@ -9,7 +9,7 @@ preparation: 15 min
 cuisson: 10 min
 portions: 4
 difficulte: Facile
-resume: Des noix de Saint-Jacques dorées à la poêle et nappées d'un beurre au miel d'oranger, à l'orange et au gingembre. Une entrée chaude ou un plat de fête prêt en 25 minutes.
+resume: Des noix de Saint-Jacques dorées à la poêle et nappées d'un beurre au miel d'oranger, à l'orange et au gingembre. Une entrée chaude de fête prête en 25 minutes.
 tags: [noël, saint-jacques, fruits de mer, réveillon, orange]
 ---
 Le miel d'oranger, fleuri et léger, souligne la douceur naturelle de la Saint-Jacques. Dans la sauce, il caramélise à peine avec le jus d'orange et lie le beurre : quelques secondes suffisent pour obtenir une sauce brillante qui nappe les noix.

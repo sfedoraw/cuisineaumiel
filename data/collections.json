@@ -8,12 +8,12 @@
     "intro": "Décembre est le mois du miel. Il parfume les biscuits de l'Avent, laque les viandes de fête, adoucit le vin chaud et se glisse dans les cadeaux faits maison. Voici nos recettes pour un Noël au miel, rangées comme un repas de fête. Pensez à préparer les biscuits et le pain d'épices quelques jours à l'avance : ils sont meilleurs après un temps de repos.",
     "sections": [
       {
-        "titre": "Pour l'apéritif",
-        "recettes": ["toasts-pain-epices-foie-gras-confit-oignons-miel", "foie-gras-mi-cuit-miel-epices", "camembert-roti-chataignier-romarin", "noix-caramelisees-miel-fleur-de-sel", "chutney-figues-miel"]
+        "titre": "Apéritif et entrées",
+        "recettes": ["toasts-pain-epices-foie-gras-confit-oignons-miel", "foie-gras-mi-cuit-miel-epices", "saint-jacques-beurre-miel-orange", "camembert-roti-chataignier-romarin", "noix-caramelisees-miel-fleur-de-sel", "chutney-figues-miel"]
       },
       {
         "titre": "Le plat de fête",
-        "recettes": ["volaille-fete-rotie-miel-marrons", "canard-roti-miel-epices-noel", "saint-jacques-beurre-miel-orange", "magret-canard-miel-orange-epices", "jambon-glace-miel-girofle"]
+        "recettes": ["volaille-fete-rotie-miel-marrons", "canard-roti-miel-epices-noel", "magret-canard-miel-orange-epices", "jambon-glace-miel-girofle"]
       },
       {
         "titre": "Les desserts",

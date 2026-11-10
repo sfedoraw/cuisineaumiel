@@ -7,7 +7,7 @@ photo: 1611489142329-5f62cfa43e6e
 credit: Олег Мороз
 preparation: 20 min
 cuisson: 1 h 45
-portions: 6
+portions: 4
 difficulte: Moyenne
 resume: Un canard entier laqué au miel de thym, à la cannelle et à la badiane, rôti sur un lit de pommes de terre qui cuisent dans son jus. Le plat de fête qui fait son effet au milieu de la table.
 tags: [noël, canard, rôti, plat de fête, épices]
