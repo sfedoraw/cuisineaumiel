@@ -1206,3 +1206,5 @@ h3 { font-size: .98rem; font-weight: 600; }
 @media (max-width: 760px) { .share-cta { grid-template-columns: auto 1fr; } .share-cta .btn { grid-column: 1 / -1; justify-self: start; } .share-ico { width: 52px; height: 52px; } }
 @media print { .share-cta { display: none; } }
 .snap-btn svg { flex: none; width: 24px; height: 24px; }
+
+.alcool { margin: 0 0 24px; font-size: .85rem; color: var(--ink-soft); }

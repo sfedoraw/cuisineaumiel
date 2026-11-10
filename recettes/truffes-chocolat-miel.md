@@ -11,7 +11,7 @@ repos: 3 h
 portions: 25
 unite: truffes
 difficulte: Facile
-resume: Des truffes fondantes au chocolat noir, adoucies au miel d'acacia et roulées dans le cacao. La gourmandise à offrir à Noël, prête en une demi-heure.
+resume: Des truffes fondantes au chocolat noir, adoucies au miel d'acacia et roulées dans le cacao. La gourmandise à offrir à Noël : une demi-heure de travail et quelques heures au frais.
 tags: [noël, chocolat, cadeau gourmand, mignardises]
 ---
 Dans une ganache, le miel fait plus que sucrer : il garde les truffes souples et fondantes, et les empêche de durcir au réfrigérateur. Le miel d'acacia, très doux et toujours liquide, se fond dans la crème sans masquer le goût du chocolat.

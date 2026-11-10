@@ -37,4 +37,4 @@ Un thermomètre de cuisson est votre meilleur allié : c'est la température à 
 
 ## Variantes
 - Servez avec un chutney de figues au miel ou une tranche de pain d'épices toastée.
-- Remplacez l'armagnac par un vin moelleux, ou supprimez l'alcool sans rien changer d'autre. L'abus d'alcool est dangereux pour la santé, à consommer avec modération.
+- Remplacez l'armagnac par un vin moelleux, ou supprimez l'alcool sans rien changer d'autre.

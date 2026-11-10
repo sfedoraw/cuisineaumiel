@@ -19,15 +19,15 @@ Venu des pizzerias new-yorkaises, le miel pimenté est devenu le condiment à la
 ## Ingrédients
 - 200 g de miel d'acacia
 - 2 c. à café de piment en flocons
-- 1 piment frais
+- 1 piment séché entier (facultatif)
 - 1 c. à café de vinaigre de cidre
 
 ## Préparation
-1. Versez le miel dans une petite casserole avec le piment en flocons et le piment frais coupé en rondelles.
+1. Versez le miel dans une petite casserole avec le piment en flocons et, si vous le souhaitez, le piment séché entier.
 2. Faites chauffer à feu très doux 5 minutes, sans jamais faire bouillir.
 3. Retirez du feu et laissez infuser 1 heure.
 4. Ajoutez le vinaigre, mélangez et filtrez si vous voulez un miel lisse.
-5. Versez dans un pot propre. Il se conserve plusieurs mois à température ambiante.
+5. Versez dans un pot propre. Il se conserve plusieurs mois à température ambiante. N'utilisez que du piment séché : un piment frais apporte de l'eau et ne permet pas une conservation sûre hors du réfrigérateur.
 
 ## Le conseil
 Essayez-le sur une pizza au chorizo, un [camembert rôti](/recettes/camembert-roti-chataignier-romarin/) ou des [ailes de poulet](/recettes/ailes-poulet-miel-piment/).

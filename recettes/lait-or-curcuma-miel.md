@@ -13,7 +13,7 @@ difficulte: Très facile
 resume: Une boisson chaude et réconfortante au curcuma, gingembre, cannelle et poivre, adoucie au miel de tilleul au moment de servir.
 tags: [boisson chaude, hiver, épices, sans gluten]
 ---
-La boisson des soirées fraîches. Le miel de tilleul, aux notes mentholées et apaisantes, s'ajoute hors du feu pour garder tous ses arômes.
+La boisson des soirées fraîches. Le miel de tilleul, aux notes fraîches et légèrement mentholées, s'ajoute hors du feu pour garder tous ses arômes.
 
 ## Ingrédients
 - 50 cl de lait ou de boisson végétale
@@ -31,4 +31,4 @@ La boisson des soirées fraîches. Le miel de tilleul, aux notes mentholées et 
 5. Servez saupoudré d'un peu de cannelle.
 
 ## Le conseil
-Le poivre n'est pas là par hasard : il aide l'organisme à mieux assimiler le curcuma. Une toute petite pincée suffit.
+Le poivre est traditionnel dans cette boisson : il réveille le curcuma et le gingembre. Une toute petite pincée suffit, sinon il prend le dessus.

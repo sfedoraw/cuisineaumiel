@@ -34,7 +34,7 @@ Sur les marchés de Noël, le vin chaud est souvent trop sucré. Le préparer à
 6. Goûtez et ajoutez une cuillère de miel si vous l'aimez plus doux. Filtrez et servez bien chaud dans des verres épais ou des tasses, avec une rondelle d'orange.
 
 ## Le conseil
-Ajoutez le miel dès le début et remuez pendant que le vin chauffe doucement : il se dissout complètement avant que le vin ne frémisse, sans risquer de chauffer trop fort. Et si vous préparez le vin chaud à l'avance, retirez les épices après l'infusion, sinon le clou de girofle devient vite amer. L'abus d'alcool est dangereux pour la santé, à consommer avec modération.
+Ajoutez le miel dès le début et remuez pendant que le vin chauffe doucement : il se dissout complètement avant que le vin ne frémisse, sans risquer de chauffer trop fort. Et si vous préparez le vin chaud à l'avance, retirez les épices après l'infusion, sinon le clou de girofle devient vite amer.
 
 ## Variantes
 - Version sans alcool : remplacez le vin par un mélange de jus de raisin rouge et de jus de pomme, et réduisez le miel de moitié.

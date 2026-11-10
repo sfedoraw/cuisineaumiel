@@ -13,7 +13,7 @@ difficulte: Très facile
 resume: Des muffins moelleux qui recyclent les bananes trop mûres, sucrés au miel d'acacia, avec des noix concassées et un soupçon de cannelle.
 tags: [goûter, anti-gaspillage, enfants, petit-déjeuner]
 ---
-La meilleure façon d'utiliser les bananes noircies au fond de la corbeille. Elles et le miel apportent l'essentiel du sucre : il n'en faut presque pas d'autre.
+La meilleure façon d'utiliser les bananes noircies au fond de la corbeille. Elles et le miel apportent l'essentiel du sucre : il n'en faut pas d'autre.
 
 ## Ingrédients
 - 3 bananes très mûres

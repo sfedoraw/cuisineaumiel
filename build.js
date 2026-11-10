@@ -509,6 +509,10 @@ ${pageHead(c.name, c.intro, BANNER[c.slug] || 'chef-sel', `<nav class="crumbs" a
 }
 
 // Titre court d'une étape pour Google : sa première phrase, coupée proprement vers 60 caractères.
+// Loi Évin : mention automatique dès qu'un ingrédient ou une variante contient de l'alcool (le vinaigre ne compte pas).
+const ALCOOL = /\bvins?\b|rhum|cognac|bi[eè]re|calvados|whisky|liqueur|porto|armagnac|kirsch|\bcidre\b|sak[eé]|mirin|grand marnier|cointreau|champagne|vodka|\bgin\b|pastis|marsala/i;
+const hasAlcohol = (r) => ALCOOL.test([...r.ingredientsList, r.variantes || ''].join(' ').replace(/vinaigre de (cidre|vin|xérès|riz)|vinaigre balsamique/gi, ''));
+
 function stepName(text) {
   let t = text.split(/(?<=[.!?;:])\s/)[0].replace(/[.;:]$/, '').trim();
   if (t.length > 60) t = t.slice(0, 60).replace(/[\s,]+\S*$/, '') + '…';
@@ -592,6 +596,7 @@ ${printSheet(r)}
       <ol class="steps">${r.steps.map((s, n) => `<li id="etape-${n + 1}">${inline(s)}</li>`).join('')}</ol>
       ${r.conseil ? `<div class="tip"><h2>🐝 Le conseil</h2>${r.conseil}</div>` : ''}
       ${r.variantes ? `<div class="variants"><h2>Variantes</h2>${r.variantes}</div>` : ''}
+      ${hasAlcohol(r) ? '<p class="alcool">Cette recette contient de l\'alcool. L\'abus d\'alcool est dangereux pour la santé, à consommer avec modération.</p>' : ''}
       ${nutritionHtml(r)}
       <div class="print-partner"><p>Fiche offerte par <b>MesAbeilles.fr</b></p><p>Retrouvez cette recette et bien d'autres sur cuisineaumiel.fr</p></div>
       ${avisHtml(r)}

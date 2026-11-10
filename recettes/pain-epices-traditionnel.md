@@ -11,7 +11,7 @@ repos: 24 h
 portions: 10
 unite: tranches
 difficulte: Facile
-resume: Le vrai pain d'épices moelleux, sans beurre ni œufs en excès, avec un tiers de farine de seigle, beaucoup de miel et un mélange d'épices maison.
+resume: Le vrai pain d'épices moelleux, avec 40 % de farine de seigle, beaucoup de miel, très peu de beurre, un seul œuf et un mélange d'épices maison.
 tags: [pain d'épices, noël, goûter, épices]
 ---
 Le pain d'épices est la recette de miel par excellence. Celui-ci est riche en miel et en seigle, ce qui lui donne sa texture dense et moelleuse. Il est bien meilleur le lendemain.
