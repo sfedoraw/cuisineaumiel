@@ -1214,3 +1214,33 @@ h3 { font-size: .98rem; font-weight: 600; }
 .cat-guide a { color: var(--accent); font-weight: 600; }
 .cat-guide-more { margin-bottom: 0 !important; }
 @media (max-width: 620px) { .cat-guide { padding: 22px 18px; margin: 0 16px 56px; } }
+
+/* Coût estimé, FAQ des recettes, sources Google */
+.rf-list .rf-sub { font-size: .74rem; color: var(--accent); text-decoration: none; font-weight: 600; }
+.rf-list .rf-sub:hover { text-decoration: underline; }
+.cost-note { margin: 0 0 18px; font-size: .85rem; color: var(--ink-soft); }
+.cost-note b { color: var(--ink); }
+.recipe-main .faq { margin: 8px 0 28px; }
+.recipe-main .faq h2 { margin-bottom: 4px; }
+.recipe-main .faq details p { margin: 0 0 14px; color: var(--ink-soft); }
+.gsource { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px 22px; margin: 18px 0; padding: 20px clamp(18px, 3vw, 28px); border-radius: var(--radius); border: 1px solid var(--line); background: #fff; }
+.gsource-ico { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: var(--tint); color: var(--honey); font-size: 1.5rem; }
+.gsource .kicker { margin: 0 0 2px; }
+.gsource h2 { margin: 0 0 4px; font-size: 1.12rem; }
+.gsource p:last-child { margin: 0; color: var(--ink-soft); font-size: .92rem; }
+.gsource .btn { white-space: nowrap; }
+@media (max-width: 760px) { .gsource { grid-template-columns: auto 1fr; } .gsource .btn { grid-column: 1 / -1; justify-self: start; } }
+@media print { .gsource, .cost-note .rf-sub { display: none; } }
+.rf-list li { min-width: 0; }
+.rf-list .rf-sub { white-space: normal; }
+@media (max-width: 760px) {
+  .rf-list li.rf-cost { flex: 1 1 100%; border-top: 1px solid var(--line); }
+  .rf-list li.rf-cost::before { display: none; }
+}
+/* Bandeau recette sur mobile : rien ne dépasse de l'écran */
+@media (max-width: 640px) {
+  .rfacts { grid-template-columns: minmax(0, 1fr); }
+  .rf-actions { flex-wrap: wrap; justify-content: center; }
+  .rf-btn.rf-main { flex: 1 1 100%; justify-content: center; }
+  .rf-btn { padding: 0 8px; }
+}

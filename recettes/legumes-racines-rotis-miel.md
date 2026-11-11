@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 40 min
 portions: 4
 difficulte: Très facile
+cout: 5,5
 resume: Panais, carottes, betteraves et oignons rouges rôtis au four avec du miel, du thym et de l'huile d'olive. L'accompagnement d'hiver idéal.
 tags: [végétarien, légumes, hiver, accompagnement]
 ---
@@ -36,3 +37,11 @@ L'accompagnement qui va avec tout : volaille, rôti de porc, ou simplement un œ
 
 ## Le conseil
 Mettez les betteraves dans un coin de la plaque : elles colorent tout ce qu'elles touchent.
+
+## Questions fréquentes
+### Quels légumes utiliser ?
+Tous les légumes racines : patate douce, céleri-rave, topinambour, navet, rutabaga, ou même des quartiers de courge. Coupez-les en morceaux de taille égale.
+### Peut-on les préparer à l'avance ?
+Oui. Rôtis, ils se gardent 3 jours au réfrigérateur. Réchauffez-les 10 minutes au four pour qu'ils retrouvent leur caramélisé.
+### Peut-on les cuire au Airfryer ?
+Oui, en deux fournées pour ne pas les serrer : 20 minutes à 190 °C, puis 5 minutes après avoir ajouté le miel et le vinaigre.

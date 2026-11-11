@@ -10,6 +10,7 @@ cuisson: 1 h
 repos: 6 h
 portions: 8
 difficulte: Moyenne
+cout: 16
 resume: Un cheesecake crémeux cuit doucement au four, sur une base de spéculoos, sucré au miel et nappé d'un dernier filet de miel au moment de servir.
 tags: [gâteau, fromage frais, dessert de fête, à l'avance]
 ---
@@ -41,3 +42,11 @@ Ici, le miel remplace une grande partie du sucre et donne une texture plus fonda
 
 ## Le conseil
 Sortez le fromage frais et les œufs du réfrigérateur une heure avant : à température ambiante, ils se mélangent sans grumeaux.
+
+## Questions fréquentes
+### Pourquoi mon cheesecake a-t-il fissuré ?
+Trop de chaleur ou un refroidissement trop rapide. Respectez les 150 °C, ne fouettez pas trop après l'ajout des œufs, et laissez-le refroidir dans le four éteint, porte entrouverte.
+### Peut-on remplacer les spéculoos ?
+Oui, par des petits-beurre, des sablés bretons ou des biscuits au gingembre. Gardez le même poids de biscuits et de beurre.
+### Combien de temps se garde-t-il ?
+Trois jours au réfrigérateur, filmé. Il est même meilleur le lendemain. Ajoutez le filet de miel au moment de servir.

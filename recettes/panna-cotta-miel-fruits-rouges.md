@@ -10,6 +10,7 @@ repos: 4 h
 cuisson: 5 min
 portions: 6
 difficulte: Facile
+cout: 11
 resume: Une panna cotta tremblante parfumée au miel d'acacia et à la vanille, avec un coulis acidulé de framboises et de fruits rouges.
 tags: [dessert à l'avance, fruits rouges, italien, sans gluten]
 ---
@@ -38,3 +39,11 @@ Le dessert qui se prépare le matin pour le soir. Le miel d'acacia, très doux, 
 
 ## Le conseil
 Pour démouler sur assiette, huilez légèrement les ramequins avant de les remplir, et trempez-les 5 secondes dans l'eau chaude au moment de démouler.
+
+## Questions fréquentes
+### Peut-on remplacer la gélatine ?
+Oui, par de l'agar-agar : 2 g pour cette quantité. Il doit bouillir 1 minute dans la crème pour agir, et il donne une texture un peu plus ferme.
+### Peut-on la préparer la veille ?
+Oui. Elle se garde 2 jours au réfrigérateur, couverte. Ajoutez le coulis au moment de servir.
+### Quels fruits utiliser hors saison ?
+Des fruits rouges surgelés conviennent parfaitement pour le coulis. En hiver, un coulis de mangue ou de fruits de la passion fonctionne aussi.

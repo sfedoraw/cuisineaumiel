@@ -9,6 +9,7 @@ preparation: 25 min
 cuisson: 2 h
 portions: 6
 difficulte: Moyenne
+cout: 25
 resume: L'épaule d'agneau mijotée longuement aux épices douces, avec des pruneaux confits au miel d'oranger et des amandes grillées.
 tags: [agneau, mijoté, épices, plat d'hiver]
 ---
@@ -47,3 +48,11 @@ Un plat de partage qui embaume toute la maison. Les pruneaux sont confits à par
 
 ## Le conseil
 Le tajine est encore meilleur réchauffé le lendemain. Préparez la viande la veille et ne confisez les pruneaux qu'au moment de servir.
+
+## Questions fréquentes
+### Peut-on faire ce plat sans tajine ?
+Oui, dans une cocotte en fonte avec couvercle, comme indiqué dans la recette. La cuisson est la même.
+### Quel morceau d'agneau choisir ?
+De l'épaule, qui reste moelleuse après une longue cuisson. Le collier convient aussi. Le gigot, plus maigre, risque de sécher.
+### Peut-on remplacer l'agneau ?
+Oui, par des cuisses de poulet : comptez alors 45 minutes à 1 heure de mijotage.

@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 20 min
 portions: 4
 difficulte: Moyenne
+cout: 17
 resume: Un magret rosé à cœur, à la peau croustillante, nappé d'une sauce miel, orange et quatre-épices réduite au vinaigre de Xérès.
 tags: [canard, fêtes, sauce, orange]
 ---
@@ -35,3 +36,11 @@ Le canard et le miel sont faits l'un pour l'autre. Le miel de sapin, malté et p
 
 ## Le conseil
 Gardez la graisse de canard dans un bocal : elle fera les meilleures pommes de terre sautées du monde pour accompagner ce plat.
+
+## Questions fréquentes
+### Comment réussir la cuisson du magret ?
+Démarrez toujours côté peau dans une poêle froide : la graisse fond doucement et la peau devient croustillante. Comptez 8 à 10 minutes côté peau et 4 minutes côté chair pour une viande rosée.
+### Peut-on cuire le magret au four ?
+Oui. Saisissez-le 5 minutes côté peau à la poêle, puis terminez 8 à 10 minutes au four à 200 °C. Laissez-le reposer avant de le trancher.
+### Que servir avec le magret au miel ?
+Des pommes de terre sautées à la graisse de canard, une purée de céleri ou de patate douce, ou des [légumes racines rôtis au miel](/recettes/legumes-racines-rotis-miel/).

@@ -9,6 +9,7 @@ preparation: 5 min
 cuisson: 6 min
 portions: 4
 difficulte: Très facile
+cout: 5
 resume: Des tranches de halloumi dorées à la poêle, arrosées de miel de thym chaud, de sésame grillé et de menthe fraîche. Prêt en dix minutes.
 tags: [fromage, apéritif, rapide, végétarien]
 ---
@@ -32,3 +33,11 @@ Le halloumi ne fond pas à la cuisson : il dore, devient moelleux et un peu éla
 
 ## Le conseil
 Le halloumi durcit en refroidissant. Préparez tout à l'avance et ne le cuisez qu'au moment où vos invités passent à table.
+
+## Questions fréquentes
+### Peut-on cuire le halloumi au barbecue ?
+Oui. Coupez-le en tranches épaisses, grillez-le 2 minutes de chaque côté, puis badigeonnez-le de miel juste avant de servir.
+### Par quoi remplacer le halloumi ?
+Par un fromage à griller vendu au rayon frais, ou par du provolone en tranches épaisses. La feta peut dépanner, mais elle est plus fragile : saisissez-la délicatement.
+### Comment servir le halloumi au miel ?
+En apéritif, piqué de cure-dents, ou en entrée avec une salade de tomates, de pastèque ou de concombre.

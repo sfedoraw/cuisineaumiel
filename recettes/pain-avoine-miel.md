@@ -11,6 +11,7 @@ cuisson: 35 min
 portions: 12
 unite: tranches
 difficulte: Moyenne
+cout: 2,5
 resume: Un pain de mie maison à la mie tendre, enrichi de flocons d'avoine et légèrement sucré au miel. Parfait pour les tartines du matin.
 tags: [pain, boulangerie, petit-déjeuner, pâte levée]
 ---
@@ -40,3 +41,11 @@ Le miel nourrit la levure, colore la croûte et garde la mie souple plusieurs jo
 
 ## Le conseil
 Attendez qu'il soit complètement refroidi avant de le trancher, sinon la mie se tasse sous le couteau.
+
+## Questions fréquentes
+### Peut-on utiliser de la levure fraîche ?
+Oui : remplacez les 7 g de levure sèche par 20 g de levure fraîche, délayée dans le lait tiède.
+### Peut-on faire ce pain en machine à pain ?
+Oui. Mettez d'abord les liquides et le mélange à l'avoine tiédi, puis la farine, le sel et la levure, et lancez un programme pain de mie ou pain blanc.
+### Combien de temps se garde-t-il ?
+Trois à quatre jours dans un sac en tissu ou un torchon. Il se congèle très bien en tranches.

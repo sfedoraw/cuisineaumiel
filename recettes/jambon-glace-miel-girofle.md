@@ -9,6 +9,7 @@ preparation: 20 min
 cuisson: 2 h 30
 portions: 10
 difficulte: Moyenne
+cout: 40
 resume: Le grand plat des fêtes : un jambon cuit doucement, quadrillé, piqué de clous de girofle et glacé au four avec du miel, de l'orange et de la moutarde.
 tags: [porc, fêtes, Noël, plat à partager]
 ---
@@ -38,3 +39,11 @@ Un plat spectaculaire qui demande surtout du temps. Le glaçage au miel de chât
 
 ## Le conseil
 Les restes se gardent une semaine au réfrigérateur et font des sandwichs mémorables avec un peu de chutney.
+
+## Questions fréquentes
+### Faut-il dessaler le jambon ?
+Seulement s'il est demi-sel. Renseignez-vous auprès de votre boucher : un jambon frais ne demande pas de dessalage.
+### Peut-on faire un jambon plus petit ?
+Oui. Pour un morceau de 1,5 kg, comptez 50 minutes de pochage et 30 à 40 minutes au four, en divisant le glaçage par deux.
+### Peut-on le préparer la veille ?
+Oui. Pochez-le la veille, gardez-le au réfrigérateur, puis glacez-le au four le jour même. Il se sert aussi froid, en tranches fines.

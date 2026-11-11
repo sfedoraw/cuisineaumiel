@@ -10,6 +10,7 @@ cuisson: 45 min
 portions: 3
 unite: pots
 difficulte: Facile
+cout: 12,5
 resume: Un chutney aigre-doux de figues, oignons rouges et vinaigre, parfumé au gingembre et au miel de châtaignier. Parfait avec le foie gras et les fromages.
 tags: [conserve, fromage, foie gras, cadeau]
 ---
@@ -37,3 +38,11 @@ Un condiment de fêtes à préparer à la fin de l'été, quand les figues sont 
 
 ## Le conseil
 Le chutney est prêt lorsqu'une cuillère passée au fond de la casserole laisse un sillon qui ne se referme pas tout de suite.
+
+## Questions fréquentes
+### Combien de temps se garde le chutney ?
+Plusieurs mois dans des pots stérilisés, fermés hermétiquement et rangés au frais et à l'abri de la lumière. Une fois ouvert, gardez le pot au réfrigérateur et consommez-le en 3 semaines environ.
+### Peut-on utiliser des figues séchées ?
+Oui : prenez 500 g de figues séchées coupées en morceaux et ajoutez 30 cl d'eau. Surveillez la cuisson, qui sera un peu plus courte.
+### Avec quoi servir ce chutney ?
+Avec du foie gras, un plateau de fromages (chèvre, comté, bleu), une terrine, une volaille rôtie ou un jambon froid.

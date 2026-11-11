@@ -10,6 +10,7 @@ cuisson: 0 min
 portions: 1
 unite: pots
 difficulte: Très facile
+cout: 2,5
 resume: Un beurre léger et mousseux, fouetté avec du miel et de la fleur de sel. À tartiner sur du pain chaud, des crêpes ou du maïs grillé.
 tags: [tartinade, petit-déjeuner, bocal, sans cuisson]
 ---
@@ -29,3 +30,11 @@ Une tartinade qui fait son effet sur une table de brunch. Fouetté longuement, l
 
 ## Le conseil
 Il se garde deux semaines au réfrigérateur. Sortez-le 20 minutes avant de servir pour qu'il retrouve sa texture.
+
+## Questions fréquentes
+### Peut-on utiliser du beurre demi-sel ?
+Oui, et dans ce cas supprimez la fleur de sel. Le beurre doit être bien mou pour devenir aérien au fouet.
+### Mon beurre a tranché, que faire ?
+Le miel a sans doute été ajouté trop vite ou le beurre était trop froid. Laissez le bol 10 minutes à température ambiante, puis fouettez de nouveau : la texture redevient lisse.
+### Avec quoi servir ce beurre au miel ?
+Sur du pain grillé, des crêpes, des pancakes, des scones ou un pain de mie brioché. Il est aussi délicieux sur une patate douce ou un épi de maïs grillé.

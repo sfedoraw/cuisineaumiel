@@ -10,6 +10,7 @@ cuisson: 40 min
 repos: 48 h
 portions: 8
 difficulte: Moyenne
+cout: 26
 resume: Un foie gras de canard mi-cuit maison, assaisonné de miel d'acacia, de poivre et d'une pointe de quatre-épices, cuit doucement en terrine au bain-marie. Le grand classique du réveillon.
 tags: [noël, foie gras, réveillon, entrée de fête, terrine]
 ---
@@ -38,3 +39,11 @@ Un thermomètre de cuisson est votre meilleur allié : c'est la température à 
 ## Variantes
 - Servez avec un chutney de figues au miel ou une tranche de pain d'épices toastée.
 - Remplacez l'armagnac par un vin moelleux, ou supprimez l'alcool sans rien changer d'autre.
+
+## Questions fréquentes
+### Peut-on faire ce foie gras sans armagnac ?
+Oui, l'armagnac est facultatif. Vous pouvez le supprimer ou le remplacer par un vin moelleux, comme un sauternes ou un jurançon.
+### Pourquoi attendre 48 heures avant de servir ?
+Le repos permet au foie gras de se raffermir et aux épices de se répartir. Son goût est nettement meilleur après deux jours.
+### Avec quoi le servir ?
+Avec du pain de campagne grillé, du pain d'épices, une pointe de fleur de sel et un chutney, comme notre [chutney de figues au miel](/recettes/chutney-figues-miel/).

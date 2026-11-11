@@ -9,6 +9,7 @@ preparation: 10 min
 cuisson: 6 min
 portions: 4
 difficulte: Très facile
+cout: 18
 resume: Des crevettes saisies à feu vif dans un beurre à l'ail, puis enrobées de miel, de citron et de persil. Le plat express par excellence.
 tags: [fruits de mer, rapide, poêle, semaine]
 ---
@@ -36,3 +37,11 @@ Six minutes de cuisson, pas une de plus. Le miel ajouté en fin de cuisson forme
 
 ## Le conseil
 Les crevettes sont cuites dès qu'elles forment un C. Si elles se referment en O, elles sont trop cuites et deviennent caoutchouteuses.
+
+## Questions fréquentes
+### Peut-on utiliser des crevettes surgelées ?
+Oui. Faites-les décongeler une nuit au réfrigérateur, puis séchez-les bien : trop humides, elles cuisent à l'eau au lieu de dorer.
+### Par quoi remplacer la sauce soja ?
+Par du tamari, si vous évitez le gluten, ou par une pincée de sel et un trait de jus de citron supplémentaire.
+### Avec quoi servir ces crevettes ?
+Avec du riz basmati, des nouilles sautées, des pâtes ou une simple salade. Elles font aussi un bon apéritif, piquées sur des cure-dents.

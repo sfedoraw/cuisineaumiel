@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 40 min
 portions: 4
 difficulte: Facile
+cout: 9,5
 resume: De belles tranches de butternut rôties au miel de sarrasin, au beurre noisette et à la sauge croustillante, avec burrata et noisettes.
 tags: [végétarien, courge, automne, burrata]
 ---
@@ -36,3 +37,11 @@ Un plat végétarien qui a tout d'un plat de fête. Le miel de sarrasin, presque
 
 ## Le conseil
 Pas de miel de sarrasin ? Prenez un miel de châtaignier. L'important est qu'il soit assez corsé pour ne pas rendre le plat sucré.
+
+## Questions fréquentes
+### Faut-il éplucher la courge butternut ?
+Non. Sa peau devient tendre au four et se mange sans problème. Lavez-la simplement avant de la couper.
+### Par quoi remplacer la burrata ?
+Par une mozzarella di bufala, de la feta émiettée ou une cuillère de ricotta. Pour une version végétalienne, utilisez un houmous et une huile d'olive à la place du beurre.
+### Quelles autres courges conviennent ?
+Le potimarron fonctionne très bien et cuit un peu plus vite. Une courge musquée ou un potiron donnent aussi de bons résultats, mais ils rendent plus d'eau.

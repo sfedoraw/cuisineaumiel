@@ -11,6 +11,7 @@ repos: 1 h
 portions: 2
 unite: pots
 difficulte: Très facile
+cout: 7
 resume: Une sauce acidulée et brillante de cranberries fraîches, adoucie au miel de romarin et parfumée au zeste d'orange. L'accompagnement idéal des volailles rôties, du gibier et des fromages de l'hiver.
 tags: [fêtes, hiver, volaille, fromage, cadeau]
 ---
@@ -44,3 +45,11 @@ Préparez-la jusqu'à une semaine à l'avance : elle se garde au réfrigérateur
 - **Version épicée** : ajoutez un bâton de cannelle et 2 clous de girofle pendant la cuisson, à retirer avant la mise en pots.
 - **Version croquante** : ajoutez 30 g de noix concassées au moment de servir.
 - **Autre miel** : un miel de sarrasin, plus puissant et malté, donne une sauce plus sombre qui va très bien avec le gibier.
+
+## Questions fréquentes
+### Peut-on utiliser des cranberries séchées ?
+Ce n'est pas l'idéal : elles ne libèrent pas de pectine et la sauce ne prendra pas. Préférez des cranberries fraîches ou surgelées, sans les décongeler.
+### Avec quoi servir la sauce aux cranberries ?
+Avec une volaille rôtie, une dinde, une terrine, un pâté en croûte ou un plateau de fromages.
+### Peut-on la congeler ?
+Oui, jusqu'à trois mois dans une boîte hermétique. Laissez-la décongeler une nuit au réfrigérateur.

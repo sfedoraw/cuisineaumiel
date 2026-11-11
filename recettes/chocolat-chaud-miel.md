@@ -10,6 +10,7 @@ cuisson: 5 min
 portions: 2
 unite: tasses
 difficulte: Très facile
+cout: 3
 resume: Un vrai chocolat chaud au chocolat noir fondu, épais et velouté, sucré au miel de châtaignier et parfumé d'une pointe de cannelle.
 tags: [boisson chaude, hiver, chocolat, goûter]
 ---
@@ -32,3 +33,11 @@ Rien à voir avec le cacao en poudre. Le miel de châtaignier, légèrement amer
 
 ## Le conseil
 Pour un chocolat à la viennoise, ajoutez une cuillère de crème fouettée et un filet de miel sur le dessus.
+
+## Questions fréquentes
+### Peut-on utiliser une boisson végétale ?
+Oui. Une boisson à l'avoine ou à l'amande donne un bon résultat. Remplacez alors la crème par la même quantité de boisson végétale, le chocolat sera un peu moins onctueux.
+### Quel chocolat choisir ?
+Un chocolat noir de 60 à 70 % de cacao, en tablette. Le chocolat au lait donne une boisson plus douce : réduisez alors le miel de moitié.
+### Peut-on le préparer à l'avance ?
+Oui. Il se garde un jour au réfrigérateur et se réchauffe doucement en fouettant. Il épaissit en refroidissant : ajoutez un peu de lait si besoin.

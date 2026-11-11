@@ -9,6 +9,7 @@ preparation: 25 min
 cuisson: 2 h 15
 portions: 8
 difficulte: Moyenne
+cout: 50
 resume: Une belle volaille de Noël, chapon, poularde ou petite dinde, glacée au miel de sapin et rôtie avec des marrons, des échalotes et du thym. Le grand plat du réveillon, sans complication.
 tags: [noël, chapon, dinde, marrons, plat de fête]
 ---
@@ -45,3 +46,11 @@ Comptez environ 45 minutes par kilo pour une volaille de fête. Le glaçage au m
 ## Variantes
 - Ajoutez des quartiers de pommes avec les marrons, pour une garniture plus fruitée.
 - Avec un miel de châtaignier, le glaçage prend un goût plus prononcé qui va bien avec les marrons.
+
+## Questions fréquentes
+### Combien de temps cuire la volaille selon son poids ?
+Comptez environ 45 minutes par kilo à 180 °C, comme indiqué dans le conseil. Vérifiez toujours en piquant le haut de la cuisse : le jus doit être clair.
+### Chapon ou poularde ?
+Le chapon est plus gros, plus gras et plus fondant. La poularde est un peu plus petite et plus fine. Les deux conviennent à cette recette.
+### Peut-on utiliser des marrons frais ?
+Oui, mais ils demandent beaucoup de travail : il faut les inciser, les cuire et les éplucher. Les marrons cuits sous vide donnent un très bon résultat.

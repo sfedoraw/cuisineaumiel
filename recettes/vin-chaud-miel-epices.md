@@ -9,6 +9,7 @@ preparation: 10 min
 cuisson: 20 min
 portions: 6
 difficulte: Très facile
+cout: 10
 resume: Le vin chaud des marchés de Noël, sucré au miel d'oranger, avec orange, cannelle, badiane et clou de girofle. Doux, parfumé, jamais trop sucré.
 tags: [noël, boisson chaude, épices, apéritif, hiver]
 ---
@@ -39,3 +40,11 @@ Ajoutez le miel dès le début et remuez pendant que le vin chauffe doucement : 
 ## Variantes
 - Version sans alcool : remplacez le vin par un mélange de jus de raisin rouge et de jus de pomme, et réduisez le miel de moitié.
 - Pour un vin chaud blanc, prenez un vin blanc sec et du miel d'acacia, avec de la poire et une gousse de vanille.
+
+## Questions fréquentes
+### Quel vin choisir ?
+Un vin rouge fruité et peu tannique, comme un côtes-du-rhône, un gamay ou un merlot. Inutile de prendre une grande bouteille.
+### Peut-on le préparer à l'avance ?
+Oui. Retirez les épices après l'infusion pour éviter l'amertume, et réchauffez-le doucement au moment de servir, sans le faire bouillir.
+### Existe-t-il une version sans alcool ?
+Oui, notre [jus de pomme chaud aux épices et au miel](/recettes/jus-pomme-chaud-epices-miel-oranger/) est la version idéale pour ceux qui ne boivent pas d'alcool.

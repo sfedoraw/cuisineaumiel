@@ -10,6 +10,7 @@ repos: 6 h
 cuisson: 10 min
 portions: 8
 difficulte: Moyenne
+cout: 15
 resume: Un parfait glacé sans sorbetière, à base de meringue au miel, de crème fouettée, de pistaches, d'amandes caramélisées et de fruits confits.
 tags: [glace, provence, fêtes, sans sorbetière]
 ---
@@ -41,3 +42,11 @@ Le dessert glacé des fêtes provençales. La meringue italienne au miel lui don
 
 ## Le conseil
 Sans thermomètre, le sirop est à point quand une goutte plongée dans l'eau froide forme une petite boule molle.
+
+## Questions fréquentes
+### Combien de temps à l'avance peut-on le préparer ?
+Il se garde une semaine au congélateur, bien filmé. Préparez-le plusieurs jours avant votre repas de fête.
+### Peut-on le faire sans thermomètre ?
+Oui. Le sirop est prêt quand une goutte plongée dans l'eau froide forme une petite boule molle, comme expliqué dans le conseil.
+### Peut-on remplacer les fruits confits ?
+Oui, par des abricots secs ou des cranberries coupés en dés, ou par davantage de pistaches et d'amandes.

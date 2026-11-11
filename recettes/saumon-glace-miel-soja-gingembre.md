@@ -10,6 +10,7 @@ repos: 15 min
 cuisson: 12 min
 portions: 4
 difficulte: Facile
+cout: 15
 resume: Des pavés de saumon marinés puis glacés au four dans une sauce miel, soja, gingembre et citron vert. Prêt en moins de quarante minutes.
 tags: [poisson, rapide, saumon, asiatique]
 ---
@@ -37,3 +38,11 @@ Le plat de semaine idéal. Le miel d'acacia, liquide et neutre, se mélange faci
 
 ## Le conseil
 Le saumon est parfait quand il se détache en lamelles mais reste encore nacré au centre. Mieux vaut sortir une minute trop tôt qu'une minute trop tard.
+
+## Questions fréquentes
+### Peut-on utiliser du saumon surgelé ?
+Oui. Faites-le décongeler une nuit au réfrigérateur et séchez-le avant de le mariner.
+### Peut-on cuire le saumon à la poêle ?
+Oui. Saisissez-le côté peau 4 minutes à feu moyen, retournez-le 2 minutes, puis versez la sauce réduite pour l'enrober.
+### Par quoi remplacer la sauce soja ?
+Par du tamari, sans gluten, ou par une sauce soja réduite en sel. Évitez les sauces soja sucrées, déjà très douces.

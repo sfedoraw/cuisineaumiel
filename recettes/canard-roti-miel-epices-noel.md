@@ -9,6 +9,7 @@ preparation: 20 min
 cuisson: 1 h 45
 portions: 4
 difficulte: Moyenne
+cout: 24
 resume: Un canard entier laqué au miel de thym, à la cannelle et à la badiane, rôti sur un lit de pommes de terre qui cuisent dans son jus. Le plat de fête qui fait son effet au milieu de la table.
 tags: [noël, canard, rôti, plat de fête, épices]
 ---
@@ -46,3 +47,11 @@ Ne laquez pas le canard dès le début : le miel brûlerait avant que la viande 
 ## Variantes
 - Remplacez les pommes de terre par des quartiers de pommes et de coings.
 - Avec un miel de châtaignier, le laquage est plus sombre et plus puissant.
+
+## Questions fréquentes
+### Comment savoir si le canard est cuit ?
+Piquez la cuisse à l'endroit le plus épais : le jus qui s'écoule doit être clair. Avec un thermomètre, visez environ 75 °C à cœur dans la cuisse.
+### Que faire de la graisse de canard ?
+Filtrez-la et gardez-la au réfrigérateur dans un bocal propre. Elle est parfaite pour faire sauter des pommes de terre.
+### Peut-on remplacer le canard entier ?
+Oui, par 4 cuisses de canard : comptez 1 heure de cuisson à 180 °C, puis 20 minutes de laquage à 200 °C.

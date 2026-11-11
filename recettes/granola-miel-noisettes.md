@@ -9,6 +9,7 @@ preparation: 10 min
 cuisson: 30 min
 portions: 10
 difficulte: Très facile
+cout: 7,5
 resume: Un granola maison en gros éclats, doré au four avec du miel, de l'huile de coco, des noisettes et des fruits secs.
 tags: [petit-déjeuner, vegan possible, bocal, fait maison]
 ---
@@ -40,3 +41,11 @@ C'est en ne remuant pas le granola pendant la cuisson que vous obtiendrez de bea
 ## Variantes
 - Version vegan : remplacez le miel par du sirop d'érable.
 - Ajoutez 2 cuillères de cacao en poudre et des pépites de chocolat après refroidissement.
+
+## Questions fréquentes
+### Mon granola n'est pas croustillant, pourquoi ?
+Il n'a peut-être pas assez cuit ou il a été rangé encore tiède. Laissez-le refroidir complètement sur la plaque : c'est en refroidissant qu'il durcit.
+### Peut-on remplacer les noisettes ?
+Oui, par des amandes, des noix de pécan ou un mélange de graines. Gardez le même poids total.
+### Peut-on réduire la quantité de miel ?
+Jusqu'à 70 g, mais les grappes seront plus petites. C'est le miel qui lie les flocons entre eux.

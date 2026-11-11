@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 30 min
 portions: 4
 difficulte: Très facile
+cout: 3,5
 resume: Un velouté orange et soyeux, relevé de gingembre frais et d'orange, adouci d'une cuillère de miel d'oranger et servi avec une crème au cumin.
 tags: [soupe, hiver, végétarien, sans gluten]
 ---
@@ -36,3 +37,11 @@ Une soupe d'hiver lumineuse. Le miel ne la rend pas sucrée : il arrondit l'acid
 
 ## Le conseil
 Pour une version végétale, remplacez la crème par du lait de coco : il se marie très bien avec le gingembre.
+
+## Questions fréquentes
+### Peut-on congeler ce velouté ?
+Oui, sans la crème au cumin, jusqu'à trois mois. Réchauffez-le doucement et préparez la crème au moment de servir.
+### Peut-on remplacer le gingembre frais ?
+Oui, par ½ cuillère à café de gingembre en poudre, à ajouter avec les carottes.
+### Que servir avec ce velouté ?
+Des croûtons, quelques graines de courge grillées, ou une tartine de chèvre chaud.

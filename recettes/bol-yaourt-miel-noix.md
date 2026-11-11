@@ -9,6 +9,7 @@ preparation: 5 min
 cuisson: 0 min
 portions: 2
 difficulte: Très facile
+cout: 5
 resume: Le petit-déjeuner grec par excellence : un yaourt épais et crémeux, un filet de miel de thym, des noix et des fruits de saison.
 tags: [petit-déjeuner, grec, sans cuisson, rapide]
 ---
@@ -30,3 +31,11 @@ En Grèce, on le mange au petit-déjeuner comme au dessert. Tout repose sur la q
 
 ## Le conseil
 Préparez le [granola maison au miel](/recettes/granola-miel-noisettes/) le week-end : vous aurez de quoi faire ces bols toute la semaine.
+
+## Questions fréquentes
+### Peut-on remplacer le yaourt grec ?
+Oui, par du skyr ou du fromage blanc à 3 % bien égoutté. Un yaourt nature classique, plus liquide, donne un bol moins crémeux.
+### Quels fruits choisir selon la saison ?
+Des figues ou des raisins à l'automne, des poires ou des agrumes en hiver, des fraises au printemps, des pêches ou des abricots en été.
+### Peut-on préparer les bols la veille ?
+Préparez le yaourt et les fruits, mais ajoutez le granola et les noix au dernier moment pour qu'ils restent croquants.

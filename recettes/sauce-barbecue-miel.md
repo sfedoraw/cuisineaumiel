@@ -10,6 +10,7 @@ cuisson: 20 min
 portions: 1
 unite: bocaux
 difficulte: Très facile
+cout: 4
 resume: Une sauce barbecue fumée et laquante, sans additifs, à base de tomate, de miel de sarrasin, de vinaigre de cidre et de paprika fumé.
 tags: [sauce, barbecue, été, bocal]
 ---
@@ -38,3 +39,11 @@ Bien meilleure que celle du commerce et prête en vingt minutes. Le miel de sarr
 
 ## Le conseil
 Utilisez-la pour laquer les [travers de porc au miel](/recettes/travers-porc-miel-moutarde/) ou des ailes de poulet au four.
+
+## Questions fréquentes
+### Peut-on utiliser un autre miel que le sarrasin ?
+Oui. Un miel de châtaignier donne un goût proche. Un miel toutes fleurs fonctionne aussi, avec une sauce plus douce.
+### Comment la rendre plus piquante ?
+Ajoutez du piment de Cayenne par petites pincées, ou un trait de sauce pimentée en fin de cuisson. Goûtez au fur et à mesure.
+### Peut-on la congeler ?
+Oui, en portions dans des petits pots ou un bac à glaçons, jusqu'à trois mois.

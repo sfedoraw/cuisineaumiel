@@ -10,6 +10,7 @@ cuisson: 25 min
 repos: 5 min
 portions: 4
 difficulte: Facile
+cout: 13
 resume: Un filet mignon saisi à la poêle puis rôti au four, laqué d'un jus au miel de romarin, à la moutarde et au vinaigre balsamique.
 tags: [porc, plat rapide, au four, sauce]
 ---
@@ -37,3 +38,11 @@ Le filet mignon est tendre et cuit vite. Saisi puis rôti, il reste juteux à c�
 
 ## Le conseil
 Un thermomètre est votre meilleur allié : sortez la viande à 62 °C à cœur, elle finira de cuire pendant le repos.
+
+## Questions fréquentes
+### Le filet mignon peut-il être rosé ?
+Oui. Le porc actuel se mange légèrement rosé à cœur. Sortez-le à 62 °C : il finit de cuire pendant le repos.
+### Par quoi remplacer le vinaigre balsamique ?
+Par du vinaigre de cidre ou de xérès. La sauce sera un peu plus acidulée : ajoutez une demi-cuillère de miel si besoin.
+### Que servir avec le filet mignon au miel ?
+Une purée de pommes de terre ou de patates douces, des [légumes racines rôtis](/recettes/legumes-racines-rotis-miel/) ou des haricots verts.

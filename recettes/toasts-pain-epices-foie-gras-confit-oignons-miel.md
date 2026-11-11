@@ -10,6 +10,7 @@ cuisson: 30 min
 portions: 24
 unite: toasts
 difficulte: Facile
+cout: 17,5
 resume: Des bouchées de fête : pain d'épices toasté, une lamelle de foie gras et un confit d'oignons au miel de châtaignier. Le sucré-salé qui ouvre le réveillon.
 tags: [noël, apéritif, foie gras, pain d'épices, bouchées]
 ---
@@ -41,3 +42,11 @@ Préparez le confit d'oignons la veille : il est encore meilleur et vous n'aurez
 ## Variantes
 - Remplacez le confit d'oignons par un chutney de figues au miel.
 - Pour une version sans foie gras, utilisez un fromage de chèvre frais.
+
+## Questions fréquentes
+### Peut-on remplacer le foie gras ?
+Oui, par un fromage de chèvre frais, du bleu ou un pâté de campagne. Le confit d'oignons au miel accompagne très bien les fromages.
+### Combien de temps se garde le confit d'oignons ?
+Une semaine au réfrigérateur, dans un pot fermé.
+### Combien de temps à l'avance peut-on monter les toasts ?
+Au dernier moment, ou au maximum 30 minutes avant de servir. Sinon, le pain d'épices ramollit.

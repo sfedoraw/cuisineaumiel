@@ -10,6 +10,7 @@ cuisson: 10 min
 repos: 6 h
 portions: 6
 difficulte: Moyenne
+cout: 6,5
 resume: Une crème glacée onctueuse à base de crème anglaise sucrée au miel de châtaignier, relevée de quelques cristaux de fleur de sel.
 tags: [glace, été, sans gluten, crème anglaise]
 ---
@@ -34,3 +35,11 @@ Le miel rend la glace plus souple : elle reste facile à servir même après plu
 
 ## Le conseil
 Sans sorbetière, versez la crème dans une boîte au congélateur et fouettez-la toutes les 30 minutes pendant 3 heures pour casser les cristaux.
+
+## Questions fréquentes
+### Combien de temps se garde la glace maison ?
+Deux à trois semaines au congélateur, dans une boîte bien fermée. Grâce au miel, elle reste assez souple pour être servie directement.
+### Peut-on utiliser un autre miel ?
+Oui. Un miel de lavande ou d'acacia donne une glace plus florale et plus douce. Le châtaignier reste le plus proche d'un goût de caramel.
+### Que faire des blancs d'œufs restants ?
+Gardez-les pour des [financiers au miel](/recettes/financiers-miel-amandes/) ou pour un [nougat glacé](/recettes/nougat-glace-miel-pistaches/).

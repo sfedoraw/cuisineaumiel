@@ -11,6 +11,7 @@ repos: 1 h
 portions: 25
 unite: mendiants
 difficulte: Très facile
+cout: 7
 resume: Des palets de chocolat noir garnis de fruits secs caramélisés au miel et d'une pointe de fleur de sel. Le cadeau gourmand de Noël le plus simple à réussir.
 tags: [noël, chocolat, cadeau gourmand, sans cuisson au four, fruits secs]
 ---
@@ -41,3 +42,11 @@ Laissez bien refroidir les fruits secs au miel avant de les poser : chauds, ils 
 ## Variantes
 - Remplacez une partie du chocolat noir par du chocolat au lait ou du chocolat blanc.
 - Ajoutez une pincée de cannelle ou de piment d'Espelette sur les fruits secs au miel.
+
+## Questions fréquentes
+### Pourquoi mon chocolat a-t-il blanchi ?
+Il a sans doute été trop chauffé ou il a refroidi trop vite. La méthode de la recette, qui consiste à ajouter un tiers de chocolat haché hors du feu, aide à garder un chocolat brillant.
+### Peut-on utiliser du chocolat au lait ou blanc ?
+Oui. Le chocolat au lait et le chocolat blanc fondent à plus basse température : faites-les fondre très doucement et réduisez le miel des fruits secs, car ils sont déjà plus sucrés.
+### Comment les offrir ?
+Dans une boîte en fer ou un sachet transparent, séparés par du papier cuisson. Ils se gardent deux semaines au sec et au frais.

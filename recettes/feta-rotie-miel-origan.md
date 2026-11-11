@@ -9,6 +9,7 @@ preparation: 10 min
 cuisson: 20 min
 portions: 4
 difficulte: Très facile
+cout: 6,5
 resume: Un bloc de feta rôti entier au four avec des tomates cerises, de l'origan et un filet de miel. À tremper avec du pain grillé.
 tags: [fromage, apéritif, grec, végétarien]
 ---
@@ -34,3 +35,11 @@ Au four, la feta devient crémeuse et les tomates éclatent en un jus sucré. Le
 
 ## Le conseil
 Écrasez le tout à la fourchette, ajoutez des pâtes cuites et vous obtenez un plat complet en deux minutes.
+
+## Questions fréquentes
+### Quelle feta choisir ?
+Une feta AOP en bloc, au lait de brebis ou de brebis et chèvre. Elle se tient mieux à la cuisson que les fromages de type salade, plus friables.
+### Peut-on remplacer les tomates cerises ?
+Oui, par des poivrons en lanières, des oignons rouges ou des olives. Ajustez le temps de cuisson pour que les légumes soient fondants.
+### Comment en faire un plat complet ?
+Écrasez la feta et les tomates avec des pâtes cuites, comme dans le conseil. Vous pouvez aussi la servir avec un taboulé ou des pommes de terre rôties.

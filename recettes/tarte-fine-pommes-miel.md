@@ -9,6 +9,7 @@ preparation: 20 min
 cuisson: 30 min
 portions: 6
 difficulte: Facile
+cout: 5
 resume: Une pâte feuilletée croustillante, des pommes tranchées très finement, badigeonnées d'un mélange de miel et de beurre salé fondu.
 tags: [tarte, pomme, goûter, pâte feuilletée]
 ---
@@ -34,3 +35,11 @@ La plus simple des tartes, et peut-être la meilleure. Le secret est dans la fin
 
 ## Le conseil
 Utilisez une mandoline pour trancher les pommes : plus elles sont fines, plus elles caramélisent et plus la tarte est croustillante.
+
+## Questions fréquentes
+### Quelles pommes choisir ?
+Des pommes qui se tiennent à la cuisson et ont un peu d'acidité, comme la reinette, la boskoop ou la golden indiquées dans la recette.
+### Peut-on préparer la tarte à l'avance ?
+Elle est meilleure tiède, le jour même. Vous pouvez la cuire quelques heures avant et la réchauffer 5 minutes au four.
+### Avec quoi la servir ?
+Avec une boule de glace vanille, une cuillère de crème fraîche épaisse ou un filet de miel.

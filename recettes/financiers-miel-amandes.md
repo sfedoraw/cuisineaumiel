@@ -10,6 +10,7 @@ cuisson: 12 min
 portions: 16
 unite: financiers
 difficulte: Facile
+cout: 5,5
 resume: Des petits gâteaux à la poudre d'amande et au beurre noisette, croustillants dehors, fondants dedans, relevés par un miel de bruyère.
 tags: [goûter, amande, petits gâteaux, utilise des blancs]
 ---
@@ -36,3 +37,11 @@ Parfaits pour utiliser des blancs d'œufs restants. Le beurre noisette et le mie
 
 ## Le conseil
 La pâte se conserve trois jours au réfrigérateur. Vous pouvez ainsi cuire des financiers tout chauds à la demande.
+
+## Questions fréquentes
+### Peut-on utiliser des moules en silicone ?
+Oui. Placez-les sur une plaque pour les enfourner. Les financiers colorent un peu moins que dans des moules métalliques beurrés.
+### Faut-il absolument faire un beurre noisette ?
+C'est lui qui donne le goût typique du financier. Avec un beurre simplement fondu, ils restent bons, mais plus neutres.
+### Combien de temps se gardent-ils ?
+Quatre à cinq jours dans une boîte hermétique. Ils se congèlent aussi très bien, jusqu'à un mois.

@@ -10,6 +10,7 @@ cuisson: 0 min
 portions: 2
 unite: verres
 difficulte: Très facile
+cout: 2
 resume: Un smoothie onctueux et rassasiant, à la banane, au yaourt, aux flocons d'avoine et au miel. Un petit-déjeuner à boire en cinq minutes.
 tags: [boisson, petit-déjeuner, sans cuisson, rapide]
 ---
@@ -32,3 +33,11 @@ Le petit-déjeuner des matins pressés. Les flocons d'avoine le rendent épais e
 
 ## Le conseil
 Congelez à l'avance vos bananes trop mûres en tronçons : elles remplacent les glaçons et rendent le smoothie encore plus crémeux.
+
+## Questions fréquentes
+### Peut-on préparer le smoothie la veille ?
+Il est meilleur bu tout de suite. Préparé la veille, il épaissit à cause de l'avoine : ajoutez un peu de lait et mixez de nouveau.
+### Peut-on le faire sans lait ?
+Oui, avec une boisson végétale et un yaourt au soja ou à la noix de coco.
+### Peut-on remplacer les flocons d'avoine ?
+Oui, par une cuillère de purée d'amande ou de beurre de cacahuète, qui donne aussi une texture épaisse.

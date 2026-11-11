@@ -11,6 +11,7 @@ repos: 6 h
 portions: 30
 unite: losanges
 difficulte: Moyenne
+cout: 22
 resume: Des couches de pâte filo beurrée et de fruits secs, cuites jusqu'à être dorées et croustillantes, puis imbibées d'un sirop au miel d'oranger.
 tags: [oriental, fêtes, pâte filo, à partager]
 ---
@@ -41,3 +42,11 @@ Le baklava est une affaire de patience plutôt que de technique. Le secret : un 
 
 ## Le conseil
 Couvrez la pâte filo d'un torchon humide pendant que vous travaillez : elle sèche et se casse en quelques minutes à l'air.
+
+## Questions fréquentes
+### Pourquoi verser un sirop froid sur un baklava chaud ?
+L'écart de température permet au sirop d'être absorbé sans détremper la pâte. Si les deux sont chauds, le baklava devient mou. Si les deux sont froids, le sirop pénètre mal.
+### Combien de temps se garde le baklava ?
+Une semaine environ, à température ambiante, dans une boîte hermétique ou sous un torchon. Évitez le réfrigérateur, qui ramollit la pâte filo.
+### Peut-on remplacer les pistaches ?
+Oui : la recette fonctionne avec uniquement des noix, ou avec un mélange de noix et d'amandes. Gardez le même poids total de fruits secs.

@@ -136,11 +136,42 @@ const recipes = fs.readdirSync(path.join(ROOT, 'recettes'))
       steps: listItems(s['preparation']),
       conseil: s['le-conseil'] ? markdown(s['le-conseil'].join('\n')) : '',
       variantes: s['variantes'] ? markdown(s['variantes'].join('\n')) : '',
+      faq: recipeFaq(s['questions-frequentes']),
+      cout: parseFloat(String(data.cout || '').replace(',', '.')) || 0,
       tags: Array.isArray(data.tags) ? data.tags : [],
     };
   })
   .filter((r) => r.date <= today)
   .sort((a, b) => b.date - a.date || a.titre.localeCompare(b.titre, 'fr'));
+
+// FAQ d'une recette : « ### Question » suivi de la réponse.
+function recipeFaq(lines = []) {
+  const out = [];
+  for (const l of lines) {
+    const m = l.match(/^###\s+(.*)$/);
+    if (m) { out.push({ q: m[1].trim(), a: [] }); continue; }
+    if (out.length) out[out.length - 1].a.push(l);
+  }
+  return out.map((x) => ({ q: x.q, a: x.a.join('\n').trim() })).filter((x) => x.q && x.a);
+}
+
+// Coût estimé (champ « cout: » = prix total de la recette en euros, miel compris).
+const eur = (n) => { const v = Math.round(n * 10) / 10; return (Number.isInteger(v) ? String(v) : v.toFixed(2).replace(".", ",")) + " €"; };
+const PER_PERSON = /^(pers|personnes|tasses|verres|tranches)$/;
+const SINGULIER = { bocaux: "bocal", pots: "pot", personnes: "personne" };
+const unitName = (u, n) => (n > 1 ? u : SINGULIER[u] || u.replace(/s$/, ""));
+function costOf(r) {
+  if (!r.cout) return null;
+  const unite = r.unite || "personnes";
+  const perPerson = PER_PERSON.test(unite);
+  const lot = /^(pots?|bocaux|bocal)$/.test(unite);
+  const per = r.cout / r.portions;
+  const [a, b] = perPerson ? [2, 4] : lot ? [4, 8] : [0.6, 1];
+  const level = per <= a ? 1 : per <= b ? 2 : 3;
+  const label = ["", "Petit budget", "Budget moyen", "Budget plus élevé"][level];
+  const detail = perPerson ? `${eur(Math.round(per * 10) / 10)} par ${unitName(unite, 1)}` : `pour ${r.portions} ${unitName(unite, r.portions)}`;
+  return { total: r.cout, level, label, signs: "€".repeat(level), detail };
+}
 
 function ingredientGroups(lines) {
   const html = [];
@@ -218,6 +249,7 @@ const RF = {
   people: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.7 3 2.4 3.5 5.2"/></svg>`,
   chef: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.9V20h12v-6.1"/><path d="M6 14a4 4 0 1 1 2.6-7A4.5 4.5 0 0 1 17 6.1 4 4 0 1 1 18 14z"/></svg>`,
   print: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></svg>`,
+  euro: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 6.2A7 7 0 1 0 17.5 17.8"/><path d="M4 10.2h9M4 13.8h9"/></svg>`,
   share: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>`,
 };
 const dropIcon = (on) => `<svg viewBox="0 0 12 16" width="11" height="14" aria-hidden="true"><path d="M6 1C5 3 1 7 1 10.4a5 5 0 0 0 10 0C11 7 7 3 6 1z" fill="${on ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.4"/></svg>`;
@@ -336,7 +368,7 @@ const recipeText = (r) => nrm(r.ingredientsList.join(' | '));
 const dietsOf = (r) => DIETS.filter(([, , re]) => re.test(recipeText(r))).map(([k]) => k);
 // Petit budget : aucun ingrédient cher (champ « budget: petit » ou « budget: moyen » pour forcer).
 const PRICEY = /magret|canard|agneau|filet mignon|filets mignons|saumon|crevette|saint-jacques|boeuf|veau|pistache|pignon|macadamia|safran|gousse de vanille|jambon cru|jambon demi-sel de 3 kg|burrata|cepe|truffe|champagne|foie gras/;
-const isCheap = (r) => (r.budget ? nrm(r.budget).startsWith('petit') : !PRICEY.test(recipeText(r)));
+const isCheap = (r) => (r.budget ? nrm(r.budget).startsWith('petit') : r.cout ? costOf(r).level === 1 : !PRICEY.test(recipeText(r)));
 // Ingrédients du « frigo » : [clé, libellé, rayon, motif].
 const FRIGO = [
   ['pomme', 'Pommes', 'Fruits', /\bpommes?\b(?! de terre)|jus de pomme/], ['poire', 'Poires', 'Fruits', /\bpoires?\b/], ['figue', 'Figues', 'Fruits', /figue/], ['orange', 'Oranges', 'Fruits', /\boranges?\b/], ['citron', 'Citrons', 'Fruits', /citron/], ['banane', 'Bananes', 'Fruits', /banane/], ['peche', 'Pêches', 'Fruits', /\bpeches?\b/], ['fruits-rouges', 'Fruits rouges', 'Fruits', /fruits rouges|framboise|fraise|myrtille/], ['coing', 'Coings', 'Fruits', /coing/], ['pruneau', 'Pruneaux', 'Fruits', /pruneau/], ['fruits-secs', 'Fruits secs', 'Fruits', /fruits secs|raisins secs|abricots secs|cranberr|fruits confits/],
@@ -573,6 +605,7 @@ function recipePage(r, i) {
       return { '@type': 'HowToStep', name: stepName(text), text, url: `${SITE.url}${r.url}#etape-${n + 1}` };
     }),
     ...nutritionLd(r),
+    ...(r.cout ? { estimatedCost: { '@type': 'MonetaryAmount', currency: 'EUR', value: r.cout } } : {}),
     ...(NOTES[r.slug] && NOTES[r.slug].n ? { aggregateRating: { '@type': 'AggregateRating', ratingValue: NOTES[r.slug].moy, ratingCount: NOTES[r.slug].n, bestRating: 5, worstRating: 1 } } : {}),
   };
   const body = `
@@ -602,6 +635,7 @@ ${printSheet(r)}
       ${r.repos ? `<li>${RF.pause}<span>Repos</span><b>${esc(r.repos)}</b></li>` : ''}
       <li>${level(r)}<span>Difficulté</span><b>${esc(r.difficulte)}</b></li>
       <li>${RF.people}<span>Pour</span><b>${r.portions} ${esc(r.unite || 'pers.')}</b></li>
+      ${costOf(r) ? `<li class="rf-cost">${RF.euro}<span>Coût estimé</span><b>≈ ${eur(r.cout)}</b><a class="rf-sub" href="#cout">${costOf(r).signs} · ${esc(costOf(r).detail)}</a></li>` : ''}
     </ul>
     <div class="rf-actions">
       <button type="button" class="rf-btn rf-main" data-cook title="Plein écran, une étape à la fois, écran toujours allumé">${RF.chef}<span>Mode cuisine</span></button><span class="rf-hint">Plein écran, étape par étape, écran allumé</span>
@@ -633,11 +667,14 @@ ${printSheet(r)}
       <ol class="steps">${r.steps.map((s, n) => `<li id="etape-${n + 1}">${inline(s)}</li>`).join('')}</ol>
       ${r.conseil ? `<div class="tip"><h2>🐝 Le conseil</h2>${r.conseil}</div>` : ''}
       ${r.variantes ? `<div class="variants"><h2>Variantes</h2>${r.variantes}</div>` : ''}
+      ${faqHtml(r.faq)}
+      ${costOf(r) ? `<p class="cost-note" id="cout"><b>${costOf(r).signs} ${costOf(r).label} : environ ${eur(r.cout)} la recette${PER_PERSON.test(r.unite || 'personnes') ? `, soit ${esc(costOf(r).detail)}` : ` (${esc(costOf(r).detail)})`}.</b> Estimation d'après les prix moyens en supermarché en novembre 2026, miel de producteur compris (environ 20 € le kilo). Le coût réel varie selon les saisons, les enseignes et ce que vous avez déjà dans vos placards.</p>` : ''}
       ${hasAlcohol(r) ? '<p class="alcool">Cette recette contient de l\'alcool. L\'abus d\'alcool est dangereux pour la santé, à consommer avec modération.</p>' : ''}
       ${nutritionHtml(r)}
       <div class="print-partner"><p>Fiche offerte par <b>MesAbeilles.fr</b></p><p>Retrouvez cette recette et bien d'autres sur cuisineaumiel.fr</p></div>
       ${avisHtml(r)}
       ${shareCta('share-recipe')}
+      ${googleSource()}
       <p class="credits">Photos : ${esc(r.credit)}${r.honey.credit ? ` et ${esc(r.honey.credit)}` : ''} sur <a href="https://unsplash.com/fr" rel="nofollow">Unsplash</a>.</p>
     </div>
   </div>
@@ -649,13 +686,23 @@ ${printSheet(r)}
 </section>`;
   return layout({
     title: r.titre, description: r.resume, canonical: r.url, body, ogImage: img(r.photo, 1200),
-    extraHead: `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`,
+    extraHead: [ld, faqLd(r.faq)].filter(Boolean).map(ldScript).join('\n'),
   });
+}
+
+// Bouton « Ajouter à mes sources préférées » de Google (lien officiel google.com/preferences/source).
+function googleSource(cls = '') {
+  const host = SITE.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  return `<aside class="gsource ${cls}">
+  <span class="gsource-ico" aria-hidden="true">★</span>
+  <div><p class="kicker">En un clic</p><h2>Cuisine au miel en premier dans Google</h2><p>Ajoutez le site à vos sources préférées : nos recettes remonteront en priorité dans vos recherches Google.</p></div>
+  <a class="btn" href="https://www.google.com/preferences/source?q=${encodeURIComponent(host)}" target="_blank" rel="noopener">Ajouter à mes sources Google</a>
+</aside>`;
 }
 
 function printSheet(r) {
   const h = honeyOf(r);
-  const facts = [['Préparation', r.preparation], ...(r.cuisson && r.cuisson !== '0 min' ? [['Cuisson', r.cuisson]] : []), ...(r.repos ? [['Repos', r.repos]] : []), ['Total', totalTime(r)], ['Difficulté', r.difficulte], ['Pour', `<span data-ps-portions>${r.portions}</span> ${esc(r.unite || 'pers.')}`]];
+  const facts = [['Préparation', r.preparation], ...(r.cuisson && r.cuisson !== '0 min' ? [['Cuisson', r.cuisson]] : []), ...(r.repos ? [['Repos', r.repos]] : []), ['Total', totalTime(r)], ['Difficulté', r.difficulte], ['Pour', `<span data-ps-portions>${r.portions}</span> ${esc(r.unite || 'pers.')}`], ...(r.cout ? [['Coût', `≈ ${eur(r.cout)}`]] : [])];
   return `<div class="ps" aria-hidden="true">
   <header class="ps-head">
     <div class="ps-brand">${logoMedal('ps-drop')}</div>

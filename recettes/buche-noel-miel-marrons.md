@@ -10,6 +10,7 @@ cuisson: 12 min
 repos: 4 h
 portions: 8
 difficulte: Moyenne
+cout: 9,5
 resume: Un biscuit roulé tendre garni d'une crème de marrons au miel de châtaignier et recouvert de chocolat, façon écorce. La bûche des fêtes, sans beurre-crème.
 tags: [noël, bûche, marrons, chocolat, dessert de fête]
 ---
@@ -47,3 +48,11 @@ Roulez le biscuit dès la sortie du four, encore chaud : il prend la forme et ne
 ## Variantes
 - Décorez avec des champignons en meringue, des brisures de marrons glacés ou quelques feuilles de houx en sucre.
 - Remplacez la crème de marrons par une crème au chocolat et à l'orange.
+
+## Questions fréquentes
+### Mon biscuit casse quand je le roule, pourquoi ?
+Il est sans doute trop cuit ou il a refroidi avant d'être roulé. Sortez-le dès qu'il est doré et souple au toucher, et roulez-le aussitôt dans le torchon humide.
+### Combien de temps à l'avance préparer la bûche ?
+La veille, c'est l'idéal. Elle se garde 2 jours au réfrigérateur, filmée. Ajoutez le sucre glace juste avant de servir.
+### Peut-on congeler la bûche ?
+Oui, sans le glaçage au chocolat ni le sucre glace, jusqu'à un mois. Faites-la décongeler une nuit au réfrigérateur, puis glacez-la.

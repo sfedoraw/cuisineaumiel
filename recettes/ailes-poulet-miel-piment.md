@@ -9,6 +9,7 @@ preparation: 10 min
 cuisson: 45 min
 portions: 4
 difficulte: Facile
+cout: 9
 resume: Des ailes de poulet croustillantes au four, enrobées d'une laque collante au miel, au piment, à l'ail et au citron vert.
 tags: [poulet, apéritif dînatoire, au four, épicé]
 ---
@@ -38,3 +39,11 @@ Pas besoin de friteuse : une cuisson longue à four chaud suffit à rendre la pe
 
 ## Le conseil
 Utilisez bien de la **levure chimique** et non du bicarbonate pur, qui laisserait un goût métallique.
+
+## Questions fréquentes
+### Peut-on faire ces ailes au Airfryer ?
+Oui. Comptez 25 minutes à 200 °C en secouant le panier à mi-cuisson, sans les serrer. Enrobez-les de laque au miel seulement à la fin, hors de l'appareil.
+### Comment rendre la recette moins piquante ?
+Remplacez la sriracha par du ketchup ou par une cuillère de concentré de tomate. Gardez le paprika, qui colore sans piquer.
+### Peut-on préparer les ailes à l'avance ?
+La laque se prépare la veille et se garde au réfrigérateur. Les ailes, elles, sont meilleures cuites au dernier moment : réchauffées, elles perdent leur croustillant.

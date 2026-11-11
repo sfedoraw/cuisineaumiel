@@ -11,6 +11,7 @@ repos: 12 h
 portions: 40
 unite: biscuits
 difficulte: Facile
+cout: 9
 resume: Les petits biscuits de Noël d'Alsace, au miel de sapin et aux épices, découpés à l'emporte-pièce. Une pâte qui repose une nuit et des biscuits qui se gardent des semaines.
 tags: [noël, biscuits, alsace, épices, cadeau gourmand]
 ---
@@ -49,3 +50,11 @@ Les biscuits sont un peu durs à la sortie du four : c'est normal. Rangés dans 
 ## Variantes
 - Remplacez le miel de sapin par un miel de châtaignier pour un goût plus corsé.
 - Sans glaçage, badigeonnez les biscuits d'un peu de lait avant cuisson et parsemez d'amandes effilées.
+
+## Questions fréquentes
+### Combien de temps se gardent les bredele ?
+Trois à quatre semaines dans une boîte en fer bien fermée, à l'abri de la chaleur. C'est pour cela qu'on les prépare dès le début de l'Avent.
+### Peut-on sauter le repos d'une nuit ?
+C'est déconseillé. Le repos permet aux épices de se développer et rend la pâte plus facile à étaler. Au minimum, laissez-la 4 heures au réfrigérateur.
+### Quel miel utiliser si je n'ai pas de miel de sapin ?
+Un miel de châtaignier ou un miel de forêt donne un résultat proche, boisé et corsé. Un miel toutes fleurs fonctionne aussi, avec un goût plus doux.

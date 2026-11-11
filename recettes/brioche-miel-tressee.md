@@ -10,6 +10,7 @@ repos: 3 h
 cuisson: 30 min
 portions: 8
 difficulte: Moyenne
+cout: 6
 resume: Une brioche filante et parfumée, dont une partie du sucre est remplacée par du miel, tressée à trois brins et dorée au jaune d'œuf.
 tags: [viennoiserie, petit-déjeuner, week-end, pâte levée]
 ---
@@ -40,3 +41,11 @@ Le miel nourrit la levure et garde la mie moelleuse plus longtemps. Cette brioch
 
 ## Le conseil
 Si la brioche colore trop vite, couvrez-la d'une feuille d'aluminium après 15 minutes. Le miel dore plus rapidement que le sucre.
+
+## Questions fréquentes
+### Peut-on pétrir la brioche à la main ?
+Oui, mais comptez 15 à 20 minutes de pétrissage énergique, en écrasant et repliant la pâte. Elle colle beaucoup au début : n'ajoutez pas de farine, elle se décolle en travaillant.
+### Peut-on préparer la pâte la veille ?
+Oui. Après le pétrissage, laissez-la pousser une nuit au réfrigérateur, bien couverte. Le lendemain, façonnez la tresse et laissez-la pousser 1 h 30 à température ambiante avant cuisson.
+### Comment garder la brioche moelleuse ?
+Enveloppez-la dans un torchon propre ou un sac une fois refroidie. Elle se garde 3 jours, puis elle est parfaite en pain perdu.
