@@ -10,6 +10,7 @@ repos: 30 min
 cuisson: 10 min
 portions: 4
 difficulte: Facile
+cout: 11
 resume: Des brochettes de haut de cuisse de poulet et d'oignons nouveaux, grillées et laquées d'une sauce au miel, à la sauce soja et au mirin.
 tags: [poulet, barbecue, japonais, brochettes]
 ---
@@ -40,3 +41,11 @@ Le haut de cuisse reste moelleux sur le gril, là où le blanc sèche vite. La s
 
 ## Le conseil
 Ne badigeonnez pas trop tôt : le miel brûle vite sur la braise. Attendez que le poulet soit presque cuit.
+
+## Questions fréquentes
+### Peut-on utiliser du blanc de poulet ?
+Oui, mais réduisez la cuisson de 2 à 3 minutes : le blanc sèche plus vite que le haut de cuisse. Le poulet doit être cuit à cœur, sans trace rosée.
+### Par quoi remplacer le mirin et le saké ?
+Le mirin peut être remplacé par 1 cuillère à soupe de miel en plus et un trait de vinaigre de riz. Le saké peut être remplacé par de l'eau, comme indiqué dans les ingrédients.
+### Peut-on faire mariner le poulet à l'avance ?
+Vous pouvez le laisser 2 à 12 heures dans un tiers de la sauce, au réfrigérateur. Gardez le reste de sauce à part pour badigeonner et servir.

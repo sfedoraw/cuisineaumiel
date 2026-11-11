@@ -11,6 +11,7 @@ cuisson: 20 min
 portions: 15
 unite: crêpes
 difficulte: Facile
+cout: 5
 resume: Des crêpes fines et dentelées, servies simplement avec un beurre fondu au miel et quelques gouttes de citron. Le goûter breton dans toute sa simplicité.
 tags: [crêpes, goûter, Chandeleur, enfants]
 ---
@@ -40,3 +41,11 @@ Le plus simple est souvent le meilleur. Un mélange de beurre fondu, de miel et 
 
 ## Le conseil
 La première crêpe est toujours ratée : c'est elle qui graisse et met la poêle à bonne température.
+
+## Questions fréquentes
+### Peut-on préparer la pâte la veille ?
+Oui. Elle se garde 24 heures au réfrigérateur, filmée. Fouettez-la avant l'emploi et ajoutez un peu de lait si elle a épaissi.
+### Ma pâte a des grumeaux, que faire ?
+Passez-la au chinois ou donnez quelques coups de mixeur plongeant. Pour les éviter, ajoutez le lait en petites quantités au début.
+### Comment garder les crêpes chaudes ?
+Empilez-les sur une assiette posée au-dessus d'une casserole d'eau frémissante et couvrez-les d'un torchon propre.

@@ -10,6 +10,7 @@ cuisson: 5 min
 portions: 2
 unite: tasses
 difficulte: Très facile
+cout: 3
 resume: Le grog des montagnes, au rhum ambré, au miel de sapin, au citron et aux épices. Existe aussi en version sans alcool au thé.
 tags: [boisson chaude, hiver, rhum, montagne]
 ---
@@ -35,3 +36,11 @@ Après une journée dans le froid, rien ne vaut un grog. Le miel de sapin, avec 
 
 ## Le conseil
 Ne faites jamais bouillir le miel ni le rhum : le premier perd son parfum, le second son alcool et son goût.
+
+## Questions fréquentes
+### Peut-on faire un grog sans alcool ?
+Oui. Supprimez le rhum et remplacez-le par un thé noir ou une infusion de thym. Vous obtenez une boisson chaude au miel et au citron, tout aussi réconfortante.
+### Quel rhum choisir ?
+Un rhum ambré ou vieux, plus rond qu'un rhum blanc. On peut aussi utiliser un cognac ou un calvados.
+### Pourquoi ne pas faire bouillir le grog ?
+L'ébullition fait perdre au miel son parfum et évapore l'alcool. Versez l'infusion chaude sur le miel et le rhum, sans les chauffer directement.

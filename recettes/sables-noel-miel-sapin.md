@@ -11,6 +11,7 @@ repos: 1 h
 portions: 30
 unite: sablés
 difficulte: Facile
+cout: 4,5
 resume: Des petits sablés en forme d'étoiles et de sapins, parfumés au miel de sapin et à la cannelle, à croquer ou à suspendre au sapin avec un ruban.
 tags: [noël, biscuits, avent, enfants, cadeau gourmand]
 ---
@@ -45,3 +46,11 @@ La pâte au miel colle davantage qu'une pâte sablée classique : ne sautez pas 
 ## Variantes
 - Remplacez la cannelle par du gingembre en poudre et une pointe de muscade.
 - Avec un miel toutes fleurs, le goût est plus doux, idéal pour les enfants (à partir d'un an).
+
+## Questions fréquentes
+### Peut-on préparer la pâte à l'avance ?
+Oui. Elle se garde 3 jours au réfrigérateur, bien filmée, ou un mois au congélateur. Laissez-la décongeler une nuit au réfrigérateur avant de l'étaler.
+### Comment suspendre les sablés au sapin ?
+Percez un petit trou avec une paille avant la cuisson, puis passez un ruban une fois les biscuits refroidis et décorés.
+### Quel miel utiliser si je n'ai pas de miel de sapin ?
+Un miel de forêt, de châtaignier ou un miel toutes fleurs. Le goût sera différent, mais la texture reste la même.

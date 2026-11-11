@@ -11,6 +11,7 @@ cuisson: 12 min
 portions: 16
 unite: cookies
 difficulte: Très facile
+cout: 5
 resume: Des cookies épais, croustillants sur les bords et tendres au centre, aux flocons d'avoine, au miel de bruyère et aux pépites de chocolat.
 tags: [goûter, biscuits, enfants, chocolat]
 ---
@@ -38,3 +39,11 @@ Le miel garde les cookies moelleux plusieurs jours et leur donne un léger goût
 
 ## Le conseil
 Sortez les cookies quand ils semblent encore pas tout à fait cuits : ils finissent de prendre en refroidissant et restent moelleux.
+
+## Questions fréquentes
+### Peut-on remplacer le miel de bruyère ?
+Oui, par un miel toutes fleurs ou de châtaignier. Le goût change, mais la texture reste aussi moelleuse.
+### Peut-on congeler la pâte ?
+Oui. Formez les boules, congelez-les sur une plaque, puis gardez-les en sachet un mois. Enfournez-les sans décongeler, en ajoutant 2 minutes de cuisson.
+### Comment garder les cookies moelleux ?
+Dans une boîte hermétique, à température ambiante. Ils restent tendres 4 à 5 jours grâce au miel.

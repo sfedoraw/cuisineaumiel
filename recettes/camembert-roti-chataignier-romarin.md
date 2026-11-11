@@ -9,6 +9,7 @@ preparation: 5 min
 cuisson: 20 min
 portions: 4
 difficulte: Très facile
+cout: 7
 resume: Un camembert entier cuit dans sa boîte, coulant à cœur, arrosé de miel de châtaignier et de romarin. À partager avec des mouillettes.
 tags: [fromage, apéritif, hiver, à partager]
 ---
@@ -34,3 +35,11 @@ L'apéritif des soirées d'hiver. Le miel de châtaignier, sombre et un peu amer
 
 ## Le conseil
 Vérifiez que la boîte est bien **agrafée et non collée** : la colle peut fondre au four. Dans le doute, posez le fromage dans un petit plat à gratin.
+
+## Questions fréquentes
+### Quel camembert choisir pour la cuisson ?
+Un camembert au lait cru bien fait, dans une boîte en bois agrafée. Un fromage trop jeune et crayeux à cœur fond moins bien.
+### Peut-on remplacer le miel de châtaignier ?
+Oui, par un miel de sarrasin pour un goût encore plus corsé, ou par un miel de thym. Un miel très doux, comme l'acacia, sera vite masqué par le fromage.
+### Que servir avec le camembert rôti ?
+Des mouillettes de pain grillé, des pommes de terre vapeur, des bâtonnets de pomme ou d'endive et une salade verte.

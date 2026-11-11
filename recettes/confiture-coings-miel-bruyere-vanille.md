@@ -10,6 +10,7 @@ cuisson: 1 h 15
 portions: 4
 unite: pots
 difficulte: Moyenne
+cout: 13,5
 resume: Une confiture ambrée de coings fondants, adoucie au miel de bruyère et parfumée à la vanille. Sur une tartine, avec un fromage de brebis ou en cadeau gourmand pour les fêtes.
 tags: [conserve, automne, coing, fromage, cadeau]
 ---
@@ -41,3 +42,11 @@ Ajoutez le miel en fin de cuisson : une ébullition trop longue lui ferait perdr
 - **Aux épices de Noël** : remplacez la vanille par 1 bâton de cannelle et 2 étoiles de badiane.
 - **Coings et pommes** : remplacez 500 g de coings par des pommes acidulées, la cuisson du début sera plus courte.
 - **En accord fromage** : servez-la avec une tranche de tomme de brebis, à la manière du membrillo espagnol.
+
+## Questions fréquentes
+### Ma confiture ne prend pas, que faire ?
+Remettez-la à cuire quelques minutes à petits bouillons, puis refaites le test de l'assiette froide. Les pépins de coing apportent la pectine : ne les oubliez pas.
+### Peut-on éplucher les coings ?
+Ce n'est pas nécessaire : la peau contient de la pectine et apporte du goût. Frottez-les bien pour retirer le duvet.
+### Combien de temps se garde la confiture ?
+Un an environ dans des pots stérilisés, au frais et à l'abri de la lumière. Une fois ouvert, gardez le pot au réfrigérateur.

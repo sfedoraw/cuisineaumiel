@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 45 min
 portions: 4
 difficulte: Facile
+cout: 13
 resume: Des cuisses de poulet rôties dans une laque de miel, citron, ail et thym, avec des pommes de terre qui cuisent dans le même plat.
 tags: [poulet, plat familial, au four, un seul plat]
 ---
@@ -41,3 +42,11 @@ Si la peau colore trop vite, couvrez le plat d'une feuille d'aluminium pour les 
 ## Variantes
 - Remplacez le citron par de l'orange et le thym par du romarin.
 - Ajoutez une pincée de piment fumé dans la laque pour une version plus relevée.
+
+## Questions fréquentes
+### Peut-on utiliser des blancs de poulet ?
+Oui, mais ils cuisent plus vite et sèchent davantage. Comptez 25 à 30 minutes en tout et ajoutez les pommes de terre 15 minutes avant le poulet.
+### Comment savoir si le poulet est cuit ?
+Piquez la cuisse à l'endroit le plus épais : le jus doit être clair, sans trace rosée.
+### Peut-on préparer le plat à l'avance ?
+Vous pouvez préparer la laque et le plat quelques heures avant et le garder au réfrigérateur. Enfournez au dernier moment.

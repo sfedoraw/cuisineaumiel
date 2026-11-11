@@ -10,6 +10,7 @@ cuisson: 22 min
 portions: 12
 unite: muffins
 difficulte: Très facile
+cout: 6,5
 resume: Des muffins moelleux qui recyclent les bananes trop mûres, sucrés au miel d'acacia, avec des noix concassées et un soupçon de cannelle.
 tags: [goûter, anti-gaspillage, enfants, petit-déjeuner]
 ---
@@ -39,3 +40,11 @@ La meilleure façon d'utiliser les bananes noircies au fond de la corbeille. Ell
 
 ## Le conseil
 Une pâte à muffins doit rester grumeleuse. Trop mélangée, elle donne des muffins compacts et caoutchouteux.
+
+## Questions fréquentes
+### Mes muffins sont compacts, pourquoi ?
+La pâte a été trop mélangée. Il faut juste humidifier la farine : quelques grumeaux restent normaux et donnent des muffins aérés.
+### Peut-on congeler les muffins ?
+Oui, jusqu'à un mois, dans un sac congélation. Laissez-les décongeler à température ambiante ou passez-les 5 minutes au four.
+### Peut-on remplacer les noix ?
+Oui, par des pépites de chocolat, des myrtilles ou des noix de pécan. Vous pouvez aussi les supprimer.

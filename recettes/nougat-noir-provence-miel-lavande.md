@@ -11,6 +11,7 @@ repos: 12 h
 portions: 20
 unite: morceaux
 difficulte: Moyenne
+cout: 11,5
 resume: L'un des treize desserts de Noël en Provence : un nougat croquant fait simplement de miel caramélisé et d'amandes grillées, entre deux feuilles de pain azyme.
 tags: [noël, treize desserts, provence, confiserie, amandes]
 ---
@@ -36,3 +37,11 @@ Attention, le miel cuit dépasse 140 °C : travaillez sans enfants autour de la 
 ## Variantes
 - Ajoutez une poignée de noisettes et de pistaches avec les amandes.
 - Avec un miel de thym, le nougat prend un goût plus corsé.
+
+## Questions fréquentes
+### Comment couper le nougat noir sans le casser ?
+Utilisez un grand couteau bien chaud, trempé dans l'eau bouillante et essuyé. Appuyez d'un coup sec avec la paume sur le dos de la lame.
+### Où trouver du pain azyme ?
+Au rayon épicerie de nombreux supermarchés, dans les épiceries casher ou en ligne. À défaut, utilisez du papier cuisson huilé, à retirer avant de servir.
+### Peut-on utiliser un autre miel ?
+Oui, mais le miel fait tout le goût. Un miel de romarin ou un miel toutes fleurs de Provence garde l'esprit de la recette.

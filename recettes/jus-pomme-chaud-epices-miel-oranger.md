@@ -10,6 +10,7 @@ cuisson: 15 min
 portions: 4
 unite: tasses
 difficulte: Très facile
+cout: 5
 resume: Un jus de pomme chauffé doucement avec cannelle, badiane, clous de girofle et zeste d'orange, adouci au miel d'oranger. La boisson chaude des après-midi d'automne, sans alcool, pour toute la famille.
 tags: [boisson chaude, automne, sans alcool, pomme, épices]
 ---
@@ -42,3 +43,11 @@ Ne faites jamais bouillir le jus : les épices deviendraient amères et le jus p
 - **Version adulte** : remplacez la moitié du jus de pomme par du cidre brut et chauffez de la même façon.
 - **Version poire** : utilisez moitié jus de pomme, moitié jus de poire, et remplacez le miel d'oranger par du miel de châtaignier pour une boisson plus corsée.
 - **À l'avance** : la boisson filtrée se garde 3 jours au réfrigérateur et se réchauffe doucement à la casserole.
+
+## Questions fréquentes
+### Peut-on préparer ce jus à l'avance ?
+Oui. Il se garde 2 jours au réfrigérateur après avoir été filtré. Réchauffez-le doucement, sans le faire bouillir.
+### Quel jus de pomme choisir ?
+Un pur jus, idéalement trouble, sans sucre ajouté. Il a plus de goût qu'un jus à base de concentré.
+### Peut-on le faire avec un autre miel ?
+Oui. Un miel de châtaignier donne un jus plus corsé, un miel d'acacia un jus plus doux.

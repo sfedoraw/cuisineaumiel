@@ -11,6 +11,7 @@ cuisson: 3 min
 portions: 6
 unite: verres
 difficulte: Très facile
+cout: 6
 resume: Une citronnade maison peu sucrée, préparée avec un sirop de miel infusé au romarin, à allonger d'eau plate ou pétillante.
 tags: [boisson fraîche, été, sans alcool, apéritif]
 ---
@@ -33,3 +34,11 @@ La boisson de l'été, à préparer en carafe. Le sirop au miel se garde une sem
 
 ## Le conseil
 Goûtez avant de servir : selon l'acidité des citrons, ajoutez une cuillère de miel ou un trait de jus supplémentaire.
+
+## Questions fréquentes
+### Peut-on remplacer le romarin ?
+Oui, par du thym citron, de la menthe, du basilic ou quelques tranches de gingembre frais. Laissez infuser de la même façon.
+### Pourquoi chauffer le miel ?
+Le miel se dissout mal dans l'eau froide. Une légère chauffe suffit pour obtenir un sirop homogène, sans le faire bouillir.
+### Combien de temps se garde la citronnade ?
+Deux jours au réfrigérateur une fois allongée d'eau. Le sirop au miel seul se garde une semaine.

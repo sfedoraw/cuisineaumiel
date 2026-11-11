@@ -9,6 +9,7 @@ preparation: 10 min
 cuisson: 20 min
 portions: 4
 difficulte: Très facile
+cout: 7
 resume: Des demi-pêches rôties au four dans un sirop de miel de lavande, de beurre et de romarin, servies tièdes avec une boule de glace ou du mascarpone.
 tags: [fruits, été, dessert rapide, sans gluten]
 ---
@@ -34,3 +35,11 @@ Le dessert le plus simple de l'été. La chaleur concentre le parfum des pêches
 
 ## Le conseil
 Hors saison, la recette fonctionne aussi avec des abricots, des prunes ou des figues.
+
+## Questions fréquentes
+### Faut-il peler les pêches ?
+Non. La peau se détache facilement après cuisson si vous préférez la retirer, et elle donne une jolie couleur au sirop.
+### Peut-on cuire les pêches au barbecue ?
+Oui. Faites griller les demi-pêches face coupée 3 à 4 minutes, retournez-les, puis arrosez-les de miel et de jus de citron.
+### Par quoi remplacer le romarin ?
+Par du thym, de la verveine, de la lavande ou une gousse de vanille fendue.

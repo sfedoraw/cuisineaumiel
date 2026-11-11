@@ -9,6 +9,7 @@ preparation: 10 min
 cuisson: 8 min
 portions: 4
 difficulte: Facile
+cout: 8,5
 resume: Des crottins tièdes et fondants, nappés de miel de thym et parsemés de noix grillées, sur une salade croquante.
 tags: [chèvre, salade, noix, entrée rapide]
 ---
@@ -43,3 +44,11 @@ Ajoutez le dernier trait de miel **à la sortie du four** : il reste brillant et
 ## Variantes
 - Remplacez les noix par des pignons et le thym par du romarin.
 - Pour une version d'automne, ajoutez quelques lamelles de poire crue sur la salade.
+
+## Questions fréquentes
+### Quel fromage de chèvre choisir ?
+Un crottin bien affiné, qui se tient à la chaleur. Une bûche de chèvre fonctionne aussi, coupée en rondelles d'un centimètre.
+### Peut-on cuire les toasts à la poêle ?
+Oui : faites dorer le pain dans un filet d'huile, posez le fromage dessus et couvrez 3 à 4 minutes à feu doux pour qu'il fonde.
+### Par quoi remplacer l'huile de noix ?
+Par de l'huile d'olive ou de colza. L'huile de noix apporte un goût qui rappelle les cerneaux, mais la salade reste très bonne sans.

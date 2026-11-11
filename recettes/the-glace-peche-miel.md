@@ -11,6 +11,7 @@ cuisson: 5 min
 portions: 6
 unite: verres
 difficulte: Très facile
+cout: 4
 resume: Un thé noir infusé puis refroidi, parfumé de pêches fraîches et sucré au miel d'acacia. Bien moins sucré que les versions du commerce.
 tags: [boisson fraîche, été, sans alcool, thé]
 ---
@@ -34,3 +35,11 @@ Fait maison, le thé glacé n'a rien à voir avec celui en bouteille. Le miel se
 
 ## Le conseil
 N'infusez pas le thé plus de 4 minutes : il deviendrait amer, et l'amertume ressort encore davantage une fois froid.
+
+## Questions fréquentes
+### Peut-on utiliser du thé vert ?
+Oui. Faites-le infuser dans une eau à 80 °C, 2 à 3 minutes seulement, pour éviter l'amertume.
+### Combien de temps se garde le thé glacé ?
+Trois jours au réfrigérateur, dans une carafe fermée. Retirez les pêches au bout d'un jour.
+### Peut-on remplacer les pêches ?
+Oui, par des framboises, des fraises, des abricots ou des rondelles de citron.

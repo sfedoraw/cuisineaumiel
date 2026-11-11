@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 50 min
 portions: 4
 difficulte: Facile
+cout: 12,5
 resume: Des poires entières pochées dans un vin rouge au miel, à la cannelle et à l'orange, puis servies avec leur sirop réduit.
 tags: [fruits, hiver, sans gluten, dessert léger]
 ---
@@ -34,3 +35,11 @@ Un dessert d'hiver élégant et presque sans effort. Les poires prennent une bel
 
 ## Le conseil
 Les poires sont encore plus belles le lendemain : laissez-les toute la nuit dans leur sirop, au frais, elles se teintent jusqu'au cœur.
+
+## Questions fréquentes
+### Quelles poires choisir ?
+Des poires fermes, pas trop mûres, comme la conférence ou la williams indiquées dans la recette. Trop mûres, elles s'effondrent à la cuisson.
+### Peut-on faire une version sans alcool ?
+Oui. Remplacez le vin par du jus de raisin rouge ou un mélange de jus de cassis et d'eau. Réduisez alors le miel, car ces jus sont déjà sucrés.
+### Combien de temps se gardent les poires pochées ?
+Trois jours au réfrigérateur, dans leur sirop. Elles se colorent davantage chaque jour.

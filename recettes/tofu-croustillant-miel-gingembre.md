@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 15 min
 portions: 3
 difficulte: Facile
+cout: 6,5
 resume: Des cubes de tofu ferme enrobés de fécule et poêlés jusqu'à être très croustillants, puis laqués d'une sauce miel, gingembre et sauce soja.
 tags: [végétarien, tofu, asiatique, poêle]
 ---
@@ -40,3 +41,11 @@ Même ceux qui disent ne pas aimer le tofu se laissent convaincre. La fécule le
 
 ## Le conseil
 Plus le tofu est sec, plus il sera croustillant. Ne sautez pas l'étape du pressage.
+
+## Questions fréquentes
+### Quel tofu choisir ?
+Un tofu ferme nature. Le tofu soyeux est trop tendre et ne devient pas croustillant.
+### Peut-on cuire le tofu au four ou au Airfryer ?
+Oui. Au four : 25 minutes à 200 °C sur une plaque huilée, en le retournant. Au Airfryer : 15 minutes à 200 °C en secouant le panier. Enrobez-le de sauce à la poêle à la fin.
+### Comment rendre la recette végétalienne ?
+Remplacez le miel par du sirop d'érable ou d'agave, en même quantité.

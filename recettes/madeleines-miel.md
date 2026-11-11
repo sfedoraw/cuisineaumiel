@@ -11,6 +11,7 @@ cuisson: 10 min
 portions: 20
 unite: madeleines
 difficulte: Facile
+cout: 4
 resume: Des madeleines dorées, moelleuses et bien bombées, parfumées au miel et au citron. Le secret est dans le choc thermique.
 tags: [goûter, petits gâteaux, citron, enfants]
 ---
@@ -37,3 +38,11 @@ Le miel garde les madeleines tendres plusieurs jours. Pour obtenir la fameuse bo
 
 ## Le conseil
 Ne lissez pas la pâte dans les moules : déposez un petit tas au centre de chaque empreinte, il s'étalera tout seul et la bosse sera plus haute.
+
+## Questions fréquentes
+### Pourquoi mes madeleines n'ont-elles pas de bosse ?
+La bosse vient du choc thermique entre une pâte très froide et un four très chaud. Laissez reposer la pâte au moins 2 heures au réfrigérateur et préchauffez bien le four à 230 °C.
+### Peut-on utiliser des moules en silicone ?
+Oui, mais la bosse sera moins marquée et la coloration plus légère qu'avec des moules métalliques beurrés et farinés.
+### Combien de temps se gardent les madeleines ?
+Trois à quatre jours dans une boîte hermétique. Le miel les garde tendres plus longtemps que le sucre seul.

@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 40 min
 portions: 8
 difficulte: Très facile
+cout: 5,5
 resume: Le gâteau au yaourt de notre enfance, revisité avec du miel à la place d'une partie du sucre et imbibé d'un sirop au miel et au citron.
 tags: [gâteau, goûter, enfants, facile]
 ---
@@ -39,3 +40,11 @@ Un gâteau de goûter qu'on peut préparer les yeux fermés, en un seul saladier
 
 ## Le conseil
 Ce gâteau est encore meilleur le lendemain, enveloppé dans un torchon : le sirop a eu le temps de se répartir.
+
+## Questions fréquentes
+### Peut-on remplacer l'huile par du beurre ?
+Oui, par 100 g de beurre fondu. Le gâteau aura un goût plus riche, mais il sera un peu moins moelleux le lendemain.
+### Peut-on supprimer le sucre ?
+Oui, en le remplaçant par 60 g de miel en plus. Le gâteau sera un peu plus dense et colorera plus vite : baissez le four à 160 °C.
+### Quel moule utiliser ?
+Un moule rond de 24 cm ou un moule à cake. Dans un moule à cake, prolongez la cuisson de 10 minutes et vérifiez avec une lame.

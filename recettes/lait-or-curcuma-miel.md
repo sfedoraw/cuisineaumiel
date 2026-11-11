@@ -10,6 +10,7 @@ cuisson: 5 min
 portions: 2
 unite: tasses
 difficulte: Très facile
+cout: 2
 resume: Une boisson chaude et réconfortante au curcuma, gingembre, cannelle et poivre, adoucie au miel de tilleul au moment de servir.
 tags: [boisson chaude, hiver, épices, sans gluten]
 ---
@@ -32,3 +33,11 @@ La boisson des soirées fraîches. Le miel de tilleul, aux notes fraîches et l�
 
 ## Le conseil
 Le poivre est traditionnel dans cette boisson : il réveille le curcuma et le gingembre. Une toute petite pincée suffit, sinon il prend le dessus.
+
+## Questions fréquentes
+### Peut-on le préparer avec une boisson végétale ?
+Oui. Une boisson à l'avoine, à l'amande ou au soja convient très bien. La boisson à l'avoine donne la texture la plus onctueuse.
+### Le curcuma tache-t-il ?
+Oui, il colore durablement les plans de travail en bois et les tissus. Essuyez rapidement les éclaboussures.
+### Quand ajouter le miel ?
+Hors du feu, quand la boisson n'est plus brûlante. Il garde ainsi tous ses arômes.

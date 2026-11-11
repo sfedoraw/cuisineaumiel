@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 2 h 15
 portions: 4
 difficulte: Facile
+cout: 14
 resume: Des travers cuits longuement à basse température pour qu'ils deviennent fondants, puis laqués au miel de châtaignier et à la moutarde.
 tags: [porc, barbecue, mijoté, convivial]
 ---
@@ -39,3 +40,11 @@ La cuisson se fait en deux temps : d'abord à couvert et doucement pour attendri
 
 ## Le conseil
 L'été, terminez la cuisson au barbecue : 5 minutes de chaque côté sur une braise moyenne, en badigeonnant à chaque fois.
+
+## Questions fréquentes
+### Peut-on préparer les travers à l'avance ?
+Oui. Faites la première cuisson la veille et gardez-les au réfrigérateur. Le jour même, il ne reste que l'étape de laquage au four chaud.
+### Par quoi remplacer le cidre ?
+Par du jus de pomme ou du bouillon de volaille. Avec le jus de pomme, la sauce sera un peu plus sucrée.
+### Comment savoir si les travers sont assez cuits ?
+La viande doit se détacher facilement de l'os quand on la pique avec une fourchette. Si elle résiste, prolongez la première cuisson de 15 à 20 minutes.

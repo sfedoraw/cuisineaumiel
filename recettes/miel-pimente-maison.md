@@ -11,6 +11,7 @@ repos: 1 h
 portions: 1
 unite: pots
 difficulte: Très facile
+cout: 5,5
 resume: Un miel infusé au piment et relevé d'un trait de vinaigre, à verser sur une pizza, du poulet frit, du fromage ou des légumes rôtis.
 tags: [condiment, épicé, pizza, bocal]
 ---
@@ -31,3 +32,11 @@ Venu des pizzerias new-yorkaises, le miel pimenté est devenu le condiment à la
 
 ## Le conseil
 Essayez-le sur une pizza au chorizo, un [camembert rôti](/recettes/camembert-roti-chataignier-romarin/) ou des [ailes de poulet](/recettes/ailes-poulet-miel-piment/).
+
+## Questions fréquentes
+### Peut-on utiliser du piment frais ?
+Non, comme indiqué dans la recette. Le piment frais apporte de l'eau et ne permet pas une conservation sûre hors du réfrigérateur. Utilisez uniquement du piment séché.
+### Comment doser le piquant ?
+Commencez par 1 cuillère à café de flocons, goûtez après l'infusion et ajoutez-en si besoin. Le piquant se renforce un peu avec le temps.
+### Quel miel choisir ?
+Un miel liquide et doux, comme l'acacia, qui laisse la place au piment. Un miel toutes fleurs liquide convient aussi.

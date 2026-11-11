@@ -11,6 +11,7 @@ repos: 24 h
 portions: 10
 unite: tranches
 difficulte: Facile
+cout: 8,5
 resume: Le vrai pain d'épices moelleux, avec 40 % de farine de seigle, beaucoup de miel, très peu de beurre, un seul œuf et un mélange d'épices maison.
 tags: [pain d'épices, noël, goûter, épices]
 ---
@@ -46,3 +47,11 @@ Le pain d'épices est la recette de miel par excellence. Celui-ci est riche en m
 
 ## Le conseil
 Le repos n'est pas facultatif : en 24 heures, l'humidité du miel se répartit et le pain d'épices devient moelleux. Il se garde ainsi une semaine.
+
+## Questions fréquentes
+### Pourquoi attendre 24 heures avant de le manger ?
+Pendant le repos, l'humidité du miel se répartit dans la mie. Le pain d'épices devient plus moelleux et ses épices plus présentes.
+### Peut-on remplacer la farine de seigle ?
+Oui, par la même quantité de farine de blé. Le pain d'épices sera plus léger et moins typé, mais toujours bon.
+### Quel miel choisir ?
+Un miel corsé, comme le sapin ou le châtaignier, qui tient tête aux épices. Avec un miel toutes fleurs, il sera plus doux.

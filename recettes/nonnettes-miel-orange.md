@@ -10,6 +10,7 @@ cuisson: 20 min
 portions: 12
 unite: nonnettes
 difficulte: Facile
+cout: 8,5
 resume: Les petits pains d'épices fourrés à la marmelade d'orange et glacés au sucre, comme à Dijon. Moelleux, parfumés au miel de châtaignier, parfaits pour les fêtes.
 tags: [noël, pain d'épices, goûter, cadeau gourmand, épices]
 ---
@@ -48,3 +49,11 @@ Comme le pain d'épices, les nonnettes sont meilleures le lendemain : le miel se
 ## Variantes
 - Remplacez la marmelade par de la confiture de cassis ou de framboise.
 - Pour un goût plus doux, prenez un miel toutes fleurs ou un miel de sapin.
+
+## Questions fréquentes
+### Peut-on remplacer la marmelade d'orange ?
+Oui, par une confiture d'abricots, de figues ou de framboises. Choisissez une confiture assez épaisse pour qu'elle reste au centre.
+### Peut-on faire des nonnettes sans moule à muffins ?
+Oui, dans des caissettes en papier posées sur une plaque, ou dans des petits moules individuels. Surveillez la cuisson, qui peut être un peu plus courte.
+### Quel miel utiliser si je n'ai pas de châtaignier ?
+Un miel de sapin ou un miel de forêt donne un résultat proche. Un miel toutes fleurs fonctionne, avec un goût plus doux.

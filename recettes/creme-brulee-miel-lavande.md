@@ -10,6 +10,7 @@ cuisson: 1 h
 repos: 3 h
 portions: 6
 difficulte: Moyenne
+cout: 8,5
 resume: Une crème onctueuse, sucrée uniquement au miel de lavande, sous une fine couche de sucre caramélisé qui craque sous la cuillère.
 tags: [crème, provence, dessert de fête, sans gluten]
 ---
@@ -34,3 +35,11 @@ Tout le parfum de la Provence dans un ramequin. Ici, le miel remplace complètem
 
 ## Le conseil
 Préparez les crèmes la veille : elles seront plus fermes et plus parfumées. Ne caramélisez qu'à la dernière minute, sinon la croûte ramollit.
+
+## Questions fréquentes
+### Pourquoi une cuisson à 100 °C seulement ?
+Une cuisson douce évite que les jaunes ne coagulent trop vite, ce qui donnerait une crème granuleuse ou percée de bulles. C'est ce qui donne la texture lisse et fondante.
+### Comment caraméliser sans chalumeau ?
+Placez les ramequins bien froids sous le gril du four, au plus près de la résistance, 1 à 2 minutes. Surveillez sans vous éloigner : la cassonade passe vite du doré au brûlé.
+### Que faire des blancs d'œufs restants ?
+Ils se gardent 3 jours au réfrigérateur ou plusieurs mois au congélateur. Ils sont parfaits pour des [financiers au miel](/recettes/financiers-miel-amandes/).

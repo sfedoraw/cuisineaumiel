@@ -11,6 +11,7 @@ repos: 3 h
 portions: 25
 unite: truffes
 difficulte: Facile
+cout: 5
 resume: Des truffes fondantes au chocolat noir, adoucies au miel d'acacia et roulées dans le cacao. La gourmandise à offrir à Noël : une demi-heure de travail et quelques heures au frais.
 tags: [noël, chocolat, cadeau gourmand, mignardises]
 ---
@@ -38,3 +39,11 @@ Passez vos mains sous l'eau froide et séchez-les avant de rouler les truffes : 
 ## Variantes
 - Roulez-les dans des noisettes ou des pistaches concassées.
 - Ajoutez le zeste d'une orange dans la crème chaude pour des truffes à l'orange.
+
+## Questions fréquentes
+### Ma ganache est trop molle, que faire ?
+Laissez-la plus longtemps au réfrigérateur, jusqu'à une nuit. Si elle reste trop molle, faites fondre 30 à 50 g de chocolat en plus et incorporez-le.
+### Peut-on les parfumer autrement ?
+Oui. Faites infuser dans la crème un zeste d'orange, une gousse de vanille ou une pincée de cannelle, puis filtrez avant de la verser sur le chocolat.
+### Peut-on les congeler ?
+Oui, jusqu'à un mois, avant de les rouler dans le cacao. Laissez-les décongeler au réfrigérateur, puis roulez-les.

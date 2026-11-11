@@ -9,6 +9,7 @@ preparation: 5 min
 cuisson: 15 min
 portions: 6
 difficulte: Très facile
+cout: 8
 resume: Un mélange de noix, amandes et noix de pécan enrobées de miel, de romarin et de piment, rôties jusqu'à devenir croquantes.
 tags: [apéritif, fruits secs, cadeau, sans gluten]
 ---
@@ -33,3 +34,11 @@ tags: [apéritif, fruits secs, cadeau, sans gluten]
 
 ## Le conseil
 Surveillez les dernières minutes : le miel passe vite du doré au brûlé. Dès que l'odeur devient caramélisée, sortez la plaque.
+
+## Questions fréquentes
+### Mes noix collent, que faire ?
+Elles n'ont pas assez cuit ou ont pris l'humidité. Remettez-les 3 à 4 minutes au four, laissez-les refroidir complètement et rangez-les dans un bocal bien fermé.
+### Peut-on les faire sans piment ?
+Oui. Remplacez le piment par une pincée de cannelle ou de paprika doux, ou supprimez-le simplement.
+### Avec quoi les servir ?
+À l'apéritif, sur une salade d'endives et de poires, sur un plateau de fromages ou dans un bol de yaourt.

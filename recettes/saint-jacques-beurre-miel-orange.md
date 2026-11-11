@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 10 min
 portions: 4
 difficulte: Facile
+cout: 16,5
 resume: Des noix de Saint-Jacques dorées à la poêle et nappées d'un beurre au miel d'oranger, à l'orange et au gingembre. Une entrée chaude de fête prête en 25 minutes.
 tags: [noël, saint-jacques, fruits de mer, réveillon, orange]
 ---
@@ -38,3 +39,11 @@ Le secret d'une Saint-Jacques bien dorée : des noix parfaitement sèches, une p
 ## Variantes
 - Servez-les sur une purée de panais ou une fondue de poireaux.
 - Remplacez l'orange par une clémentine, plus douce, en pleine saison à Noël.
+
+## Questions fréquentes
+### Peut-on utiliser des Saint-Jacques surgelées ?
+Oui. Faites-les décongeler une nuit au réfrigérateur, puis séchez-les très soigneusement : c'est indispensable pour qu'elles dorent.
+### Comment savoir si les Saint-Jacques sont cuites ?
+Elles doivent être bien dorées dessus et encore nacrées, presque translucides, au centre. Trop cuites, elles deviennent fermes et caoutchouteuses.
+### Avec quoi les servir ?
+Avec une purée de céleri ou de panais, une fondue de poireaux, un risotto ou quelques pousses d'épinards.

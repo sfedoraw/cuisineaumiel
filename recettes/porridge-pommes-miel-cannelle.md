@@ -9,6 +9,7 @@ preparation: 5 min
 cuisson: 10 min
 portions: 2
 difficulte: Très facile
+cout: 2,5
 resume: Un porridge onctueux aux flocons d'avoine, avec des pommes poêlées au miel et à la cannelle et quelques noisettes grillées.
 tags: [petit-déjeuner, hiver, rapide, avoine]
 ---
@@ -38,3 +39,11 @@ Le petit-déjeuner des matins froids. Les pommes caramélisées dans le miel tra
 
 ## Le conseil
 Préparez-le la veille sans cuisson : laissez les flocons tremper toute la nuit dans le lait au réfrigérateur, et il ne reste plus qu'à ajouter les pommes.
+
+## Questions fréquentes
+### Peut-on le faire avec une boisson végétale ?
+Oui, avec une boisson à l'avoine, à l'amande ou au soja. Remplacez le beurre par une huile neutre pour une version sans produits laitiers.
+### Peut-on le cuire au micro-ondes ?
+Oui. Mélangez les flocons, le lait, l'eau et le sel dans un grand bol et chauffez 2 minutes, remuez, puis 1 à 2 minutes de plus.
+### Quels autres fruits utiliser ?
+Des poires, des bananes, des fruits rouges ou des figues. Les fruits rouges se mettent crus, sans les faire dorer.

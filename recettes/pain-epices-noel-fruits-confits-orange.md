@@ -11,6 +11,7 @@ repos: 24 h
 portions: 10
 unite: tranches
 difficulte: Facile
+cout: 10
 resume: Le pain d'épices des fêtes, garni de fruits confits et d'orange, glacé et décoré de rondelles d'orange séchées. À préparer quelques jours avant Noël, il n'en sera que meilleur.
 tags: [noël, pain d'épices, fruits confits, cadeau gourmand, épices]
 ---
@@ -48,3 +49,11 @@ Le repos de 24 heures n'est pas facultatif : le miel se répartit dans la mie, q
 ## Variantes
 - Remplacez les fruits confits par des abricots secs et des figues séchées coupés en dés.
 - Pour un goût plus doux, prenez un miel de sapin ou un miel toutes fleurs.
+
+## Questions fréquentes
+### Mes fruits confits sont tombés au fond, pourquoi ?
+Ils n'ont pas été farinés ou la pâte était trop liquide. Roulez-les dans une cuillerée de farine avant de les incorporer, comme indiqué à l'étape 4.
+### Peut-on préparer ce pain d'épices à l'avance ?
+Oui, c'est même conseillé. Bien emballé, il se garde une dizaine de jours. Ajoutez le glaçage la veille ou le jour même.
+### Peut-on supprimer les fruits confits ?
+Oui. Remplacez-les par des abricots secs, des cranberries ou des écorces d'orange confites, ou supprimez-les simplement.

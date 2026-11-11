@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 12 min
 portions: 4
 difficulte: Facile
+cout: 13
 resume: Des figues fendues en croix, rôties au miel et au vinaigre balsamique, servies tièdes avec du jambon cru et de la roquette poivrée.
 tags: [figue, jambon, salade, fin d'été]
 ---
@@ -36,3 +37,11 @@ Une entrée de fin d'été qui ne demande presque rien. Le miel de lavande souli
 
 ## Le conseil
 Récupérez le jus sirupeux au fond du plat : c'est la meilleure des vinaigrettes. Versez-le directement sur la salade.
+
+## Questions fréquentes
+### Peut-on préparer cette entrée hors saison des figues ?
+Oui, avec des poires ou des pêches coupées en quartiers. Hors saison, des figues séchées réhydratées dans un peu d'eau chaude conviennent aussi.
+### Quel jambon cru choisir ?
+Un jambon de Bayonne, de Parme ou un jambon serrano, en tranches très fines. Pour une version végétarienne, supprimez-le et ajoutez du chèvre frais.
+### Peut-on cuire les figues à l'avance ?
+Vous pouvez les préparer quelques heures avant et les servir tièdes ou à température ambiante. Dressez la salade au dernier moment.

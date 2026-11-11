@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 15 min
 portions: 4
 difficulte: Facile
+cout: 9
 resume: Des pancakes épais et aériens grâce à la ricotta et aux blancs montés, servis avec un filet de miel et des fruits frais.
 tags: [brunch, week-end, petit-déjeuner, citron]
 ---
@@ -40,3 +41,11 @@ Les pancakes du dimanche matin. La ricotta les rend incroyablement légers, le m
 
 ## Le conseil
 Cuisez à feu doux : avec le miel, les pancakes colorent vite, et ils doivent avoir le temps de cuire à cœur.
+
+## Questions fréquentes
+### Peut-on remplacer la ricotta ?
+Oui, par du fromage blanc bien égoutté ou du skyr. Les pancakes seront un peu moins moelleux.
+### Peut-on préparer la pâte à l'avance ?
+Le mélange à la ricotta se prépare la veille. Montez les blancs et incorporez-les au dernier moment, sinon les pancakes perdent leur légèreté.
+### Comment les garder chauds ?
+Dans le four à 90 °C, sur une plaque, couverts d'un torchon propre, le temps de cuire toute la pâte.

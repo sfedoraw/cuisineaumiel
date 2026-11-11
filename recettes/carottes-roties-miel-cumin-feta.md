@@ -9,6 +9,7 @@ preparation: 15 min
 cuisson: 30 min
 portions: 4
 difficulte: Facile
+cout: 8,5
 resume: Des carottes entières, laquées au miel et au cumin, posées sur un yaourt frais à la feta et au citron. Végétarien et très coloré.
 tags: [végétarien, carotte, légumes, yaourt]
 ---
@@ -42,3 +43,11 @@ Rôties longtemps à four chaud, les carottes deviennent fondantes et presque co
 
 ## Le conseil
 Ne serrez pas les carottes sur la plaque : trop proches, elles cuisent à la vapeur et ne caramélisent pas.
+
+## Questions fréquentes
+### Peut-on utiliser des carottes classiques ?
+Oui. Coupez-les en bâtonnets de taille égale pour qu'elles cuisent de façon homogène. La cuisson est la même.
+### Comment rendre la recette végétalienne ?
+Remplacez la sauce au yaourt et à la feta par un houmous ou une crème de tahini citronnée, et le miel par du sirop d'érable.
+### Peut-on préparer ce plat à l'avance ?
+Les carottes rôties se gardent 2 jours au réfrigérateur. Réchauffez-les 10 minutes au four, et préparez le yaourt à la feta au dernier moment.

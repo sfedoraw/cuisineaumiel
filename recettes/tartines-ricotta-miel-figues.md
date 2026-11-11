@@ -9,6 +9,7 @@ preparation: 10 min
 cuisson: 3 min
 portions: 4
 difficulte: Très facile
+cout: 9,5
 resume: Du pain de campagne grillé, une couche généreuse de ricotta fouettée, des figues fraîches, un filet de miel et des pistaches concassées.
 tags: [petit-déjeuner, rapide, brunch, figue]
 ---
@@ -33,3 +34,11 @@ Dix minutes pour un petit-déjeuner qui ressemble à un dessert. La ricotta foue
 
 ## Le conseil
 Hors saison des figues, remplacez-les par des poires rôties, des pêches ou des framboises.
+
+## Questions fréquentes
+### Peut-on remplacer la ricotta ?
+Oui, par du fromage frais, de la burrata, du chèvre frais ou du mascarpone.
+### Quel pain choisir ?
+Un pain de campagne ou un pain au levain, en tranches épaisses. Un pain aux noix fonctionne très bien aussi.
+### Peut-on préparer la ricotta fouettée à l'avance ?
+Oui, elle se garde 2 jours au réfrigérateur dans une boîte fermée. Fouettez-la de nouveau avant de l'étaler.
