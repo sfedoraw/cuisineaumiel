@@ -11,11 +11,12 @@ Cette consigne est exécutée automatiquement deux fois par semaine (lundi et je
    - Tiens compte de la saison en France à la date du jour (fruits et légumes de saison, fêtes à venir).
    - Une recette réaliste, testable à la maison, avec des ingrédients faciles à trouver. Pas de copie d'une recette publiée ailleurs.
 3. Écris-la en français dans `recettes/<slug>.md`, en suivant exactement le format des recettes existantes :
-   - Front matter : `titre`, `date` (date du jour, AAAA-MM-JJ), `categorie` (un des slugs : aperitifs-entrees, plats, desserts, patisserie, petit-dejeuner, boissons, sauces-condiments), `miel`, `photo` (identifiant Unsplash, voir ci-dessous), `credit` (nom du photographe), `preparation`, `cuisson`, `repos` si besoin, `portions`, `unite` si ce ne sont pas des personnes, `difficulte` (Très facile, Facile, Moyenne, Difficile), `resume` (une ou deux phrases), `tags`.
+   - Front matter : `titre`, `date` (date du jour, AAAA-MM-JJ), `categorie` (un des slugs : aperitifs-entrees, plats, desserts, patisserie, petit-dejeuner, boissons, sauces-condiments), `miel`, `photo` (identifiant Unsplash, voir ci-dessous), `credit` (nom du photographe), `preparation`, `cuisson`, `repos` si besoin, `portions`, `unite` si ce ne sont pas des personnes, `difficulte` (Très facile, Facile, Moyenne, Difficile), `resume` (une ou deux phrases), `tags`, `cout` (coût total estimé de la recette en euros, miel compris à environ 20 € le kilo, prix moyens en supermarché ; par exemple `cout: 8,5`).
    - Un paragraphe d'introduction qui explique le rôle du miel dans la recette.
    - `## Ingrédients` (avec des sous-titres `###` si utile), chaque ligne commence par la quantité en chiffres pour que l'ajustement des portions fonctionne.
    - `## Préparation` en étapes numérotées.
    - `## Le conseil`, et éventuellement `## Variantes`.
+   - `## Questions fréquentes` en dernier : exactement 3 questions pratiques, chacune en `### Question ?` suivie d'une réponse courte (remplacer un ingrédient, préparer à l'avance, conserver, quel autre miel…). Les réponses ne doivent jamais contredire la recette, ni contenir d'allégation santé.
    - Le slug : en minuscules, sans accents, mots séparés par des tirets.
 4. Photo : avec WebFetch, ouvre `https://unsplash.com/s/photos/<plat-en-anglais>` et choisis une photo **gratuite** (jamais `plus.unsplash.com` ni Unsplash+) dont la description correspond bien au plat. Mets dans `photo` la partie après `photo-` de l'URL `images.unsplash.com/photo-...` et le nom du photographe dans `credit`. N'utilise pas une photo déjà présente dans une autre recette. La photo du miel est choisie automatiquement selon le miel indiqué.
 5. **Double vérification, avant toute publication** (voir la section ci-dessous). Prends le temps nécessaire : une recette juste vaut mieux qu'une recette publiée à l'heure.
@@ -37,6 +38,8 @@ Relis le fichier en entier et vérifie chaque point. Fais les calculs, ne les es
 - **Températures et cuissons justes et sûres** : four, cuisson à cœur des volailles et du porc, réfrigération des préparations crues (œufs, crème, foie gras). Le miel caramélise vite : vérifie que la température et la durée ne le brûlent pas.
 - **La technique fonctionne** : l'ordre des étapes est logique (préchauffer avant d'enfourner, laisser refroidir avant de démouler, etc.).
 - **Les règles du site sont respectées** : aucune allégation santé, mention « déconseillé aux enfants de moins d'un an » si la recette s'adresse aux enfants, mention de la loi Évin si la recette contient de l'alcool.
+- **Le coût `cout` est réaliste** : additionne le prix de chaque ingrédient au lieu de deviner un total.
+- **Les 3 réponses de la FAQ sont justes** et cohérentes avec les ingrédients, les temps et les étapes.
 - **La photo correspond bien au plat** (relis la description de la photo Unsplash).
 
 Corrige tout ce qui ne va pas.
