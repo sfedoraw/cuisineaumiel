@@ -6,7 +6,7 @@ L'ordre privilégie les miels les plus recherchés en France, puis les appellati
 
 - [x] miel-de-corse : Miel de Corse – Mele di Corsica (AOP 2000, six appellations de saison) (publiée le 2026-11-06)
 - [x] miel-de-provence : Miel de Provence (IGP 2005, toutes fleurs et lavande) (publiée le 2026-11-10)
-- [ ] miel-de-colza : Miel de colza (le plus produit en France, cristallisation très rapide)
+- [x] miel-de-colza : Miel de colza (grand miel de printemps, cristallisation très rapide) (publiée le 2026-11-13)
 - [ ] miel-de-tournesol : Miel de tournesol
 - [ ] miel-de-manuka : Miel de mānuka (Nouvelle-Zélande, définition officielle MPI 2017)
 - [ ] miel-d-alsace : Miel d'Alsace (IGP 2005, six variétés)
