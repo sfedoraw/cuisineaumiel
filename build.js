@@ -1827,6 +1827,7 @@ ${recHtml}${artHtml}
   return { subject, html };
 }
 
+const FORM = fs.existsSync(path.join(ROOT, 'data', 'formulaire.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'formulaire.json'), 'utf8')) : {};
 const AVIS = fs.existsSync(path.join(ROOT, 'data', 'avis.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'avis.json'), 'utf8')) : {};
 // Notes réelles lues au moment de la construction, pour les étoiles dans les résultats Google.
 const NOTES = (() => {
@@ -1960,7 +1961,8 @@ ${pageHead('Proposez votre recette au miel', 'Une recette de grand-mère, une tr
       </ul>
       <p>Pas de promesse santé, s'il vous plaît : nous parlons de goût, de plaisir et de tradition. Et rappel : le miel ne convient pas aux enfants de moins d'un an.</p>
     </div>
-    <form class="wl-form" id="propose-form" data-mail="${PARTNER_MAIL[0]}" data-domain="${PARTNER_MAIL[1]}" novalidate>
+    <form class="wl-form" id="propose-form" data-mail="${PARTNER_MAIL[0]}" data-domain="${PARTNER_MAIL[1]}"${FORM.service === 'formsubmit' ? ' data-send="formsubmit"' : ''} novalidate>
+      <p class="hp" aria-hidden="true"><label>Ne pas remplir<input name="_honey" tabindex="-1" autocomplete="off"></label></p>
       <h3>Ma recette</h3>
       ${AVIS.api && AVIS.lecture ? `<div class="snap" data-snap="${esc(AVIS.api.replace(/\/$/, ''))}">
         <label class="snap-btn"><input type="file" accept="image/*" capture="environment"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span><b>Prendre ma fiche en photo</b><small>Le formulaire se remplit tout seul, vous n'avez plus qu'à relire.</small></span></label>
@@ -1979,8 +1981,12 @@ ${pageHead('Proposez votre recette au miel', 'Une recette de grand-mère, une tr
       <label class="propose-ok"><input type="checkbox" name="accord" required><span>Je suis l'auteur de cette recette (ou elle vient de ma famille) et j'accepte qu'elle soit publiée sur cuisineaumiel.fr, adaptée si besoin, avec mon prénom.</span></label>
       <p class="wl-err" hidden>Merci de remplir votre prénom, votre e-mail, le nom de la recette, les ingrédients, la préparation, et de cocher l'accord.</p>
       <button class="btn" type="submit">Envoyer ma recette</button>
-      <p class="pt-small">Votre messagerie s'ouvre avec la recette déjà rédigée : il ne reste qu'à l'envoyer (vous pouvez y joindre une photo). Rien ne s'ouvre ? <button type="button" class="linklike" data-propose-copy>Copier le texte</button> et <a href="#" data-mail="${PARTNER_MAIL[0]}" data-domain="${PARTNER_MAIL[1]}" data-subject="Ma%20recette">envoyez-le-nous par e-mail</a>.</p>
-      <p class="propose-copied" hidden>Texte copié : collez-le dans un e-mail.</p>
+      ${FORM.service === 'formsubmit' ? `<p class="pt-small">Votre recette nous est transmise par e-mail grâce au service FormSubmit. Votre adresse sert uniquement à vous prévenir de la publication.</p>` : `<p class="pt-small">Votre messagerie s'ouvre avec la recette déjà rédigée : il ne reste qu'à l'envoyer.</p>`}
+      <div class="propose-done" role="status" hidden><p class="propose-done-ok"><b>Merci, votre recette est bien envoyée !</b> Nous la lisons avec attention et nous vous écrivons dès qu'elle est publiée.</p></div>
+      <div class="propose-fallback" role="alert" hidden>
+        <p><b class="pf-title">L'envoi n'a pas fonctionné.</b> Votre recette n'est pas perdue : copiez-la, puis collez-la dans un e-mail à <a href="#" data-mail="${PARTNER_MAIL[0]}" data-domain="${PARTNER_MAIL[1]}" data-subject="Ma%20recette" data-addr></a>.</p>
+        <p><button type="button" class="btn btn-sm" data-propose-copy>Copier ma recette</button> <span class="propose-copied" hidden>Copié ! Collez-la dans un e-mail.</span></p>
+      </div>
     </form>
   </div>
 </section>`;
