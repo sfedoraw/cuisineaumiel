@@ -582,12 +582,41 @@ document.addEventListener('click', async (e) => {
   if (!f) return;
   const v = (k) => (f.elements[k].value || '').trim();
   const text = () => `Bonjour,\n\nVoici ma recette pour Cuisine au miel.\n\nRECETTE : ${v('titre')}\nCatégorie : ${v('categorie')}\nPour : ${v('portions')}\nPréparation : ${v('prep')} · Cuisson : ${v('cuisson')}\nMiel : ${v('miel')}\n\nINGRÉDIENTS\n${v('ingredients')}\n\nPRÉPARATION\n${v('etapes')}\n\nASTUCE / HISTOIRE\n${v('astuce')}\n\nPrénom : ${v('prenom')}\nVille : ${v('ville')}\nE-mail : ${v('email')}\n\nJe suis l'auteur de cette recette (ou elle vient de ma famille) et j'accepte qu'elle soit publiée sur cuisineaumiel.fr, adaptée si besoin, avec mon prénom.`;
-  f.addEventListener('submit', (e) => {
+  const addr = `${f.dataset.mail}@${f.dataset.domain}`;
+  f.querySelectorAll('[data-addr]').forEach((x) => { x.textContent = addr; });
+  const btn = f.querySelector('button[type=submit]');
+  const fallback = (title) => {
+    const box = f.querySelector('.propose-fallback');
+    if (title) box.querySelector('.pf-title').textContent = title;
+    box.hidden = false; box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+  f.addEventListener('submit', async (e) => {
     e.preventDefault();
     const ok = v('prenom') && /.+@.+\..+/.test(v('email')) && v('titre') && v('ingredients') && v('etapes') && f.elements.accord.checked;
     f.querySelector('.wl-err').hidden = !!ok;
-    if (!ok) return;
-    location.href = `mailto:${f.dataset.mail}@${f.dataset.domain}?subject=${encodeURIComponent('Ma recette : ' + v('titre'))}&body=${encodeURIComponent(text())}`;
+    if (!ok) { f.querySelector('.wl-err').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    if (f.elements._honey.value) return;
+    if (f.dataset.send === 'formsubmit') {
+      btn.disabled = true; btn.textContent = 'Envoi en cours…';
+      try {
+        const r = await fetch(`https://formsubmit.co/ajax/${addr}`, {
+          method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json' },
+          body: JSON.stringify({ _subject: 'Recette proposée : ' + v('titre'), _replyto: v('email'), _template: 'box', _captcha: 'false', Recette: text() }),
+        });
+        const d = await r.json().catch(() => ({}));
+        if (!r.ok || String(d.success) === 'false') throw new Error(d.message || 'envoi');
+        f.querySelectorAll('label, .wl-row, .snap, .pt-small, h3').forEach((x) => { x.hidden = true; });
+        btn.hidden = true;
+        f.querySelector('.propose-done').hidden = false;
+        f.querySelector('.propose-done').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (err) {
+        fallback();
+      } finally { btn.disabled = false; btn.textContent = 'Envoyer ma recette'; }
+      return;
+    }
+    location.href = `mailto:${addr}?subject=${encodeURIComponent('Ma recette : ' + v('titre'))}&body=${encodeURIComponent(text())}`;
+    // Si aucune messagerie ne s'ouvre, le plan B apparaît.
+    setTimeout(() => fallback('Votre messagerie ne s\'est pas ouverte ?'), 1500);
   });
   // Photo de la fiche : lue par le service (avis/worker.js, route /lire), puis le formulaire est pré-rempli.
   const snap = f.querySelector('[data-snap]');
@@ -627,7 +656,8 @@ document.addEventListener('click', async (e) => {
     });
   }
   f.querySelector('[data-propose-copy]').addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(text()); f.querySelector('.propose-copied').hidden = false; } catch (e) {}
+    try { await Promise.race([navigator.clipboard.writeText(text()), new Promise((_, ko) => setTimeout(ko, 800))]); } catch (e) { const t = document.createElement('textarea'); t.value = text(); document.body.append(t); t.select(); document.execCommand('copy'); t.remove(); }
+    f.querySelector('.propose-copied').hidden = false;
   });
 })();
 

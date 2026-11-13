@@ -1,0 +1,4 @@
+{
+  "service": "formsubmit",
+  "note": "Envoi des recettes proposées. 'formsubmit' = https://formsubmit.co (gratuit, sans compte : la première recette envoie un lien d'activation à l'adresse du site). Mettre \"\" pour revenir à l'ouverture de la messagerie."
+}
