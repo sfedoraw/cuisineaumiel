@@ -1254,3 +1254,4 @@ h3 { font-size: .98rem; font-weight: 600; }
 .propose-fallback a { overflow-wrap: anywhere; }
 .btn-sm { padding: 8px 16px; font-size: .9rem; min-height: 0; }
 #propose-form button[disabled] { opacity: .6; cursor: wait; }
+.recipe-by { margin: 6px 0 0; color: var(--accent); font-weight: 600; font-size: .95rem; }

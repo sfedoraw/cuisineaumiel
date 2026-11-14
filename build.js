@@ -596,7 +596,7 @@ function recipePage(r, i) {
   const ld = {
     '@context': 'https://schema.org', '@type': 'Recipe', name: r.titre, description: r.resume,
     image: [img(r.photo, 1200)],
-    datePublished: r.date.toISOString().slice(0, 10), author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    datePublished: r.date.toISOString().slice(0, 10), author: r.auteur ? { '@type': 'Person', name: r.auteur.split(',')[0].trim() } : { '@type': 'Organization', name: SITE.name, url: SITE.url },
     prepTime: isoDuration(r.preparation), cookTime: isoDuration(r.cuisson), totalTime: `PT${minutes(r.preparation) + minutes(r.cuisson) + minutes(r.repos)}M`,
     recipeYield: `${r.portions} ${r.unite || 'personnes'}`, recipeCategory: r.cat.name, recipeCuisine: 'Française',
     keywords: ['miel', r.miel, ...r.tags].join(', '), recipeIngredient: r.ingredientsList,
@@ -615,6 +615,7 @@ ${printSheet(r)}
   <header class="recipe-head">
     <h1>${esc(r.titre)}</h1>
     <p class="lede">${esc(r.resume)}</p>
+    ${r.auteur ? `<p class="recipe-by">Recette proposée par <b>${esc(r.auteur)}</b>, lectrice ou lecteur de Cuisine au miel</p>` : ''}
     <p class="recipe-date">Publiée le <time datetime="${r.date.toISOString().slice(0, 10)}">${dateFr(r.date)}</time></p>
   </header>
   <div class="duo">
