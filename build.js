@@ -445,7 +445,7 @@ function honeyCards() {
     const [id, , alt] = all.find((h) => !used.has(h[0])) || fam[0];
     used.add(id);
     const fiche = honeyOf(list[0]);
-    return `<article class="honey-card"><a href="${fiche ? fiche.url : `/recettes/?q=${encodeURIComponent(name.toLowerCase())}`}">
+    return `<article class="honey-card"><a href="${fiche ? fiche.url : `/recettes/?q=${encodeURIComponent(name.toLowerCase())}`}"${fiche ? '' : ' rel="nofollow"'}>
     <div class="card-media">${picture(id, alt, { sizes: '(min-width: 1200px) 280px, 60vw', ratio: '4 / 3' })}</div>
     <span class="card-cat">Miel</span><h3>${esc(name)}</h3>
     <div class="card-meta"><span>${list.length} recette${list.length > 1 ? 's' : ''}</span></div></a></article>`;
@@ -926,7 +926,7 @@ function pairChip(a, x) {
   const w = normTxt(a).replace(/s$/, '').split(/\s+/).filter((m) => m.length > 2).pop() || normTxt(a);
   const n = recipes.filter((r) => normTxt([r.titre, ...r.ingredientsList].join(' ')).includes(w)).length;
   const q = n ? w : normTxt(shortHoney(x.nom));
-  return `<li><a href="/recettes/?q=${encodeURIComponent(q)}" title="${n ? `${n} recette${n > 1 ? 's' : ''} avec ${esc(a.toLowerCase())}` : `Nos recettes au ${esc(x.nom.toLowerCase())}`}">${esc(a)}${n ? ` <small>${n}</small>` : ''}</a></li>`;
+  return `<li><a rel="nofollow" href="/recettes/?q=${encodeURIComponent(q)}" title="${n ? `${n} recette${n > 1 ? 's' : ''} avec ${esc(a.toLowerCase())}` : `Nos recettes au ${esc(x.nom.toLowerCase())}`}">${esc(a)}${n ? ` <small>${n}</small>` : ''}</a></li>`;
 }
 function honeyId(x) {
   if (!x.profil) return '';
@@ -959,7 +959,7 @@ function honeyId(x) {
   ${x.accords || x.boissons ? `<div class="hid-card hid-pairs">
     <h2>Les accords</h2>
     <ul class="chips">${listOf(x.accords).map((a) => pairChip(a, x)).join('')}</ul>
-    ${x.boissons ? `<h3>Avec quoi le boire</h3><ul class="chips chips-drink">${listOf(x.boissons).map((a) => `<li><a href="/recettes/?q=${encodeURIComponent(shortHoney(x.nom).toLowerCase())}" title="Nos recettes au ${esc(x.nom.toLowerCase())}">${esc(a)}</a></li>`).join('')}</ul>` : ''}
+    ${x.boissons ? `<h3>Avec quoi le boire</h3><ul class="chips chips-drink">${listOf(x.boissons).map((a) => `<li><a rel="nofollow" href="/recettes/?q=${encodeURIComponent(shortHoney(x.nom).toLowerCase())}" title="Nos recettes au ${esc(x.nom.toLowerCase())}">${esc(a)}</a></li>`).join('')}</ul>` : ''}
   </div>` : ''}
 </section>`;
 }
