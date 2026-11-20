@@ -292,6 +292,7 @@ function layout({ title, description, body, canonical, extraHead = '', ogImage =
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css?v=${ASSET_V}">
 ${extraHead}
+<script defer src="https://cdn.scruter.net/s.js" data-site="CUISIN01"></script>
 </head>
 <body${hero ? ' class="has-hero"' : ''}>
 <a class="skip" href="#contenu">Aller au contenu</a>
