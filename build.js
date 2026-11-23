@@ -293,6 +293,7 @@ function layout({ title, description, body, canonical, extraHead = '', ogImage =
 <link rel="stylesheet" href="/style.css?v=${ASSET_V}">
 ${extraHead}
 <script defer src="https://cdn.scruter.net/s.js" data-site="CUISIN01"></script>
+<script defer src="https://seo-dashboard.samuel-367.workers.dev/t.js"></script>
 </head>
 <body${hero ? ' class="has-hero"' : ''}>
 <a class="skip" href="#contenu">Aller au contenu</a>
