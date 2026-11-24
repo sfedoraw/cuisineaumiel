@@ -596,12 +596,20 @@ document.addEventListener('click', async (e) => {
     f.querySelector('.wl-err').hidden = !!ok;
     if (!ok) { f.querySelector('.wl-err').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
     if (f.elements._honey.value) return;
-    if (f.dataset.send === 'formsubmit') {
+    if (f.dataset.send) {
       btn.disabled = true; btn.textContent = 'Envoi en cours…';
+      // Au bout de 20 s sans réponse du service, on montre le plan B au lieu de laisser le bouton tourner.
+      const ctl = new AbortController(), stop = setTimeout(() => ctl.abort(), 20000);
+      const w3f = f.dataset.send === 'web3forms';
+      const url = w3f ? 'https://api.web3forms.com/submit' : `https://formsubmit.co/ajax/${addr}`;
+      const sujet = 'Recette proposée : ' + v('titre');
+      const body = w3f
+        ? { access_key: f.dataset.key, subject: sujet, from_name: 'Cuisine au miel', replyto: v('email'), botcheck: '', Recette: text() }
+        : { _subject: sujet, _replyto: v('email'), _template: 'box', _captcha: 'false', Recette: text() };
       try {
-        const r = await fetch(`https://formsubmit.co/ajax/${addr}`, {
-          method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json' },
-          body: JSON.stringify({ _subject: 'Recette proposée : ' + v('titre'), _replyto: v('email'), _template: 'box', _captcha: 'false', Recette: text() }),
+        const r = await fetch(url, {
+          method: 'POST', signal: ctl.signal, headers: { 'content-type': 'application/json', accept: 'application/json' },
+          body: JSON.stringify(body),
         });
         const d = await r.json().catch(() => ({}));
         if (!r.ok || String(d.success) === 'false') throw new Error(d.message || 'envoi');
@@ -611,7 +619,7 @@ document.addEventListener('click', async (e) => {
         f.querySelector('.propose-done').scrollIntoView({ behavior: 'smooth', block: 'center' });
       } catch (err) {
         fallback();
-      } finally { btn.disabled = false; btn.textContent = 'Envoyer ma recette'; }
+      } finally { clearTimeout(stop); btn.disabled = false; btn.textContent = 'Envoyer ma recette'; }
       return;
     }
     location.href = `mailto:${addr}?subject=${encodeURIComponent('Ma recette : ' + v('titre'))}&body=${encodeURIComponent(text())}`;

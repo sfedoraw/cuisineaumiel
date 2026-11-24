@@ -1964,7 +1964,7 @@ ${pageHead('Proposez votre recette au miel', 'Une recette de grand-mère, une tr
       </ul>
       <p>Pas de promesse santé, s'il vous plaît : nous parlons de goût, de plaisir et de tradition. Et rappel : le miel ne convient pas aux enfants de moins d'un an.</p>
     </div>
-    <form class="wl-form" id="propose-form" data-mail="${PARTNER_MAIL[0]}" data-domain="${PARTNER_MAIL[1]}"${FORM.service === 'formsubmit' ? ' data-send="formsubmit"' : ''} novalidate>
+    <form class="wl-form" id="propose-form" data-mail="${PARTNER_MAIL[0]}" data-domain="${PARTNER_MAIL[1]}"${FORM.service === 'web3forms' && FORM.cle ? ` data-send="web3forms" data-key="${esc(FORM.cle)}"` : FORM.service === 'formsubmit' ? ' data-send="formsubmit"' : ''} novalidate>
       <p class="hp" aria-hidden="true"><label>Ne pas remplir<input name="_honey" tabindex="-1" autocomplete="off"></label></p>
       <h3>Ma recette</h3>
       ${AVIS.api && AVIS.lecture ? `<div class="snap" data-snap="${esc(AVIS.api.replace(/\/$/, ''))}">

@@ -1,12 +1,12 @@
 # Recettes proposées par les lecteurs
 
-Les recettes envoyées par le formulaire « Proposer une recette » arrivent dans la boîte mail du site (samuel@fedorawiez.com), envoyées par FormSubmit, avec pour objet « Recette proposée : … ».
+Les recettes envoyées par le formulaire « Proposer une recette » arrivent dans la boîte mail du site (samuel@fedorawiez.com), envoyées par Web3Forms (ou FormSubmit, ancien service), avec pour objet « Recette proposée : … ».
 
 Règle de Samuel (14/11/2026) : **un seul OK de sa part**. Je prépare tout, il valide d'un clic, puis je publie.
 
 ## Chaque matin
 
-1. Chercher dans Gmail les mails FormSubmit « Recette proposée » qui n'ont pas le libellé `cuisineaumiel/traitee`.
+1. Chercher dans Gmail les mails « Recette proposée » (Web3Forms ou FormSubmit) qui n'ont pas le libellé `cuisineaumiel/traitee`.
 2. Écarter sans rien publier :
    - les spams et les textes sans vraie recette ;
    - les recettes sans miel ;

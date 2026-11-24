@@ -1,4 +1,5 @@
 {
   "service": "formsubmit",
-  "note": "Envoi des recettes proposées. 'formsubmit' = https://formsubmit.co (gratuit, sans compte : la première recette envoie un lien d'activation à l'adresse du site). Mettre \"\" pour revenir à l'ouverture de la messagerie."
+  "cle": "",
+  "note": "Envoi des recettes proposées. 'web3forms' + 'cle' (clé d'accès reçue par mail sur https://web3forms.com, gratuite, 250 envois/mois) = service conseillé. 'formsubmit' = https://formsubmit.co (lent ou injoignable en novembre 2026). Mettre \"\" pour revenir à l'ouverture de la messagerie. Si le service ne répond pas en 20 s, le visiteur voit le bouton « Copier ma recette »."
 }
