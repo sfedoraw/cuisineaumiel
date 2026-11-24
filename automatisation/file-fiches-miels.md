@@ -9,7 +9,7 @@ L'ordre privilégie les miels les plus recherchés en France, puis les appellati
 - [x] miel-de-colza : Miel de colza (grand miel de printemps, cristallisation très rapide) (publiée le 2026-11-13)
 - [x] miel-de-tournesol : Miel de tournesol (publiée le 2026-11-17)
 - [x] miel-de-manuka : Miel de mānuka (Nouvelle-Zélande, définition officielle MPI 2017) (publiée le 2026-11-20)
-- [ ] miel-d-alsace : Miel d'Alsace (IGP 2005, six variétés)
+- [x] miel-d-alsace : Miel d'Alsace (IGP 2005, six variétés) (publiée le 2026-11-24)
 - [ ] miel-des-cevennes : Miel des Cévennes (IGP 2015)
 - [ ] miel-d-eucalyptus : Miel d'eucalyptus
 - [ ] miel-de-bourdaine : Miel de bourdaine
