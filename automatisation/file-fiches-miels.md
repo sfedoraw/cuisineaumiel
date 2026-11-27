@@ -10,7 +10,7 @@ L'ordre privilégie les miels les plus recherchés en France, puis les appellati
 - [x] miel-de-tournesol : Miel de tournesol (publiée le 2026-11-17)
 - [x] miel-de-manuka : Miel de mānuka (Nouvelle-Zélande, définition officielle MPI 2017) (publiée le 2026-11-20)
 - [x] miel-d-alsace : Miel d'Alsace (IGP 2005, six variétés) (publiée le 2026-11-24)
-- [ ] miel-des-cevennes : Miel des Cévennes (IGP 2015)
+- [x] miel-des-cevennes : Miel des Cévennes (IGP 2015) (publiée le 2026-11-27)
 - [ ] miel-d-eucalyptus : Miel d'eucalyptus
 - [ ] miel-de-bourdaine : Miel de bourdaine
 - [ ] miel-de-pissenlit : Miel de pissenlit
